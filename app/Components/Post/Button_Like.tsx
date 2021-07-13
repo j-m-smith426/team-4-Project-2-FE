@@ -18,7 +18,7 @@ const styles = StyleSheet.create({
         height: '100%',
         alignItems: 'center',
         justifyContent: 'center',
-        marginLeft: 70,
+        marginLeft: 80,
         position:'absolute'
     }
 });
