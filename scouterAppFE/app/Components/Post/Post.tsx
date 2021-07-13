@@ -1,5 +1,6 @@
 import React from "react";
 import { Text, View, StyleSheet, Image } from "react-native";
+import colors from "../../config/colors";
 import Button_Comment from "./Button_Comment";
 import Button_Like from "./Button_Like";
 import ProfileImg from "./ProfileImg";
@@ -16,9 +17,9 @@ const Post = () => {
                 <View style={styles.text}>
                     <Text>This is text in a content, who knows what's here or isn't here</Text>
                 </View>
-            <View style={styles.postMid}>
+            {/* <View style={styles.postMid}> */}
                 <Image style={styles.postImg} source={require('../../assets/icon.png')} />
-            </View>
+            {/* </View> */}
             <View style={styles.postBot}>
                 <View style={styles.postBot}>
                 <Button_Comment />
@@ -37,7 +38,7 @@ const Post = () => {
 const styles = StyleSheet.create({
     post: {
         //flex:1,
-        backgroundColor: 'red',
+        backgroundColor: colors.terchiary,
         borderWidth: 5,
         width: '100%',
         maxHeight: '60%'  
@@ -45,7 +46,7 @@ const styles = StyleSheet.create({
     postTop: {
         //flex: 1,
         flexDirection:"row",
-        backgroundColor: 'lightblue',
+        //backgroundColor: 'lightblue',
         height: 50,
         //justifyContent: 'center',
        // alignContent: 'center',
@@ -53,7 +54,7 @@ const styles = StyleSheet.create({
     profImg: {
         //flex: 1,
         flexDirection: 'row',
-        backgroundColor: 'orange',
+       // backgroundColor: 'orange',
         alignSelf: 'flex-start',
         position: 'relative',
         width: 150,
@@ -67,7 +68,7 @@ const styles = StyleSheet.create({
     text: {
         //flex: 1,
         flexDirection: 'row',
-        backgroundColor: 'yellow',
+       // backgroundColor: 'yellow',
         alignSelf: 'center',
         marginTop: 10,
         height: 70,
@@ -75,21 +76,26 @@ const styles = StyleSheet.create({
         position: 'relative',
     },
     postMid: {
-        //flex:1,
         
         maxHeight: '70%',
-        backgroundColor: 'blue',
+        borderWidth:1,
+       // backgroundColor: 'blue',
         
     },
     postImg: {
         height: 200,
-        width: '100%',
-        resizeMode: 'center'
+        width: '80%',
+        borderWidth: 2,
+        alignSelf: 'center',
+        borderColor: 'black',
+        resizeMode: 'center',
+        marginBottom: 5,
+        
     },
     postBot: {
         //flexDirection: 'row',
         height: 40,
-        backgroundColor: 'green',
+       // backgroundColor: 'green',
         
     },
     timeContainer: {
