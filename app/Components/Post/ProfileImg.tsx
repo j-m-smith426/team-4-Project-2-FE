@@ -1,10 +1,14 @@
 import React from 'react';
 import { Image, View, StyleSheet, Text, Pressable } from 'react-native';
+interface Iprops
+{
+    username: string,
+    profileImg: string
+}
 
-
-const ProfileImg = () => {
+const ProfileImg = (props:Iprops) => {
     return (
-            <Pressable onPress={() => console.log('User name was pressed')}>
+            <Pressable onPress={() => console.log(props.username + ' was pressed')}>
         <View style={styles.container}>
                 <View style={styles.imageCover}>
                     <Image
@@ -12,7 +16,7 @@ const ProfileImg = () => {
                         source={require('../../assets/icon.png')} />
                     </View>
                 <View>
-                        <Text>user name</Text>
+                    <Text>{props.username}</Text>
                         
                 </View>
 

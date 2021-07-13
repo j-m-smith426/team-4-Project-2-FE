@@ -16,7 +16,8 @@ const styles = StyleSheet.create({
     commentContainer: {
         backgroundColor: colors.secondary,
         justifyContent: 'center',
-        width: '20%',
+        marginRight: '2%',
+        width: '22%',
         height: '100%'
     }
 });
