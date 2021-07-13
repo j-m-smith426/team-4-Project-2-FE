@@ -1,17 +1,21 @@
 import React from 'react';
-import { Text, View, StyleSheet } from 'react-native';
+import { Text, View, StyleSheet, Pressable } from 'react-native';
+import colors from '../../config/colors';
 
 const Button_Comment = () => {
     return (
         <View style={styles.commentContainer}>
+            <Pressable onPress={() => console.log('comment was pressed')}>
             <Text>Comment</Text>
+            </Pressable>
         </View>
     );
 }
 
 const styles = StyleSheet.create({
     commentContainer: {
-        backgroundColor: 'grey',
+        backgroundColor: colors.secondary,
+        justifyContent: 'center',
         width: '20%',
         height: '100%'
     }
