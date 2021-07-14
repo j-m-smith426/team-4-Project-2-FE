@@ -6,7 +6,7 @@ import Post from './app/Components/Post/Post';
 import Login from './app/Screen/Login';
 
 import AnimeScreen from './app/Screen/animeScreen';
-import Post from './app/Components/Post/Post';
+
 
 
 
@@ -14,11 +14,11 @@ export default function App() {
   return (
     <View style={styles.container}>
 
-      {/*<Login /> */}
+      {/*<Login />*/} 
       {/* <Post /> */}
       
 
-     <AnimeScreen/>
+    <AnimeScreen/>
       {/* <Post /> */}   
 
 

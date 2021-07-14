@@ -1,6 +1,6 @@
 import React from 'react';
 import { Text, View, StyleSheet, Button, Alert} from 'react-native';
-
+import colors from '../../config/colors'
 const Button_animeComments = () => {
     
     
@@ -21,7 +21,8 @@ const Button_animeComments = () => {
 
 const styles = StyleSheet.create({
     comments: {
-       borderRadius:15,
+       backgroundColor:colors.primary, 
+       borderRadius:25,
         margin:5,
         padding:10,
         

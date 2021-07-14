@@ -72,7 +72,7 @@ const styles = StyleSheet.create({
     flexDirection:'row',
     backgroundColor:'#072083',
     alignItems: 'center',
-    justifyContent: 'space-evenly',
+    justifyContent:'space-evenly',
 
   },
   rating:{

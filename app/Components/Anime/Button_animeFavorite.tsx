@@ -20,6 +20,7 @@ const styles = StyleSheet.create({
     favorite: {
         margin:5,
         padding:10,
+        borderRadius:25,
         
         
     }
