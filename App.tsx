@@ -5,11 +5,7 @@ import { StyleSheet, Text, View } from 'react-native';
 import Post from './app/Components/Post/Post';
 import Login from './app/Screen/Login';
 import MainRoutes from './app/Navigation/MainRoutes';
-
-
-
 import AnimeScreen from './app/Screen/animeScreen';
-import Post from './app/Components/Post/Post';
 
 
 
