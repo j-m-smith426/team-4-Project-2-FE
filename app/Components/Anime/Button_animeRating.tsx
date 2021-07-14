@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import { Text, View, StyleSheet, Alert, Button, TouchableOpacity } from 'react-native';
-
+import buttons from '../../config/buttons';
+import colors from '../../config/colors';
 
 
 
@@ -13,7 +14,7 @@ const Button_animeRating = () => {
             
             onPress={() =>Alert.alert('Eventually you will be able to rate this anime.')}
             title="Rate Anime"
-            color='#f85B1A'
+            color={buttons.backColor}
             accessibilityLabel="Press to give your rating of this anime."
             />
         </View>
@@ -21,14 +22,17 @@ const Button_animeRating = () => {
 }
 
 const styles = StyleSheet.create({
-    button: {
-        
-        margin:5,
-        padding:10,
-        borderRadius:25,      
-    },
-    text:{
-        color:'red',
+    
+        button: {
+            backgroundColor:colors.buttonPrimary,
+            borderRadius:buttons.radius,
+            margin:buttons.marg,
+            padding:buttons.padd,
+            fontSize:buttons.fSize,
+           
+          
+   
+    
     }
 });
 
