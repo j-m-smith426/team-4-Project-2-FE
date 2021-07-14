@@ -1,8 +1,9 @@
 const colors = {
   primary: "indigo",
   secondary: "grey",
-  terchiary: "lightblue",
+  tertiary: "lightblue",
   background: "white",
+  buttonPrimary: "indigo",
 };
 
 export default colors;
