@@ -1,20 +1,29 @@
 import React from 'react';
-import { Image, View, StyleSheet, Text } from 'react-native';
 
+import { Image, View, StyleSheet, Text, Pressable } from 'react-native';
+interface Iprops
+{
+    username: string,
+    profileImg: string
+}
 
-const ProfileImg = () => {
+const ProfileImg = (props:Iprops) => {
     return (
+            <Pressable onPress={() => console.log(props.username + ' was pressed')}>
         <View style={styles.container}>
-            <View style={styles.imageCover}>
-                <Image
-                    style={styles.image}
-                    source={require('../../assets/icon.png')} />
-                </View>
+                <View style={styles.imageCover}>
+                    <Image
+                        style={styles.image}
+                        source={require('../../assets/icon.png')} />
+                    </View>
                 <View>
-                <Text>user name</Text>
-            </View>
+                    <Text>{props.username}</Text>
+                        
+                </View>
 
         </View>
+            </Pressable>
+
     );
 }
 
@@ -29,7 +38,9 @@ const styles = StyleSheet.create({
         width: '50%',
         height: '100%', 
         
-        backgroundColor: 'indigo',
+
+       // backgroundColor: 'indigo',
+
     },
     image: {
         width: '100%',
