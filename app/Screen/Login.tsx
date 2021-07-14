@@ -2,7 +2,8 @@ import React, { useState } from "react";
 import { Text, View, StyleSheet, Image, TextInput, TouchableOpacity } from "react-native";
 import colors from "../config/colors";
 
-const Login = () => {
+
+const Login = ({navigation}) => {
     const [img, setImg] = useState<any>(<View style = {styles.profImg}>
         <Image
             style={styles.image}
@@ -31,9 +32,9 @@ const Login = () => {
                         style={styles.TextInput}
                         placeholder="Password"/>
                 </View>
-
                 <TouchableOpacity style={styles.loginBtn}>
                     <Text style={styles.text}>{btnText}</Text>
+
                 </TouchableOpacity>
                 {signup}
             </View>

@@ -61,14 +61,8 @@ const Post = (props: IPost) =>
 
 const styles = StyleSheet.create({
     post: {
-
-HEAD:app/Components/Post/Post.tsx
         //flex:1,
         backgroundColor: colors.tertiary,
-
-        
-        backgroundColor: colors.terchiary,
- 5ca1b9318ec29ebba0c115189c61d50decfec1a0:scouterAppFE/app/Components/Post/Post.tsx
         borderWidth: 5,
         width: '100%',
         maxHeight: '100%'  
