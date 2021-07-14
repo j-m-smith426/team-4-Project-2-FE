@@ -2,7 +2,7 @@ import React from "react";
 import { Text, View, StyleSheet, Image, TextInput, TouchableOpacity } from "react-native";
 import colors from "../config/colors";
 
-const Login = () => {
+const Login = ({navigation}) => {
     return (
         <View style = {styles.container}>
             <View style = {styles.profImg}>
@@ -22,10 +22,10 @@ const Login = () => {
                         style={styles.TextInput}
                         placeholder="Password"/>
                 </View>
-                <TouchableOpacity>
+                <TouchableOpacity onPress={() => navigation.navigate('Post')}>
                     <Text style={styles.forgot_button}>Forgot Password?</Text>
                 </TouchableOpacity>
-                <TouchableOpacity style={styles.loginBtn}>
+                <TouchableOpacity style={styles.loginBtn} >
                     <Text style={styles.text}>LOGIN</Text>
                 </TouchableOpacity>
             </View>

@@ -1,18 +1,27 @@
-import { StatusBar } from 'expo-status-bar';
 import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
-import Post from './app/Components/Post/Post';
-import Login from './app/Screen/Login';
+import { StyleSheet } from 'react-native';
+import { createStackNavigator} from '@react-navigation/stack'
+
+import MainRoutes from './app/Navigation/MainRoutes';
+
+type RootParams = {
+  Login: undefined;
+  Post: undefined;
+}
+
+
 
 export default function App() {
   return (
-    <View style={styles.container}>
-      <Login />
-      {/* <Post /> */}
+
+    
+        // <View style={styles.container}>
+      <MainRoutes />
       
-    </View>
-  );
-}
+      );
+    }
+    {/* <Login/> */}
+      //  </View>
 
 const styles = StyleSheet.create({
   container: {
