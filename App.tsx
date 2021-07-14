@@ -6,7 +6,7 @@ import Post from './app/Components/Post/Post';
 import Login from './app/Screen/Login';
 
 import AnimeScreen from './app/Screen/animeScreen';
-import Post from './app/Components/Post/Post';
+import PostScreen from './app/Screen/PostScreen';
 
 
 
@@ -18,7 +18,7 @@ export default function App() {
       {/* <Post /> */}
       
 
-     <AnimeScreen/>
+     <Login/>
       {/* <Post /> */}   
 
 
@@ -32,6 +32,7 @@ const styles = StyleSheet.create({
     backgroundColor: '#fff',
     alignItems: 'center',
     justifyContent: 'space-evenly',
+    flexDirection:"column",
 
   },
 });

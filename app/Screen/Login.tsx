@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Text, View, StyleSheet, Image, TextInput, TouchableOpacity } from "react-native";
+import { Text, View, StyleSheet, Image, TextInput, TouchableOpacity, Pressable } from "react-native";
 import colors from "../config/colors";
 
 const Login = () => {
@@ -9,7 +9,7 @@ const Login = () => {
             source={require('../assets/icon.png')} />
             
     </View>);
-    const [email, setEmail] = useState<any>(<span/>);
+    const [email, setEmail] = useState<any>(<View/>);
 
     const [signup,setSignup] = useState<any>(                <TouchableOpacity>
         <Text style={styles.linkText} onPress={toSignup}>Sign Up</Text>
@@ -37,12 +37,13 @@ const Login = () => {
                 </TouchableOpacity>
                 {signup}
             </View>
+            <View style = {styles.filler}/>
         </View>
 
 
     );
     async function toSignup(){
-        setImg(<span/>);
+        setImg(<View style={styles.filler}/>);
         setEmail(<View style={styles.inputView}>
             <TextInput
                 style={styles.TextInput}
@@ -59,7 +60,7 @@ const Login = () => {
                 style={styles.image}
                 source={require('../assets/icon.png')} />
         </View>);
-        setEmail(<span/>);
+        setEmail(<View/>);
         setSignup(                <TouchableOpacity >
             <Text style={styles.linkText} onPress={toSignup}>Sign Up</Text>
         </TouchableOpacity>);
@@ -77,6 +78,9 @@ const styles = StyleSheet.create({
         height: '50%'
         
     },
+    filler:{
+        flex:1
+    },
     image: {
         width: '80%',
         height: '80%',
@@ -88,7 +92,7 @@ const styles = StyleSheet.create({
     {
         width:"90%",
         borderRadius:1000,
-        flex:2,
+        height:"20%",
         alignItems:"center",
         justifyContent:"center",
         backgroundColor:colors.buttonPrimary,
@@ -96,9 +100,9 @@ const styles = StyleSheet.create({
     },
 
     linkText: {
-        textAlign: "left",
-        flex:1,
-        marginBottom: "30%",
+        height: "20%",
+        marginBottom: "42%",
+        alignItems: "center",
       },
 
     container: {
@@ -112,9 +116,11 @@ const styles = StyleSheet.create({
         backgroundColor: colors.background,
         borderRadius: 1000,
         width: "90%",
-        flex:2,
+        //flex:2,
+        height:"20%",
         marginBottom: "2%",
         alignItems: "center",
+        
       },
       
     TextInput: {
@@ -127,6 +133,7 @@ const styles = StyleSheet.create({
         //outlineWidth: 0
     },
     main: {
+        flexDirection:"column",
         backgroundColor: colors.tertiary,
         alignItems: "center",
         paddingTop:20,
@@ -135,20 +142,10 @@ const styles = StyleSheet.create({
         borderWidth: 1,
         width: '80%',
         maxWidth:500,
-        height: '30%',
-        minHeight:300
-    },
-    lmain: {
-        backgroundColor: colors.tertiary,
-        alignItems: "center",
-        paddingTop:20,
-        //justifyContent: "center",
-        borderRadius: 30,
-        borderWidth: 1,
-        width: '80%',
-        maxWidth:500,
-        height: '35%',
-        minHeight:250
+        flex:1,
+        minHeight:300,
+        justifyContent:"space-between"
+        
     },
     text: {
         //flex: 1,
