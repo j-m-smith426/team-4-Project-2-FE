@@ -1,4 +1,5 @@
 import React from 'react';
+
 import { Image, View, StyleSheet, Text, Pressable } from 'react-native';
 interface Iprops
 {
@@ -22,6 +23,7 @@ const ProfileImg = (props:Iprops) => {
 
         </View>
             </Pressable>
+
     );
 }
 
@@ -36,7 +38,9 @@ const styles = StyleSheet.create({
         width: '50%',
         height: '100%', 
         
+
        // backgroundColor: 'indigo',
+
     },
     image: {
         width: '100%',
