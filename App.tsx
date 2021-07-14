@@ -1,20 +1,21 @@
 import React from 'react';
-import { StyleSheet } from 'react-native';
-import { createStackNavigator} from '@react-navigation/stack'
 
+import { StyleSheet, Text, View } from 'react-native';
+
+import Post from './app/Components/Post/Post';
+import Login from './app/Screen/Login';
 import MainRoutes from './app/Navigation/MainRoutes';
 
-type RootParams = {
-  Login: undefined;
-  Post: undefined;
-}
+
+
+import AnimeScreen from './app/Screen/animeScreen';
+import Post from './app/Components/Post/Post';
 
 
 
 export default function App() {
   return (
 
-    
         // <View style={styles.container}>
       <MainRoutes />
       
