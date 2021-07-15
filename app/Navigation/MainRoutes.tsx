@@ -3,7 +3,7 @@ import {NavigationContainer} from '@react-navigation/native'
 import { createStackNavigator } from '@react-navigation/stack';
 import Login from '../Screen/Login';
 import PostScreen from '../Screen/PostScreen';
-
+import animeScreen from '../Screen/animeScreen';
 interface RouterProps
 {
     children?: any
@@ -15,6 +15,7 @@ const MainRoutes: React.FC<RouterProps> = (props:RouterProps) =>
     return (
         <NavigationContainer >
             <Stack.Navigator >
+            <Stack.Screen name="Anime" component={animeScreen} />
                 <Stack.Screen
                 name="Login"
                 component={Login}

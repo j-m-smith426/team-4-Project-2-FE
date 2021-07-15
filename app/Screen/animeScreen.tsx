@@ -4,10 +4,16 @@ import { StyleSheet, Text, View, Image, Button } from 'react-native';
 import Button_animeComments from '../Components/Anime/Button_animeComments';
 import Button_animeFavorite from '../Components/Anime/Button_animeFavorite';
 import Button_animeRating from '../Components/Anime/Button_animeRating';
+import { NavigationContainer } from '@react-navigation/native';
+import { createMaterialBottomTabNavigator } from '@react-navigation/material-bottom-tabs';
+import Login from './Login'
+import PostScreen from './PostScreen'
+import mainScreen from './mainScreen'
 
 
 
 export default function AnimeScreen() {
+  const Tab = createMaterialBottomTabNavigator();
   return (
     <View style={styles.container}>
        <View style={styles.topMenu}>
@@ -23,14 +29,23 @@ export default function AnimeScreen() {
         <Text style={styles.content}>The epic episodic adventure of Goku and the Z Warriors as they defend the Earth 
         and the Universe from super-powered fighters and monsters</Text>
         
-   
+   {/*}
     <View style={styles.lowerMenu}>
 
     
     <Button_animeComments/>
     <Button_animeFavorite/>
     <Button_animeRating/>
-    </View>
+  </View>*/}
+  
+  <NavigationContainer>
+      <Tab.Navigator>
+        <Tab.Screen name="Login" component={Login} />
+        <Tab.Screen name="Home" component={mainScreen} />
+        <Tab.Screen name="Posts" component={PostScreen} />
+
+      </Tab.Navigator>
+    </NavigationContainer>
   </View>
   );
 
