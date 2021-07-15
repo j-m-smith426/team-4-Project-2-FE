@@ -1,27 +1,33 @@
-import React from 'react';
-import { Text, View, StyleSheet, Alert, Button } from 'react-native';
+import React, {Component} from 'react';
+import { Text, View, StyleSheet, Alert, Button, TouchableOpacity } from 'react-native';
+import buttons from '../../config/buttons';
+
+
+
+
 
 const Button_animeRating = () => {
     return (
-        <View style={styles.commentContainer}>
+        <View style={styles.button}>
            <Button
             
             onPress={() =>Alert.alert('Eventually you will be able to rate this anime.')}
             title="Rate Anime"
-            color='#f85B1A'
+            color={buttons.backColor}
             accessibilityLabel="Press to give your rating of this anime."
             />
-
         </View>
     );
 }
 
 const styles = StyleSheet.create({
-    commentContainer: {
-        margin:5,
-        padding:10,
-        
-       
+    
+        button:{
+            backgroundColor:buttons.backColor,
+            borderRadius:buttons.radius,
+            margin:buttons.marg,
+            padding:buttons.padd,
+            fontSize:buttons.fSize,   
     }
 });
 
