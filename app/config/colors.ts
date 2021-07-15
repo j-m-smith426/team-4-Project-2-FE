@@ -3,7 +3,7 @@ const colors = {
   secondary: "grey",
   tertiary: "lightblue",
   background: "white",
-  buttonPrimary: "indigo",
+  buttonPrimary: "green",
 };
 
 export default colors;

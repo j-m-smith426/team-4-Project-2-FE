@@ -9,12 +9,17 @@ import MainRoutes from './app/Navigation/MainRoutes';
 
 
 import AnimeScreen from './app/Screen/animeScreen';
+
+
+
 import PostScreen from './app/Screen/PostScreen';
+
 
 
 
 export default function App() {
   return (
+
 
         // <View style={styles.container}>
       <MainRoutes />
@@ -23,6 +28,7 @@ export default function App() {
     }
     {/* <Login/> */}
       //  </View>
+
 
 const styles = StyleSheet.create({
   container: {

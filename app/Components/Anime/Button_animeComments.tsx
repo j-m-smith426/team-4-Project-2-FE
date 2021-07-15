@@ -1,17 +1,18 @@
 import React from 'react';
 import { Text, View, StyleSheet, Button, Alert} from 'react-native';
+import buttons from '../../config/buttons';
 
 const Button_animeComments = () => {
     
     
     
     return (
-        <View style={styles.comments}>
+        <View style={styles.button}>
            <Button
             
             onPress={() => Alert.alert('Eventually you will see the comments.')}
             title="Comments"
-            color='#f85B1A'
+            color={buttons.backColor}
             accessibilityLabel="Press to look at this anime's comments"
             />
 
@@ -20,11 +21,13 @@ const Button_animeComments = () => {
 }
 
 const styles = StyleSheet.create({
-    comments: {
-       borderRadius:15,
-        margin:5,
-        padding:10,
-        
+    button: {
+        backgroundColor:buttons.backColor,
+        borderRadius:buttons.radius,
+        margin:buttons.marg,
+        padding:buttons.padd,
+        fontSize:buttons.fSize,
+       
       
     }
 });

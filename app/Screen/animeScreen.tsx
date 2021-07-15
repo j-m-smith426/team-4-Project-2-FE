@@ -40,8 +40,8 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: '#fff',
-   alignItems: 'center',
-  justifyContent: 'space-evenly',
+    alignItems: 'center',
+    justifyContent: 'space-evenly',
 
   },
   animeImg:{      
@@ -70,9 +70,9 @@ const styles = StyleSheet.create({
   },
   lowerMenu:{
     flexDirection:'row',
-    backgroundColor:'#072083',
+    //backgroundColor:'#072083',
     alignItems: 'center',
-    justifyContent: 'space-evenly',
+    justifyContent:'space-evenly',
 
   },
   rating:{
