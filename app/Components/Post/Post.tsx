@@ -1,6 +1,6 @@
 import React from "react";
-import { useEffect } from "react";
-import { useState } from "react";
+import { useEffect, useState } from "react";
+
 import { Text, View, StyleSheet, Image } from "react-native";
 
 import colors from "../../config/colors";
