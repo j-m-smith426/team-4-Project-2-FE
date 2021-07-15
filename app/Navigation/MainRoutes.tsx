@@ -4,6 +4,7 @@ import { createStackNavigator } from '@react-navigation/stack';
 import Login from '../Screen/Login';
 import PostScreen from '../Screen/PostScreen';
 import AnimeScreen from '../Screen/animeScreen';
+import ProfilePage from '../Components/Profile/ProfilePage';
 
 interface RouterProps
 {
@@ -15,13 +16,14 @@ const MainRoutes: React.FC<RouterProps> = (props:RouterProps) =>
 {
     return (
         <NavigationContainer >
-            <Stack.Navigator >
+            <Stack.Navigator initialRouteName='Login'>
                 <Stack.Screen
                 name="Login"
                 component={Login}
                 />
                 <Stack.Screen name="Post" component={PostScreen} />
                 <Stack.Screen name="Anime" component={AnimeScreen} />
+                <Stack.Screen name="User" component={ProfilePage} />
             </Stack.Navigator>
         </NavigationContainer>
         

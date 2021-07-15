@@ -1,9 +1,11 @@
 import React, { useState } from "react";
 import { Text, View, StyleSheet, Image, TextInput, TouchableOpacity, Pressable } from "react-native";
 import colors from "../config/colors";
+import { useNavigation } from "@react-navigation/core";
 
-
-const Login = ({navigation}) => {
+const Login = () =>
+{
+    let navigation = useNavigation();
     const [img, setImg] = useState<any>(<View style = {styles.profImg}>
         <Image
             style={styles.image}
@@ -32,7 +34,7 @@ const Login = ({navigation}) => {
                         style={styles.TextInput}
                         placeholder="Password"/>
                 </View>
-                <TouchableOpacity style={styles.loginBtn}>
+                <TouchableOpacity style={styles.loginBtn} onPress={() =>navigation.navigate('Anime') }>
                     <Text style={styles.text}>{btnText}</Text>
 
                 </TouchableOpacity>
