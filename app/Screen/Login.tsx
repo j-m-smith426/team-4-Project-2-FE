@@ -1,39 +1,75 @@
-import React from "react";
-import { Text, View, StyleSheet, Image, TextInput, TouchableOpacity } from "react-native";
+import React, { useState } from "react";
+import { Text, View, StyleSheet, Image, TextInput, TouchableOpacity, Pressable } from "react-native";
 import colors from "../config/colors";
 
-const Login = () => {
+
+const Login = ({navigation}) => {
+    const [img, setImg] = useState<any>(<View style = {styles.profImg}>
+        <Image
+            style={styles.image}
+            source={require('../assets/icon.png')} />
+            
+    </View>);
+    const [email, setEmail] = useState<any>(<View/>);
+
+    const [signup,setSignup] = useState<any>(                <TouchableOpacity>
+        <Text style={styles.linkText} onPress={toSignup}>Sign Up</Text>
+    </TouchableOpacity>);
+    const [btnText,setBtnText] = useState<string>("LOGIN");
+    const [mainSize,setMainSize] = useState(styles.main);
     return (
         <View style = {styles.container}>
-            <View style = {styles.profImg}>
-                <Image
-                    style={styles.image}
-                    source={require('../assets/icon.png')} />
-            </View>
-            <View style= {styles.main}>
+            {img}
+            <View style= {mainSize}>
+                {email}
                 <View style={styles.inputView}>
                     <TextInput
                         style={styles.TextInput}
                         placeholder="Username"/>
                 </View>
-
                 <View style={styles.inputView}>
                     <TextInput
                         style={styles.TextInput}
                         placeholder="Password"/>
                 </View>
-                <TouchableOpacity>
-                    <Text style={styles.forgot_button}>Forgot Password?</Text>
-                </TouchableOpacity>
                 <TouchableOpacity style={styles.loginBtn}>
-                    <Text style={styles.text}>LOGIN</Text>
+                    <Text style={styles.text}>{btnText}</Text>
+
                 </TouchableOpacity>
+                {signup}
             </View>
+            <View style = {styles.filler}/>
         </View>
 
 
     );
+    async function toSignup(){
+        setImg(<View style={styles.filler}/>);
+        setEmail(<View style={styles.inputView}>
+            <TextInput
+                style={styles.TextInput}
+                placeholder="Email"/>
+        </View>);
+        setSignup(<TouchableOpacity>
+            <Text style={styles.linkText} onPress={toLogin}>Log in</Text>
+        </TouchableOpacity>);
+        setBtnText("SIGN UP");
+    } 
+    async function toLogin(){
+        setImg(<View style = {styles.profImg}>
+            <Image
+                style={styles.image}
+                source={require('../assets/icon.png')} />
+        </View>);
+        setEmail(<View/>);
+        setSignup(                <TouchableOpacity >
+            <Text style={styles.linkText} onPress={toSignup}>Sign Up</Text>
+        </TouchableOpacity>);
+        setBtnText("LOGIN");
+        setMainSize(styles.main);
+    } 
 }
+  
 const styles = StyleSheet.create({
     profImg: {
         alignItems: "center",
@@ -42,6 +78,9 @@ const styles = StyleSheet.create({
         maxWidth:500,
         height: '50%'
         
+    },
+    filler:{
+        flex:1
     },
     image: {
         width: '80%',
@@ -52,16 +91,19 @@ const styles = StyleSheet.create({
     },
     loginBtn:
     {
-        width:"80%",
-        borderRadius:25,
-        height:50,
+        width:"90%",
+        borderRadius:1000,
+        height:"20%",
         alignItems:"center",
         justifyContent:"center",
         backgroundColor:colors.buttonPrimary,
+        marginBottom: "2%"
     },
 
-    forgot_button: {
-        height: 30,
+    linkText: {
+        height: "20%",
+        marginBottom: "42%",
+        alignItems: "center",
       },
 
     container: {
@@ -73,11 +115,13 @@ const styles = StyleSheet.create({
     },
     inputView: {
         backgroundColor: colors.background,
-        borderRadius: 30,
+        borderRadius: 1000,
         width: "90%",
-        height: 60,
-        marginBottom: 20,
+        //flex:2,
+        height:"20%",
+        marginBottom: "2%",
         alignItems: "center",
+        
       },
       
     TextInput: {
@@ -87,8 +131,10 @@ const styles = StyleSheet.create({
         marginLeft: 20,
         width:'90%',
         borderRadius: 30,
+        //outlineWidth: 0
     },
     main: {
+        flexDirection:"column",
         backgroundColor: colors.tertiary,
         alignItems: "center",
         paddingTop:20,
@@ -97,7 +143,10 @@ const styles = StyleSheet.create({
         borderWidth: 1,
         width: '80%',
         maxWidth:500,
-        height: '30%'
+        flex:1,
+        minHeight:300,
+        justifyContent:"space-between"
+        
     },
     text: {
         //flex: 1,
