@@ -18,13 +18,13 @@ const Button_Like = () => {
 const styles = StyleSheet.create({
     likeContainer: {
 
-        backgroundColor: colors.primary,
+        //backgroundColor: colors.primary,
         width: '20%',
         height: '100%',
         alignItems: 'center',
         justifyContent: 'center',
         marginLeft: 80,
-
+        borderRadius: 10000,
         position:'absolute'
     }
 });
