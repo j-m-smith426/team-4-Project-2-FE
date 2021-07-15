@@ -1,7 +1,6 @@
 import React, {Component} from 'react';
 import { Text, View, StyleSheet, Alert, Button, TouchableOpacity } from 'react-native';
 import buttons from '../../config/buttons';
-import colors from '../../config/colors';
 
 
 
@@ -23,16 +22,12 @@ const Button_animeRating = () => {
 
 const styles = StyleSheet.create({
     
-        button: {
-            backgroundColor:colors.buttonPrimary,
+        button:{
+            backgroundColor:buttons.backColor,
             borderRadius:buttons.radius,
             margin:buttons.marg,
             padding:buttons.padd,
-            fontSize:buttons.fSize,
-           
-          
-   
-    
+            fontSize:buttons.fSize,   
     }
 });
 

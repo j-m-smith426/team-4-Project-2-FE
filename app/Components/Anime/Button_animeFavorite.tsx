@@ -1,10 +1,10 @@
 import React from 'react';
 import { Text, View, StyleSheet, Button, Alert } from 'react-native';
-import colors from '../../config/colors';
+
 import buttons from '../../config/buttons';
 const Button_animeFavorite = () => {
     return (
-        <View style={styles.button}>
+        <View style={styles.favorite}>
           <Button
             
             onPress={() => Alert.alert('You Have added this anime to your favorites.')}
@@ -18,8 +18,8 @@ const Button_animeFavorite = () => {
 }
 
 const styles = StyleSheet.create({
-    button: {
-        backgroundColor:colors.buttonPrimary,
+    favorite: {
+        backgroundColor:buttons.backColor,
         borderRadius:buttons.radius,
         margin:buttons.marg,
         padding:buttons.padd,
