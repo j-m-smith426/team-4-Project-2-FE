@@ -27,8 +27,8 @@ export default function AnimeScreen() {
     <View style={styles.lowerMenu}>
 
     
-    <Button_animeComments/>
-    <Button_animeFavorite/>
+        <Button_animeComments/>
+        <Button_animeFavorite/>
     <Button_animeRating/>
     </View>
   </View>

@@ -7,12 +7,11 @@ import Login from './app/Screen/Login';
 import MainRoutes from './app/Navigation/MainRoutes';
 
 
-
 import AnimeScreen from './app/Screen/animeScreen';
-
-
-
 import PostScreen from './app/Screen/PostScreen';
+
+
+
 
 
 
