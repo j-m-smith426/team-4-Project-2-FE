@@ -22,7 +22,8 @@ export default function App() {
 
 
         // <View style={styles.container}>
-      <MainRoutes />
+      // <MainRoutes />
+      <ProfilePage />
       
       );
     }
