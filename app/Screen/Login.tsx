@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Text, View, StyleSheet, Image, TextInput, TouchableOpacity, Pressable } from "react-native";
+import { Text, View, StyleSheet, Image, TextInput, TouchableOpacity } from "react-native";
 import colors from "../config/colors";
 import { useNavigation } from "@react-navigation/core";
 
@@ -34,7 +34,7 @@ const Login = () =>
                         style={styles.TextInput}
                         placeholder="Password"/>
                 </View>
-                <TouchableOpacity style={styles.loginBtn} onPress={() =>navigation.navigate('Anime') }>
+                <TouchableOpacity style={styles.loginBtn} onPress={() =>navigation.navigate("Home") }>
                     <Text style={styles.text}>{btnText}</Text>
 
                 </TouchableOpacity>
