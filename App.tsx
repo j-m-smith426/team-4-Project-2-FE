@@ -10,12 +10,8 @@ import MainRoutes from './app/Navigation/MainRoutes';
 
 import AnimeScreen from './app/Screen/animeScreen';
 
-
-
 import PostScreen from './app/Screen/PostScreen';
-import ProfilePage from './app/Components/Profile/ProfilePage';
-
-
+import ProfilePage from './app/Components/Profile/ProfileNavigation';
 
 export default function App() {
   return (
@@ -23,8 +19,8 @@ export default function App() {
 
         // <View style={styles.container}>
       // <MainRoutes />
-      <ProfilePage />
-      
+        // <ProfilePage />
+        <ProfilePage/>
       );
     }
     {/* <Login/> */}

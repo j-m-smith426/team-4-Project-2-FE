@@ -8,7 +8,7 @@ const Watchlist = () => {
 }
 
 const styles = StyleSheet.create({
-    watchlist: {}
+    watchlist: {},
 });
 
 export default Watchlist;
