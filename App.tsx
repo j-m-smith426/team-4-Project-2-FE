@@ -16,13 +16,16 @@ import PostScreen from './app/Screen/PostScreen';
 export default function App() {
   return (
 
-        // <View style={styles.container}>
-      <MainRoutes />
-      
+      <View style={styles.container}>
+        <Login />
+      </View>
+      //<MainRoutes />
+
+      //<Login />
       );
     }
     {/* <Login/> */}
-      //  </View>
+      //  s
 
 const styles = StyleSheet.create({
   container: {

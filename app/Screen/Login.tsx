@@ -3,7 +3,7 @@ import { Text, View, StyleSheet, Image, TextInput, TouchableOpacity, Pressable }
 import colors from "../config/colors";
 
 
-const Login = ({navigation}) => {
+const Login = () => {
     const [img, setImg] = useState<any>(<View style = {styles.profImg}>
         <Image
             style={styles.image}
@@ -20,7 +20,7 @@ const Login = ({navigation}) => {
     return (
         <View style = {styles.container}>
             {img}
-            <View style= {mainSize}>
+            <View style= {styles.main}>
                 {email}
                 <View style={styles.inputView}>
                     <TextInput
@@ -30,13 +30,18 @@ const Login = ({navigation}) => {
                 <View style={styles.inputView}>
                     <TextInput
                         style={styles.TextInput}
-                        placeholder="Password"/>
+                    placeholder="Password"/>
                 </View>
-                <TouchableOpacity style={styles.loginBtn}>
-                    <Text style={styles.text}>{btnText}</Text>
+                <View style={styles.loginBtnView}>
+                    <TouchableOpacity style={styles.loginBtn}>
+                        <Text style={styles.text}>{btnText}</Text>
+                    </TouchableOpacity>
+                </View>
 
-                </TouchableOpacity>
-                {signup}
+                <View style={styles.filler}>
+                    {signup}
+                </View>
+
             </View>
             <View style = {styles.filler}/>
         </View>
@@ -80,7 +85,7 @@ const styles = StyleSheet.create({
         
     },
     filler:{
-        flex:1
+        flex:2
     },
     image: {
         width: '80%',
@@ -89,20 +94,26 @@ const styles = StyleSheet.create({
         borderRadius: 50,
         
     },
+    loginBtnView:{
+        width:"90%",
+        marginBottom: "5%",
+        //height:"20%",
+        flex:2
+    },
     loginBtn:
     {
-        width:"90%",
-        borderRadius:1000,
-        height:"20%",
-        alignItems:"center",
+        width:"100%",
+        height:"100%",
+        alignContent:"center",
         justifyContent:"center",
+        borderRadius:2000,
         backgroundColor:colors.buttonPrimary,
-        marginBottom: "2%"
     },
 
     linkText: {
-        height: "20%",
-        marginBottom: "42%",
+        /*height: "20%",
+        marginBottom: "42%",*/
+        flex:1,
         alignItems: "center",
       },
 
@@ -117,9 +128,9 @@ const styles = StyleSheet.create({
         backgroundColor: colors.background,
         borderRadius: 1000,
         width: "90%",
-        //flex:2,
-        height:"20%",
-        marginBottom: "2%",
+        flex:2,
+        //height:"20%",
+        marginBottom: "5%",
         alignItems: "center",
         
       },
@@ -134,6 +145,7 @@ const styles = StyleSheet.create({
         //outlineWidth: 0
     },
     main: {
+        flex:1,
         flexDirection:"column",
         backgroundColor: colors.tertiary,
         alignItems: "center",
@@ -143,7 +155,7 @@ const styles = StyleSheet.create({
         borderWidth: 1,
         width: '80%',
         maxWidth:500,
-        flex:1,
+
         minHeight:300,
         justifyContent:"space-between"
         
