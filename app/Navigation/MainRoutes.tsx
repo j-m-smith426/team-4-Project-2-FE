@@ -5,6 +5,7 @@ import Login from '../Screen/Login';
 import PostScreen from '../Screen/PostScreen';
 import AnimeScreen from '../Screen/animeScreen';
 import ProfilePage from '../Components/Profile/ProfilePage';
+import FavoriteScreen from '../Screen/FavoriteScreen';
 
 interface RouterProps
 {

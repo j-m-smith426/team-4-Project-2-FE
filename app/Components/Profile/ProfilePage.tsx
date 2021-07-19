@@ -1,12 +1,14 @@
 import React from "react";
 import { Button } from 'react-native-elements';
 import { View, StyleSheet, Text , Image, Alert, ScrollView, Pressable} from "react-native";
+import PostScreen from "../../Screen/PostScreen";
+import FavoriteScreen from "../../Screen/FavoriteScreen";
 
 const ProfilePage = () => {
     return(
         //body
         <View style = {styles.container}>
-            
+
             <View style={styles.header}>
                 <View style = {styles.buttons}>
                     <Button 
@@ -14,61 +16,24 @@ const ProfilePage = () => {
                         type = "clear"
                         style = {styles.middle}
                         onPress = {() => Alert.alert('Search Bar')}
-                    />
+                        />
                     <Button
                         title = "Edit"
                         type = "clear"
                         style = {styles.right}
                         onPress = {() => Alert.alert('Pull Dropdown, change v to ^')}
-                    />
+                        />
                 </View>
             </View>
             <Text style = {styles.username}>Username</Text>
             <Image
                 style = {styles.profilePicture}
                 source = {require('../../assets/favicon.png')}
-            />
+                />
 
             <View style={styles.bio}>
-                <ScrollView>
-                    <Text style = {styles.bio}>Hi! My name is 2Chainz!</Text>
-                    <Text>Synopsis:</Text>
-                    <Text>I like to watch the birdz</Text>
-                    <Text>liwjdahdnkajdkjashdkhadjashdkjahdiewh8i-0u98ygt76ufryd5tesxdfcgvhjbkilouy7cgfhbvnmkjlhgfcvbnkjlhgbvnkjhgvb</Text>
-                    <Text>liwjdahdnkajdkjashdkhadjashdkjahdiewh8i-0u98ygt76ufryd5tesxdfcgvhjbkilouy7cgfhbvnmkjlhgfcvbnkjlhgbvnkjhgvb</Text>
-                    <Text>liwjdahdnkajdkjashdkhadjashdkjahdiewh8i-0u98ygt76ufryd5tesxdfcgvhjbkilouy7cgfhbvnmkjlhgfcvbnkjlhgbvnkjhgvb</Text>
-                    <Text>liwjdahdnkajdkjashdkhadjashdkjahdiewh8i-0u98ygt76ufryd5tesxdfcgvhjbkilouy7cgfhbvnmkjlhgfcvbnkjlhgbvnkjhgvb</Text>
-                    <Text>liwjdahdnkajdkjashdkhadjashdkjahdiewh8i-0u98ygt76ufryd5tesxdfcgvhjbkilouy7cgfhbvnmkjlhgfcvbnkjlhgbvnkjhgvb</Text>
-                    <Text>liwjdahdnkajdkjashdkhadjashdkjahdiewh8i-0u98ygt76ufryd5tesxdfcgvhjbkilouy7cgfhbvnmkjlhgfcvbnkjlhgbvnkjhgvb</Text>
-                    <Text>liwjdahdnkajdkjashdkhadjashdkjahdiewh8i-0u98ygt76ufryd5tesxdfcgvhjbkilouy7cgfhbvnmkjlhgfcvbnkjlhgbvnkjhgvb</Text>
-                    <Text>liwjdahdnkajdkjashdkhadjashdkjahdiewh8i-0u98ygt76ufryd5tesxdfcgvhjbkilouy7cgfhbvnmkjlhgfcvbnkjlhgbvnkjhgvb</Text>
-                    <Text>liwjdahdnkajdkjashdkhadjashdkjahdiewh8i-0u98ygt76ufryd5tesxdfcgvhjbkilouy7cgfhbvnmkjlhgfcvbnkjlhgbvnkjhgvb</Text>
-                    <Text>liwjdahdnkajdkjashdkhadjashdkjahdiewh8i-0u98ygt76ufryd5tesxdfcgvhjbkilouy7cgfhbvnmkjlhgfcvbnkjlhgbvnkjhgvb</Text>
-                    <Text>liwjdahdnkajdkjashdkhadjashdkjahdiewh8i-0u98ygt76ufryd5tesxdfcgvhjbkilouy7cgfhbvnmkjlhgfcvbnkjlhgbvnkjhgvb</Text>
-                    <Text>liwjdahdnkajdkjashdkhadjashdkjahdiewh8i-0u98ygt76ufryd5tesxdfcgvhjbkilouy7cgfhbvnmkjlhgfcvbnkjlhgbvnkjhgvb</Text>
-                    <Text>liwjdahdnkajdkjashdkhadjashdkjahdiewh8i-0u98ygt76ufryd5tesxdfcgvhjbkilouy7cgfhbvnmkjlhgfcvbnkjlhgbvnkjhgvb</Text>
-                    <Text>liwjdahdnkajdkjashdkhadjashdkjahdiewh8i-0u98ygt76ufryd5tesxdfcgvhjbkilouy7cgfhbvnmkjlhgfcvbnkjlhgbvnkjhgvb</Text>
-                    <Text>liwjdahdnkajdkjashdkhadjashdkjahdiewh8i-0u98ygt76ufryd5tesxdfcgvhjbkilouy7cgfhbvnmkjlhgfcvbnkjlhgbvnkjhgvb</Text>
-                    <Text>liwjdahdnkajdkjashdkhadjashdkjahdiewh8i-0u98ygt76ufryd5tesxdfcgvhjbkilouy7cgfhbvnmkjlhgfcvbnkjlhgbvnkjhgvb</Text>
-                    <Text>liwjdahdnkajdkjashdkhadjashdkjahdiewh8i-0u98ygt76ufryd5tesxdfcgvhjbkilouy7cgfhbvnmkjlhgfcvbnkjlhgbvnkjhgvb</Text>
-                    <Text>liwjdahdnkajdkjashdkhadjashdkjahdiewh8i-0u98ygt76ufryd5tesxdfcgvhjbkilouy7cgfhbvnmkjlhgfcvbnkjlhgbvnkjhgvb</Text>
-                    <Text>liwjdahdnkajdkjashdkhadjashdkjahdiewh8i-0u98ygt76ufryd5tesxdfcgvhjbkilouy7cgfhbvnmkjlhgfcvbnkjlhgbvnkjhgvb</Text>
-                    <Text>liwjdahdnkajdkjashdkhadjashdkjahdiewh8i-0u98ygt76ufryd5tesxdfcgvhjbkilouy7cgfhbvnmkjlhgfcvbnkjlhgbvnkjhgvb</Text>
-                    <Text>liwjdahdnkajdkjashdkhadjashdkjahdiewh8i-0u98ygt76ufryd5tesxdfcgvhjbkilouy7cgfhbvnmkjlhgfcvbnkjlhgbvnkjhgvb</Text>
-                    <Text>liwjdahdnkajdkjashdkhadjashdkjahdiewh8i-0u98ygt76ufryd5tesxdfcgvhjbkilouy7cgfhbvnmkjlhgfcvbnkjlhgbvnkjhgvb</Text>
-                    <Text>liwjdahdnkajdkjashdkhadjashdkjahdiewh8i-0u98ygt76ufryd5tesxdfcgvhjbkilouy7cgfhbvnmkjlhgfcvbnkjlhgbvnkjhgvb</Text>
-                    <Text>liwjdahdnkajdkjashdkhadjashdkjahdiewh8i-0u98ygt76ufryd5tesxdfcgvhjbkilouy7cgfhbvnmkjlhgfcvbnkjlhgbvnkjhgvb</Text>
-                    <Text>liwjdahdnkajdkjashdkhadjashdkjahdiewh8i-0u98ygt76ufryd5tesxdfcgvhjbkilouy7cgfhbvnmkjlhgfcvbnkjlhgbvnkjhgvb</Text>
-                    <Text>liwjdahdnkajdkjashdkhadjashdkjahdiewh8i-0u98ygt76ufryd5tesxdfcgvhjbkilouy7cgfhbvnmkjlhgfcvbnkjlhgbvnkjhgvb</Text>
-                    <Text>liwjdahdnkajdkjashdkhadjashdkjahdiewh8i-0u98ygt76ufryd5tesxdfcgvhjbkilouy7cgfhbvnmkjlhgfcvbnkjlhgbvnkjhgvb</Text>
-                    <Text>liwjdahdnkajdkjashdkhadjashdkjahdiewh8i-0u98ygt76ufryd5tesxdfcgvhjbkilouy7cgfhbvnmkjlhgfcvbnkjlhgbvnkjhgvb</Text>
-                    <Text>liwjdahdnkajdkjashdkhadjashdkjahdiewh8i-0u98ygt76ufryd5tesxdfcgvhjbkilouy7cgfhbvnmkjlhgfcvbnkjlhgbvnkjhgvb</Text>
-                    <Text>liwjdahdnkajdkjashdkhadjashdkjahdiewh8i-0u98ygt76ufryd5tesxdfcgvhjbkilouy7cgfhbvnmkjlhgfcvbnkjlhgbvnkjhgvb</Text>
-                    <Text>liwjdahdnkajdkjashdkhadjashdkjahdiewh8i-0u98ygt76ufryd5tesxdfcgvhjbkilouy7cgfhbvnmkjlhgfcvbnkjlhgbvnkjhgvb</Text>
-                    <Text>liwjdahdnkajdkjashdkhadjashdkjahdiewh8i-0u98ygt76ufryd5tesxdfcgvhjbkilouy7cgfhbvnmkjlhgfcvbnkjlhgbvnkjhgvb</Text>
-                    <Text>liwjdahdnkajdkjashdkhadjashdkjahdiewh8i-0u98ygt76ufryd5tesxdfcgvhjbkilouy7cgfhbvnmkjlhgfcvbnkjlhgbvnkjhgvb</Text>
-
-                </ScrollView>
+                {/* <PostScreen/> */}
+                <FavoriteScreen />
             </View>
             <View style={styles.footer}>
                 <Text>Home</Text>
@@ -77,6 +42,7 @@ const ProfilePage = () => {
                 <Text>Favorites</Text>
             </View>
 
+                
         </View>
     );
 }
@@ -132,8 +98,8 @@ const styles = StyleSheet.create({
         flex: 2,
         fontSize: 16,
         textAlign: "center",
-        marginLeft: "5%",
-        marginRight: "5%",
+        marginLeft: "2%",
+        marginRight: "2%",
         paddingBottom: "3%"
     },
 
