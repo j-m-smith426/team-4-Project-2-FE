@@ -7,25 +7,25 @@ import Login from './app/Screen/Login';
 import MainRoutes from './app/Navigation/MainRoutes';
 
 
-
 import AnimeScreen from './app/Screen/animeScreen';
 import PostScreen from './app/Screen/PostScreen';
+
+
 
 
 
 export default function App() {
   return (
 
-      <View style={styles.container}>
-        <Login />
-      </View>
-      //<MainRoutes />
 
-      //<Login />
+        <MainRoutes />
+        // <View style={styles.container}>
+
       );
     }
     {/* <Login/> */}
       //  s
+
 
 const styles = StyleSheet.create({
   container: {

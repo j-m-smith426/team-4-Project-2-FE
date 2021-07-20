@@ -1,6 +1,6 @@
 import React from "react";
-import { useEffect } from "react";
-import { useState } from "react";
+import { useEffect, useState } from "react";
+
 import { Text, View, StyleSheet, Image } from "react-native";
 
 import colors from "../../config/colors";
@@ -56,9 +56,11 @@ const styles = StyleSheet.create({
     post: {
         
         backgroundColor: colors.tertiary,
-        borderWidth: 5,
-        width: '100%',
-        maxHeight: '100%'  
+        borderWidth: 1,
+        alignSelf: 'center',
+        width: '90%',
+        maxHeight: '100%',
+        borderRadius: 25
     },
     postTop: {
         
@@ -95,7 +97,7 @@ const styles = StyleSheet.create({
     postImg: {
         height: 200,
         width: '80%',
-        borderWidth: 2,
+        borderWidth: 1,
         alignSelf: 'center',
         borderColor: 'black',
         resizeMode: 'center',
