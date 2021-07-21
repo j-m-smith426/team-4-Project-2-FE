@@ -6,7 +6,7 @@ import PostScreen from '../Screen/PostScreen';
 
 import Navbar from './NavBar';
 import AnimeScreen from '../Screen/animeScreen';
-import ProfilePage from '../Components/Profile/ProfilePage';
+import ProfilePage from '../Components/Profile/ProfileNavigation';
 
 import SideMenu from 'react-native-side-menu-updated';
 import animeScreen from '../Screen/animeScreen';
@@ -33,7 +33,7 @@ const MainRoutes: React.FC<RouterProps> = (props:RouterProps) =>
                     <Stack.Screen
                     name="Login"
                     component={Login}
-
+                    {...props}
                     />
                     <Stack.Screen name="Post" component={PostScreen} />
                     <Stack.Screen name="Anime" component={AnimeScreen} />
