@@ -9,9 +9,8 @@ const Bio = () => {
             style = {styles.profilePicture}
             source = {require('../../assets/favicon.png')}
         />
-
+        <Text style = {styles.intro}>Hi! My name is 2Chainz!</Text>
         <View style={styles.bio}>
-                <Text style = {styles.bio}>Hi! My name is 2Chainz!</Text>
                 <Text>Synopsis:</Text>
                 <Text>I like to watch the birdz</Text>
                 <Text>liwjdahdnkajdkjashdkhadjashdkjahdiewh8i-0u98ygt76ufryd5tesxdfcgvhjbkilouy7cgfhbvnmkjlhgfcvbnkjlhgbvnkjhgvb</Text>
@@ -62,12 +61,18 @@ const styles = StyleSheet.create({
         borderColor: "grey",
         borderRadius: 100/2,
     },
+    intro: {
+        flex: 2,
+        fontSize: 16,
+        textAlign: "center",
+        paddingTop: "5%"   
+    },
 
     bio: {
         flex: 2,
         fontSize: 16,
         textAlign: "center",
-        paddingHorizontal: "5%",
+        paddingHorizontal: "10%",
         paddingVertical: "5%"
     },
 });
