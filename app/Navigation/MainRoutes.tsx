@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import {NavigationContainer} from '@react-navigation/native'
 import { createStackNavigator } from '@react-navigation/stack';
 import Login from '../Screen/Login';
@@ -8,11 +8,7 @@ import Navbar from './NavBar';
 import AnimeScreen from '../Screen/animeScreen';
 import ProfilePage from '../Components/Profile/ProfileNavigation';
 
-import SideMenu from 'react-native-side-menu-updated';
-import animeScreen from '../Screen/animeScreen';
-import { TouchableOpacity, View, Text } from 'react-native';
-import { useNavigation } from "@react-navigation/core";
-import { DrawerLayoutAndroid } from 'react-native-gesture-handler';
+import { View } from 'react-native';
 import { createDrawerNavigator } from '@react-navigation/drawer';
 
 interface RouterProps
