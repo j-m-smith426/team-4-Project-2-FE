@@ -6,7 +6,7 @@ import PostScreen from '../Screen/PostScreen';
 
 import Navbar from './NavBar';
 import AnimeScreen from '../Screen/animeScreen';
-import ProfilePage from '../Components/Profile/ProfilePage';
+import ProfilePage from '../Components/Profile/ProfileNavigation';
 
 import SideMenu from 'react-native-side-menu-updated';
 import animeScreen from '../Screen/animeScreen';
@@ -34,6 +34,7 @@ const MainRoutes: React.FC<RouterProps> = (props:RouterProps) =>
     return (
         <NavigationContainer >
 
+<<<<<<< HEAD
             <Stack.Navigator initialRouteName='Login' screenOptions={{ headerTitle: props => <View><Navbar menu = {openMenu}></Navbar></View> }}>
                 <Stack.Screen
                 name="Login"
@@ -48,6 +49,20 @@ const MainRoutes: React.FC<RouterProps> = (props:RouterProps) =>
 
 
             </Stack.Navigator>
+=======
+            <SideMenu menu = {menu} isOpen= {open} onChange = {(isOpen) => {if(!isOpen){setOpen(false)}}} >
+                <Stack.Navigator initialRouteName='Login' screenOptions={{ headerTitle: props => <View><Navbar menu = {openMenu}></Navbar></View> }}>
+                    <Stack.Screen
+                    name="Login"
+                    component={Login}
+                    {...props}
+                    />
+                    <Stack.Screen name="Post" component={PostScreen} />
+                    <Stack.Screen name="Anime" component={AnimeScreen} />
+                    <Stack.Screen name="User" component={ProfilePage} />
+                </Stack.Navigator>
+            </SideMenu>
+>>>>>>> 5d8c13568d2ea5491bc93358f1ae099628df651a
         </NavigationContainer>
         
     );
