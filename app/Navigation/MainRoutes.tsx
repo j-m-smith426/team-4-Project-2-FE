@@ -6,6 +6,7 @@ import PostScreen from '../Screen/PostScreen';
 
 import Navbar from './NavBar';
 import AnimeScreen from '../Screen/animeScreen';
+<<<<<<< HEAD
 import ProfilePage from '../Components/Profile/ProfileNavigation';
 
 import SideMenu from 'react-native-side-menu-updated';
@@ -14,6 +15,10 @@ import { TouchableOpacity, View, Text } from 'react-native';
 import { useNavigation } from "@react-navigation/core";
 import { DrawerLayoutAndroid } from 'react-native-gesture-handler';
 import { createDrawerNavigator } from '@react-navigation/drawer';
+=======
+import ProfilePage from '../Components/Profile/ProfilePage';
+import FavoriteScreen from '../Screen/FavoriteScreen';
+>>>>>>> c1c1a45eb14e656c6d7d08b3561a8dfe2f51d9ad
 
 interface RouterProps
 {

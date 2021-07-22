@@ -22,7 +22,7 @@ const styles = StyleSheet.create({
         backgroundColor: colors.secondary,
         justifyContent: 'center',
         //marginHorizontal: '2%',
-        width: '22%',
+        width: '25%',
         alignItems: 'center',
         borderRadius: 80,
 
