@@ -49,7 +49,7 @@ const styles = StyleSheet.create({
       width:300,
   },
   title:{
-      fontFamily:'',
+      //fontFamily:'',
       fontSize: 32,
       color:'#000000',
       textAlign:'center',
