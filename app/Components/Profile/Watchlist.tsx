@@ -46,49 +46,37 @@ const Watchlist = () => {
                 <Image
                     style = {styles.photo}
                     source={{
-                        uri: 'https://m.media-amazon.com/images/I/91-W7KxXXdL._SY445_.jpg'
+                        uri: 'https://upload.wikimedia.org/wikipedia/en/7/72/Bleachanime.png'
                     }}
                 />
                 <View style = {styles.infoContainer}>
-                    <Text style = {styles.animeTitle}>Zatch Bell</Text>
-                    <Text style = {styles.infoText}>Genre: Action, Adventure</Text>
-                    <Text style = {styles.infoText}>Episodes: 150</Text>
+                    <Text style = {styles.animeTitle}>Bleach</Text>
+                    <Text style = {styles.infoText}>Genre: Action, Supernatural</Text>
+                    <Text style = {styles.infoText}>Episodes: 350</Text>
                 </View>
             </View><View style = {styles.anime}>
                 <Image
                     style = {styles.photo}
                     source={{
-                        uri: 'https://m.media-amazon.com/images/I/91-W7KxXXdL._SY445_.jpg'
+                        uri: 'https://img1.ak.crunchyroll.com/i/spire2/54c15675670ba44c1f98c3e11ba0cddf1515030877_full.jpg'
                     }}
                 />
                 <View style = {styles.infoContainer}>
-                    <Text style = {styles.animeTitle}>Zatch Bell</Text>
-                    <Text style = {styles.infoText}>Genre: Action, Adventure</Text>
-                    <Text style = {styles.infoText}>Episodes: 150</Text>
+                    <Text style = {styles.animeTitle}>Gintama</Text>
+                    <Text style = {styles.infoText}>Genre: Comedy, Action</Text>
+                    <Text style = {styles.infoText}>Episodes: 327</Text>
                 </View>
             </View><View style = {styles.anime}>
                 <Image
                     style = {styles.photo}
                     source={{
-                        uri: 'https://m.media-amazon.com/images/I/91-W7KxXXdL._SY445_.jpg'
+                        uri: 'https://m.media-amazon.com/images/M/MV5BOGZmYjkxMDItNmQ3ZC00YzdlLThjMDktYWJkOGZiOWU1NmY0XkEyXkFqcGdeQXVyMTA3MzQ4MTcw._V1_.jpg'
                     }}
                 />
                 <View style = {styles.infoContainer}>
-                    <Text style = {styles.animeTitle}>Zatch Bell</Text>
-                    <Text style = {styles.infoText}>Genre: Action, Adventure</Text>
-                    <Text style = {styles.infoText}>Episodes: 150</Text>
-                </View>
-            </View><View style = {styles.anime}>
-                <Image
-                    style = {styles.photo}
-                    source={{
-                        uri: 'https://m.media-amazon.com/images/I/91-W7KxXXdL._SY445_.jpg'
-                    }}
-                />
-                <View style = {styles.infoContainer}>
-                    <Text style = {styles.animeTitle}>Zatch Bell</Text>
-                    <Text style = {styles.infoText}>Genre: Action, Adventure</Text>
-                    <Text style = {styles.infoText}>Episodes: 150</Text>
+                    <Text style = {styles.animeTitle}>Demon Slayer</Text>
+                    <Text style = {styles.infoText}>Genre: Supernatural, Actione</Text>
+                    <Text style = {styles.infoText}>Episodes: 26</Text>
                 </View>
             </View>
         </ScrollView>
