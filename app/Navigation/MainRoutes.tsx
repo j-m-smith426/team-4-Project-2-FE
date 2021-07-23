@@ -23,11 +23,15 @@ const Stack = createStackNavigator();
 const Drawer = createDrawerNavigator();
 const MainRoutes: React.FC<RouterProps> = (props:RouterProps) =>
 {
-    const mainView =  () => {return(<Drawer.Navigator initialRouteName='Anime'>
-    <Drawer.Screen name="Post" component={PostScreen} />
-    <Drawer.Screen name="Anime" component={AnimeScreen} />
-    <Drawer.Screen name="User" component={ProfilePage} />
-</Drawer.Navigator>)};
+    const mainView = () =>
+    {
+        return (
+            <Drawer.Navigator initialRouteName='Anime'>
+                <Drawer.Screen name="Post" component={PostScreen} />
+                <Drawer.Screen name="Anime" component={AnimeScreen} />
+                <Drawer.Screen name="User" component={ProfilePage} />
+            </Drawer.Navigator>   
+    )};
     const [open, setOpen] = useState<boolean>(false);
 
     const openMenu = () => {setOpen(true)};
