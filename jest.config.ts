@@ -19,7 +19,7 @@ module.exports = {
   collectCoverage: true,
   collectCoverageFrom: [
     // "app/Components/**/*.{ts, tsx}",
-    "<rootDir>/app/**/*.tsx",
+    "<rootDir>/app/**/*.{tsx,ts}",
     //"<rootDir>/app/**/*.ts",
   ],
   coverageDirectory: "coverage",
@@ -38,7 +38,7 @@ module.exports = {
 
   /*//if you include next line, add import { defaults } from 'jest-config';
    */
-  moduleFileExtensions: ["ts", "tsx"],
+  moduleFileExtensions: [...defaults.moduleFileExtensions, "ts", "tsx"],
 
   //see https://docs.expo.io/guides/testing-with-jest/#jest-configuration
   transformIgnorePatterns: [
