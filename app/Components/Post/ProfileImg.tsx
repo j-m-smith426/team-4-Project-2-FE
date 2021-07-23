@@ -16,8 +16,8 @@ const ProfileImg = (props:Iprops) => {
                         style={styles.image}
                         source={require('../../assets/icon.png')} />
                     </View>
-                <View testID = 'Name'>
-                    <Text >{props.username}</Text>
+                <View >
+                    <Text testID = 'Name'>{props.username}</Text>
                         
                 </View>
 

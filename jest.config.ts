@@ -10,15 +10,18 @@ module.exports = {
     withEnzyme(require("jest-expo/android/jest-preset")),
     withEnzyme(require("jest-expo/web/jest-preset")),
   ],
-  preset: "jest-expo",
-  //- enzyme",
-  //setupFiles: ["./__tests__/test-setup.js"],
-
+  preset: "jest-expo-enzyme",
+  setupFiles: ["./__tests__/test-setup.js"],
+  //testEnvironment: "jsdom",
   //==========================================================================
   //configure Jest coverage report
   //==========================================================================
   collectCoverage: true,
-  collectCoverageFrom: ["./src/**/*.{ts, tsx}"],
+  collectCoverageFrom: [
+    // "app/Components/**/*.{ts, tsx}",
+    "./app/**/**/*.{ts, tsx}",
+    "!**/node_modules/**",
+  ],
   coverageDirectory: "coverage",
   coverageThreshold: {
     global: {
