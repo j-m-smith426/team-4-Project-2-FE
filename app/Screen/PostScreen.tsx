@@ -23,16 +23,16 @@ const postArr: IPost[] = [
 
 const PostScreen = () =>
 {
-    const renderPost = ({ item }) => (
-        <View style={styles.item}>
-            <Post username={item.username} userProfilePic={item.userProfilePic} Contents={item.Contents} image={item.image} timestamp={item.timestamp} postID={item.postID} />
-        </View>
-    )  
     
     return (
         <FlatList
-            data={postArr}
-            renderItem={renderPost}
+        data={postArr}
+            renderItem={
+                ({ item }) => (
+                    <View style={styles.item}>
+                        <Post username={item.username} userProfilePic={item.userProfilePic} Contents={item.Contents} image={item.image} timestamp={item.timestamp} postID={item.postID} />
+                    </View>
+                )}
             keyExtractor={item => item.postID}
             />
 
