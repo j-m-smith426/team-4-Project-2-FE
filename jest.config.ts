@@ -19,7 +19,7 @@ module.exports = {
   collectCoverage: true,
   collectCoverageFrom: [
     // "app/Components/**/*.{ts, tsx}",
-    "./app/**/**/*.{ts, tsx}",
+    "./app/**/*.{ts, tsx}",
     "!**/node_modules/**",
   ],
   coverageDirectory: "coverage",
