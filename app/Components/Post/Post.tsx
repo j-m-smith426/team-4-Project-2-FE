@@ -24,19 +24,18 @@ const Post = (props: IPost) =>
     return (
         <View style={styles.post}>
 
-            {/* <View style={styles.postTop}> */}
+            
                 <View style={styles.profImg}>
                     <ProfileImg username={props.username} profileImg={props.userProfilePic} />
                 </View>
-            {/* </View> */}
+            
                 <View style={styles.text}>
                     <Text>{props.Contents}</Text>
                 </View>
-            {/* <View style={styles.postMid}> */}
             {
-                hasImage && <Image style={styles.postImg} source={require('../../assets/icon.png')} />
+                hasImage && <Image testID='CommentImg' style={styles.postImg} source={require('../../assets/icon.png')} />
             }
-            {/* </View> */}
+            
             <View style={styles.postBot}>
                 <View style={styles.postBot}>
                 <Button_Comment />
