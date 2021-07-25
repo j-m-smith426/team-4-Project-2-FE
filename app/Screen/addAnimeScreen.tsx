@@ -10,7 +10,7 @@ import Button_animeRating from '../Components/Anime/Button_animeRating';
 
 
 
-export default function AnimeScreen()
+export default function addAnimeScreen()
 {
     const [title, setTitle] = useState('title');
     const [description, setDescription] = useState('description');
@@ -55,20 +55,27 @@ export default function AnimeScreen()
 
   return (
     <View style={styles.container}>
-       <View style={styles.topMenu}>
-       <Text style={styles.header}>Dragonball Z Anime Page</Text>
-       </View>
+       {/* <View style={styles.topMenu}>
+       
+       </View> */}
           {image && <Image
               style={styles.animeImg}
               source={{uri: image}} />}
         <Button title='addPicture' onPress={pickImage} />
+          <View style={styles.lowerMenu}>
+              <View style={styles.textInput} >
 
-          <Text style={styles.title}>Title: </Text>
-          <TextInput onChangeText={setTitle}/>
-        
-          <Text style={styles.content}>Description: </Text>
-          <TextInput multiline numberOfLines={3} onChangeText={setDescription} />
-
+            
+            <TextInput style={styles.title} placeholder="Title" onChangeText={setTitle}/>
+              
+              </View>
+          </View>
+          <View style={styles.lowerMenu}>
+              <View style={styles.textInput} >
+          <TextInput style={styles.descrption} multiline numberOfLines={3} placeholder="Description" onChangeText={setDescription} />
+              </View>
+          </View>
+          
           <Button title='Submit' onPress={submitPage} />
           <Button title='Delete' onPress={deletePage} />
   </View>
@@ -88,12 +95,19 @@ const styles = StyleSheet.create({
       height:200,
       width:300,
   },
-  title:{
+    title: {
+      flex:1,
       fontFamily:'',
       fontSize: 32,
       color:'#000000',
       textAlign:'center',
-  },
+    },
+    descrption: {
+        flex:1,
+      fontFamily:'',
+      fontSize: 20,
+      color:'#000000',
+    },
   content : {
       marginLeft:30,
       marginRight:30,
@@ -108,11 +122,12 @@ const styles = StyleSheet.create({
       flexDirection:'row',
       padding:10,
   },
-  lowerMenu:{
+    lowerMenu: {
     flexDirection:'row',
     //backgroundColor:'#072083',
-    alignItems: 'center',
-    justifyContent:'space-evenly',
+      alignContent: 'center',
+      //borderWidth : 1,
+      justifyContent: "space-around",
 
   },
   rating:{
@@ -121,5 +136,10 @@ const styles = StyleSheet.create({
   },
   header:{
       color:'white'
+    },
+    textInput: {
+        flex: .7,
+        flexDirection: "row",
   }
+  
 });

@@ -13,6 +13,8 @@ import { useNavigation } from "@react-navigation/core";
 import { DrawerLayoutAndroid } from 'react-native-gesture-handler';
 import { createDrawerNavigator } from '@react-navigation/drawer';
 import { Icon } from 'react-native-elements';
+import addAnimeScreen from '../Screen/addAnimeScreen';
+import editProfile from '../Components/Profile/editProfile';
 interface RouterProps
 {
     children?: any
@@ -35,6 +37,8 @@ const MainRoutes: React.FC<RouterProps> = (props:RouterProps) =>
                 <Stack.Screen name="Login" component={Login}/>
                 <Drawer.Screen name="Post" component={PostScreen} />
                 <Drawer.Screen name="Anime" component={AnimeScreen} />
+                <Drawer.Screen name="AnimeAdd" component={addAnimeScreen} />
+                <Drawer.Screen name="editProfile" component={editProfile} />
                 <Drawer.Screen name="User" component={ProfilePage} />
             </Drawer.Navigator>
         </NavigationContainer>
