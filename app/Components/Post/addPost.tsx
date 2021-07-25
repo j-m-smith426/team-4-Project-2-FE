@@ -1,25 +1,55 @@
 import React, { useEffect, useState } from "react";
-
-import { Text, View, StyleSheet, Image } from "react-native";
+import * as ImagePicker from 'expo-image-picker'
+import { View, StyleSheet, Image, Platform, Pressable, Button, TextInput } from "react-native";
 
 import colors from "../../config/colors";
-import IPost from "../../model/Post";
-import Button_Comment from "./Button_Comment";
-import Button_Like from "./Button_Like";
 import ProfileImg from "./ProfileImg";
+import { Icon } from "react-native-elements";
 
 
-
-
-
-
-const Post = (props: IPost) =>
+interface IaddPost
 {
-    const [hasImage, setHasImage] = useState(false);
-    useEffect(() =>
+    username: string,
+    userProfilePic: string,
+}
+
+
+
+const AddPost = (props: IaddPost) =>
+{
+    const [image, setImage] = useState(undefined);
+    useEffect(() => {
+        (async () => {
+          if (Platform.OS !== 'web') {
+            const { status } = await ImagePicker.requestMediaLibraryPermissionsAsync();
+            if (status !== 'granted') {
+              alert('Sorry, we need camera roll permissions to make this work!');
+            }
+          }
+        })();
+      }, []);
+
+      const pickImage = async () => {
+        let result:any = await ImagePicker.launchImageLibraryAsync({
+          mediaTypes: ImagePicker.MediaTypeOptions.All,
+          allowsEditing: true,
+          //aspect: [4, 3],
+          quality: 1,
+        });
+    
+        console.log(result);
+    
+        if (!result.cancelled) {
+          setImage(result.uri);
+        } else {
+            setImage(undefined);
+        }
+    };
+
+    const submitPost = () =>
     {
-        setHasImage(Boolean(props.image));        
-    },[])
+        
+    }
     return (
         <View style={styles.post}>
 
@@ -29,20 +59,21 @@ const Post = (props: IPost) =>
                 </View>
             
                 <View style={styles.text}>
-                    <Text>{props.Contents}</Text>
+                    <TextInput placeholder="Make a new Post"/>
                 </View>
             {
-                hasImage && <Image testID='CommentImg' style={styles.postImg} source={require('../../assets/icon.png')} />
+                image && <Image testID='CommentImg' style={styles.postImg} source={{ uri: image }} />
             }
             
             <View style={styles.postBot}>
-                <View style={styles.postBot}>
-                <Button_Comment />
-                <Button_Like />
+                <View style={styles.imgAdd}>
+                    <Pressable onPress={pickImage}>
+                        <Icon name="image" />
+                    </Pressable>
                 </View>
                 
                 <View style={styles.timeContainer}>
-                    <Text>Posted {props.timestamp} Ago</Text>
+                    <Button title="Post" onPress={submitPost} />
                 </View>
 
             </View>
@@ -63,7 +94,6 @@ const styles = StyleSheet.create({
     postTop: {
         
         flexDirection:"row",
-        
         maxHeight: 500,
         
         
@@ -107,9 +137,15 @@ const styles = StyleSheet.create({
         height: 40,
         marginTop: 1,
         marginLeft: '1%',
-        marginBottom: '1%'
+        marginBottom: '1%',
+        
        
         
+    },
+    imgAdd: {
+        alignSelf: 'flex-start',
+        paddingLeft: '4%',
+      paddingTop: '4%'
     },
     timeContainer: {
         alignSelf: 'flex-end',
@@ -123,4 +159,4 @@ const styles = StyleSheet.create({
 
 });
 
-export default Post;
+export default AddPost;
