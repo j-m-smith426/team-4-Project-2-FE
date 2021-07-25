@@ -34,7 +34,7 @@ const Login = () =>
                         style={styles.TextInput}
                         placeholder="Password"/>
                 </View>
-                <TouchableOpacity style={styles.loginBtn} onPress={() =>navigation.navigate('Main') }>
+                <TouchableOpacity style={styles.loginBtn} onPress={() =>navigation.navigate('Anime') }>
                     <Text style={styles.text}>{btnText}</Text>
 
                 </TouchableOpacity>

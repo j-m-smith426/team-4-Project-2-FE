@@ -2,7 +2,8 @@ import React from 'react';
 import { FlatList, StyleSheet, View } from 'react-native';
 import Post from '../Components/Post/Post';
 import IPost from '../model/Post';
-
+import AddPost from '../Components/Post/addPost';
+import ScreenWrapper from './ScreenWrapper';
 
 
 
@@ -25,17 +26,22 @@ const PostScreen = () =>
 {
     
     return (
-        <FlatList
-        data={postArr}
-            renderItem={
-                ({ item }) => (
-                    <View style={styles.item}>
-                        <Post username={item.username} userProfilePic={item.userProfilePic} Contents={item.Contents} image={item.image} timestamp={item.timestamp} postID={item.postID} />
-                    </View>
-                )}
-            keyExtractor={item => item.postID}
-            />
+        <ScreenWrapper>
+            <AddPost username="user1" userProfilePic="pic"/>
+            <FlatList
+                //viewabilityConfig={{viewAreaCoveragePercentThreshold: 100}}
+                data={postArr}
+                renderItem={
+                    ({ item }) => (
+                        <View style={styles.item}>
+                            <Post username={item.username} userProfilePic={item.userProfilePic} Contents={item.Contents} image={item.image} timestamp={item.timestamp} postID={item.postID} />
+                        </View>
+                    )}
+                keyExtractor={item => item.postID}
+                onEndReachedThreshold={0.0}
+                />
 
+        </ScreenWrapper>
         
     );
 }
