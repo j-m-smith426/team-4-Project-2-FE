@@ -13,27 +13,6 @@ const Bio = () => {
         <View style={styles.bio}>
                 <Text>Synopsis:</Text>
                 <Text>I like to watch the birdz</Text>
-                <Text>liwjdahdnkajdkjashdkhadjashdkjahdiewh8i-0u98ygt76ufryd5tesxdfcgvhjbkilouy7cgfhbvnmkjlhgfcvbnkjlhgbvnkjhgvb</Text>
-                <Text>liwjdahdnkajdkjashdkhadjashdkjahdiewh8i-0u98ygt76ufryd5tesxdfcgvhjbkilouy7cgfhbvnmkjlhgfcvbnkjlhgbvnkjhgvb</Text>
-                <Text>liwjdahdnkajdkjashdkhadjashdkjahdiewh8i-0u98ygt76ufryd5tesxdfcgvhjbkilouy7cgfhbvnmkjlhgfcvbnkjlhgbvnkjhgvb</Text>
-                <Text>liwjdahdnkajdkjashdkhadjashdkjahdiewh8i-0u98ygt76ufryd5tesxdfcgvhjbkilouy7cgfhbvnmkjlhgfcvbnkjlhgbvnkjhgvb</Text>
-                <Text>liwjdahdnkajdkjashdkhadjashdkjahdiewh8i-0u98ygt76ufryd5tesxdfcgvhjbkilouy7cgfhbvnmkjlhgfcvbnkjlhgbvnkjhgvb</Text>
-                <Text>liwjdahdnkajdkjashdkhadjashdkjahdiewh8i-0u98ygt76ufryd5tesxdfcgvhjbkilouy7cgfhbvnmkjlhgfcvbnkjlhgbvnkjhgvb</Text>
-                <Text>liwjdahdnkajdkjashdkhadjashdkjahdiewh8i-0u98ygt76ufryd5tesxdfcgvhjbkilouy7cgfhbvnmkjlhgfcvbnkjlhgbvnkjhgvb</Text>
-                <Text>liwjdahdnkajdkjashdkhadjashdkjahdiewh8i-0u98ygt76ufryd5tesxdfcgvhjbkilouy7cgfhbvnmkjlhgfcvbnkjlhgbvnkjhgvb</Text>
-                <Text>liwjdahdnkajdkjashdkhadjashdkjahdiewh8i-0u98ygt76ufryd5tesxdfcgvhjbkilouy7cgfhbvnmkjlhgfcvbnkjlhgbvnkjhgvb</Text>
-                <Text>liwjdahdnkajdkjashdkhadjashdkjahdiewh8i-0u98ygt76ufryd5tesxdfcgvhjbkilouy7cgfhbvnmkjlhgfcvbnkjlhgbvnkjhgvb</Text>
-                <Text>liwjdahdnkajdkjashdkhadjashdkjahdiewh8i-0u98ygt76ufryd5tesxdfcgvhjbkilouy7cgfhbvnmkjlhgfcvbnkjlhgbvnkjhgvb</Text>
-                <Text>liwjdahdnkajdkjashdkhadjashdkjahdiewh8i-0u98ygt76ufryd5tesxdfcgvhjbkilouy7cgfhbvnmkjlhgfcvbnkjlhgbvnkjhgvb</Text>
-                <Text>liwjdahdnkajdkjashdkhadjashdkjahdiewh8i-0u98ygt76ufryd5tesxdfcgvhjbkilouy7cgfhbvnmkjlhgfcvbnkjlhgbvnkjhgvb</Text>
-                <Text>liwjdahdnkajdkjashdkhadjashdkjahdiewh8i-0u98ygt76ufryd5tesxdfcgvhjbkilouy7cgfhbvnmkjlhgfcvbnkjlhgbvnkjhgvb</Text>
-                <Text>liwjdahdnkajdkjashdkhadjashdkjahdiewh8i-0u98ygt76ufryd5tesxdfcgvhjbkilouy7cgfhbvnmkjlhgfcvbnkjlhgbvnkjhgvb</Text>
-                <Text>liwjdahdnkajdkjashdkhadjashdkjahdiewh8i-0u98ygt76ufryd5tesxdfcgvhjbkilouy7cgfhbvnmkjlhgfcvbnkjlhgbvnkjhgvb</Text>
-                <Text>liwjdahdnkajdkjashdkhadjashdkjahdiewh8i-0u98ygt76ufryd5tesxdfcgvhjbkilouy7cgfhbvnmkjlhgfcvbnkjlhgbvnkjhgvb</Text>
-                <Text>liwjdahdnkajdkjashdkhadjashdkjahdiewh8i-0u98ygt76ufryd5tesxdfcgvhjbkilouy7cgfhbvnmkjlhgfcvbnkjlhgbvnkjhgvb</Text>
-                <Text>liwjdahdnkajdkjashdkhadjashdkjahdiewh8i-0u98ygt76ufryd5tesxdfcgvhjbkilouy7cgfhbvnmkjlhgfcvbnkjlhgbvnkjhgvb</Text>
-                <Text>liwjdahdnkajdkjashdkhadjashdkjahdiewh8i-0u98ygt76ufryd5tesxdfcgvhjbkilouy7cgfhbvnmkjlhgfcvbnkjlhgbvnkjhgvb</Text>
-                <Text>liwjdahdnkajdkjashdkhadjashdkjahdiewh8i-0u98ygt76ufryd5tesxdfcgvhjbkilouy7cgfhbvnmkjlhgfcvbnkjlhgbvnkjhgvb</Text>
                 
         </View>
     </ScrollView>
