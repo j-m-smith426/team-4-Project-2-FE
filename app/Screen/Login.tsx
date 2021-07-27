@@ -1,11 +1,17 @@
-import React, { useState } from "react";
+import React, { ChangeEvent, useState } from "react";
 import { Text, View, StyleSheet, Image, TextInput, TouchableOpacity, Pressable } from "react-native";
 import colors from "../config/colors";
 import { useNavigation } from "@react-navigation/core";
+import { useDispatch } from "react-redux";
+import { LoginActions } from "../redux/Actions";
+import { Auth } from "aws-amplify";
+import { CognitoUser } from "@aws-amplify/auth";
+
 
 const Login = () =>
 {
     let navigation = useNavigation();
+    //component states
     const [img, setImg] = useState<any>(<View style = {styles.profImg}>
         <Image
             style={styles.image}
@@ -19,22 +25,64 @@ const Login = () =>
     </TouchableOpacity>);
     const [btnText,setBtnText] = useState<string>("LOGIN");
     const [mainSize,setMainSize] = useState(styles.main);
+    //Functionality states
+    const [username, setUsername]= useState<string>("");
+    const [password, setPassword]= useState<string>("");
+    const dispatch = useDispatch();
+    
+    /*const handler = (input:ChangeEvent<HTMLInputElement>) =>{
+        setUser({...user,[input.target.name]: input.target.value })
+    }*/
+    const onUserChange = (name:string) => {
+        setUsername(name);
+    }
+    const onPassChange = (pass:string) => {
+        setPassword(pass);
+    }
+    //-------------
+    const submit = async () => {
+       
+        try {
+            let cogUser: CognitoUser= await Auth.signIn(username, password);
+           
+           console.log(cogUser);
+           if(cogUser){
+           dispatch({
+               type:LoginActions.LOGIN,
+               payload:{
+                  name: cogUser.getUsername() 
+               }
+           })
+           
+           }
+            
+        console.log(cogUser.getUsername());
+       } catch (error) {
+           console.log('error signing in', error);
+       }
+        
+        
+    }
+
+
     return (
         <View style = {styles.container}>
             {img}
             <View style= {mainSize}>
                 {email}
                 <View style={styles.inputView}>
-                    <TextInput
+                    <TextInput 
+                        onChangeText ={onUserChange}
                         style={styles.TextInput}
                         placeholder="Username"/>
                 </View>
                 <View style={styles.inputView}>
                     <TextInput
+                        onChangeText ={onPassChange}
                         style={styles.TextInput}
                         placeholder="Password"/>
                 </View>
-                <TouchableOpacity style={styles.loginBtn} onPress={() =>navigation.navigate('Anime') }>
+                <TouchableOpacity style={styles.loginBtn} onPress={submit}>
                     <Text style={styles.text}>{btnText}</Text>
 
                 </TouchableOpacity>

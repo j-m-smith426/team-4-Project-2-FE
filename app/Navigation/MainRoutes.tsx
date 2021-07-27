@@ -19,7 +19,6 @@ interface RouterProps
 {
     children?: any
 }
-const Stack = createStackNavigator();
 const Drawer = createDrawerNavigator();
 
 const MainRoutes: React.FC<RouterProps> = (props:RouterProps) =>
@@ -34,7 +33,7 @@ const MainRoutes: React.FC<RouterProps> = (props:RouterProps) =>
                         name='menu' /></Pressable>),
                         headerShown:true
                       })}>
-                <Stack.Screen name="Login" component={Login}/>
+                <Drawer.Screen name="Login" component={Login}/>
                 <Drawer.Screen name="Post" component={PostScreen} />
                 <Drawer.Screen name="Anime" component={AnimeScreen} />
                 <Drawer.Screen name="AnimeAdd" component={addAnimeScreen} />
