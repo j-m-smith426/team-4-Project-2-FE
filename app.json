@@ -24,7 +24,7 @@
         "foregroundImage": "./app/assets/adaptive-icon.png",
         "backgroundColor": "#FFFFFF"
         
-      },
+      }
     },
     "androidNavigationBar":{
       "visible":"sticky-immersive"
