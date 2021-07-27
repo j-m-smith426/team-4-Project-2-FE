@@ -5,6 +5,7 @@ import { View, StyleSheet, Image, Platform, Pressable, Button, TextInput } from 
 import colors from "../../config/colors";
 import ProfileImg from "./ProfileImg";
 import { Icon } from "react-native-elements";
+import axiosConfig from "../../../axiosConfig";
 
 
 interface IaddPost
@@ -18,6 +19,7 @@ interface IaddPost
 const AddPost = (props: IaddPost) =>
 {
     const [image, setImage] = useState(undefined);
+    const [content, setContent] = useState('');
     useEffect(() => {
         (async () => {
           if (Platform.OS !== 'web') {
@@ -48,7 +50,19 @@ const AddPost = (props: IaddPost) =>
 
     const submitPost = () =>
     {
-        
+        let user = 'user';
+        let Stamp: number = new Date().getTime();
+        let page: string = 'A#DragonBall';
+        axiosConfig.post('Post', {
+            body: {
+                Stamp,
+                postID: `${user}#${Stamp}`,
+                content,
+                parentID: page,
+                image: 'key'
+
+            }
+        })
     }
     return (
         <View style={styles.post}>
@@ -59,7 +73,7 @@ const AddPost = (props: IaddPost) =>
                 </View>
             
                 <View style={styles.text}>
-                    <TextInput placeholder="Make a new Post"/>
+                <TextInput placeholder="Make a new Post" onChangeText={setContent}/>
                 </View>
             {
                 image && <Image testID='CommentImg' style={styles.postImg} source={{ uri: image }} />
