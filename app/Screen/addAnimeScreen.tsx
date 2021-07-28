@@ -3,7 +3,7 @@ import React, { useEffect } from 'react';
 import { useState } from 'react';
 import { StyleSheet, Text, View, Image, Button, TextInput, Platform } from 'react-native';
 import * as ImagePicker from 'expo-image-picker'
-import axiosConfig from './AnimeAxios'
+import axiosConfig from '../../axiosConfig'
 import Button_animeComments from '../Components/Anime/Button_animeComments';
 import Button_animeFavorite from '../Components/Anime/Button_animeFavorite';
 import Button_animeRating from '../Components/Anime/Button_animeRating';
@@ -15,6 +15,7 @@ export default function addAnimeScreen()
     const [title, setTitle] = useState('title');
     const [description, setDescription] = useState('description');
     const [image, setImage] = useState(undefined);
+    const [currRes,setRes] =useState('result')
 
     useEffect(() => {
         (async () => {
@@ -43,13 +44,23 @@ export default function addAnimeScreen()
     };
     
     const submitPage = () =>
-    {
-        
+    {        
+        axiosConfig.post('Anime/Add', {
+          REFERENCE:'0',
+          TYPEID:title,
+          bio:description,
+          image:image,
+        })
+        .then(function (response) {
+          console.log(response);
+        })
     };
 
     const deletePage = () =>
+
     {
-        
+       let id = title;
+        axiosConfig.delete(`Anime/${id}`).then(() => setRes('Delete successful'));
     };
 
 
