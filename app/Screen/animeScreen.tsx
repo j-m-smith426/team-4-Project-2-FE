@@ -1,27 +1,48 @@
 import { StatusBar } from 'expo-status-bar';
-import React from 'react';
+import React,{useState} from 'react';
 import { StyleSheet, Text, View, Image, Button } from 'react-native';
 import Button_animeComments from '../Components/Anime/Button_animeComments';
 import Button_animeFavorite from '../Components/Anime/Button_animeFavorite';
 import Button_animeRating from '../Components/Anime/Button_animeRating';
+import {Storage} from 'aws-amplify'
+import { useEffect } from 'react';
+import axios from '../../axiosConfig';
+import IAnime from '../model/Anime'
 
-
+const newAnime:IAnime = {
+  REFERENCE:'0',
+  TYPEID:'A#FakeAnime',
+  name:'IamAFake',
+  bio:'bad day for me',
+  image:'',
+}
 
 export default function AnimeScreen() {
+  const [anime,setAnime] = useState<IAnime>(newAnime);
+  const currentPage = "A#DragonBall";
+
+   
+    useEffect(() =>
+    {getAnime()},[])
+    const getAnime = async () =>
+    {axios.get('/Anime', {params: {TYPEID:currentPage }})
+      .then(response =>{setAnime(response.data)});
+    }
+  
   return (
     <View style={styles.container}>
        <View style={styles.topMenu}>
-       <Text style={styles.header}>Dragonball Z Anime Page</Text>
+       <Text style={styles.header}>{anime.name}</Text>
        </View>
       <Image
+     
         style={styles.animeImg}
-        source={require('../assets/dbz.jpg')}/>
+        source={require( `https://scouter-revature-project1.s3.amazonaws.com/public/${anime.image}`)}/>
         
 
-        <Text style={styles.title}> Dragonball Z </Text>
-        <Text style={styles.rating}>Rated 6 out of 7 Dragnballs</Text>
-        <Text style={styles.content}>The epic episodic adventure of Goku and the Z Warriors as they defend the Earth 
-        and the Universe from super-powered fighters and monsters</Text>
+        <Text style={styles.title}>{anime.name}</Text>
+        <Text style={styles.rating}></Text>
+        <Text style={styles.content}>{anime.bio}</Text>
         
    
     <View style={styles.lowerMenu}>
@@ -35,6 +56,7 @@ export default function AnimeScreen() {
   );
 
 }
+
 
 const styles = StyleSheet.create({
   container: {
