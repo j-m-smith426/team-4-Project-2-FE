@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { FlatList, StyleSheet, View } from 'react-native';
+import { FlatList, RefreshControl, StyleSheet, View } from 'react-native';
 
 import Post from '../Components/Post/Post';
 import IPost from '../model/Post';
@@ -7,6 +7,8 @@ import AddPost from '../Components/Post/addPost';
 import ScreenWrapper from './ScreenWrapper';
 import axios from '../../axiosConfig'
 import { useEffect } from 'react';
+import { useCallback } from 'react';
+import { Auth } from 'aws-amplify';
 
 
 
@@ -26,57 +28,61 @@ import { useEffect } from 'react';
 
 const PostScreen = () =>
 {
+    const [refreshing, setRefreshing] = useState(false);
     const [postArr,setPostArr] = useState<IPost[]>()
     const currentPage = "A#DragonBall";
     useEffect(() =>
     {
         getPosts();
     }, [])
-    const getPosts = async () =>
+    const getPosts = useCallback(async () =>
     {
+        console.log('Name:',Auth.currentAuthenticatedUser());
+        setRefreshing(true);
         let newArray: IPost[] = [];
-        axios.get<any[]>('Post/Page', {
-            params: {
-                pageID: currentPage
-            }
+        let [pageType, page] = currentPage.split('#');
+        axios.get<any[]>(`Post/Page/${pageType}_${page}`, {
+            
         }).then(response =>
         {
-            let post: IPost = {
-                username: '',
-                userProfilePic: '',
-                image: '',
-                Contents: '',
-                timestamp: 0,
-                postID: ''
-
-                
-            };
+            
+           //console.log('Response:',response.data);
             //construct each post
             response.data.forEach((data) =>
             {
+                let post: IPost = {
+                    username: '',
+                    userProfilePic: '',
+                    image: '',
+                    Contents: '',
+                    timestamp: 0,
+                    postID: ''
+    
+                    
+                };
                 let name: string = data.REFERENCE.split('#')[0]
-                axios.get<any>('User', {
-                    params: {
-                        userID: name
-                    }
-                }).then(userResponse =>
-                {
-                    let userData = userResponse.data
-                    post.userProfilePic = userData.image
-                })
+                // axios.get<any>(`User/${name}`, {
+                // }).then(userResponse =>
+                // {
+                //     let userData = userResponse.data
+                post.userProfilePic = 'l';//userData.image
+                // })
                 post.username = name;
                 post.postID = data.REFERENCE;
                 post.Contents = data.content;
                 post.timestamp = data.Stamp;
                 post.image = data.image;
-
+               
+                    newArray.push(post);
             });
-            newArray = postArr ? [...postArr, post] : [post]
+            setPostArr(newArray);
             
         });
-        setPostArr(newArray);
-    }
-    
+       
+        
+        setRefreshing(false);
+    }, [refreshing]);
+    //console.log('Result',postArr);
     return (
         <ScreenWrapper>
             <AddPost username="user1" userProfilePic="pic"/>
@@ -91,7 +97,7 @@ const PostScreen = () =>
                     )}
                 keyExtractor={item => item.postID}
                 // onEndReachedThreshold={0.0}
-                onRefresh= {getPosts}
+                refreshControl={<RefreshControl refreshing={refreshing} onRefresh={getPosts} />}
                 />
 
         </ScreenWrapper>

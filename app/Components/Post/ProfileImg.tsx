@@ -1,4 +1,7 @@
 import React from 'react';
+import { useNavigation } from '@react-navigation/native';
+import { useDispatch } from 'react-redux';
+import { SwitchPageAction } from '../../redux/Actions';
 
 import { Image, View, StyleSheet, Text, Pressable } from 'react-native';
 interface Iprops
@@ -7,9 +10,24 @@ interface Iprops
     profileImg: string
 }
 
-const ProfileImg = (props:Iprops) => {
+const ProfileImg = (props: Iprops) =>
+{
+    let navigation = useNavigation();
+    const dispatch = useDispatch();
+    const goToUser = () =>
+    {
+        dispatch({
+            type: SwitchPageAction.UPDATE,
+            payload: {
+                PageName: 'User',
+                parentID: `U#${props.username}`
+            }
+        })
+        navigation.navigate("User");
+    }
+    
     return (
-            <Pressable onPress={() => console.log(props.username + ' was pressed')}>
+            <Pressable onPress={() => goToUser}>
         <View style={styles.container}>
                 <View style={styles.imageCover}>
                     <Image
