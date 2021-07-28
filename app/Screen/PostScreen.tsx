@@ -97,7 +97,12 @@ const PostScreen = () =>
                 renderItem={
                     ({ item }) => (
                         <View style={styles.item}>
-                            <Post username={item.username} userProfilePic={item.userProfilePic} Contents={item.Contents} image={item.image} timestamp={item.timestamp} postID={item.postID} />
+                            <Post username={item.username}
+                                userProfilePic={item.userProfilePic}
+                                Contents={item.Contents}
+                                image={item.image}
+                                timestamp={item.timestamp}
+                                postID={item.postID} />
                         </View>
                     )}
                 keyExtractor={item => item.postID}
