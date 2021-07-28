@@ -13,8 +13,8 @@ const Watchlist = () => {
                     }}
                 />
                 <View style = {styles.infoContainer}>
-                    <Text style = {styles.animeTitle}>Zatch Bell</Text>
-                    <Text style = {styles.infoText}>Genre: Action, Adventure</Text>
+                    <Text style = {styles.animeTitle} numberOfLines = {1}>Zatch Bell plus other stuff and things</Text>
+                    <Text style = {styles.infoText} numberOfLines = {1}>Genre: Action, Adventure, anything, whatever, cool, stuff</Text>
                     <Text style = {styles.infoText}>Episodes: 150</Text>
                 </View>
             </View>
