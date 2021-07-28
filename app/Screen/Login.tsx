@@ -1,11 +1,12 @@
-import React, { ChangeEvent, useState } from "react";
+import React, { ChangeEvent, useState,useEffect } from "react";
 import { Text, View, StyleSheet, Image, TextInput, TouchableOpacity, Pressable } from "react-native";
 import colors from "../config/colors";
 import { useNavigation } from "@react-navigation/core";
-import { useDispatch } from "react-redux";
-import { LoginActions } from "../redux/Actions";
+import { useDispatch, useSelector } from "react-redux";
+import { LoginActions, SwitchPageAction } from "../redux/Actions";
 import { Auth } from "aws-amplify";
 import { CognitoUser } from "@aws-amplify/auth";
+import { IRootState } from "../redux/State";
 
 
 const Login = () =>
@@ -29,10 +30,14 @@ const Login = () =>
     const [username, setUsername]= useState<string>("");
     const [password, setPassword]= useState<string>("");
     const dispatch = useDispatch();
-    
-    /*const handler = (input:ChangeEvent<HTMLInputElement>) =>{
-        setUser({...user,[input.target.name]: input.target.value })
-    }*/
+    const currentUser = useSelector((state: IRootState) =>
+    {
+        return state.sites.ILogin.username
+    })
+    useEffect(() =>
+    {
+        checkLogin();
+    }, []);
     const onUserChange = (name:string) => {
         setUsername(name);
     }
@@ -45,23 +50,46 @@ const Login = () =>
         try {
             let cogUser: CognitoUser= await Auth.signIn(username, password);
            
-           console.log(cogUser);
+           
            if(cogUser){
            dispatch({
                type:LoginActions.LOGIN,
                payload:{
-                  name: cogUser.getUsername() 
+                   name: cogUser.getUsername(),
+                  type:  cogUser.getUsername() === 'newUser' ? 'Admin': 'user'
                }
            })
-           
+               dispatch({
+                   type: SwitchPageAction.UPDATE,
+                   payload: {
+                    PageName: 'Post',
+                    parentID: `U#${cogUser.getUsername()}`
+                }
+            })
+               navigation.navigate('Post');
            }
             
-        console.log(cogUser.getUsername());
+       
        } catch (error) {
            console.log('error signing in', error);
        }
         
         
+    }
+    //Check if someone is logged in
+    const checkLogin = () =>
+    {
+        if (currentUser !== 'Guest') {
+            //Switch page info
+            dispatch({
+                type: SwitchPageAction.UPDATE,
+                payload: {
+                 PageName: 'Post',
+                 parentID: `U#${currentUser}`
+             }
+         })
+            navigation.navigate('Post');
+        }
     }
 
 

@@ -6,6 +6,8 @@ import colors from "../../config/colors";
 import ProfileImg from "./ProfileImg";
 import { Icon } from "react-native-elements";
 import axiosConfig from "../../../axiosConfig";
+import { useSelector } from "react-redux";
+import {IRootState} from '../../redux/State'
 
 
 interface IaddPost
@@ -20,6 +22,10 @@ const AddPost = (props: IaddPost) =>
 {
     const [image, setImage] = useState(undefined);
     const [content, setContent] = useState('');
+    let page: string = useSelector((state: IRootState) =>
+    {
+        return state.sites.IPageState.parentID;
+    });
     useEffect(() => {
         (async () => {
           if (Platform.OS !== 'web') {
@@ -52,17 +58,16 @@ const AddPost = (props: IaddPost) =>
     {
         let user = 'user';
         let Stamp: number = new Date().getTime();
-        let page: string = 'A#DragonBall';
+        
         axiosConfig.post('Post', {
-            body: {
                 Stamp,
                 postID: `${user}#${Stamp}`,
                 content,
                 parentID: page,
                 image: 'key'
-
-            }
         })
+        setContent('');
+        setImage(undefined);
     }
     return (
         <View style={styles.post}>

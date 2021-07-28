@@ -15,6 +15,8 @@ import { createDrawerNavigator } from '@react-navigation/drawer';
 import { Icon } from 'react-native-elements';
 import addAnimeScreen from '../Screen/addAnimeScreen';
 import editProfile from '../Components/Profile/editProfile';
+import { useSelector } from 'react-redux';
+import { IRootState } from '../redux/State';
 interface RouterProps
 {
     children?: any
@@ -23,7 +25,10 @@ const Drawer = createDrawerNavigator();
 
 const MainRoutes: React.FC<RouterProps> = (props:RouterProps) =>
 {
-
+    const [user,userType] = useSelector((state: IRootState) =>
+    {
+        return [state.sites.ILogin.username,state.sites.ILogin.userType];
+})
 
 
     return (
@@ -33,14 +38,14 @@ const MainRoutes: React.FC<RouterProps> = (props:RouterProps) =>
                         name='menu' /></Pressable>),
                         headerShown:true
                       })}>
-                <Drawer.Screen name="Login" component={Login}/>
+                {user === 'Guest' && <Drawer.Screen name="Login" component={Login} />}
                 <Drawer.Screen name="Post" component={PostScreen} />
                 <Drawer.Screen name="Anime" component={AnimeScreen} />
-                <Drawer.Screen name="AnimeAdd" component={addAnimeScreen} />
+                {userType === 'Admin' && <Drawer.Screen name="AnimeAdd" component={addAnimeScreen} />}
                 <Drawer.Screen name="editProfile" component={editProfile} />
                 <Drawer.Screen name="User" component={ProfilePage} />
             </Drawer.Navigator>
-        </NavigationContainer>
+                </NavigationContainer>
         
     );
 }
