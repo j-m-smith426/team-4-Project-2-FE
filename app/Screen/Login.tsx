@@ -1,11 +1,18 @@
-import React, { useState } from "react";
-import { Text, View, StyleSheet, Image, TextInput, TouchableOpacity } from "react-native";
+import React, { ChangeEvent, useState,useEffect } from "react";
+import { Text, View, StyleSheet, Image, TextInput, TouchableOpacity, Pressable } from "react-native";
 import colors from "../config/colors";
 import { useNavigation } from "@react-navigation/core";
+import { useDispatch, useSelector } from "react-redux";
+import { LoginActions, SwitchPageAction } from "../redux/Actions";
+import { Auth } from "aws-amplify";
+import { CognitoUser } from "@aws-amplify/auth";
+import { IRootState } from "../redux/State";
+
 
 const Login = () =>
 {
     let navigation = useNavigation();
+    //component states
     const [img, setImg] = useState<any>(<View style = {styles.profImg}>
         <Image
             style={styles.image}
@@ -19,22 +26,91 @@ const Login = () =>
     </TouchableOpacity>);
     const [btnText,setBtnText] = useState<string>("LOGIN");
     const [mainSize,setMainSize] = useState(styles.main);
+    //Functionality states
+    const [username, setUsername]= useState<string>("");
+    const [password, setPassword]= useState<string>("");
+    const dispatch = useDispatch();
+    const currentUser = useSelector((state: IRootState) =>
+    {
+        return state.sites.ILogin.username
+    })
+    useEffect(() =>
+    {
+        checkLogin();
+    }, []);
+    const onUserChange = (name:string) => {
+        setUsername(name);
+    }
+    const onPassChange = (pass:string) => {
+        setPassword(pass);
+    }
+    //-------------
+    const submit = async () => {
+       
+        try {
+            let cogUser: CognitoUser= await Auth.signIn(username, password);
+           
+           
+           if(cogUser){
+           dispatch({
+               type:LoginActions.LOGIN,
+               payload:{
+                   name: cogUser.getUsername(),
+                  type:  cogUser.getUsername() === 'newUser' ? 'Admin': 'user'
+               }
+           })
+               dispatch({
+                   type: SwitchPageAction.UPDATE,
+                   payload: {
+                    PageName: 'Post',
+                    parentID: `U#${cogUser.getUsername()}`
+                }
+            })
+               navigation.navigate('Post');
+           }
+            
+       
+       } catch (error) {
+           console.log('error signing in', error);
+       }
+        
+        
+    }
+    //Check if someone is logged in
+    const checkLogin = () =>
+    {
+        if (currentUser !== 'Guest') {
+            //Switch page info
+            dispatch({
+                type: SwitchPageAction.UPDATE,
+                payload: {
+                 PageName: 'Post',
+                 parentID: `U#${currentUser}`
+             }
+         })
+            navigation.navigate('Post');
+        }
+    }
+
+
     return (
         <View style = {styles.container}>
             {img}
             <View style= {mainSize}>
                 {email}
                 <View style={styles.inputView}>
-                    <TextInput
+                    <TextInput 
+                        onChangeText ={onUserChange}
                         style={styles.TextInput}
                         placeholder="Username"/>
                 </View>
                 <View style={styles.inputView}>
                     <TextInput
+                        onChangeText ={onPassChange}
                         style={styles.TextInput}
                         placeholder="Password"/>
                 </View>
-                <TouchableOpacity style={styles.loginBtn} onPress={() =>navigation.navigate('Anime') }>
+                <TouchableOpacity style={styles.loginBtn} onPress={submit}>
                     <Text style={styles.text}>{btnText}</Text>
 
                 </TouchableOpacity>
