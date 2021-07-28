@@ -4,12 +4,6 @@ import { useState } from 'react';
 import { StyleSheet, Text, View, Image, Button, TextInput, Platform } from 'react-native';
 import * as ImagePicker from 'expo-image-picker'
 
-import Button_animeComments from '../Components/Anime/Button_animeComments';
-import Button_animeFavorite from '../Components/Anime/Button_animeFavorite';
-import Button_animeRating from '../Components/Anime/Button_animeRating';
-
-
-
 export default function addAnimeScreen()
 {
     const [title, setTitle] = useState('title');
