@@ -37,7 +37,8 @@ export default function AnimeScreen() {
       <Image
      
         style={styles.animeImg}
-        source={require( `https://scouter-revature-project1.s3.amazonaws.com/public/${anime.image}`)}/>
+        source={require('../assets/dbz.jpg')}/>
+        {/* /*{source={require( `https://scouter-revature-project1.s3.amazonaws.com/public/${anime.image}`)}/>}*/ }
         
 
         <Text style={styles.title}>{anime.name}</Text>
