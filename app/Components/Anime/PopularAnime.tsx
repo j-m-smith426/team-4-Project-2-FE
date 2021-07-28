@@ -12,7 +12,7 @@ const PopularAnime = () => {
                             uri: 'https://www.anime-planet.com/images/anime/covers/fate-zero-3626.jpg'
                         }}
                     />
-                    <Text style = {styles.animeInfo} numberOfLines = {2}>Anything please wodiheidohwe wedhewiohd ewiuhd iuuwhdiue wdui wuiew udhiewu hiewuh wf hiwuhweiu hrk why isn't this working</Text>
+                    <Text style = {styles.animeInfo} numberOfLines = {1}>Anything please</Text>
                     <Text style = {styles.genre} numberOfLines = {1}>Genre</Text>
                 </View>
                 <View style = {styles.animeCard}>
@@ -22,12 +22,10 @@ const PopularAnime = () => {
                             uri: 'https://www.anime-planet.com/images/anime/covers/fate-zero-3626.jpg'
                         }}
                     />
-                    <Text style = {styles.animeInfo} numberOfLines = {2}>Anythingad;kdlasdkla jdklajdklajdlakjdadada work please</Text>
+                    <Text style = {styles.animeInfo} numberOfLines = {1}>Anythingad;kdlasdkla jdklajdklajdlakjdadada work please</Text>
                     <Text style = {styles.genre} numberOfLines = {1}>action, adventure, humor</Text>
                 </View>
             </View>
-
-
 
             <View style = {styles.containAnime}>
                 <View style = {styles.animeCard}>
@@ -37,7 +35,8 @@ const PopularAnime = () => {
                             uri: 'https://www.anime-planet.com/images/anime/covers/fate-zero-3626.jpg'
                         }}
                     />
-                    <Text style = {styles.animeInfo}>Anything please work why isn't this working</Text>
+                    <Text style = {styles.animeInfo} numberOfLines = {1}>Anything please wodiheidohwe wedhewiohd ewiuhd iuuwhdiue wdui wuiew udhiewu hiewuh wf hiwuhweiu hrk why isn't this working</Text>
+                    <Text style = {styles.genre} numberOfLines = {1}>Genre</Text>
                 </View>
                 <View style = {styles.animeCard}>
                     <Image
@@ -46,32 +45,41 @@ const PopularAnime = () => {
                             uri: 'https://www.anime-planet.com/images/anime/covers/fate-zero-3626.jpg'
                         }}
                     />
-                    <Text style = {styles.animeInfo}>Anythingad;kdlasdkla jdklajdklajdlakjdadada work please</Text>
+                    <Text style = {styles.animeInfo} numberOfLines = {1}>Anime Name</Text>
+                    <Text style = {styles.genre} numberOfLines = {1}>action, adventure, humor</Text>
                 </View>
             </View>
+
         </ScrollView>
     );
 }
 
 const styles = StyleSheet.create({
-    container: {},
+    container: {
+        //marginHorizontal: "2%",
+        //width: "100%"
+    },
     containAnime: {
         flexWrap: "wrap",
         flex: 1,
         paddingTop: "10%",
-        paddingLeft: "2.5%",
+        paddingLeft: "2.8%",
         flexDirection: "row",
+        
     },
 
     animeCard: {
         flex: 1,
+        //paddingLeft: "1%"
+        //justifyContent: "center",
+
     },
     
     anime: {
         width: 190,
         height: 290,
-        resizeMode: 'stretch',
-        //borderWidth: 3,
+        resizeMode: 'contain',
+        flex: 1,
     },
 
     animeInfo: {

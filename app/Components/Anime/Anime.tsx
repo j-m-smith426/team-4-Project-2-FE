@@ -32,7 +32,7 @@ const styles = StyleSheet.create({
 
     top: {
         backgroundColor: "#0078FF",
-        paddingVertical: "20%",       
+        paddingVertical: "15%",       
         height: "30%",
     },
 
