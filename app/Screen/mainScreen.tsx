@@ -1,15 +1,27 @@
 import React from 'react';
 import { NavigationContainer } from '@react-navigation/native';
-import { createStackNavigator } from '@react-navigation/stack';
 
-import Login from './Login';
+import {Text, View} from 'react-native'
+import AnimeScreen from './animeScreen';
 import PostScreen from './PostScreen';
-import View from 'react-native-gesture-handler/lib/typescript/GestureHandlerRootView';
+import { createMaterialBottomTabNavigator } from '@react-navigation/material-bottom-tabs';
 
-const mainScreen = () => {
+
+
+const Tab = createMaterialBottomTabNavigator();
+export default function MainScreen ()  {
     return (
-        <View></View>
+        <View>
+            <Text>Welcome to Scouter App!!</Text>
+
+      <NavigationContainer independent={true}>
+      <Tab.Navigator>
+        <Tab.Screen name="Anime" component={AnimeScreen} />
+       
+        <Tab.Screen name="Users" component={PostScreen} />
+      </Tab.Navigator>
+      </NavigationContainer>  
+    </View>
     );
 }
 
-export default mainScreen;
