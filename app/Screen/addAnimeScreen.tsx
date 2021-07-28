@@ -3,12 +3,27 @@ import React, { useEffect } from 'react';
 import { useState } from 'react';
 import { StyleSheet, Text, View, Image, Button, TextInput, Platform } from 'react-native';
 import * as ImagePicker from 'expo-image-picker'
+import axiosConfig from '../../axiosConfig'
+import { Storage } from 'aws-amplify';
+import Button_animeComments from '../Components/Anime/Button_animeComments';
+import Button_animeFavorite from '../Components/Anime/Button_animeFavorite';
+import Button_animeRating from '../Components/Anime/Button_animeRating';
+import { useSelector } from 'react-redux';
+import { IRootState } from '../redux/State';
+
+
 
 export default function addAnimeScreen()
 {
     const [title, setTitle] = useState('title');
     const [description, setDescription] = useState('description');
-    const [image, setImage] = useState(undefined);
+    const [image, setImage] = useState('key');
+  const [currRes, setRes] = useState('result')
+  
+  // const page = useSelector((state:IRootState) =>
+  // {
+  //   return state.sites.IPageState.parentID.split("#")[1];
+  // })
 
     useEffect(() => {
         (async () => {
@@ -37,13 +52,34 @@ export default function addAnimeScreen()
     };
     
     const submitPage = () =>
-    {
+    {const Stamp = new Date().getTime();
+      fetch(image).then((response) =>
+      {
         
+          console.log('Res',response);
+          const access = { level: "public" };
+          response.blob().then(blob =>
+              {
+                  Storage.put(`A ${title}/${Stamp}.jpg`, blob, access);
+                  
+              })
+          })
+        axiosConfig.post('Anime', {
+          
+          parentID:'A#'+title,
+          bio:description,
+          image:`A ${title}/${Stamp}.jpg`,
+        })
+        .then(function (response) {
+          console.log(response);
+        })
     };
 
     const deletePage = () =>
+
     {
-        
+       let id = title;
+        axiosConfig.delete(`Anime/${id}`).then(() => setRes('Delete successful'));
     };
 
 
