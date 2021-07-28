@@ -7,7 +7,9 @@ import ProfileImg from "./ProfileImg";
 import { Icon } from "react-native-elements";
 import axiosConfig from "../../../axiosConfig";
 import { useSelector } from "react-redux";
-import {IRootState} from '../../redux/State'
+import { IRootState } from '../../redux/State'
+import { Storage } from 'aws-amplify'
+import mime from 'mime-types'
 
 
 interface IaddPost
@@ -20,8 +22,12 @@ interface IaddPost
 
 const AddPost = (props: IaddPost) =>
 {
-    const [image, setImage] = useState(undefined);
+    const [image, setImage] = useState('key');
     const [content, setContent] = useState('');
+    const currentUser = useSelector((state: IRootState) =>
+    {
+        return state.sites.ILogin.username;
+    })
     let page: string = useSelector((state: IRootState) =>
     {
         return state.sites.IPageState.parentID;
@@ -50,24 +56,36 @@ const AddPost = (props: IaddPost) =>
         if (!result.cancelled) {
           setImage(result.uri);
         } else {
-            setImage(undefined);
+            setImage('key');
         }
     };
 
     const submitPost = () =>
     {
-        let user = 'user';
+        let user = currentUser;
         let Stamp: number = new Date().getTime();
-        
+            console.log('IMG',image);
+            fetch(image).then((response) =>
+            {
+               
+                console.log('Res',response);
+                const access = { level: "public" };
+                response.blob().then(blob =>
+                    {
+                        Storage.put(`${currentUser}/${Stamp}.jpg`, blob, access);
+                        
+                    })
+                })
+            
         axiosConfig.post('Post', {
                 Stamp,
                 postID: `${user}#${Stamp}`,
                 content,
                 parentID: page,
-                image: 'key'
+                image: image ? `${currentUser}/${Stamp}.jpg`: 'key'
         })
         setContent('');
-        setImage(undefined);
+        setImage('key');
     }
     return (
         <View style={styles.post}>
@@ -78,10 +96,10 @@ const AddPost = (props: IaddPost) =>
                 </View>
             
                 <View style={styles.text}>
-                <TextInput placeholder="Make a new Post" onChangeText={setContent}/>
+                <TextInput placeholder="Make a new Post" onChangeText={setContent} value={content}/>
                 </View>
             {
-                image && <Image testID='CommentImg' style={styles.postImg} source={{ uri: image }} />
+                image !== 'key' && <Image testID='CommentImg' style={styles.postImg} source={{ uri: image }} />
             }
             
             <View style={styles.postBot}>
