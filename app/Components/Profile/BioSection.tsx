@@ -21,8 +21,14 @@ let newAnime:IAnime = {
     genres: [],
     image:''
 }
+interface Iprops {
+    bio: {
+        greeting: string,
+        description:string
+}
+}
 
-const Bio = () => {
+const Bio = (props:Iprops) => {
    /*
     const [anime, setAnime] = useState<any>(newAnime);
     useEffect((), => {
@@ -52,15 +58,15 @@ const Bio = () => {
     */
     return(
         <ScrollView style = {styles.background}>
-        <Text style = {styles.username}>Username</Text>
+        {/* <Text style = {styles.username}>Username</Text> */}
         <Image
             style = {styles.profilePicture}
             source = {require('../../assets/favicon.png')}
         />
-        <Text style = {styles.intro}>Hi! My name is 2Chainz!</Text>
+            <Text style={styles.intro}>{props.bio.greeting}</Text>
         <View style={styles.bio}>
                 <Text>Synopsis:</Text>
-                <Text>I like to watch the birdz</Text>                
+                <Text>{props.bio.description}</Text>
         </View>
     </ScrollView>
     );
