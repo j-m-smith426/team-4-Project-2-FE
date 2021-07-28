@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-
+import {S3Image} from 'aws-amplify-react-native'
 import { Text, View, StyleSheet, Image } from "react-native";
 
 import colors from "../../config/colors";
@@ -37,8 +37,8 @@ const Post = (props: IPost) =>
     const [hasImage, setHasImage] = useState(false);
     useEffect(() =>
     {
-        setHasImage(Boolean(props.image));        
-    },[])
+        setHasImage(Boolean(props.image !== 'key'));        
+    }, [])
     return (
         <View style={styles.post}>
 
@@ -51,7 +51,7 @@ const Post = (props: IPost) =>
                     <Text>{props.Contents}</Text>
                 </View>
             {
-                hasImage && <Image testID='CommentImg' style={styles.postImg} source={require('../../assets/icon.png')} />
+                hasImage && <Image testID='CommentImg' style={styles.postImg} source={{uri: `https://scouter-revature-project1.s3.amazonaws.com/public/${props.image}`}} />
             }
             
             <View style={styles.postBot}>

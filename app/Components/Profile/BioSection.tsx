@@ -1,10 +1,58 @@
-import React, { useState } from "react";
-import { ScrollView, Text, Image, View, StyleSheet, TextInput, Button } from "react-native";
+import React, {useState, useEffect} from "react";
+import { ScrollView, Text, Image, View, StyleSheet } from "react-native";
+import axiosConfig from "../../../axiosConfig";
+import axios, {AxiosResponse} from "axios";
+
+export interface IAnime {
+    TYPEID: string;
+    REFERENCE: string;
+    name: string;
+    description:string;
+    genres: string[];
+    image:string;
+    
+}
+
+let newAnime:IAnime = {
+    TYPEID: '',
+    REFERENCE: '',
+    name: '',
+    description:'',
+    genres: [],
+    image:''
+}
+
 const Bio = () => {
+   /*
+    const [anime, setAnime] = useState<any>(newAnime);
+    useEffect((), => {
+        getAnime();
+    }, []);
+
+    
+    const getAnime = async () => {
+        let animeResponse: any = 'null';
+        axiosConfig.get('Anime/all').then(response => {
+            animeResponse = response.data;
+            setAnime = animeResponse;
+            //alert(JSON.stringify(response.data));
+
+        })
+    } 
+    
+    const getAnime = async () => {
+        let animeResponse: any = 'null'
+        return axiosConfig.get<typeof newAnime>('Anime/A#Naruto').then(response => {
+            animeResponse = response.data;
+            console.log(animeResponse);
+
+        });
+    }
+    getAnime();
+    */
     return(
         <ScrollView style = {styles.background}>
-            <Text style={styles.username}>Username</Text>
-           
+        <Text style = {styles.username}>Username</Text>
         <Image
             style = {styles.profilePicture}
             source = {require('../../assets/favicon.png')}
@@ -12,17 +60,11 @@ const Bio = () => {
         <Text style = {styles.intro}>Hi! My name is 2Chainz!</Text>
         <View style={styles.bio}>
                 <Text>Synopsis:</Text>
-                <Text>I like to watch the birdz</Text>
-                
-                
+                <Text>I like to watch the birdz</Text>                
         </View>
     </ScrollView>
     );
 }
-   
-
-    
-
 const styles = StyleSheet.create({
     background: {
         flex: 1,
