@@ -1,10 +1,6 @@
 import React from "react";
 import { View, Text, ScrollView, Image, StyleSheet } from "react-native";
-import axios from "axios";
 const Anime = () => {
-    const getAnime = () => {
-        axios.get('https://oqz6a3fml5.execute-api.us-east-2.amazonaws.com/dev/Anime/');
-    }
     return(
         <ScrollView contentContainerStyle = {styles.container}>
             <View style = {styles.top}>
@@ -15,7 +11,14 @@ const Anime = () => {
                     }}
                 />
             </View>
-            
+            <View style = {styles.information}>
+                <Text style={styles.title}> Dragonball Z</Text>
+                <Text style = {styles.genre}>Adventure, Action</Text> 
+                <Text style={styles.rating}>Rated 6 out of 7 Dragonballs</Text>
+                <Text style={styles.description}>The epic episodic adventure of Goku and the Z Warriors as they defend the Earth 
+                and the Universe from super-powered fighters and monsters.</Text>
+            </View>
+        
             {/* <View style = {styles.bottom}></View> */}
         </ScrollView>
     );
@@ -26,19 +29,44 @@ const styles = StyleSheet.create({
         flex: 1,
         backgroundColor: "white",
     },
+
     top: {
-        backgroundColor: "#DDA2FF",
-        //flex: 3,
+        backgroundColor: "#0078FF",
         paddingVertical: "20%",       
         height: "30%",
-        borderBottomWidth: 3,
     },
-    bottom: {
-        backgroundColor: "#DDA2FF",
-        flex: 0.9,
-        paddingVertical: "20%",
 
+    information: {
+        paddingTop: "60%",
+        alignItems: "center",
     },
+
+    title:{
+        fontSize: 32,
+        fontWeight: "bold",
+        textAlign:'center',
+        paddingBottom: "4%",
+    },
+
+    genre: {
+        backgroundColor: "#E9E9E9",
+        width: "100%",
+        textAlign: 'center',
+        paddingVertical: "2%",
+        fontSize: 16,
+    },
+
+    rating:{
+        fontSize:18,
+        paddingVertical: "5%",
+    },
+
+    description: {
+        marginHorizontal: "12%",
+        textAlign:'left',
+        fontSize: 16,
+    },
+    
     animePicture: {
         width: 300,
         height: 400,
@@ -47,8 +75,6 @@ const styles = StyleSheet.create({
         borderWidth: 5,
         borderColor: "white",
     },
-    animeName: {},
-    animeInfo: {},
 });
 
 export default Anime;

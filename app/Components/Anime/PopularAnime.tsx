@@ -83,7 +83,6 @@ const styles = StyleSheet.create({
         paddingHorizontal: "1%",
         fontSize: 14,
         color: "grey",
-        //alignContent: "center",
     }
 })
 
