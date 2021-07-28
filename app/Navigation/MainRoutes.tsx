@@ -33,7 +33,7 @@ const MainRoutes: React.FC<RouterProps> = (props:RouterProps) =>
 
     return (
         <NavigationContainer >
-            <Drawer.Navigator initialRouteName='Login' screenOptions = {({navigation})=>({
+            <Drawer.Navigator initialRouteName='Login' drawerType = 'slide' screenOptions = {({navigation})=>({
                         headerLeft: () => (<Pressable onPress={() => {navigation.openDrawer()}} style = {styles.menuImg}><Icon
                         name='menu' /></Pressable>),
                         headerShown:user !== 'Guest'
