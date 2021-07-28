@@ -9,6 +9,8 @@ import axios from '../../axiosConfig'
 import { useEffect } from 'react';
 import { useCallback } from 'react';
 import { Auth } from 'aws-amplify';
+import { useSelector } from 'react-redux';
+import { IRootState } from '../redux/State';
 
 
 
@@ -30,14 +32,17 @@ const PostScreen = () =>
 {
     const [refreshing, setRefreshing] = useState(false);
     const [postArr,setPostArr] = useState<IPost[]>()
-    const currentPage = "A#DragonBall";
+    const [user,currentPage] = useSelector((state: IRootState) =>
+    {
+        return [state.sites.ILogin.username, state.sites.IPageState.parentID];
+    });
     useEffect(() =>
     {
         getPosts();
     }, [])
     const getPosts = useCallback(async () =>
     {
-        console.log('Name:',Auth.currentAuthenticatedUser());
+        console.log('currentPage',currentPage)
         setRefreshing(true);
         let newArray: IPost[] = [];
         let [pageType, page] = currentPage.split('#');
@@ -76,16 +81,16 @@ const PostScreen = () =>
                     newArray.push(post);
             });
             setPostArr(newArray);
-            
+            setRefreshing(false);
         });
        
         
-        setRefreshing(false);
+        
     }, [refreshing]);
-    //console.log('Result',postArr);
+    console.log('Result',postArr);
     return (
         <ScreenWrapper>
-            <AddPost username="user1" userProfilePic="pic"/>
+            <AddPost username={user} userProfilePic="pic"/>
             <FlatList
                 //viewabilityConfig={{viewAreaCoveragePercentThreshold: 100}}
                 data={postArr}
