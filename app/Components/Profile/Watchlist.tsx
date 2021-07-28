@@ -119,6 +119,7 @@ const styles = StyleSheet.create({
         fontSize: 16,
         flex: 0.4
     },
+
 });
 
 export default Watchlist;

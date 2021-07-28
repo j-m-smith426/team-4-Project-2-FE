@@ -1,6 +1,7 @@
 import * as React from 'react';
 import { View, Text, useWindowDimensions, StyleSheet } from 'react-native';
 import { TabView, SceneMap, TabBar } from 'react-native-tab-view';
+import PostScreen from '../../Screen/PostScreen';
 import Bio from './BioSection';
 import Favorites from './Favorites';
 import Watchlist from './Watchlist';
@@ -11,11 +12,13 @@ const FirstRoute = () => (
 );
 
 const SecondRoute = () => (
-  <Favorites/>
+  // <Favorites/>
+  <PostScreen />
 );
 
 const ThirdRoute = () => (
   <Watchlist/>
+ 
 );
 
 const renderScene = SceneMap({

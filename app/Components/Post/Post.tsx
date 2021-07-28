@@ -1,5 +1,4 @@
-import React from "react";
-import { useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 
 import { Text, View, StyleSheet, Image } from "react-native";
 
@@ -10,7 +9,26 @@ import Button_Like from "./Button_Like";
 import ProfileImg from "./ProfileImg";
 
 
+function timeDifference(oldTime:number){
+    let currentTime = new Date();
+    let differenceTimeMill  = currentTime.getTime()- oldTime;
+    let differenceTimeSeconds = Math.floor(differenceTimeMill/(1000));
+    let differenceTimeMin = Math.floor(differenceTimeSeconds / 60);
+    let differentTimeHour = Math.floor(differenceTimeMin / 60);
+    let differenceDays = Math.floor(differentTimeHour/24)
+    if(differenceTimeMin < 1){
+        return `posted ${differenceTimeSeconds} seconds ago `
+    }
+    if(differentTimeHour < 1){
+        return `posted ${differenceTimeMin} Minutes ago `
+    }
+    
+    if(differentTimeHour < 24){
+        return `posted ${differentTimeHour} hours ago `
+    }
+    return `posted ${differenceDays} days ago `
 
+}
 
 
 
@@ -24,19 +42,18 @@ const Post = (props: IPost) =>
     return (
         <View style={styles.post}>
 
-            {/* <View style={styles.postTop}> */}
+            
                 <View style={styles.profImg}>
                     <ProfileImg username={props.username} profileImg={props.userProfilePic} />
                 </View>
-            {/* </View> */}
+            
                 <View style={styles.text}>
                     <Text>{props.Contents}</Text>
                 </View>
-            {/* <View style={styles.postMid}> */}
             {
-                hasImage && <Image style={styles.postImg} source={require('../../assets/icon.png')} />
+                hasImage && <Image testID='CommentImg' style={styles.postImg} source={require('../../assets/icon.png')} />
             }
-            {/* </View> */}
+            
             <View style={styles.postBot}>
                 <View style={styles.postBot}>
                 <Button_Comment />
@@ -44,7 +61,7 @@ const Post = (props: IPost) =>
                 </View>
                 
                 <View style={styles.timeContainer}>
-                    <Text>Posted {props.timestamp} Ago</Text>
+                    <Text>{ timeDifference(props.timestamp)}</Text>
                 </View>
 
             </View>

@@ -1,48 +1,59 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState,} from 'react';
 import {NavigationContainer} from '@react-navigation/native'
 import { createStackNavigator } from '@react-navigation/stack';
 import Login from '../Screen/Login';
 import PostScreen from '../Screen/PostScreen';
-
-import Navbar from './NavBar';
 import AnimeScreen from '../Screen/animeScreen';
 import ProfilePage from '../Components/Profile/ProfileNavigation';
 
 import SideMenu from 'react-native-side-menu-updated';
 import animeScreen from '../Screen/animeScreen';
-import { TouchableOpacity, View } from 'react-native';
-
-
+import { TouchableOpacity, View, Text, Pressable,StyleSheet, } from 'react-native';
+import { useNavigation } from "@react-navigation/core";
+import { DrawerLayoutAndroid } from 'react-native-gesture-handler';
+import { createDrawerNavigator } from '@react-navigation/drawer';
+import { Icon } from 'react-native-elements';
+import addAnimeScreen from '../Screen/addAnimeScreen';
+import editProfile from '../Components/Profile/editProfile';
+import { useSelector } from 'react-redux';
+import { IRootState } from '../redux/State';
 interface RouterProps
 {
     children?: any
 }
-const Stack = createStackNavigator();
+const Drawer = createDrawerNavigator();
 
 const MainRoutes: React.FC<RouterProps> = (props:RouterProps) =>
 {
-    const menu =<View></View>;
-    const [open, setOpen] = useState<boolean>(false);
+    const [user,userType] = useSelector((state: IRootState) =>
+    {
+        return [state.sites.ILogin.username,state.sites.ILogin.userType];
+})
 
-    const openMenu = () => {setOpen(true)};
+
     return (
         <NavigationContainer >
-
-            <SideMenu menu = {menu} isOpen= {open} onChange = {(isOpen) => {if(!isOpen){setOpen(false)}}} >
-                <Stack.Navigator initialRouteName='Login' screenOptions={{ headerTitle: props => <View><Navbar menu = {openMenu}></Navbar></View> }}>
-                    <Stack.Screen
-                    name="Login"
-                    component={Login}
-                    {...props}
-                    />
-                    <Stack.Screen name="Post" component={PostScreen} />
-                    <Stack.Screen name="Anime" component={AnimeScreen} />
-                    <Stack.Screen name="User" component={ProfilePage} />
-                </Stack.Navigator>
-            </SideMenu>
-        </NavigationContainer>
+            <Drawer.Navigator initialRouteName='Login' screenOptions = {({navigation})=>({
+                        headerLeft: () => (<Pressable onPress={() => {navigation.openDrawer()}} style = {styles.menuImg}><Icon
+                        name='menu' /></Pressable>),
+                        headerShown:true
+                      })}>
+                {user === 'Guest' && <Drawer.Screen name="Login" component={Login} />}
+                <Drawer.Screen name="Post" component={PostScreen} />
+                <Drawer.Screen name="Anime" component={AnimeScreen} />
+                {userType === 'Admin' && <Drawer.Screen name="AnimeAdd" component={addAnimeScreen} />}
+                <Drawer.Screen name="editProfile" component={editProfile} />
+                <Drawer.Screen name="User" component={ProfilePage} />
+            </Drawer.Navigator>
+                </NavigationContainer>
         
     );
 }
-
+const styles = StyleSheet.create({
+    menuImg: {
+        marginLeft:20,
+        
+    },
+});
 export default MainRoutes;
+
