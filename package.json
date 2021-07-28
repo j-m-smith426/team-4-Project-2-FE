@@ -43,7 +43,7 @@
     "react-redux": "^7.2.4",
     "redux": "^4.1.0",
     "redux-router": "^2.1.2",
-    "ts-node": "^10.1.0",
+    "ts-node": "^10.1.0"
   },
   "devDependencies": {
     "@babel/core": "~7.9.0",

@@ -20,10 +20,10 @@ export default function addAnimeScreen()
     const [image, setImage] = useState('key');
   const [currRes, setRes] = useState('result')
   
-  const page = useSelector((state:IRootState) =>
-  {
-    return state.sites.IPageState.parentID.split("#")[1];
-  })
+  // const page = useSelector((state:IRootState) =>
+  // {
+  //   return state.sites.IPageState.parentID.split("#")[1];
+  // })
 
     useEffect(() => {
         (async () => {
@@ -60,15 +60,15 @@ export default function addAnimeScreen()
           const access = { level: "public" };
           response.blob().then(blob =>
               {
-                  Storage.put(`A ${page}/${Stamp}.jpg`, blob, access);
+                  Storage.put(`A ${title}/${Stamp}.jpg`, blob, access);
                   
               })
           })
-        axiosConfig.post('Anime/Add', {
-          REFERENCE:'0',
-          TYPEID:title,
+        axiosConfig.post('Anime', {
+          
+          parentID:'A#'+title,
           bio:description,
-          image:`A ${page}/${Stamp}.jpg`,
+          image:`A ${title}/${Stamp}.jpg`,
         })
         .then(function (response) {
           console.log(response);
