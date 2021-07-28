@@ -56,7 +56,6 @@ const styles = StyleSheet.create({
     },
 
     TabView: {
-      paddingBottom: "10%",
       flex: 1,
     },
 })
