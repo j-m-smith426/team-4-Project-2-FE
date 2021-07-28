@@ -1,5 +1,5 @@
 import React, { ChangeEvent, useState,useEffect } from "react";
-import { Text, View, StyleSheet, Image, TextInput, TouchableOpacity, Pressable } from "react-native";
+import { Text, View, StyleSheet, Image, TextInput, TouchableOpacity, Pressable, GestureResponderEvent } from "react-native";
 import colors from "../config/colors";
 import { useNavigation } from "@react-navigation/core";
 import { useDispatch, useSelector } from "react-redux";
@@ -19,16 +19,16 @@ const Login = () =>
             source={require('../assets/icon.png')} />
             
     </View>);
-    const [email, setEmail] = useState<any>(<View/>);
+    const [emailComp, setEmailComp] = useState<any>(<View/>);
 
     const [signup,setSignup] = useState<any>(                <TouchableOpacity>
         <Text style={styles.linkText} onPress={toSignup}>Sign Up</Text>
     </TouchableOpacity>);
-    const [btnText,setBtnText] = useState<string>("LOGIN");
-    const [mainSize,setMainSize] = useState(styles.main);
     //Functionality states
     const [username, setUsername]= useState<string>("");
     const [password, setPassword]= useState<string>("");
+    const [email, setEmail]= useState<string>("");
+
     const dispatch = useDispatch();
     const currentUser = useSelector((state: IRootState) =>
     {
@@ -39,16 +39,23 @@ const Login = () =>
         checkLogin();
     }, []);
     const onUserChange = (name:string) => {
+        console.log("Username is: " + username);
         setUsername(name);
+        
     }
     const onPassChange = (pass:string) => {
         setPassword(pass);
     }
+    const onEmailChange = (email:string) => {
+        setEmail(email);
+    }
     //-------------
     const submit = async () => {
-       
+        console.log("Username is" + username);
+        
         try {
             let cogUser: CognitoUser= await Auth.signIn(username, password);
+            
            
            
            if(cogUser){
@@ -72,10 +79,29 @@ const Login = () =>
        
        } catch (error) {
            console.log('error signing in', error);
-       }
-        
-        
+       }  
     }
+    async function signUpSubmit() {
+        try {
+            const { user } = await Auth.signUp({
+                username: username,
+                password: password,
+                attributes: {
+                    email: email,          
+                }
+            });
+            if(user){
+                toLogin();
+            }
+            console.log(user);
+        } catch (error) {
+            console.log('error signing up:', error);
+        }
+    }
+    //login button state
+    const [loginTrue, setLoginTrue] = useState<boolean>(true);
+
+
     //Check if someone is logged in
     const checkLogin = () =>
     {
@@ -96,23 +122,26 @@ const Login = () =>
     return (
         <View style = {styles.container}>
             {img}
-            <View style= {mainSize}>
-                {email}
+            <View style= {styles.main}>
+                {emailComp}
                 <View style={styles.inputView}>
                     <TextInput 
                         onChangeText ={onUserChange}
                         style={styles.TextInput}
+                        autoCompleteType = "username"
                         placeholder="Username"/>
                 </View>
                 <View style={styles.inputView}>
                     <TextInput
                         onChangeText ={onPassChange}
+                        textContentType = "password"
+                        autoCompleteType = "password"
+                        secureTextEntry = {true}
                         style={styles.TextInput}
                         placeholder="Password"/>
                 </View>
-                <TouchableOpacity style={styles.loginBtn} onPress={submit}>
-                    <Text style={styles.text}>{btnText}</Text>
-
+                <TouchableOpacity style={styles.loginBtn} onPress={loginTrue ? submit : signUpSubmit}>
+                    <Text style={styles.text}>LOGIN</Text>
                 </TouchableOpacity>
                 {signup}
             </View>
@@ -123,15 +152,17 @@ const Login = () =>
     );
     async function toSignup(){
         setImg(<View style={styles.filler}/>);
-        setEmail(<View style={styles.inputView}>
+        setEmailComp(<View style={styles.inputView}>
             <TextInput
+                onChangeText ={onEmailChange}
                 style={styles.TextInput}
+                autoCompleteType = "email"
                 placeholder="Email"/>
         </View>);
         setSignup(<TouchableOpacity>
             <Text style={styles.linkText} onPress={toLogin}>Log in</Text>
         </TouchableOpacity>);
-        setBtnText("SIGN UP");
+        setLoginTrue(false);
     } 
     async function toLogin(){
         setImg(<View style = {styles.profImg}>
@@ -139,12 +170,11 @@ const Login = () =>
                 style={styles.image}
                 source={require('../assets/icon.png')} />
         </View>);
-        setEmail(<View/>);
+        setEmailComp(<View/>);
         setSignup(                <TouchableOpacity >
             <Text style={styles.linkText} onPress={toSignup}>Sign Up</Text>
         </TouchableOpacity>);
-        setBtnText("LOGIN");
-        setMainSize(styles.main);
+        setLoginTrue(true);
     } 
 }
   

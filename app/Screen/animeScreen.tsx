@@ -25,7 +25,7 @@ export default function AnimeScreen() {
     useEffect(() =>
     {getAnime()},[])
     const getAnime = async () =>
-    {axios.get('/Anime', {params: {TYPEID:currentPage }})
+    {axios.get('/Anime/'+currentPage)
       .then(response =>{setAnime(response.data)});
     }
   
@@ -37,8 +37,8 @@ export default function AnimeScreen() {
       <Image
      
         style={styles.animeImg}
-        source={require('../assets/dbz.jpg')}/>
-        {/* /*{source={require( `https://scouter-revature-project1.s3.amazonaws.com/public/${anime.image}`)}/>}*/ }
+        // source={require('../assets/dbz.jpg')}/>
+        source={{uri: `https://scouter-revature-project1.s3.amazonaws.com/public/${anime.image}`}}/> 
         
 
         <Text style={styles.title}>{anime.name}</Text>
@@ -49,9 +49,9 @@ export default function AnimeScreen() {
     <View style={styles.lowerMenu}>
 
     
-        <Button_animeComments/>
+        {/* <Button_animeComments/>
         <Button_animeFavorite/>
-    <Button_animeRating/>
+    <Button_animeRating/> */}
     </View>
   </View>
   );
