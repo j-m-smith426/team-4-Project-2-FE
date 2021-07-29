@@ -18,7 +18,7 @@ export default function addAnimeScreen()
     const [title, setTitle] = useState('title');
     const [description, setDescription] = useState('description');
     const [image, setImage] = useState('key');
-  const [currRes, setRes] = useState('result')
+    const [currRes, setRes] = useState('result');
   
   // const page = useSelector((state:IRootState) =>
   // {
@@ -91,7 +91,7 @@ export default function addAnimeScreen()
           {image && <Image
               style={styles.animeImg}
               source={{uri: image}} />}
-        <Button title='addPicture' onPress={pickImage} />
+        <Button title='Add Picture' onPress={pickImage} />
           <View style={styles.lowerMenu}>
               <View style={styles.textInput} >
 
@@ -101,8 +101,8 @@ export default function addAnimeScreen()
               </View>
           </View>
           <View style={styles.lowerMenu}>
-              <View style={styles.textInput} >
-          <TextInput style={styles.descrption} multiline numberOfLines={3} placeholder="Description" onChangeText={setDescription} />
+              <View style={styles.textInput}>
+          <TextInput style={styles.description} multiline numberOfLines={3} placeholder="Description" onChangeText={setDescription} />
               </View>
           </View>
           
@@ -122,19 +122,19 @@ const styles = StyleSheet.create({
 
   },
   animeImg:{      
-      height:200,
-      width:300,
+      height: 400,
+      width: 300,
   },
     title: {
       flex:1,
-      fontFamily:'',
+      //fontFamily:'',
       fontSize: 32,
       color:'#000000',
       textAlign:'center',
     },
-    descrption: {
-        flex:1,
-      fontFamily:'',
+    description: {
+      flex:1,
+      //fontFamily:'',
       fontSize: 20,
       color:'#000000',
     },
@@ -152,24 +152,26 @@ const styles = StyleSheet.create({
       flexDirection:'row',
       padding:10,
   },
-    lowerMenu: {
-    flexDirection:'row',
+  lowerMenu: {
+      flexDirection:'row',
     //backgroundColor:'#072083',
       alignContent: 'center',
       //borderWidth : 1,
       justifyContent: "space-around",
-
   },
+
   rating:{
       color:'black',
       fontSize:18,
   },
+
   header:{
       color:'white'
-    },
-    textInput: {
-        flex: .7,
-        flexDirection: "row",
+  },
+
+  textInput: {
+      flex: .7,
+      flexDirection: "row",
   }
   
 });
