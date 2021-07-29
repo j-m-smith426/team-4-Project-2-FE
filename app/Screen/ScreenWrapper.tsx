@@ -1,6 +1,5 @@
-import React,{ useEffect } from 'react';
-import { useState } from 'react';
-import { useWindowDimensions, View, StyleSheet, Dimensions, StatusBar, Platform, } from 'react-native';
+import React from 'react';
+import { useWindowDimensions, View, StyleSheet, Dimensions, StatusBar } from 'react-native';
 
 const DEVICEHEIGHT = Dimensions.get('screen').height;
 const STATUSBARHEIGHT = StatusBar.currentHeight || 24;

@@ -10,7 +10,7 @@ import { createMaterialBottomTabNavigator } from '@react-navigation/material-bot
 
 const Tab = createMaterialBottomTabNavigator();
 export default function MainScreen ()  {
-    return (
+    return ( 
         <View>
             <Text>Welcome to Scouter App!!</Text>
 
