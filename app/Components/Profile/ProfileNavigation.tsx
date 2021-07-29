@@ -42,7 +42,7 @@ export default function ProfilePage() {
     { key: 'first', title: 'Profile' },
     { key: 'second', title: 'Posts' },
     { key: 'third', title: 'Watchlist'},
-    { key: 'fourth', title: 'Followed'}
+    { key: 'fourth', title: 'Follow'}
   ]);
   const [userInfo, setUserInfo] = useState<any>({ bio: { greeting: '', description: '' }, followed: [] });
   let navigation = useNavigation();
