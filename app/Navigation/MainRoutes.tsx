@@ -17,6 +17,7 @@ import addAnimeScreen from '../Screen/addAnimeScreen';
 import editProfile from '../Components/Profile/editProfile';
 import { useSelector } from 'react-redux';
 import { IRootState } from '../redux/State';
+import { Sidebar } from './Sidebar';
 interface RouterProps
 {
     children?: any
@@ -33,7 +34,7 @@ const MainRoutes: React.FC<RouterProps> = (props:RouterProps) =>
 
     return (
         <NavigationContainer >
-            <Drawer.Navigator initialRouteName='Login' drawerType = 'slide' screenOptions = {({navigation})=>({
+            <Drawer.Navigator initialRouteName='Login' drawerType = 'slide' drawerContent = {Sidebar} screenOptions = {({navigation})=>({
                         headerLeft: () => (<Pressable onPress={() => {navigation.openDrawer()}} style = {styles.menuImg}><Icon
                         name='menu' /></Pressable>),
                         headerShown:user !== 'Guest'
