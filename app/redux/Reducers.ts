@@ -23,6 +23,10 @@ export const Reducer = (
       newState.IPageState.PageName = action.payload.name;
       newState.IPageState.parentID = action.payload.parentID;
       return newState;
+    case SwitchPageAction.VIEW_POST:
+      newState.IPageState.parentID = action.payload.parentID;
+      newState.IPageState.postID = action.payload.postID;
+      return newState;
     default:
       return newState;
   }

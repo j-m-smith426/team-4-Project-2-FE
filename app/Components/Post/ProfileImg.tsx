@@ -32,7 +32,7 @@ const ProfileImg = (props: Iprops) =>
                 <View style={styles.imageCover}>
                     <Image
                         style={styles.image}
-                        source={require('../../assets/icon.png')} />
+                        source={{uri: `https://scouter-revature-project1.s3.amazonaws.com/public/${props.profileImg}`}} />
                     </View>
                 <View >
                     <Text testID = 'Name'>{props.username}</Text>
@@ -53,7 +53,7 @@ const styles = StyleSheet.create({
     },
     imageCover: {
 
-        width: '50%',
+        width: '45%',
         height: '100%', 
         
 
@@ -61,10 +61,10 @@ const styles = StyleSheet.create({
 
     },
     image: {
-        width: '100%',
-        height: '100%',
-        resizeMode: 'contain',
-        borderRadius: 100,
+        width: 50,
+        height: 50,
+        resizeMode: 'cover',
+        borderRadius: 50,
         
     }
 });

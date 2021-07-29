@@ -20,7 +20,7 @@ interface IaddPost
 
 
 
-const AddPost = (props: IaddPost) =>
+const AddComment = (props: IaddPost) =>
 {
     const [image, setImage] = useState('key');
     const [content, setContent] = useState('');
@@ -31,7 +31,7 @@ const AddPost = (props: IaddPost) =>
     })
     let page: string = useSelector((state: IRootState) =>
     {
-        return state.sites.IPageState.parentID;
+        return state.sites.IPageState.postID;
     });
     useEffect(() => {
         (async () => {
@@ -77,10 +77,12 @@ const AddPost = (props: IaddPost) =>
     {
         let user = currentUser;
         let Stamp: number = new Date().getTime();
-            console.log('IMG',image);
+        console.log('IMG', image);
+        if (image !== 'key') {
+            
             fetch(image).then((response) =>
             {
-               
+                
                 console.log('Res',response);
                 const access = { level: "public" };
                 response.blob().then(blob =>
@@ -89,13 +91,14 @@ const AddPost = (props: IaddPost) =>
                         
                     })
                 })
+            }
             
         axiosConfig.post('Post', {
                 Stamp,
                 postID: `${user}#${Stamp}`,
                 content,
                 parentID: page,
-                image: image ? `${currentUser}/${Stamp}.jpg`: 'key'
+                image: image !== 'key'? `${currentUser}/${Stamp}.jpg`: 'key'
         })
         setContent('');
         setImage('key');
@@ -209,4 +212,4 @@ const styles = StyleSheet.create({
 
 });
 
-export default AddPost;
+export default AddComment;

@@ -4,13 +4,15 @@ import { Text, View, StyleSheet, Pressable } from 'react-native';
 import colors from '../../config/colors';
 
 
-const Button_Comment = () => {
+const Button_Comment = () =>
+{
+    
     return (
         <View style={styles.commentContainer}>
 
-            <Pressable onPress={() => console.log('comment was pressed')}>
+            
             <Text>Comment</Text>
-            </Pressable>
+            
 
         </View>
     );
