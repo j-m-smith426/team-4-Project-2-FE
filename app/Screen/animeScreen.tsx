@@ -41,16 +41,15 @@ export default function AnimeScreen() {
         // source={require('../assets/dbz.jpg')}/>
         source={{uri: `https://scouter-revature-project1.s3.amazonaws.com/public/${anime.image}`}}/> 
         
-
+     
+    
         <Text style={styles.title}>{anime.TYPEID.split('#')[1]}</Text>
         {/* <Text style={styles.rating}></Text> */}
         <Text style={styles.content}>{anime.bio}</Text>
-        
-   
-    <View style={styles.lowerMenu}>
-        <SearchList/>
     
-      
+    <View style={styles.lowerMenu}>
+    <SearchList/>
+
     </View>
   </View>
   );
