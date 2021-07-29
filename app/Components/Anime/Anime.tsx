@@ -1,6 +1,15 @@
-import React from "react";
-import { View, Text, ScrollView, Image, StyleSheet } from "react-native";
+import React, {useState} from "react";
+import { View, Text, ScrollView, Image, StyleSheet, Touchable, TouchableOpacity } from "react-native";
+import { AntDesign } from "@expo/vector-icons";
+
 const Anime = () => {
+
+    const [clicked, setClicked] = useState(false);
+    const handleStarClick = () => {
+        console.log("Clicked");
+        setClicked(!clicked);
+    };
+
     return(
         <ScrollView contentContainerStyle = {styles.container}>
             <View style = {styles.top}>
@@ -12,7 +21,14 @@ const Anime = () => {
                 />
             </View>
             <View style = {styles.information}>
-                <Text style={styles.title}> Dragonball Z</Text>
+                <View style = {styles.headInfo}>
+                    <Text style={styles.title}> Dragonball Z</Text>
+                    
+                    <TouchableOpacity onPress = {() => handleStarClick()}>
+                        <AntDesign name = "star" size = {34} color = {clicked? "gold":"grey"}/>
+                    </TouchableOpacity>
+
+                </View>
                 <Text style = {styles.genre}>Adventure, Action</Text> 
                 <Text style={styles.rating}>Rated 6 out of 7 Dragonballs</Text>
                 <Text style={styles.description}>The epic episodic adventure of Goku and the Z Warriors as they defend the Earth 
@@ -41,11 +57,20 @@ const styles = StyleSheet.create({
         alignItems: "center",
     },
 
+    headInfo: {
+        flexDirection: "row",
+    },
+
+    star: {
+        color: "gold",
+    },
+
     title:{
         fontSize: 32,
         fontWeight: "bold",
         textAlign:'center',
         paddingBottom: "4%",
+        paddingHorizontal: "4%",
     },
 
     genre: {
