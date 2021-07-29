@@ -8,6 +8,7 @@ import {Storage} from 'aws-amplify'
 import { useEffect } from 'react';
 import axios from '../../axiosConfig';
 import IAnime from '../model/Anime'
+import SearchList from './SearchList'
 
 const newAnime:IAnime = {
   REFERENCE:'0',
@@ -23,7 +24,11 @@ export default function AnimeScreen() {
 
    
     useEffect(() =>
-    {getAnime()},[])
+    {
+      let isMounted = true;
+      isMounted && getAnime()
+      return() => {isMounted = false}
+    }, [])
     const getAnime = async () =>
     {axios.get('/Anime/'+currentPage.replace('#','_'))
       .then(response =>{setAnime(response.data)});
@@ -40,16 +45,15 @@ export default function AnimeScreen() {
         // source={require('../assets/dbz.jpg')}/>
         source={{uri: `https://scouter-revature-project1.s3.amazonaws.com/public/${anime.image}`}}/> 
         
-
+     
+    
         <Text style={styles.title}>{anime.TYPEID.split('#')[1]}</Text>
         {/* <Text style={styles.rating}></Text> */}
         <Text style={styles.content}>{anime.bio}</Text>
-        
-   
-    <View style={styles.lowerMenu}>
-
     
-      
+    <View style={styles.lowerMenu}>
+    <SearchList/>
+
     </View>
   </View>
   );
