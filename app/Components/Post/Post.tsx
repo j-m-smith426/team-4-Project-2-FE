@@ -1,9 +1,12 @@
-import React, { useEffect, useState } from "react";
-import {S3Image} from 'aws-amplify-react-native'
-import { Text, View, StyleSheet, Image } from "react-native";
+import { useNavigation } from "@react-navigation/native";
+import React, { useCallback, useEffect, useState } from "react";
+import { Text, View, StyleSheet, Image, Pressable } from "react-native";
+import { useDispatch } from "react-redux";
+import axiosConfig from "../../../axiosConfig";
 
 import colors from "../../config/colors";
 import IPost from "../../model/Post";
+import { SwitchPageAction } from "../../redux/Actions";
 import Button_Comment from "./Button_Comment";
 import Button_Like from "./Button_Like";
 import ProfileImg from "./ProfileImg";
@@ -35,16 +38,47 @@ function timeDifference(oldTime:number){
 const Post = (props: IPost) =>
 {
     const [hasImage, setHasImage] = useState(false);
+    const dispatch = useDispatch();
+    const [profilepic, setProfilePic] = useState('key');
+    const navigation = useNavigation();
     useEffect(() =>
     {
-        setHasImage(Boolean(props.image !== 'key'));        
-    }, [])
+        setHasImage(Boolean(props.image !== 'key'));
+        getProfPic();
+    }, [navigation]);
+
+    const getProfPic = useCallback(async() =>
+    {
+        
+        axiosConfig.get<any>(`User/U_${props.username}`, {
+        }).then(userResponse =>
+            {
+            let userData = userResponse.data;
+            console.log('ProfileIMG: ', userData.image);
+                setProfilePic(userData.image);
+            })
+        },[props.username])
+
+    const goToComment = async() =>
+    {
+        let id = props.postID;
+        dispatch({
+            type: SwitchPageAction.VIEW_POST,
+            payload: {
+                parentID: props.parentID,
+                postID: id,
+            }
+        });
+        navigation.navigate('Comment');
+    }
+    
     return (
+        
         <View style={styles.post}>
 
             
                 <View style={styles.profImg}>
-                    <ProfileImg username={props.username} profileImg={props.userProfilePic} />
+                    <ProfileImg username={props.username} profileImg={profilepic} />
                 </View>
             
                 <View style={styles.text}>
@@ -56,7 +90,9 @@ const Post = (props: IPost) =>
             
             <View style={styles.postBot}>
                 <View style={styles.postBot}>
+                    <Pressable onPress= {goToComment}>
                 <Button_Comment />
+            </Pressable>
                 <Button_Like />
                 </View>
                 

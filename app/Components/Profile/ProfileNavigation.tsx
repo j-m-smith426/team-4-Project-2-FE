@@ -1,31 +1,37 @@
+import { useNavigation } from '@react-navigation/native';
 import * as React from 'react';
+import { useEffect } from 'react';
+import { useState } from 'react';
 import { View, Text, useWindowDimensions, StyleSheet } from 'react-native';
 import { TabView, SceneMap, TabBar } from 'react-native-tab-view';
+import { useSelector } from 'react-redux';
+import axiosConfig from '../../../axiosConfig';
+import { IRootState } from '../../redux/State';
 import PostScreen from '../../Screen/PostScreen';
 import Bio from './BioSection';
 import Favorites from './Favorites';
 import Watchlist from './Watchlist';
 
 //Route to each component
-const FirstRoute = () => (
-  <Bio/>
-);
+// const FirstRoute = () => (
+//   <Bio/>
+// );
 
-const SecondRoute = () => (
-  // <Favorites/>
-  <PostScreen />
-);
+// const SecondRoute = () => (
+//   // <Favorites/>
+//   <PostScreen />
+// );
 
-const ThirdRoute = () => (
-  <Watchlist/>
+// const ThirdRoute = () => (
+//   <Watchlist/>
  
-);
+// );
 
-const renderScene = SceneMap({
-  first: FirstRoute,
-  second: SecondRoute,
-  third: ThirdRoute,
-});
+// const renderScene = SceneMap({
+//   first: FirstRoute,
+//   second: SecondRoute,
+//   third: ThirdRoute,
+// });
 
 export default function ProfilePage() {
   //const layout = useWindowDimensions();
@@ -34,9 +40,50 @@ export default function ProfilePage() {
   const [index, setIndex] = React.useState(0);
   const [routes] = React.useState([
     { key: 'first', title: 'Profile' },
-    { key: 'second', title: 'Favorites' },
+    { key: 'second', title: 'Posts' },
     { key: 'third', title: 'Watchlist'},
   ]);
+  const [userInfo, setUserInfo] = useState<any>({ bio: { greeting: '', description: '' }, followed: [] });
+  let navigation = useNavigation();
+  const page = useSelector((state: IRootState) =>
+  {
+    return state.sites.IPageState.parentID;
+  })
+  
+  let userPage = page.replace('#','_');
+  const loadUserInfo = () =>
+  {
+    axiosConfig.get(`User/${userPage}`).then((response) =>
+    {
+      console.log('Response: ', response.data);
+      setUserInfo(response.data);
+    })
+  }
+
+  useEffect(() =>
+  {
+    loadUserInfo();
+  }, [navigation]);
+  //Route to each component
+const FirstRoute = () => (
+  <Bio bio={userInfo.bio} image={userInfo.image} following={userInfo.followed.includes(page)} user={userInfo} name={page.split('#')[1]}/>
+);
+
+const SecondRoute = () => (
+  // <Favorites/>
+  <PostScreen />
+);
+
+const ThirdRoute = () => (
+  <Watchlist list={userInfo.watchlist}/>
+ 
+);
+
+const renderScene = SceneMap({
+  first: FirstRoute,
+  second: SecondRoute,
+  third: ThirdRoute,
+});
 
   return (
     <TabView

@@ -8,6 +8,7 @@ export interface Ilogin {
 export interface IPageState {
   PageName: string;
   parentID: string;
+  postID: string;
 }
 
 export interface IAppState {
@@ -27,5 +28,6 @@ export const initialState: IAppState = {
   IPageState: {
     PageName: "Login",
     parentID: "Guest",
+    postID: "none",
   },
 };

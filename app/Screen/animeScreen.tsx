@@ -19,39 +19,37 @@ const newAnime:IAnime = {
 
 export default function AnimeScreen() {
   const [anime,setAnime] = useState<IAnime>(newAnime);
-  const currentPage = "A#DragonBall";
+  const currentPage = "A#DragonBallZ";
 
    
     useEffect(() =>
     {getAnime()},[])
     const getAnime = async () =>
-    {axios.get('/Anime', {params: {TYPEID:currentPage }})
+    {axios.get('/Anime/'+currentPage.replace('#','_'))
       .then(response =>{setAnime(response.data)});
     }
   
   return (
     <View style={styles.container}>
        <View style={styles.topMenu}>
-       <Text style={styles.header}>{anime.name}</Text>
+       <Text style={styles.header}>{anime.TYPEID.split('#')[1]}</Text>
        </View>
       <Image
      
         style={styles.animeImg}
-        source={require('../assets/dbz.jpg')}/>
-        {/* /*{source={require( `https://scouter-revature-project1.s3.amazonaws.com/public/${anime.image}`)}/>}*/ }
+        // source={require('../assets/dbz.jpg')}/>
+        source={{uri: `https://scouter-revature-project1.s3.amazonaws.com/public/${anime.image}`}}/> 
         
 
-        <Text style={styles.title}>{anime.name}</Text>
-        <Text style={styles.rating}></Text>
+        <Text style={styles.title}>{anime.TYPEID.split('#')[1]}</Text>
+        {/* <Text style={styles.rating}></Text> */}
         <Text style={styles.content}>{anime.bio}</Text>
         
    
     <View style={styles.lowerMenu}>
 
     
-        <Button_animeComments/>
-        <Button_animeFavorite/>
-    <Button_animeRating/>
+      
     </View>
   </View>
   );

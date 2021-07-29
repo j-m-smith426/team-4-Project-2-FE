@@ -1,24 +1,39 @@
-import React from "react";
-import { Text, StyleSheet, Image, View, ScrollView } from "react-native";
+import React, { useEffect, useState } from "react";
+import { Text, StyleSheet, Image, View, FlatList } from "react-native";
 
-const Watchlist = () => {
+
+interface Iprops
+{
+    list:any[]
+}
+
+const Watchlist = (props:Iprops) =>
+{
+    const [favArr, setFavArr] = useState<any[]>([]);
+    useEffect(() =>
+    {
+    setFavArr(props.list)
+},[])
     return(
-        <ScrollView>
-            {/*//! Should make the entire anime card and it's info one big link to its anime page> */}
-            <View style = {styles.anime}>
-                <Image
-                    style = {styles.photo}
-                    source={{
-                        uri: 'https://m.media-amazon.com/images/I/91-W7KxXXdL._SY445_.jpg'
-                    }}
-                />
-                <View style = {styles.infoContainer}>
-                    <Text style = {styles.animeTitle} numberOfLines = {1}>Zatch Bell plus other stuff and things</Text>
-                    <Text style = {styles.infoText} numberOfLines = {1}>Genre: Action, Adventure, anything, whatever, cool, stuff</Text>
-                    <Text style = {styles.infoText}>Episodes: 150</Text>
-                </View>
-            </View>
-            <View style = {styles.anime}>
+        <FlatList
+            data={favArr}
+            renderItem={
+                ({ item }) => (
+                    <View style={styles.anime}>
+                        <Image
+                            style={styles.photo}
+                            source={{
+                                uri: `https://scouter-revature-project1.s3.amazonaws.com/public/${item.image}`
+                            }}
+                        />
+                        <View style={styles.infoContainer}>
+                            <Text style={styles.animeTitle} numberOfLines={1}>{item.name}</Text>
+                        </View>
+                    </View>
+                )}
+            keyExtractor={item => item.name}
+        >
+            {/* <View style = {styles.anime}>
                 <Image
                     style = {styles.photo}
                     source={{
@@ -78,8 +93,8 @@ const Watchlist = () => {
                     <Text style = {styles.infoText}>Genre: Supernatural, Actione</Text>
                     <Text style = {styles.infoText}>Episodes: 26</Text>
                 </View>
-            </View>
-        </ScrollView>
+            </View> */}
+        </FlatList>
     )
 }
 
