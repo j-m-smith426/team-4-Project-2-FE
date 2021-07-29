@@ -5,5 +5,6 @@ export interface IPost {
   image?: string;
   timestamp: number;
   postID: string;
+  parentID: string;
 }
 export default IPost;
