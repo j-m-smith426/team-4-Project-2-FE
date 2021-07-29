@@ -1,7 +1,7 @@
 import React from "react";
 import { View, Image, Text, ScrollView, StyleSheet, FlatList } from "react-native";
 
-const Followers = () => {
+const Following = () => {
     return(
         <ScrollView>
 
@@ -127,4 +127,4 @@ const styles = StyleSheet.create({
     },
 });
 
-export default Followers;
+export default Following;

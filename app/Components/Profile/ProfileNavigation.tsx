@@ -8,8 +8,8 @@ import axiosConfig from '../../../axiosConfig';
 import { IRootState } from '../../redux/State';
 import PostScreen from '../../Screen/PostScreen';
 import Bio from './BioSection';
-import Favorites from './Favorites';
 import Watchlist from './Watchlist';
+import Following from './Following';
 
 //Route to each component
 // const FirstRoute = () => (
@@ -41,6 +41,7 @@ export default function ProfilePage() {
     { key: 'first', title: 'Profile' },
     { key: 'second', title: 'Posts' },
     { key: 'third', title: 'Watchlist'},
+    { key: 'fourth', title: 'Followed'}
   ]);
   const [userInfo, setUserInfo] = useState<any>({});
   const page = useSelector((state: IRootState) =>
@@ -75,10 +76,15 @@ const ThirdRoute = () => (
  
 );
 
+const FourthRoute = () => (
+  <Following />
+);
+
 const renderScene = SceneMap({
   first: FirstRoute,
   second: SecondRoute,
   third: ThirdRoute,
+  fourth: FourthRoute,
 });
 
   return (
