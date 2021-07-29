@@ -1,14 +1,33 @@
-import React, {useState} from 'react'
+import React, {useEffect, useState} from 'react'
 import {View, Text, TouchableOpacity, StyleSheet, Image} from 'react-native'
 import colors from '../config/colors'
 import StarBorderOutlineIcon from '@material-ui/icons/StarBorderOutlined';
 import StarIcon from '@material-ui/icons/Star';
+import axios from '../../axiosConfig'
 const Rating = () =>{
     const[defaultRating, setDefaultRating]=useState(2);
     const[maxRating, setMaxRating]=useState([1,2,3,4,5]);
 
     const filledStar='https://raw.githubusercontent.com/tranhonghan/images/main/star_filled.png';
     const emptyStar='https://raw.githubusercontent.com/tranhonghan/images/main/star_corner.png';
+    let currPage="A#Dragonball"
+    
+    useEffect(() =>
+    {rateAnime()},[])
+    const rateAnime = async () =>{
+        axios.put('Anime', {
+          
+            parentID:currPage,
+            rating:defaultRating,
+          
+          })
+          .then(function (response) {
+            console.log(response);
+          })
+    }
+    
+    
+    
     const CustomRatingBar =() =>{
         return(
             <View style={styles.customBar}>
@@ -47,7 +66,7 @@ const Rating = () =>{
             <TouchableOpacity
                 activeOpacity={0.7}
                 style={styles.button}
-                onPress={() => alert(defaultRating)}     
+                onPress={rateAnime}     
             >
                 <Text>Rate</Text>
             </TouchableOpacity>
