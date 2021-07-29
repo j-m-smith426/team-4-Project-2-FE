@@ -1,7 +1,10 @@
 import React, {useState, useEffect} from "react";
-import { ScrollView, Text, Image, View, StyleSheet } from "react-native";
+import { ScrollView, Text, Image, View, StyleSheet, Pressable } from "react-native";
 import axiosConfig from "../../../axiosConfig";
 import axios, {AxiosResponse} from "axios";
+import { Icon } from "react-native-elements";
+import { useSelector } from "react-redux";
+import { IRootState } from "../../redux/State";
 
 export interface IAnime {
     TYPEID: string;
@@ -27,11 +30,19 @@ interface Iprops
     bio: {
         greeting: string,
         description:string
-}
+    },
+    following: boolean,
+    user: any,
+    name:string
 }
 
 const Bio = (props: Iprops) =>
 {
+    const [following, setFollowing] = useState(false);
+    const currentUser = useSelector((state: IRootState) =>
+    {
+        return state.sites.ILogin.username;
+    })
     console.log(props);
    /*
     const [anime, setAnime] = useState<any>(newAnime);
@@ -60,24 +71,46 @@ const Bio = (props: Iprops) =>
     }
     getAnime();
     */
+    const addFollow = () =>
+    {
+        setFollowing(true);
+    }
+
+    const unFollow = () =>
+    {
+        setFollowing(false);
+    }
+    const followButton = () =>
+    {
+        return (following ?
+            <Pressable onPress={unFollow} style={styles.following}>
+                <Icon name='check'/><Text>Following</Text>
+            </Pressable>:
+            <Pressable onPress={addFollow} style={styles.following}>
+                <Text>Follow</Text>
+            </Pressable> )
+    }
     return(
-        <ScrollView style = {styles.background}>
-        {/* <Text style = {styles.username}>Username</Text> */}
+        <View style = {styles.background}>
+        {console.log('compare', currentUser, props.name)}
         <Image
             style = {styles.profilePicture}
             source = {{uri: `https://scouter-revature-project1.s3.amazonaws.com/public/${props.image}`}}
-        />
+            />
+            {currentUser !== props.name && followButton()}
             <Text style={styles.intro}>{props.bio.greeting}</Text>
         <View style={styles.bio}>
                 <Text>Synopsis:</Text>
                 <Text>{props.bio.description}</Text>
-        </View>
-    </ScrollView>
+            </View>
+            
+    </View>
     );
 }
 const styles = StyleSheet.create({
     background: {
         flex: 1,
+        //alignContent: 'space-around'
     },
 
     username: {
@@ -111,6 +144,10 @@ const styles = StyleSheet.create({
         paddingHorizontal: "10%",
         paddingVertical: "5%"
     },
+    following: {
+        flexDirection: "row",
+        alignSelf: 'center'
+    }
 });
 
 export default Bio;

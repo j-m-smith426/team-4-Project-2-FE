@@ -1,3 +1,4 @@
+import { useNavigation } from '@react-navigation/native';
 import * as React from 'react';
 import { useEffect } from 'react';
 import { useState } from 'react';
@@ -42,7 +43,8 @@ export default function ProfilePage() {
     { key: 'second', title: 'Posts' },
     { key: 'third', title: 'Watchlist'},
   ]);
-  const [userInfo, setUserInfo] = useState<any>({bio:{greeting:'',description:''}});
+  const [userInfo, setUserInfo] = useState<any>({ bio: { greeting: '', description: '' }, followed: [] });
+  let navigation = useNavigation();
   const page = useSelector((state: IRootState) =>
   {
     return state.sites.IPageState.parentID;
@@ -61,10 +63,10 @@ export default function ProfilePage() {
   useEffect(() =>
   {
     loadUserInfo();
-  }, []);
+  }, [navigation]);
   //Route to each component
 const FirstRoute = () => (
-  <Bio bio={userInfo.bio} image={userInfo.image}/>
+  <Bio bio={userInfo.bio} image={userInfo.image} following={userInfo.followed.includes(page)} user={userInfo} name={page.split('#')[1]}/>
 );
 
 const SecondRoute = () => (
