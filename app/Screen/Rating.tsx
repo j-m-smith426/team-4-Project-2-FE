@@ -4,9 +4,23 @@ import colors from '../config/colors'
 import StarBorderOutlineIcon from '@material-ui/icons/StarBorderOutlined';
 import StarIcon from '@material-ui/icons/Star';
 import axios from '../../axiosConfig'
+import IAnime from '../model/Anime';
+
+
+const newAnime:IAnime = {
+    REFERENCE:'0',
+    TYPEID:'A#FAKEANIME',
+    name:'IamAFake',
+    bio:'bad day for me',
+    image:'',
+    rating:1,
+  }
+
+
 const Rating = () =>{
     const[defaultRating, setDefaultRating]=useState(2);
     const[maxRating, setMaxRating]=useState([1,2,3,4,5]);
+    const [anime,setAnime] = useState<IAnime>(newAnime);
 
     const filledStar='https://raw.githubusercontent.com/tranhonghan/images/main/star_filled.png';
     const emptyStar='https://raw.githubusercontent.com/tranhonghan/images/main/star_corner.png';

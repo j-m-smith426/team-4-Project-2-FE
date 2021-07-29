@@ -31,8 +31,9 @@ export default function AnimeScreen() {
     const getAnime = async () =>
     {axios.get('/Anime/'+currentPage.replace('#','_'))
       .then(response =>{setAnime(response.data)});
-      
+     
     }
+   
   
   return (
     <View style={styles.container}>
