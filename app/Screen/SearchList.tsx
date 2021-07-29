@@ -1,69 +1,140 @@
-import React, { useState } from "react";
-import { FlatList, SafeAreaView, StatusBar, StyleSheet, Text, TouchableOpacity } from "react-native";
+import React , {useEffect, useState} from 'react';
+import { StyleSheet, Text, View, FlatList, TouchableWithoutFeedback, Pressable, TouchableOpacity} from 'react-native';
+import IAnime from '../model/Anime'
+import axios from '../../axiosConfig'
+import { getTokenSourceMapRange } from 'typescript';
+import { useCallback } from 'react';
+import { useNavigation } from '@react-navigation/core';
 
-const DATA = [
+
+interface IProps
+{
+    page: string,
+}
+
+const dummyAnime=[
   {
-    id: "bd7acbea-c1b1-46c2-aed5-3ad53abb28ba",
-    title: "First Item",
-  },
-  {
-    id: "3ac68afc-c605-48d3-a4f8-fbd91aa97f63",
-    title: "Second Item",
-  },
-  {
-    id: "58694a0f-3da1-471f-bd96-145571e29d72",
-    title: "Third Item",
-  },
+  REFERENCE:'0',
+  TYPEID:'A#FakeAnime',
+  name:'IamAFake',
+  bio:'bad day for me',
+  image:'',
+},{
+  REFERENCE:'0',
+  TYPEID:'A#FakeAnime',
+  name:'IamAFake',
+  bio:'bad day for me',
+  image:'',
+},
+{
+  REFERENCE:'0',
+  TYPEID:'A#FakeAnime',
+  name:'IamAFake',
+  bio:'bad day for me',
+  image:'',
+},
+{
+  REFERENCE:'0',
+  TYPEID:'A#FakeAnime',
+  name:'IamAFake',
+  bio:'bad day for me',
+  image:'',
+}
 ];
 
-const Item = ({ item, onPress, backgroundColor, textColor }) => (
-  <TouchableOpacity onPress={onPress} style={[styles.item, backgroundColor]}>
-    <Text style={[styles.title, textColor]}>{item.title}</Text>
-  </TouchableOpacity>
-);
 
-const App = () => {
-  const [selectedId, setSelectedId] = useState(null);
+const SearchList=(props:IProps)=> {
 
-  const renderItem = ({ item }) => {
-    const backgroundColor = item.id === selectedId ? "#6e3b6e" : "#f9c2ff";
-    const color = item.id === selectedId ? 'white' : 'black';
+  const [animeArr, setAnime] = useState<IAnime[]>(dummyAnime);     
+  const [refreshing, setRefreshing] = useState(false); 
+  const navigation = useNavigation(); 
 
-    return (
-      <Item
-        item={item}
-        onPress={() => setSelectedId(item.id)}
-        backgroundColor={{ backgroundColor }}
-        textColor={{ color }}
-      />
-    );
-  };
+  useEffect(() =>
+  {getAnimeBySearch()
+  },[navigation])
+
+  const getAnimeBySearch = useCallback( async () =>
+  {
+    axios.get<any[]>('/Anime/search/'.replace('#','_'))
+    .then(response =>
+      {
+      response.data && response.data.forEach((data) =>
+         { let anime =
+          {
+            REFERENCE:'0',
+            TYPEID:'',
+            name:'',
+            bio:'',
+            image:''
+          };
+          anime.REFERENCE=data.REFERENCE;
+          anime.TYPEID=data.TYPEID;
+          anime.name=data.name;
+          anime.bio=data.bio;
+          anime.image=data.image;
+
+          animeArr.push(anime);
+          
+
+        }
+        )    
+        setAnime(animeArr)
+  }
+  )
+  }, [refreshing]);
+function getThere(){
+  console.log('hello');
+}
 
   return (
-    <SafeAreaView style={styles.container}>
-      <FlatList
-        data={DATA}
-        renderItem={renderItem}
-        keyExtractor={(item) => item.id}
-        extraData={selectedId}
-      />
-    </SafeAreaView>
+    <View style={styles.container}>
+       
+       {/* //only renders a small amount then adds as you scroll */}
+       
+        <FlatList
+        numColumns={1}
+        keyExtractor={(item)=>item.TYPEID}
+            data={animeArr}
+            renderItem={({item})=>(
+              <TouchableOpacity onPress={getThere}>
+                <Text style={styles.item}>{item.name}</Text>
+                </TouchableOpacity>
+
+            )}
+        />
+      
+
+        {/* //loads all items before showing on screen */}
+        {/* <ScrollView>
+        {people.map(item=>(
+                <View key={item.key}>
+                    <Text style={styles.item}>{item.name}</Text>
+                    </View>
+        ))}
+    </ScrollView> */}
+
+    </View>
   );
-};
+
+    }
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    marginTop: StatusBar.currentHeight || 0,
+    backgroundColor: '#fff',
+    paddingTop:40,
+    paddingHorizontal:20,
+    //alignItems: 'center',
+   // justifyContent: 'center',
   },
-  item: {
-    padding: 20,
-    marginVertical: 8,
-    marginHorizontal: 16,
-  },
-  title: {
-    fontSize: 32,
-  },
-});
+  item:{
+      margin:23,
+      padding:20,
+      backgroundColor:'pink',
+      fontSize:24,
 
-export default App;
+
+  }
+  
+});
+export default SearchList;
