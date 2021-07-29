@@ -11,10 +11,16 @@ const Rating = () =>{
     const filledStar='https://raw.githubusercontent.com/tranhonghan/images/main/star_filled.png';
     const emptyStar='https://raw.githubusercontent.com/tranhonghan/images/main/star_corner.png';
     let currPage="A#Dragonball"
-    
+    /*
     useEffect(() =>
     {rateAnime()},[])
     const rateAnime = async () =>{
+        axios.get('/Anime/'+currentPage.replace('#','_'))
+        .then(response =>{);
+       
+       
+       
+       
         axios.put('Anime', {
           
             parentID:currPage,
@@ -24,6 +30,9 @@ const Rating = () =>{
           .then(function (response) {
             console.log(response);
           })
+    }*/const rateAnime =()=>{
+        console.log('rated');
+
     }
     
     

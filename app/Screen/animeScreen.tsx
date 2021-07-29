@@ -14,12 +14,13 @@ const newAnime:IAnime = {
   name:'IamAFake',
   bio:'bad day for me',
   image:'',
+  rating:1,
 }
 
 export default function AnimeScreen() {
   const [anime,setAnime] = useState<IAnime>(newAnime);
   const currentPage = "A#DragonBallZ";
-
+  
    
     useEffect(() =>
     {
@@ -30,6 +31,7 @@ export default function AnimeScreen() {
     const getAnime = async () =>
     {axios.get('/Anime/'+currentPage.replace('#','_'))
       .then(response =>{setAnime(response.data)});
+      
     }
   
   return (
