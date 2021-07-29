@@ -1,9 +1,7 @@
 import { StatusBar } from 'expo-status-bar';
 import React,{useState} from 'react';
 import { StyleSheet, Text, View, Image, Button } from 'react-native';
-import Button_animeComments from '../Components/Anime/Button_animeComments';
-import Button_animeFavorite from '../Components/Anime/Button_animeFavorite';
-import Button_animeRating from '../Components/Anime/Button_animeRating';
+import Rating from './Rating'
 import {Storage} from 'aws-amplify'
 import { useEffect } from 'react';
 import axios from '../../axiosConfig';
@@ -41,14 +39,15 @@ export default function AnimeScreen() {
         // source={require('../assets/dbz.jpg')}/>
         source={{uri: `https://scouter-revature-project1.s3.amazonaws.com/public/${anime.image}`}}/> 
         
-     
+
     
         <Text style={styles.title}>{anime.TYPEID.split('#')[1]}</Text>
         {/* <Text style={styles.rating}></Text> */}
+        <Rating/>
         <Text style={styles.content}>{anime.bio}</Text>
     
     <View style={styles.lowerMenu}>
-    <SearchList/>
+   
 
     </View>
   </View>
