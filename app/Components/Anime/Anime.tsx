@@ -1,6 +1,6 @@
 import React from "react";
 import { View, Text, ScrollView, Image, StyleSheet } from "react-native";
-const Anime = () => {
+const Anime = () => { 
     return(
         <ScrollView contentContainerStyle = {styles.container}>
             <View style = {styles.top}>
