@@ -3,13 +3,22 @@ import React,{ useEffect, useState } from "react";
 import { ScrollView, TextInput, View, Text, Image, StyleSheet, Platform } from "react-native"
 import { Button } from "react-native-elements/dist/buttons/Button";
 import * as ImagePicker from 'expo-image-picker'
+import { useSelector } from "react-redux";
+import { IRootState } from "../../redux/State";
+import { Storage } from 'aws-amplify'
+import axiosConfig from "../../../axiosConfig";
 
 const editBio = () =>
 {
-    const [image, setImage] = useState(undefined);
-    const [greeting, setGreeting] = useState("Hi! My name is 2Chainz!");
-    const [descrip, setDescrip] = useState("I like to watch the birdz");
+    const [image, setImage] = useState('key');
+    const [user, setUser] = useState<any>({})
+    const [greeting, setGreeting] = useState('');
+    const [descrip, setDescrip] = useState('');
     const navigation = useNavigation();
+    const currentUser = useSelector((state: IRootState) =>
+    {
+        return state.sites.ILogin.username;
+    })
 
     useEffect(() => {
         (async () => {
@@ -20,7 +29,16 @@ const editBio = () =>
             }
           }
         })();
-      }, []);
+        loadUser();
+    }, []);
+    
+    const loadUser = () =>
+    {
+        axiosConfig.get('User/U_' + currentUser).then((response) =>
+        {
+            setUser(response.data);
+        })
+    }
 
       const pickImage = async () => {
         let result:any = await ImagePicker.launchImageLibraryAsync({
@@ -39,13 +57,39 @@ const editBio = () =>
 
     const submit = () =>
     {
-        navigation.navigate('User');
+        const Stamp = new Date().getTime();
+        fetch(image).then((response) =>
+        {
+           
+            console.log('Res', response);
+            const access = { level: "public" };
+            response.blob().then(blob =>
+            {
+                Storage.put(`${currentUser}/${Stamp}.jpg`, blob, access);
+                    
+            })
+        });
+        axiosConfig.put('User', {
+            userID: "U#"+currentUser,
+            REFERENCE: "0",
+            image: `${currentUser}/${Stamp}.jpg`,
+            bio: {
+                greeting,
+                description: descrip
+            },
+            watchlist: user.watchlist || [],
+            followed: user.followed || [],
+            favorites: user.favorites || [],
+        })
+        navigation.navigate('User', {
+            
+        });
     }
     return(
         <ScrollView style = {styles.background}>
-            <Text style={styles.username}>Username</Text>
+            <Text style={styles.username}>{currentUser}</Text>
             <Button title="submit" onPress={submit}/>
-        {image ? <Image
+        {image !== 'key'? <Image
                 style={styles.profilePicture}
                 source={{ uri: image }}
             /> :

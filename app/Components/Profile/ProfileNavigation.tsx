@@ -1,3 +1,4 @@
+import { useNavigation } from '@react-navigation/native';
 import * as React from 'react';
 import { useEffect } from 'react';
 import { useState } from 'react';
@@ -43,16 +44,19 @@ export default function ProfilePage() {
     { key: 'third', title: 'Watchlist'},
     { key: 'fourth', title: 'Followed'}
   ]);
-  const [userInfo, setUserInfo] = useState<any>({});
+  const [userInfo, setUserInfo] = useState<any>({ bio: { greeting: '', description: '' }, followed: [] });
+  let navigation = useNavigation();
   const page = useSelector((state: IRootState) =>
   {
     return state.sites.IPageState.parentID;
   })
-  let userPage = page.split('#');
+  
+  let userPage = page.replace('#','_');
   const loadUserInfo = () =>
   {
-    axiosConfig.get(`User/${userPage[1]}`).then((response) =>
+    axiosConfig.get(`User/${userPage}`).then((response) =>
     {
+      console.log('Response: ', response.data);
       setUserInfo(response.data);
     })
   }
@@ -60,10 +64,10 @@ export default function ProfilePage() {
   useEffect(() =>
   {
     loadUserInfo();
-  }, []);
+  }, [navigation]);
   //Route to each component
 const FirstRoute = () => (
-  <Bio bio={userInfo.bio}/>
+  <Bio bio={userInfo.bio} image={userInfo.image} following={userInfo.followed.includes(page)} user={userInfo} name={page.split('#')[1]}/>
 );
 
 const SecondRoute = () => (

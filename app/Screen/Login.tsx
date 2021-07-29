@@ -10,13 +10,16 @@ import { IRootState } from "../redux/State";
 
 
 const Login = () =>
-{
+{ 
     let navigation = useNavigation();
     //component states
     const [img, setImg] = useState<any>(<View style = {styles.profImg}>
         <Image
-            style={styles.image}
-            source={require('../assets/icon.png')} />
+          
+            source={require('../assets/scouter.png')} 
+           
+            />
+       
             
     </View>);
     const [emailComp, setEmailComp] = useState<any>(<View/>);
@@ -103,7 +106,7 @@ const Login = () =>
 
 
     //Check if someone is logged in
-    const checkLogin = () =>
+    const checkLogin = async() =>
     {
         if (currentUser !== 'Guest') {
             //Switch page info
@@ -264,6 +267,11 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
         position: 'relative',
         color: 'white',
+    },
+    logo:{
+        alignSelf:'auto',
+      
+        
     }
 
 
