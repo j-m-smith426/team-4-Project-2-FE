@@ -11,6 +11,9 @@ import { useCallback } from 'react';
 import { Auth } from 'aws-amplify';
 import { useSelector } from 'react-redux';
 import { IRootState } from '../redux/State';
+import axiosConfig from '../../axiosConfig';
+import { useNavigation } from '@react-navigation/native';
+import LoadPosts from './LoadPosts';
 
 
 
@@ -30,85 +33,21 @@ import { IRootState } from '../redux/State';
 
 const PostScreen = () =>
 {
-    const [refreshing, setRefreshing] = useState(false);
-    const [postArr,setPostArr] = useState<IPost[]>()
+    
     const [user,currentPage] = useSelector((state: IRootState) =>
     {
         return [state.sites.ILogin.username, state.sites.IPageState.parentID];
     });
-    useEffect(() =>
-    {
-        getPosts();
-    }, [])
-    const getPosts = useCallback(async () =>
-    {
-        console.log('currentPage',currentPage)
-        setRefreshing(true);
-        let newArray: IPost[] = [];
-        let [pageType, page] = currentPage.split('#');
-        axios.get<any[]>(`Post/Page/${pageType}_${page}`, {
-            
-        }).then(response =>
-        {
-            
-           //console.log('Response:',response.data);
-            //construct each post
-            response.data.forEach((data) =>
-            {
-                let post: IPost = {
-                    username: '',
-                    userProfilePic: '',
-                    image: '',
-                    Contents: '',
-                    timestamp: 0,
-                    postID: ''
+    let navigation = useNavigation();
     
-                    
-                };
-                let name: string = data.REFERENCE.split('#')[0]
-                // axios.get<any>(`User/${name}`, {
-                // }).then(userResponse =>
-                // {
-                //     let userData = userResponse.data
-                post.userProfilePic = 'l';//userData.image
-                // })
-                post.username = name;
-                post.postID = data.REFERENCE;
-                post.Contents = data.content;
-                post.timestamp = data.Stamp;
-                post.image = data.image;
-               
-                    newArray.push(post);
-            });
-            setPostArr(newArray);
-            setRefreshing(false);
-        });
-       
-        
-        
-    }, [refreshing]);
-    console.log('Result',postArr);
+    //console.log('Result',postArr);
     return (
         <ScreenWrapper>
+            <View style={styles.item}>
+
             <AddPost username={user} userProfilePic="pic"/>
-            <FlatList
-                //viewabilityConfig={{viewAreaCoveragePercentThreshold: 100}}
-                data={postArr}
-                renderItem={
-                    ({ item }) => (
-                        <View style={styles.item}>
-                            <Post username={item.username}
-                                userProfilePic={item.userProfilePic}
-                                Contents={item.Contents}
-                                image={item.image}
-                                timestamp={item.timestamp}
-                                postID={item.postID} />
-                        </View>
-                    )}
-                keyExtractor={item => item.postID}
-                // onEndReachedThreshold={0.0}
-                refreshControl={<RefreshControl refreshing={refreshing} onRefresh={getPosts} />}
-                />
+            </View>
+            <LoadPosts page={currentPage}/>
 
         </ScreenWrapper>
         

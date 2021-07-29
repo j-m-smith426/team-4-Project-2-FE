@@ -17,6 +17,8 @@ import addAnimeScreen from '../Screen/addAnimeScreen';
 import editProfile from '../Components/Profile/editProfile';
 import { useSelector } from 'react-redux';
 import { IRootState } from '../redux/State';
+import CommentScreen from '../Screen/CommentScreen';
+import CommentNav from '../Screen/CommentNav';
 interface RouterProps
 {
     children?: any
@@ -44,6 +46,7 @@ const MainRoutes: React.FC<RouterProps> = (props:RouterProps) =>
                 {userType === 'Admin' && <Drawer.Screen name="AnimeAdd" component={addAnimeScreen} />}
                 <Drawer.Screen name="editProfile" component={editProfile} />
                 <Drawer.Screen name="User" component={ProfilePage} />
+                <Drawer.Screen name="Comment" component={CommentNav} />
             </Drawer.Navigator>
                 </NavigationContainer>
         

@@ -11,11 +11,12 @@ export enum CreatePostActions {
 
 export enum SwitchPageAction {
   UPDATE = "update page",
+  VIEW_POST = "view post",
 }
 
 export interface ISwitchPageActions {
   type: SwitchPageAction;
-  payload: { name: string; parentID: string };
+  payload: { name: string; parentID: string; postID: string };
 }
 
 export interface ILoginActions {

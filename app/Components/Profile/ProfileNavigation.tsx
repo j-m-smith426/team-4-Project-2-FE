@@ -42,16 +42,18 @@ export default function ProfilePage() {
     { key: 'second', title: 'Posts' },
     { key: 'third', title: 'Watchlist'},
   ]);
-  const [userInfo, setUserInfo] = useState<any>({});
+  const [userInfo, setUserInfo] = useState<any>({bio:{greeting:'',description:''}});
   const page = useSelector((state: IRootState) =>
   {
     return state.sites.IPageState.parentID;
   })
-  let userPage = page.split('#');
+  
+  let userPage = page.replace('#','_');
   const loadUserInfo = () =>
   {
-    axiosConfig.get(`User/${userPage[1]}`).then((response) =>
+    axiosConfig.get(`User/${userPage}`).then((response) =>
     {
+      console.log('Response: ', response.data);
       setUserInfo(response.data);
     })
   }
@@ -62,7 +64,7 @@ export default function ProfilePage() {
   }, []);
   //Route to each component
 const FirstRoute = () => (
-  <Bio bio={userInfo.bio}/>
+  <Bio bio={userInfo.bio} image={userInfo.image}/>
 );
 
 const SecondRoute = () => (

@@ -21,14 +21,18 @@ let newAnime:IAnime = {
     genres: [],
     image:''
 }
-interface Iprops {
+interface Iprops
+{
+    image: string,
     bio: {
         greeting: string,
         description:string
 }
 }
 
-const Bio = (props:Iprops) => {
+const Bio = (props: Iprops) =>
+{
+    console.log(props);
    /*
     const [anime, setAnime] = useState<any>(newAnime);
     useEffect((), => {
@@ -61,7 +65,7 @@ const Bio = (props:Iprops) => {
         {/* <Text style = {styles.username}>Username</Text> */}
         <Image
             style = {styles.profilePicture}
-            source = {require('../../assets/favicon.png')}
+            source = {{uri: `https://scouter-revature-project1.s3.amazonaws.com/public/${props.image}`}}
         />
             <Text style={styles.intro}>{props.bio.greeting}</Text>
         <View style={styles.bio}>

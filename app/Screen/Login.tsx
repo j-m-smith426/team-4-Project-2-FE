@@ -103,7 +103,7 @@ const Login = () =>
 
 
     //Check if someone is logged in
-    const checkLogin = () =>
+    const checkLogin = async() =>
     {
         if (currentUser !== 'Guest') {
             //Switch page info
