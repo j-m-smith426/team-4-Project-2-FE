@@ -1,5 +1,6 @@
 import React from 'react';
 import { useWindowDimensions, View, StyleSheet, Dimensions, StatusBar } from 'react-native';
+import colors from '../config/colors';
 
 const DEVICEHEIGHT = Dimensions.get('screen').height;
 const STATUSBARHEIGHT = StatusBar.currentHeight || 24;
@@ -21,8 +22,8 @@ const ScreenWrapper = ({ children }) =>
 const styles = StyleSheet.create({
     wrapper: {
         flex:1,
-        height:DEVICEHEIGHT- STATUSBARHEIGHT
-
+        height: DEVICEHEIGHT - STATUSBARHEIGHT,
+        backgroundColor: colors.background
     }
 });
 
