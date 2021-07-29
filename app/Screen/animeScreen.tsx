@@ -8,6 +8,7 @@ import {Storage} from 'aws-amplify'
 import { useEffect } from 'react';
 import axios from '../../axiosConfig';
 import IAnime from '../model/Anime'
+import SearchList from './SearchList'
 
 const newAnime:IAnime = {
   REFERENCE:'0',
@@ -47,7 +48,7 @@ export default function AnimeScreen() {
         
    
     <View style={styles.lowerMenu}>
-
+        <SearchList/>
     
       
     </View>
