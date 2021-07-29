@@ -19,6 +19,10 @@ const LoadPosts = (props:IProps) =>
     const [postArr, setPostArr] = useState<IPost[]>();
     const [profilepic, setProfilePic] = useState('key');
     const [followers, setFollowers] = useState<any[]>([]);
+    const currentUser = useSelector((state: IRootState) =>
+    {
+        return state.sites.ILogin.username;
+    })
     const navigation = useNavigation();
     useEffect(() =>
     {
@@ -29,6 +33,11 @@ const LoadPosts = (props:IProps) =>
     const getPosts = useCallback(async () =>
     {
         setRefreshing(true);
+        
+        axiosConfig.get('User/U_' + currentUser).then((response) =>
+        {
+            setFollowers(response.data.followed);
+        })
         let newArray: IPost[] = [];
         axiosConfig.post<any[]>(`Post/Page/${props.page.replace('#','_')}`, {
             followArray: followers

@@ -22,7 +22,11 @@ export default function AnimeScreen() {
 
    
     useEffect(() =>
-    {getAnime()},[])
+    {
+      let isMounted = true;
+      isMounted && getAnime()
+      return() => {isMounted = false}
+    }, [])
     const getAnime = async () =>
     {axios.get('/Anime/'+currentPage.replace('#','_'))
       .then(response =>{setAnime(response.data)});

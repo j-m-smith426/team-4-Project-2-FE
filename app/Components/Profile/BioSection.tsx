@@ -71,13 +71,23 @@ const Bio = (props: Iprops) =>
     }
     getAnime();
     */
-    const addFollow = () =>
+    const addFollow = async () =>
     {
+        props.user.followed.push(props.name);
+        axiosConfig.put('User', {
+            ...props.user
+        })
         setFollowing(true);
     }
 
-    const unFollow = () =>
+    const unFollow = async() =>
     {
+        let temp:any[] = []
+        props.user.followed.forEach((name:any) => {if(name !== props.name){temp.push(name)}})
+        props.user.followed = temp;
+        axiosConfig.put('User', {
+            ...props.user
+        })
         setFollowing(false);
     }
     const followButton = () =>
