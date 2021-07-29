@@ -52,7 +52,7 @@ export default function AnimeScreen() {
         <Text style={styles.content}>{anime.bio}</Text>
     
     <View style={styles.lowerMenu}>
-    <SearchList/>
+    
 
     </View>
   </View>

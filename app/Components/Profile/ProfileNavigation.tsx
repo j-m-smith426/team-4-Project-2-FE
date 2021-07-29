@@ -62,7 +62,9 @@ export default function ProfilePage() {
 
   useEffect(() =>
   {
-    loadUserInfo();
+    let isMounted = true;
+      isMounted && loadUserInfo();
+    return() => {isMounted = false}
   }, [navigation]);
   //Route to each component
 const FirstRoute = () => (

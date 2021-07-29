@@ -12,7 +12,9 @@ const Watchlist = (props:Iprops) =>
     const [favArr, setFavArr] = useState<any[]>([]);
     useEffect(() =>
     {
-    setFavArr(props.list)
+        let isMounted = true;
+        isMounted && setFavArr(props.list)
+        return() => {isMounted = false}
 },[])
     return(
         <FlatList

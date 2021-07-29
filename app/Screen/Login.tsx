@@ -39,8 +39,10 @@ const Login = () =>
     })
     useEffect(() =>
     {
-        checkLogin();
-    }, []);
+        let isMounted = true;
+        isMounted && checkLogin();
+        return() => {isMounted = false}
+    }, [navigation]);
     const onUserChange = (name:string) => {
         console.log("Username is: " + username);
         setUsername(name);
@@ -72,11 +74,11 @@ const Login = () =>
                dispatch({
                    type: SwitchPageAction.UPDATE,
                    payload: {
-                    PageName: 'Post',
+                    PageName: 'Home',
                     parentID: `U#${cogUser.getUsername()}`
                 }
             })
-               navigation.navigate('Post');
+               navigation.navigate('Home');
            }
             
        
@@ -113,11 +115,11 @@ const Login = () =>
             dispatch({
                 type: SwitchPageAction.UPDATE,
                 payload: {
-                 PageName: 'Post',
+                 PageName: 'Home',
                  parentID: `U#${currentUser}`
              }
          })
-            navigation.navigate('Post');
+            navigation.navigate('Home');
         }
     }
 

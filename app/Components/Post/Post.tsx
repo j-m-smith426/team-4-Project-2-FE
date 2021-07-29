@@ -43,8 +43,12 @@ const Post = (props: IPost) =>
     const navigation = useNavigation();
     useEffect(() =>
     {
-        setHasImage(Boolean(props.image !== 'key'));
-        getProfPic();
+        let isMounted = true;
+        if (isMounted) {
+            setHasImage(Boolean(props.image !== 'key'));
+            getProfPic();
+        }
+        return() => {isMounted = false}
     }, [navigation]);
 
     const getProfPic = useCallback(async() =>
@@ -54,7 +58,7 @@ const Post = (props: IPost) =>
         }).then(userResponse =>
             {
             let userData = userResponse.data;
-            console.log('ProfileIMG: ', userData.image);
+            //Profile Pic
                 setProfilePic(userData.image);
             })
         },[props.username])
@@ -76,7 +80,7 @@ const Post = (props: IPost) =>
         
         <View style={styles.post}>
 
-            
+                {console.log(props.image)}
                 <View style={styles.profImg}>
                     <ProfileImg username={props.username} profileImg={profilepic} />
                 </View>

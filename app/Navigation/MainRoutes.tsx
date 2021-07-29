@@ -19,6 +19,7 @@ import { useSelector } from 'react-redux';
 import { IRootState } from '../redux/State';
 import CommentScreen from '../Screen/CommentScreen';
 import CommentNav from '../Screen/CommentNav';
+import mainScreen from '../Screen/mainScreen';
 interface RouterProps
 {
     children?: any
@@ -47,6 +48,7 @@ const MainRoutes: React.FC<RouterProps> = (props:RouterProps) =>
                 <Drawer.Screen name="editProfile" component={editProfile} />
                 <Drawer.Screen name="User" component={ProfilePage} />
                 <Drawer.Screen name="Comment" component={CommentNav} />
+                <Drawer.Screen name="Home" component={mainScreen} />
             </Drawer.Navigator>
                 </NavigationContainer>
         
