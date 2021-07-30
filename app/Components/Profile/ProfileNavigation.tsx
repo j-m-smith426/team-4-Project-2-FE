@@ -14,29 +14,9 @@ import Following from './Following';
 import Favorites from './Favorites';
 import IUser from '../../model/User';
 
-//Route to each component
-// const FirstRoute = () => (
-//   <Bio/>
-// );
-
-// const SecondRoute = () => (
-//   // <Favorites/>
-//   <PostScreen />
-// );
-
-// const ThirdRoute = () => (
-//   <Watchlist/>
- 
-// );
-
-// const renderScene = SceneMap({
-//   first: FirstRoute,
-//   second: SecondRoute,
-//   third: ThirdRoute,
-// });
 
 export default function ProfilePage() {
-  //const layout = useWindowDimensions();
+  
 
   //key value pairs for the header so that the route knows what to look for
   const [index, setIndex] = React.useState(0);
@@ -46,7 +26,21 @@ export default function ProfilePage() {
     { key: 'third', title: 'Favorite'},
     { key: 'fourth', title: 'Follow'}
   ]);
-  const [userInfo, setUserInfo] = useState<IUser>();
+  let newUser: IUser = {
+    REFERENCE: '0',
+    TYPEID: '',
+    name: '',
+    bio: {
+        greeting: '',
+        description:''
+    },
+    image: 'key',
+    watchlist: [],
+    followed: [],
+    favorites: []
+
+}
+  const [userInfo, setUserInfo] = useState<IUser>(newUser);
   let navigation = useNavigation();
   const page = useSelector((state: IRootState) =>
   {
@@ -80,7 +74,7 @@ const SecondRoute = () => (
 );
 
 const ThirdRoute = () => (
-  <Favorites list={userInfo.fa}/>
+  <Favorites list={userInfo.favorites}/>
  
 );
 
