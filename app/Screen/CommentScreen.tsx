@@ -96,7 +96,7 @@ const CommentScreen = () =>
                 image={parentPost.image}
                 timestamp={parentPost.timestamp}
                 postID={parentPost.postID}
-                parentID={parentPost.parentID }/>
+                parentID={parentPost.parentID}/>
             <AddComment username={user} userProfilePic="pic" />
                 </View>
             </ScreenWrapper>
@@ -105,7 +105,6 @@ const CommentScreen = () =>
 const styles = StyleSheet.create({
     container: {
       //flex: 1,
-      backgroundColor: '#fff',
       alignItems: 'center',
       justifyContent: 'space-evenly',
   
