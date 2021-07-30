@@ -122,7 +122,7 @@ export default function addAnimeScreen()
           
 
           <Button title='Submit' onPress={submitPage} />
-          <Button title='Delete' onPress={deletePage} />
+          <Button title='Delete' onPress={deletePage} color = "red"/>
           
   </View>
   </TouchableWithoutFeedback>
