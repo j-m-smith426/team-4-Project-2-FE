@@ -22,6 +22,8 @@ import CommentScreen from '../Screen/CommentScreen';
 import CommentNav from '../Screen/CommentNav';
 import mainScreen from '../Screen/mainScreen';
 import SearchList from '../Screen/SearchList';
+import AnimePage from '../Components/Anime/AnimeNavigation'
+
 interface RouterProps
 {
     children?: any
@@ -47,7 +49,7 @@ const MainRoutes: React.FC<RouterProps> = (props:RouterProps) =>
                 <Drawer.Screen name="Home" component={mainScreen} />
                 <Drawer.Screen name="Post" component={PostScreen} />
 
-                <Drawer.Screen name="Anime" component={AnimeScreen} />
+                <Drawer.Screen name="Anime" component={AnimePage} />
                 {userType === 'Admin' && <Drawer.Screen name="AnimeAdd" component={addAnimeScreen} />}
                 <Drawer.Screen name="editProfile" component={editProfile} />
 

@@ -51,7 +51,7 @@ const Sidebar = (props: any) => {
         flex:1,
         borderRadius:1000,
         backgroundColor:colors.buttonPrimary,
-        textAlignVertical:true
+        
 
     },
     profImg: {
