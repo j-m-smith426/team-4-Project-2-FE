@@ -1,5 +1,5 @@
 import React, { ChangeEvent, useState,useEffect } from "react";
-import { Text, View, StyleSheet, Image, TextInput, TouchableOpacity, Pressable, GestureResponderEvent } from "react-native";
+import { Text, View, StyleSheet, Image, TextInput, TouchableOpacity, Pressable, GestureResponderEvent, KeyboardAvoidingView, Platform } from "react-native";
 import colors from "../config/colors";
 import { useNavigation } from "@react-navigation/core";
 import { useDispatch, useSelector } from "react-redux";
@@ -68,7 +68,7 @@ const Login = () =>
                type:LoginActions.LOGIN,
                payload:{
                    name: cogUser.getUsername(),
-                  type:  cogUser.getUsername() === 'newUser' ? 'Admin': 'user'
+                   type: cogUser.getUsername() === 'newUser' ? 'Admin': 'user'
                }
            })
                dispatch({
@@ -125,6 +125,10 @@ const Login = () =>
 
 
     return (
+        <KeyboardAvoidingView
+        behavior={Platform.OS === "ios" ? "padding" : "height"}
+        style={styles.container}
+        >
         <View style = {styles.container}>
             {img}
             <View style= {styles.main}>
@@ -152,7 +156,7 @@ const Login = () =>
             </View>
             <View style = {styles.filler}/>
         </View>
-
+        </KeyboardAvoidingView>
 
     );
     async function toSignup(){
@@ -164,7 +168,8 @@ const Login = () =>
                 autoCompleteType = "email"
                 placeholder="Email"/>
         </View>);
-        setSignup(<TouchableOpacity>
+        setSignup(
+        <TouchableOpacity>
             <Text style={styles.linkText} onPress={toLogin}>Log in</Text>
         </TouchableOpacity>);
         setLoginTrue(false);
@@ -176,7 +181,8 @@ const Login = () =>
                 source={require('../assets/icon.png')} />
         </View>);
         setEmailComp(<View/>);
-        setSignup(                <TouchableOpacity >
+        setSignup(                
+        <TouchableOpacity >
             <Text style={styles.linkText} onPress={toSignup}>Sign Up</Text>
         </TouchableOpacity>);
         setLoginTrue(true);
@@ -226,6 +232,7 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
         alignItems: "center",
     },
+
     inputView: {
         backgroundColor: colors.background,
         borderRadius: 1000,
@@ -234,8 +241,7 @@ const styles = StyleSheet.create({
         height:"20%",
         marginBottom: "2%",
         alignItems: "center",
-        
-      },
+    },
       
     TextInput: {
         height: '90%',

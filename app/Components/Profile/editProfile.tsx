@@ -99,17 +99,17 @@ const editBio = () =>
       <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
             <View style = {styles.background}>
             <Text style={styles.username}>{currentUser}</Text>
-        {image !== 'key'? <Image
+            {image !== 'key'? <Image
                 style={styles.profilePicture}
                 source={{ uri: image }}
             /> :
             <Image
-            style={styles.profilePicture}
-            source={{
-                //require('https://www.seekpng.com/png/detail/245-2454602_tanni-chand-default-user-image-png.png'
-                uri: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTypACuX8ygmzipbD197uPBv40pqsvU8Egh-_Oo_xqg2OQqZbL1Cm-5XRxVcF3QjaocHCg&usqp=CAU',    
-            }}
-                />
+                style={styles.profilePicture}
+                source={{
+                    //require('https://www.seekpng.com/png/detail/245-2454602_tanni-chand-default-user-image-png.png')}
+                    uri: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTypACuX8ygmzipbD197uPBv40pqsvU8Egh-_Oo_xqg2OQqZbL1Cm-5XRxVcF3QjaocHCg&usqp=CAU',    
+                }}
+            />
                                
             }
             <Button title="Choose Photo" onPress={pickImage}/>
