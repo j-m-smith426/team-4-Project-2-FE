@@ -19,20 +19,6 @@ import LoadPosts from './LoadPosts';
 
 
 
-
-// const postArr: IPost[] = [
-//     {
-//         username:'user1', userProfilePic:'yes', Contents:'There once was a little bunny that ran around', timestamp: 5, postID:'001'
-//     },
-//     {
-//        username:'user2', userProfilePic:'yes', Contents:'He was very cute', image:'yes', timestamp:5, postID:'002',
-//     },
-//     {
-//        username:'user3', userProfilePic:'yes', Contents:'He was very cute', image:'yes', timestamp:5, postID:'003',
-//     }
-// ]
-
-
 const PostScreen = () =>
 {
     
@@ -42,7 +28,7 @@ const PostScreen = () =>
     });
     let navigation = useNavigation();
     
-    //console.log('Result',postArr);
+    //console.log('Page',currentPage);
     return (
         <ScreenWrapper>
             <View style={styles.item}>

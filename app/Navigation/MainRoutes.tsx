@@ -19,6 +19,7 @@ import { useSelector } from 'react-redux';
 import { IRootState } from '../redux/State';
 import CommentScreen from '../Screen/CommentScreen';
 import CommentNav from '../Screen/CommentNav';
+import mainScreen from '../Screen/mainScreen';
 interface RouterProps
 {
     children?: any
@@ -41,6 +42,7 @@ const MainRoutes: React.FC<RouterProps> = (props:RouterProps) =>
                         headerShown:user !== 'Guest'
                       })}>
                 {user === 'Guest' && <Drawer.Screen name="Login" component={Login} />}
+                <Drawer.Screen name="Home" component={mainScreen} />
                 <Drawer.Screen name="Post" component={PostScreen} />
                 <Drawer.Screen name="Anime" component={Anime} />
                 {userType === 'Admin' && <Drawer.Screen name="AnimeAdd" component={addAnimeScreen} />}

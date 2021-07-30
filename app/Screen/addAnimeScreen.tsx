@@ -25,15 +25,21 @@ export default function addAnimeScreen()
   //   return state.sites.IPageState.parentID.split("#")[1];
   // })
 
-    useEffect(() => {
-        (async () => {
-          if (Platform.OS !== 'web') {
-            const { status } = await ImagePicker.requestMediaLibraryPermissionsAsync();
-            if (status !== 'granted') {
-              alert('Sorry, we need camera roll permissions to make this work!');
-            }
+  useEffect(() =>
+  {
+    let isMounted = true;
+    if (isMounted) {
+      
+      (async () => {
+        if (Platform.OS !== 'web') {
+          const { status } = await ImagePicker.requestMediaLibraryPermissionsAsync();
+          if (status !== 'granted') {
+            alert('Sorry, we need camera roll permissions to make this work!');
           }
-        })();
+        }
+      })();
+    }
+    return () => { isMounted = false };
       }, []);
 
       const pickImage = async () => {
