@@ -1,12 +1,61 @@
-import React, {useState} from "react";
+import React, {useEffect, useState} from "react";
 import { View, Text, ScrollView, Image, StyleSheet, Touchable, TouchableOpacity } from "react-native";
 import { AntDesign } from "@expo/vector-icons";
 import Rating from '../../Screen/Rating'
+import { useSelector } from "react-redux";
+import { IRootState } from "../../redux/State";
+import axiosConfig from "../../../axiosConfig";
+import IAnime from "../../model/Anime";
+import IUser from "../../model/User";
+const newAnime:IAnime = {
+    REFERENCE:'0',
+    TYPEID:'A#FakeAnime',
+    name:'IamAFake',
+    bio:'bad day for me',
+    image:'',
+    rating:1,
+  }
 const Anime = () => {
 
     const [clicked, setClicked] = useState(false);
-    const handleStarClick = () => {
+    const [anime, setAnime] = useState(newAnime);
+    const [currentPage, currentUser] = useSelector((state: IRootState) =>
+    {
+        return [state.sites.IPageState.parentID, state.sites.ILogin.username];
+    })
+    useEffect(() =>
+    {
+      let isMounted = true;
+      isMounted && getAnime()
+      return() => {isMounted = false}
+    }, [])
+    const getAnime = async () =>
+    {axiosConfig.get('/Anime/'+currentPage.replace('#','_'))
+      .then(response =>{setAnime(response.data)});
+     
+    }
+    
+    const handleStarClick = () =>
+    {
         console.log("Clicked");
+        axiosConfig.get('User/' + currentUser).then((response) =>
+        {
+            let userData: IUser = response.data;
+            let emptyArr: string[] = [];
+            let newFavArr:string[] = userData.favorites;
+            if (newFavArr.includes(anime.TYPEID + '#' + anime.image)) {
+                newFavArr.forEach((item) =>
+                {
+                    if (item !== anime.TYPEID + '#' + anime.image) {
+                        emptyArr.push(item);
+                    }
+                })
+            } else {
+            emptyArr.push(anime.TYPEID + '#' + anime.image);
+            }
+            userData.favorites = emptyArr;
+            axiosConfig.put('User', userData);
+        })
         setClicked(!clicked);
     };
 
@@ -16,13 +65,17 @@ const Anime = () => {
                 <Image
                     style = {styles.animePicture}
                     source={{
-                        uri: 'https://www.anime-planet.com/images/anime/covers/fate-zero-3626.jpg'
+                        uri: `https://scouter-revature-project1.s3.amazonaws.com/public/${anime.image}`,
+                        method: 'GET',
+                        cache: 'reload',
+                        headers: { Pragma: 'no-cache' },
+                    
                     }}
                 />
             </View>
             <View style = {styles.information}>
                 <View style = {styles.headInfo}>
-                    <Text style={styles.title}> Dragonball Z</Text>
+                    <Text style={styles.title}> {anime.TYPEID.split('#')[1]}</Text>
                     
                     <TouchableOpacity onPress = {() => handleStarClick()}>
                         <AntDesign name = "star" size = {34} color = {clicked? "gold":"grey"}/>
