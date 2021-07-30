@@ -5,11 +5,12 @@ import axios from '../../axiosConfig'
 import { getTokenSourceMapRange } from 'typescript';
 import { useCallback } from 'react';
 import { useNavigation } from '@react-navigation/core';
+import { useRoute } from '@react-navigation/native';
 
 
 interface IProps
 {
-    page: string,
+    page: string 
 }
 
 const dummyAnime=[
@@ -19,69 +20,59 @@ const dummyAnime=[
   name:'IamAFake',
   bio:'bad day for me',
   image:'',
-},{
-  REFERENCE:'0',
-  TYPEID:'A#FakeAnime',
-  name:'IamAFake',
-  bio:'bad day for me',
-  image:'',
-},
-{
-  REFERENCE:'0',
-  TYPEID:'A#FakeAnime',
-  name:'IamAFake',
-  bio:'bad day for me',
-  image:'',
-},
-{
-  REFERENCE:'0',
-  TYPEID:'A#FakeAnime',
-  name:'IamAFake',
-  bio:'bad day for me',
-  image:'',
 }
 ];
 
 
-const SearchList=(props:IProps)=> {
+const SearchList=()=> {
 
   const [animeArr, setAnime] = useState<IAnime[]>(dummyAnime);     
   const [refreshing, setRefreshing] = useState(false); 
+
   const navigation = useNavigation(); 
+  const route = useRoute();
+  const params:any = route.params;
+  const [val,setVal] = useState(params && params.val);
+  
 
   useEffect(() =>
-  {getAnimeBySearch()
-  },[navigation])
+  { 
+    console.log("HI");
+    setVal(params && params.val);
+    getAnimeBySearch();
+  },[navigation,params])
 
   const getAnimeBySearch = useCallback( async () =>
   {
-    axios.get<any[]>('/Anime/search/'.replace('#','_'))
-    .then(response =>
-      {
-      response.data && response.data.forEach((data) =>
-         { let anime =
-          {
-            REFERENCE:'0',
-            TYPEID:'',
-            name:'',
-            bio:'',
-            image:''
-          };
-          anime.REFERENCE=data.REFERENCE;
-          anime.TYPEID=data.TYPEID;
-          anime.name=data.name;
-          anime.bio=data.bio;
-          anime.image=data.image;
+    console.log("Sending request iwth " + val);
+    if(val){
+      axios.get<any[]>('Anime/search/' + val)
+      .then(response =>
+        {
+        console.log(response.data);
+        const newArr = [...animeArr];
+        response.data && response.data.forEach(data =>
+        { 
+          console.log(data.TYPEID);
+          let anime =
+            {
+              REFERENCE:'0',
+              TYPEID:'',
+              name:'',
+              bio:'',
+              image:''
+            };
+            anime.TYPEID=data.TYPEID;
+            anime.name=data.TYPEID.substring(2);
+            newArr.push(anime);
+          }
+          )    
+          setAnime(newArr);
+          console.log(animeArr);
+      })
+    }
 
-          animeArr.push(anime);
-          
-
-        }
-        )    
-        setAnime(animeArr)
-  }
-  )
-  }, [refreshing]);
+  }, [val]);
 function getThere(){
   console.log('hello');
 }
@@ -138,3 +129,7 @@ const styles = StyleSheet.create({
   
 });
 export default SearchList;
+function useRouter() {
+  throw new Error('Function not implemented.');
+}
+
