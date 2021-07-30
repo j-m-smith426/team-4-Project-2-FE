@@ -12,7 +12,7 @@ const Sidebar = (props: any) => {
     }
     
     const submit = async () => {
-        console.log(search);
+        console.log('current Search',search);
         props.navigation.navigate('Search', {val: search});
     }
     return (
@@ -26,8 +26,7 @@ const Sidebar = (props: any) => {
                     <TextInput 
                         onChangeText ={onUserChange}
                         style={styles.TextInput}
-                        autoCompleteType = "username"
-                        placeholder="Username"
+                        placeholder="Search"
                         onSubmitEditing={()=>submit()}/>
                 </View>
             <DrawerContentScrollView {...props}>

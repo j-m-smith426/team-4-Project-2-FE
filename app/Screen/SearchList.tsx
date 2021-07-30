@@ -23,23 +23,32 @@ const dummyAnime=[
 }
 ];
 
+interface IAnimeList
+{
+  TYPEID:string,
+  name:string,
+}
+
 
 const SearchList=()=> {
 
-  const [animeArr, setAnime] = useState<IAnime[]>(dummyAnime);     
-  const [refreshing, setRefreshing] = useState(false); 
+  const [animeArr, setAnime] = useState<IAnimeList[]>([]);     
+
 
   const navigation = useNavigation(); 
   const route = useRoute();
   const params:any = route.params;
-  const [val,setVal] = useState(params && params.val);
+  const { val } = params;
   
 
   useEffect(() =>
-  { 
-    console.log("HI");
-    setVal(params && params.val);
-    getAnimeBySearch();
+  {
+    let isMounted = true;
+    if (isMounted) {
+      console.log('val',val);
+      getAnimeBySearch();
+    }
+    return()=>{isMounted = false}
   },[navigation,params])
 
   const getAnimeBySearch = useCallback( async () =>
@@ -50,17 +59,17 @@ const SearchList=()=> {
       .then(response =>
         {
         console.log(response.data);
-        const newArr = [...animeArr];
+        const newArr:IAnimeList[] = [];
         response.data && response.data.forEach(data =>
         { 
           console.log(data.TYPEID);
           let anime =
             {
-              REFERENCE:'0',
+              // REFERENCE:'0',
               TYPEID:'',
               name:'',
-              bio:'',
-              image:''
+              // bio:'',
+              // image:''
             };
             anime.TYPEID=data.TYPEID;
             anime.name=data.TYPEID.substring(2);

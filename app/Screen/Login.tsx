@@ -7,6 +7,8 @@ import { LoginActions, SwitchPageAction } from "../redux/Actions";
 import { Auth } from "aws-amplify";
 import { CognitoUser } from "@aws-amplify/auth";
 import { IRootState } from "../redux/State";
+import IUser from "../model/User";
+import axiosConfig from "../../axiosConfig";
 
 
 const Login = () =>
@@ -54,6 +56,25 @@ const Login = () =>
     const onEmailChange = (email:string) => {
         setEmail(email);
     }
+
+    const addToDb = () =>
+    {
+        let newUser: IUser = {
+            REFERENCE: '0',
+            userId: 'U#' + username,
+            name: username,
+            bio: {
+                greeting: '',
+                description:''
+            },
+            image: 'key',
+            watchlist: [],
+            followed: [],
+            favorites: []
+
+        }
+        axiosConfig.post('User', newUser);
+    }
     //-------------
     const submit = async () => {
         console.log("Username is" + username);
@@ -95,7 +116,8 @@ const Login = () =>
                     email: email,          
                 }
             });
-            if(user){
+            if (user) {
+                addToDb();
                 toLogin();
             }
             console.log(user);
