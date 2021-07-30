@@ -8,9 +8,9 @@ interface IUser {
         description:string
      }
     image:string,
-    watchlist: [],
-    followed:[],
-    favorites: [],
+    watchlist: string[],
+    followed:string[],
+    favorites: string[],
 
 
 }
