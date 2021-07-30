@@ -6,6 +6,10 @@ import Post from './app/Components/Post/Post';
 import Login from './app/Screen/Login';
 import MainRoutes from './app/Navigation/MainRoutes';
 
+import Following from './app/Components/Profile/Following';
+import Anime from './app/Components/Anime/Anime';
+import PopularAnime from './app/Components/Anime/PopularAnime';
+import addAnimeScreen from './app/Screen/addAnimeScreen';
 
 import AnimeScreen from './app/Screen/animeScreen';
 import PostScreen from './app/Screen/PostScreen';
@@ -29,11 +33,11 @@ export const store= createStore(rootReducer, w.__REDUX_DEVTOOLS_EXTENSION__ && w
 //export type RootState = ReturnType<typeof store.getState>;
 export default function App() {
   return (
+    //<Following />
 
-
-      <Provider store={store}>
-        <MainRoutes />
-      </Provider>
+        <Provider store={store}>
+          <MainRoutes />
+        </Provider>
      
       );
     }

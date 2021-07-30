@@ -5,7 +5,7 @@ import Login from '../Screen/Login';
 import PostScreen from '../Screen/PostScreen';
 import AnimeScreen from '../Screen/animeScreen';
 import ProfilePage from '../Components/Profile/ProfileNavigation';
-
+import Anime from '../Components/Anime/Anime';
 import SideMenu from 'react-native-side-menu-updated';
 import animeScreen from '../Screen/animeScreen';
 import { TouchableOpacity, View, Text, Pressable,StyleSheet, } from 'react-native';
@@ -44,7 +44,7 @@ const MainRoutes: React.FC<RouterProps> = (props:RouterProps) =>
                 {user === 'Guest' && <Drawer.Screen name="Login" component={Login} />}
                 <Drawer.Screen name="Home" component={mainScreen} />
                 <Drawer.Screen name="Post" component={PostScreen} />
-                <Drawer.Screen name="Anime" component={AnimeScreen} />
+                <Drawer.Screen name="Anime" component={Anime} />
                 {userType === 'Admin' && <Drawer.Screen name="AnimeAdd" component={addAnimeScreen} />}
                 <Drawer.Screen name="editProfile" component={editProfile} />
                 <Drawer.Screen name="User" component={ProfilePage} />
