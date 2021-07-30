@@ -6,6 +6,8 @@ import { getTokenSourceMapRange } from 'typescript';
 import { useCallback } from 'react';
 import { useNavigation } from '@react-navigation/core';
 import { useRoute } from '@react-navigation/native';
+import { useDispatch } from 'react-redux';
+import { SwitchPageAction } from '../redux/Actions';
 
 
 interface IProps
@@ -34,7 +36,7 @@ const SearchList=()=> {
 
   const [animeArr, setAnime] = useState<IAnimeList[]>([]);     
 
-
+  const dispatch = useDispatch();
   const navigation = useNavigation(); 
   const route = useRoute();
   const params:any = route.params;
@@ -82,8 +84,15 @@ const SearchList=()=> {
     }
 
   }, [val]);
-function getThere(){
-  console.log('hello');
+function getThere(name: string){
+  dispatch({
+    type: SwitchPageAction.UPDATE,
+    payload: {
+      name: 'Anime',
+      parentID: name
+    }
+  });
+  navigation.navigate('Anime')
 }
 
   return (
@@ -96,7 +105,7 @@ function getThere(){
         keyExtractor={(item)=>item.TYPEID}
             data={animeArr}
             renderItem={({item})=>(
-              <TouchableOpacity onPress={getThere}>
+              <TouchableOpacity onPress={() =>getThere(item.TYPEID)}>
                 <Text style={styles.item}>{item.name}</Text>
                 </TouchableOpacity>
 
