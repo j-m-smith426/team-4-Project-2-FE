@@ -1,7 +1,7 @@
 import { useNavigation } from "@react-navigation/native";
 import React,{ useEffect, useState } from "react";
-import { ScrollView, TextInput, View, Text, Image, StyleSheet, Platform } from "react-native"
-import { Button } from "react-native-elements/dist/buttons/Button";
+import { ScrollView, TextInput, View, Text, Image, StyleSheet, Platform, Button, KeyboardAvoidingView, TouchableWithoutFeedback, Keyboard } from "react-native"
+//import { Button } from "react-native-elements/dist/buttons/Button";
 import * as ImagePicker from 'expo-image-picker'
 import { useSelector } from "react-redux";
 import { IRootState } from "../../redux/State";
@@ -92,27 +92,37 @@ const editBio = () =>
         });
     }
     return(
-        <ScrollView style = {styles.background}>
+        <KeyboardAvoidingView
+        behavior={Platform.OS === "ios" ? "padding" : "height"}
+        style={styles.background}
+      >
+      <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
+            <View style = {styles.background}>
             <Text style={styles.username}>{currentUser}</Text>
-            <Button title="submit" onPress={submit}/>
-        {image !== 'key'? <Image
+            {image !== 'key'? <Image
                 style={styles.profilePicture}
                 source={{ uri: image }}
             /> :
             <Image
-            style={styles.profilePicture}
-            source={require('../../assets/favicon.png')}
-                />
+                style={styles.profilePicture}
+                source={{
+                    //require('https://www.seekpng.com/png/detail/245-2454602_tanni-chand-default-user-image-png.png')}
+                    uri: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTypACuX8ygmzipbD197uPBv40pqsvU8Egh-_Oo_xqg2OQqZbL1Cm-5XRxVcF3QjaocHCg&usqp=CAU',    
+                }}
+            />
                                
             }
-            <Button title="choose picture" onPress={pickImage} />
+            <Button title="Choose Photo" onPress={pickImage}/>
             <TextInput style={styles.intro} placeholder='Greeting' onChangeText={setGreeting} value={greeting}/>
         <View style={styles.bio}>
-                <Text>Synopsis:</Text>
-                <TextInput placeholder="Say something nice about yourself" onChangeText={setDescrip} value={descrip}/>
+                <TextInput style = {styles.info} placeholder="Tell us about yourself!" multiline onChangeText={setDescrip} value={descrip}/>
                 
         </View>
-    </ScrollView>
+        <Button title="Submit" onPress={submit}/>
+
+        </View>
+    </TouchableWithoutFeedback>
+    </KeyboardAvoidingView>
     )
 }
 
@@ -121,6 +131,7 @@ export default editBio;
 const styles = StyleSheet.create({
     background: {
         flex: 1,
+        paddingBottom: "5%",
     },
 
     username: {
@@ -133,25 +144,30 @@ const styles = StyleSheet.create({
 
     profilePicture: {
         alignSelf: "center",
-        width: 100,
-        height: 100,
-        paddingBottom: "25%",
+        width: 150,
+        height: 150,
+        padding: "15%",
         borderWidth: 2,
         borderColor: "grey",
-        borderRadius: 100/2,
+        borderRadius: 600/2,
     },
     intro: {
         flex: 2,
-        fontSize: 16,
+        fontSize: 24,
+        fontStyle: "italic",
         textAlign: "center",
         paddingTop: "5%"   
     },
 
     bio: {
         flex: 2,
-        fontSize: 16,
         textAlign: "center",
         paddingHorizontal: "10%",
         paddingVertical: "5%"
+    },
+
+    info: {
+        borderBottomWidth: 1,
+        fontSize: 18,
     },
 });

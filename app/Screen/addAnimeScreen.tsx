@@ -99,7 +99,9 @@ export default function addAnimeScreen()
     <View style={styles.container}>
        {/* <View style={styles.topMenu}>
        
+       
        </View> */}
+
           <Button title='Add Picture' onPress={pickImage} />
           {image && <Image
               style={styles.animeImg}
@@ -118,8 +120,9 @@ export default function addAnimeScreen()
               </View>
           </View>
           
+
           <Button title='Submit' onPress={submitPage} />
-          <Button title='Delete' onPress={deletePage} />
+          <Button title='Delete' onPress={deletePage} color = "red"/>
           
   </View>
   </TouchableWithoutFeedback>
@@ -137,10 +140,11 @@ const styles = StyleSheet.create({
 
   },
   animeImg:{      
-      height: 300,
+      height: "35%",
       width: 200,
   },
-    title: {
+  
+  title: {
       flex:1,
       //fontFamily:'',
       fontSize: 32,
@@ -148,15 +152,17 @@ const styles = StyleSheet.create({
       textAlign:'left',
       borderBottomWidth: 1,
 
-    },
-    description: {
+  },
+    
+  description: {
       flex:1,
       //fontFamily:'',
       fontSize: 20,
       color:'#000000',
       borderBottomWidth: 1,
+      maxHeight: 60,
+  },
 
-    },
   content : {
       marginLeft:30,
       marginRight:30,
@@ -171,6 +177,7 @@ const styles = StyleSheet.create({
       flexDirection:'row',
       padding:10,
   },
+
   lowerMenu: {
       flexDirection:'row',
     //backgroundColor:'#072083',
@@ -191,6 +198,6 @@ const styles = StyleSheet.create({
   textInput: {
       flex: .7,
       flexDirection: "row",
-  }
+  },
   
 });
