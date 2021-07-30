@@ -42,13 +42,13 @@ const MainRoutes: React.FC<RouterProps> = (props:RouterProps) =>
                         headerShown:user !== 'Guest'
                       })}>
                 {user === 'Guest' && <Drawer.Screen name="Login" component={Login} />}
+                <Drawer.Screen name="Home" component={mainScreen} />
                 <Drawer.Screen name="Post" component={PostScreen} />
                 <Drawer.Screen name="Anime" component={AnimeScreen} />
                 {userType === 'Admin' && <Drawer.Screen name="AnimeAdd" component={addAnimeScreen} />}
                 <Drawer.Screen name="editProfile" component={editProfile} />
                 <Drawer.Screen name="User" component={ProfilePage} />
                 <Drawer.Screen name="Comment" component={CommentNav} />
-                <Drawer.Screen name="Home" component={mainScreen} />
             </Drawer.Navigator>
                 </NavigationContainer>
         
