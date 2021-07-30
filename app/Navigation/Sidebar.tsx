@@ -1,7 +1,8 @@
 import { DrawerContentScrollView, DrawerItem, DrawerItemList, DrawerNavigationProp } from "@react-navigation/drawer";
 import { DrawerNavigationState } from "@react-navigation/routers";
 import React, { useState } from "react";
-import { View, Image,StyleSheet, TextInput,} from "react-native";
+import { View, Image,StyleSheet, TextInput, Pressable,} from "react-native";
+import { Icon } from "react-native-elements";
 import colors from "../config/colors";
 
 
@@ -23,27 +24,42 @@ const Sidebar = (props: any) => {
                 
             </View>
             <View style={styles.inputView}>
-                    <TextInput 
-                        onChangeText ={onUserChange}
-                        style={styles.TextInput}
-                        placeholder="Search"
-                        onSubmitEditing={()=>submit()}/>
-                </View>
-            <DrawerContentScrollView {...props}>
+                <TextInput 
+                    onChangeText ={onUserChange}
+                    style={styles.TextInput}
+                    placeholder="Search"
+                    onSubmitEditing={()=>submit()}/>
+                <Pressable onPress = {() => submit()} style={styles.btn}>
+                    <Icon
+                    name='search'/>
+                </Pressable>
+            </View>
+            <View style={styles.scroll}>
+                <DrawerContentScrollView {...props} style = {styles.scroll}>
+                    <DrawerItemList {...props} />
+                </DrawerContentScrollView>
+            </View>
 
-                <DrawerItemList {...props} />
-            </DrawerContentScrollView>
         </View>
 
     );
   }
   const styles = StyleSheet.create({
+    btn:
+    {
+        height: '90%',
+        flex:1,
+        borderRadius:1000,
+        backgroundColor:colors.buttonPrimary,
+        
+
+    },
     profImg: {
         alignItems: "center",
         justifyContent: "center",
         width: '80%',
-        maxWidth:500,
-        height: '50%'
+        height: "30%",
+        maxWidth:500
         
     },
     image: {
@@ -56,22 +72,24 @@ const Sidebar = (props: any) => {
     inputView: {
         backgroundColor: colors.background,
         borderRadius: 1000,
-        width: "90%",
-        //flex:2,
-        height:"20%",
+        flex:3,
         marginBottom: "2%",
         alignItems: "center",
+        flexDirection: "row"
         
       },
       
     TextInput: {
         height: '90%',
-        flex: 1,
         padding: 10,
-        marginLeft: 20,
-        width:'90%',
+        marginHorizontal: 10,
+        flex: 3,
         borderRadius: 30,
-        //outlineWidth: 0
+        borderWidth:1
     },
+    scroll: {
+        height: '60%'
+    }
+
 })
 export default Sidebar;
