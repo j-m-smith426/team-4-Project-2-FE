@@ -36,13 +36,13 @@ const Anime = () => {
     
     const handleStarClick = () =>
     {
-        console.log("Clicked");
-        axiosConfig.get('User/' + currentUser).then((response) =>
+        //console.log("Clicked");
+        axiosConfig.get('User/U_' + currentUser).then((response) =>
         {
             let userData: IUser = response.data;
             let emptyArr: string[] = [];
             let newFavArr:string[] = userData.favorites;
-            if (newFavArr.includes(anime.TYPEID + '#' + anime.image)) {
+            if (newFavArr && newFavArr.includes(anime.TYPEID + '#' + anime.image)) {
                 newFavArr.forEach((item) =>
                 {
                     if (item !== anime.TYPEID + '#' + anime.image) {
@@ -53,7 +53,16 @@ const Anime = () => {
             emptyArr.push(anime.TYPEID + '#' + anime.image);
             }
             userData.favorites = emptyArr;
-            axiosConfig.put('User', userData);
+            console.log(userData);
+            axiosConfig.put('User', {
+                userID: userData.TYPEID,
+                REFERENCE: userData.REFERENCE,
+                image: userData.image,
+                bio: userData.bio,
+                watchlist: userData.watchlist,
+                followed: userData.followed,
+                favorites: userData.favorites
+            });
         })
         setClicked(!clicked);
     };
