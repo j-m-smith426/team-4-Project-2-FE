@@ -1,7 +1,7 @@
 import React, {useState} from "react";
 import { View, Text, ScrollView, Image, StyleSheet, Touchable, TouchableOpacity } from "react-native";
 import { AntDesign } from "@expo/vector-icons";
-
+import Rating from '../../Screen/Rating'
 const Anime = () => {
 
     const [clicked, setClicked] = useState(false);
@@ -30,7 +30,7 @@ const Anime = () => {
 
                 </View>
                 <Text style = {styles.genre}>Adventure, Action</Text> 
-                <Text style={styles.rating}>Rated 6 out of 7 Dragonballs</Text>
+                <Rating/>
                 <Text style={styles.description}>The epic episodic adventure of Goku and the Z Warriors as they defend the Earth 
                 and the Universe from super-powered fighters and monsters.</Text>
             </View>
