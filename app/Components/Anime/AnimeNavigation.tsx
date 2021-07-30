@@ -64,7 +64,7 @@ const styles = StyleSheet.create({
     TabBar: {
       backgroundColor: "green",
       paddingTop: "10%",
-      marginBottom:"10%",
+     
     },
 
     TabView: {
