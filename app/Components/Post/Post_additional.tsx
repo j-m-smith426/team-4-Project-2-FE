@@ -3,7 +3,7 @@ import React, { useCallback, useEffect, useState } from "react";
 import { Text, View, StyleSheet, Image, Pressable } from "react-native";
 import { useDispatch } from "react-redux";
 import axiosConfig from "../../../axiosConfig";
-import axios from 'axios'
+import {Storage} from 'aws-amplify'
 
 import colors from "../../config/colors";
 import IPost from "../../model/Post";
@@ -36,18 +36,18 @@ function timeDifference(oldTime:number){
 
 
 
-const Post = (props: IPost) =>
+const Post_additional = (props: IPost) =>
 {
     const [hasImage, setHasImage] = useState(false);
     const dispatch = useDispatch();
     const [profilepic, setProfilePic] = useState('key');
     const navigation = useNavigation();
+    const [imageUri, setImageUri] = useState('key')
     useEffect(() =>
     {
         let isMounted = true;
         if (isMounted) {
-            console.log(props);
-            setHasImage(props.image !== 'key');
+            setHasImage(Boolean(props.image !== 'key'));
             getProfPic();
         }
         return() => {isMounted = false}
@@ -64,7 +64,7 @@ const Post = (props: IPost) =>
                 setProfilePic(userData.image);
             })
         },[])
-
+  
     const goToComment = async() =>
     {
         let id = props.postID;
@@ -82,7 +82,7 @@ const Post = (props: IPost) =>
         
         <View style={styles.post}>
 
-                {console.log(props.image)}
+                {console.log('Post',props)}
                 <View style={styles.profImg}>
                     <ProfileImg username={props.username} profileImg={profilepic} />
                 </View>
@@ -91,13 +91,12 @@ const Post = (props: IPost) =>
                     <Text>{props.Contents}</Text>
             </View>
             
-            { //console.log(`https://scouter-revature-project1.s3.amazonaws.com/public/${props.image}`)}{
+            { console.log(`https://scouter-revature-project1.s3.amazonaws.com/public/${props.image}`)}{
                 hasImage && <Image testID='CommentImg' style={styles.postImg} source={{
                     uri: `https://scouter-revature-project1.s3.amazonaws.com/public/${props.image}`,
                     method: 'GET',
                     cache: 'reload',
-                    headers: {Pragma: 'no-cache'},
-                    
+                    headers: { Pragma: 'no-cache' },
                 }} />
             }
             
@@ -166,7 +165,7 @@ const styles = StyleSheet.create({
         borderWidth: 1,
         alignSelf: 'center',
         borderColor: 'black',
-        //resizeMode: 'center',
+        resizeMode: 'cover',
         marginBottom: 5,
         
     },
@@ -191,4 +190,4 @@ const styles = StyleSheet.create({
 
 });
 
-export default Post;
+export default Post_additional;

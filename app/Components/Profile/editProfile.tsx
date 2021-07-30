@@ -20,16 +20,22 @@ const editBio = () =>
         return state.sites.ILogin.username;
     })
 
-    useEffect(() => {
-        (async () => {
-          if (Platform.OS !== 'web') {
-            const { status } = await ImagePicker.requestMediaLibraryPermissionsAsync();
-            if (status !== 'granted') {
-              alert('Sorry, we need camera roll permissions to make this work!');
-            }
-          }
-        })();
-        loadUser();
+    useEffect(() =>
+    {
+        let isMounted = true;
+        if (isMounted) {
+            
+            (async () => {
+                if (Platform.OS !== 'web') {
+                    const { status } = await ImagePicker.requestMediaLibraryPermissionsAsync();
+                    if (status !== 'granted') {
+                        alert('Sorry, we need camera roll permissions to make this work!');
+                    }
+                }
+            })();
+            loadUser();
+        }
+        return() => {isMounted = false}
     }, []);
     
     const loadUser = () =>

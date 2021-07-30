@@ -21,7 +21,9 @@ const LoadPosts = (props:IProps) =>
     const navigation = useNavigation();
     useEffect(() =>
     {
-        getPosts();
+        let isMounted = true;
+        isMounted && getPosts();
+        return()=> {isMounted = true}
     }, [navigation]);
 
 
@@ -34,7 +36,7 @@ const LoadPosts = (props:IProps) =>
         }).then(response =>
         {
             
-           console.log('Response:',response.data);
+           
             //construct each post
 
             response.data && response.data.forEach((data) =>
@@ -50,13 +52,14 @@ const LoadPosts = (props:IProps) =>
     
                     
                 };
+                //User Name For Post
                 let name: string = data.REFERENCE.split('#')[0];
-                console.log(name);
+               
         axiosConfig.get<any>(`User/U_${name}`, {
         }).then(userResponse =>
             {
             let userData = userResponse.data;
-        
+                //User Profile Pic
                 setProfilePic(userData.image);
             })
                 post.userProfilePic = profilepic;
@@ -83,7 +86,7 @@ const LoadPosts = (props:IProps) =>
                 renderItem={
                     ({ item }) =>
                     {
-                        console.log(item);
+                        
                       return  (
                             <View style={styles.item}>
                               <Post username={item.username}

@@ -51,7 +51,9 @@ const CommentScreen = () =>
     let navigation = useNavigation();
     useEffect(() =>
     {
-        getParent();
+        let isMounted = true;
+        isMounted && getParent();
+        return () => {isMounted = false}
     }, [navigation])
     const getParent = useCallback(async () =>
     {

@@ -32,7 +32,12 @@ const ProfileImg = (props: Iprops) =>
                 <View style={styles.imageCover}>
                     <Image
                         style={styles.image}
-                        source={{uri: `https://scouter-revature-project1.s3.amazonaws.com/public/${props.profileImg}`}} />
+                        source={{
+                            uri: `https://scouter-revature-project1.s3.amazonaws.com/public/${props.profileImg}`,
+                            method: 'GET',
+                            cache: 'reload',
+                            headers: { Pragma: 'no-cache' },
+                        }} />
                     </View>
                 <View >
                     <Text testID = 'Name'>{props.username}</Text>
