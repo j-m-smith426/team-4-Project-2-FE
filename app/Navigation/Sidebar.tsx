@@ -13,7 +13,7 @@ const Sidebar = (props: any) => {
     }
     
     const submit = async () => {
-        console.log(search);
+        console.log('current Search',search);
         props.navigation.navigate('Search', {val: search});
     }
     return (
@@ -31,8 +31,7 @@ const Sidebar = (props: any) => {
                     onSubmitEditing={()=>submit()}/>
                 <Pressable onPress = {() => submit()} style={styles.btn}>
                     <Icon
-                    name='search'
-                    style = {styles.icon} />
+                    name='search'/>
                 </Pressable>
             </View>
             <View style={styles.scroll}>
@@ -73,7 +72,7 @@ const Sidebar = (props: any) => {
     inputView: {
         backgroundColor: colors.background,
         borderRadius: 1000,
-        width: "90%",
+        flex:3,
         marginBottom: "2%",
         alignItems: "center",
         flexDirection: "row"

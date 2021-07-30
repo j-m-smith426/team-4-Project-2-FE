@@ -33,16 +33,22 @@ const AddPost = (props: IaddPost) =>
     {
         return state.sites.IPageState.parentID;
     });
-    useEffect(() => {
-        (async () => {
-          if (Platform.OS !== 'web') {
-            const { status } = await ImagePicker.requestMediaLibraryPermissionsAsync();
-            if (status !== 'granted') {
-              alert('Sorry, we need camera roll permissions to make this work!');
-            }
-          }
-        })();
-        getProfPic();
+    useEffect(() =>
+    {
+        let isMounted = true;
+        if (isMounted) {
+            
+            (async () => {
+                if (Platform.OS !== 'web') {
+                    const { status } = await ImagePicker.requestMediaLibraryPermissionsAsync();
+                    if (status !== 'granted') {
+                        alert('Sorry, we need camera roll permissions to make this work!');
+                    }
+                }
+            })();
+            getProfPic();
+        }
+        return() => {isMounted = false}
       }, []);
 
       const pickImage = async () => {
@@ -77,10 +83,12 @@ const AddPost = (props: IaddPost) =>
     {
         let user = currentUser;
         let Stamp: number = new Date().getTime();
-            console.log('IMG',image);
+        console.log('IMG', image);
+        if (image !== 'key') {
+            
             fetch(image).then((response) =>
             {
-               
+                
                 console.log('Res',response);
                 const access = { level: "public" };
                 response.blob().then(blob =>
@@ -89,13 +97,14 @@ const AddPost = (props: IaddPost) =>
                         
                     })
                 })
+            }
             
         axiosConfig.post('Post', {
                 Stamp,
                 postID: `${user}#${Stamp}`,
                 content,
                 parentID: page,
-                image: image ? `${currentUser}/${Stamp}.jpg`: 'key'
+                image: image !=='key' ? `${currentUser}/${Stamp}.jpg`: 'key'
         })
         setContent('');
         setImage('key');

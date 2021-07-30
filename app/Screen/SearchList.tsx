@@ -6,6 +6,8 @@ import { getTokenSourceMapRange } from 'typescript';
 import { useCallback } from 'react';
 import { useNavigation } from '@react-navigation/core';
 import { useRoute } from '@react-navigation/native';
+import { useDispatch } from 'react-redux';
+import { SwitchPageAction } from '../redux/Actions';
 
 
 interface IProps
@@ -23,23 +25,32 @@ const dummyAnime=[
 }
 ];
 
+interface IAnimeList
+{
+  TYPEID:string,
+  name:string,
+}
+
 
 const SearchList=()=> {
 
-  const [animeArr, setAnime] = useState<IAnime[]>(dummyAnime);     
-  const [refreshing, setRefreshing] = useState(false); 
+  const [animeArr, setAnime] = useState<IAnimeList[]>([]);     
 
+  const dispatch = useDispatch();
   const navigation = useNavigation(); 
   const route = useRoute();
   const params:any = route.params;
-  const [val,setVal] = useState(params && params.val);
+  const { val } = params;
   
 
   useEffect(() =>
-  { 
-    console.log("HI");
-    setVal(params && params.val);
-    getAnimeBySearch();
+  {
+    let isMounted = true;
+    if (isMounted) {
+      console.log('val',val);
+      getAnimeBySearch();
+    }
+    return()=>{isMounted = false}
   },[navigation,params])
 
   const getAnimeBySearch = useCallback( async () =>
@@ -50,17 +61,17 @@ const SearchList=()=> {
       .then(response =>
         {
         console.log(response.data);
-        const newArr = [...animeArr];
+        const newArr:IAnimeList[] = [];
         response.data && response.data.forEach(data =>
         { 
           console.log(data.TYPEID);
           let anime =
             {
-              REFERENCE:'0',
+              // REFERENCE:'0',
               TYPEID:'',
               name:'',
-              bio:'',
-              image:''
+              // bio:'',
+              // image:''
             };
             anime.TYPEID=data.TYPEID;
             anime.name=data.TYPEID.substring(2);
@@ -73,8 +84,15 @@ const SearchList=()=> {
     }
 
   }, [val]);
-function getThere(){
-  console.log('hello');
+function getThere(name: string){
+  dispatch({
+    type: SwitchPageAction.UPDATE,
+    payload: {
+      name: 'Anime',
+      parentID: name
+    }
+  });
+  navigation.navigate('Anime')
 }
 
   return (
@@ -87,7 +105,7 @@ function getThere(){
         keyExtractor={(item)=>item.TYPEID}
             data={animeArr}
             renderItem={({item})=>(
-              <TouchableOpacity onPress={getThere}>
+              <TouchableOpacity onPress={() =>getThere(item.TYPEID)}>
                 <Text style={styles.item}>{item.name}</Text>
                 </TouchableOpacity>
 

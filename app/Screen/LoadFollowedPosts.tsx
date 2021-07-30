@@ -4,77 +4,100 @@ import { useEffect } from "react";
 import { FlatList, RefreshControl, View, StyleSheet } from "react-native";
 import { useSelector } from "react-redux";
 import axiosConfig from "../../axiosConfig";
-import Post from "../Components/Post/Post";
+import Post_additional from "../Components/Post/Post_additional";
 import { IPost } from "../model/Post";
+import IUser from "../model/User";
 import { IRootState } from "../redux/State";
 
-interface IProps
-{
-    page: string,
-}
 
-const LoadPosts = (props:IProps) =>
+
+const LoadPosts = () =>
 {
     const [refreshing, setRefreshing] = useState(false);
-    const [postArr, setPostArr] = useState<IPost[]>();
+    const [postArr, setPostArr] = useState<IPost[]>([]);
     const [profilepic, setProfilePic] = useState('key');
+    const [currentPost, setCurrentPost] = useState<IPost>()
     const [followers, setFollowers] = useState<any[]>([]);
+    const currentUser = useSelector((state: IRootState) =>
+    {
+        return state.sites.ILogin.username;
+    })
     const navigation = useNavigation();
     useEffect(() =>
     {
-        getPosts();
+        let isMounted = true;
+        if (isMounted) {
+            getFollowers();
+        }
+        return () => { isMounted = false };
     }, [navigation]);
 
 
-    const getPosts = useCallback(async () =>
+    const getFollowers = useCallback(async () =>
     {
+        
         setRefreshing(true);
-        let newArray: IPost[] = [];
-        axiosConfig.post<any[]>(`Post/Page/${props.page.replace('#','_')}`, {
-            followArray: followers
-        }).then(response =>
+        console.log('user', currentUser)
+        await axiosConfig.get('User/U_' + currentUser).then(async (response) =>
         {
+            let user: IUser = response.data
             
-           console.log('Response:',response.data);
-            //construct each post
-
-            response.data && response.data.forEach((data) =>
-            {
-               let post = {
-                    username: '',
-                    userProfilePic: '',
-                    image: '',
-                    Contents: '',
-                    timestamp: 0,
-                    postID: '',
-                    parentID:''
+            let obj = {
+                followArray: [currentUser, ...user.followed]
+            }
+            console.log(obj);
+            
+            //if (followers.length > 0) {
+                
+                //console.log('followers', followers)
+                await axiosConfig.post<any[]>(`Post/follow`, {
+                    followArray: [currentUser]
+                }).then(postResponse =>
+                    {
+                    let newArray: IPost[] = [];
+            
+                    //console.log('Response:', postResponse.data);
+                    //construct each post
+                        
+                    postResponse.data && postResponse.data.forEach((data) =>
+                    {
+                        let post = {
+                            username: '',
+                            userProfilePic: '',
+                            image: '',
+                            Contents: '',
+                            timestamp: 0,
+                            postID: '',
+                            parentID: ''
+                                
+                                
+                        };
+                        let name: string = data.REFERENCE.split('#')[0];
+                            
+                        axiosConfig.get<any>(`User/U_${name}`, {
+                        }).then(userResponse =>
+                        {
+                            let userData = userResponse.data;
+            
+                            setProfilePic(userData.image);
+                        })
+                        post.userProfilePic = profilepic;
+                        post.username = name;
+                        post.postID = data.REFERENCE;
+                        post.Contents = data.content;
+                        post.timestamp = data.Stamp;
+                        post.image = data.image;
+                        post.parentID = data.TYPEID;
+                        //setCurrentPost(post);
+                        newArray.push(post);
+                        console.log('Arr',newArray);
+                    });
+                    setPostArr(newArray);
+                    setRefreshing(false);
+                });
+           // }
+        })
     
-                    
-                };
-                let name: string = data.REFERENCE.split('#')[0];
-                console.log(name);
-        axiosConfig.get<any>(`User/U_${name}`, {
-        }).then(userResponse =>
-            {
-            let userData = userResponse.data;
-        
-                setProfilePic(userData.image);
-            })
-                post.userProfilePic = profilepic;
-                post.username = name;
-                post.postID = data.REFERENCE;
-                post.Contents = data.content;
-                post.timestamp = data.Stamp;
-                post.image = data.image;
-                post.parentID = data.TYPEID;
-               
-                    newArray.push(post);
-            });
-            setPostArr(newArray);
-            setRefreshing(false);
-        });
-       
-        
         
     }, [refreshing]);
     return(
@@ -82,12 +105,12 @@ const LoadPosts = (props:IProps) =>
                 //viewabilityConfig={{viewAreaCoveragePercentThreshold: 100}}
                 data={postArr}
                 renderItem={
-                    ({ item }) =>
+                    ({ item, index }) =>
                     {
-                        console.log(item);
+                        console.log('item '+index, item.image);
                       return  (
                             <View style={styles.item}>
-                              <Post username={item.username}
+                              <Post_additional username={item.username}
                                   userProfilePic={item.userProfilePic}
                                   Contents={item.Contents}
                                   image={item.image}
@@ -99,7 +122,7 @@ const LoadPosts = (props:IProps) =>
                     }}
                 keyExtractor={item => item.postID}
                 // onEndReachedThreshold={0.0}
-                refreshControl={<RefreshControl refreshing={refreshing} onRefresh={getPosts} />}
+                refreshControl={<RefreshControl refreshing={refreshing} onRefresh={getFollowers} />}
                 />
 
         

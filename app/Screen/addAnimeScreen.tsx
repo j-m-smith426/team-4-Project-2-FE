@@ -1,7 +1,7 @@
 import { StatusBar } from 'expo-status-bar';
 import React, { useEffect } from 'react';
 import { useState } from 'react';
-import { StyleSheet, Text, View, Image, Button, TextInput, Platform } from 'react-native';
+import { StyleSheet, Text, View, Image, Button, TextInput, Keyboard, Platform, KeyboardAvoidingView, TouchableWithoutFeedback } from 'react-native';
 import * as ImagePicker from 'expo-image-picker'
 import axiosConfig from '../../axiosConfig'
 import { Storage } from 'aws-amplify';
@@ -18,22 +18,28 @@ export default function addAnimeScreen()
     const [title, setTitle] = useState('title');
     const [description, setDescription] = useState('description');
     const [image, setImage] = useState('key');
-  const [currRes, setRes] = useState('result')
+    const [currRes, setRes] = useState('result');
   
   // const page = useSelector((state:IRootState) =>
   // {
   //   return state.sites.IPageState.parentID.split("#")[1];
   // })
 
-    useEffect(() => {
-        (async () => {
-          if (Platform.OS !== 'web') {
-            const { status } = await ImagePicker.requestMediaLibraryPermissionsAsync();
-            if (status !== 'granted') {
-              alert('Sorry, we need camera roll permissions to make this work!');
-            }
+  useEffect(() =>
+  {
+    let isMounted = true;
+    if (isMounted) {
+      
+      (async () => {
+        if (Platform.OS !== 'web') {
+          const { status } = await ImagePicker.requestMediaLibraryPermissionsAsync();
+          if (status !== 'granted') {
+            alert('Sorry, we need camera roll permissions to make this work!');
           }
-        })();
+        }
+      })();
+    }
+    return () => { isMounted = false };
       }, []);
 
       const pickImage = async () => {
@@ -84,14 +90,22 @@ export default function addAnimeScreen()
 
 
   return (
+    <KeyboardAvoidingView
+      behavior={Platform.OS === "ios" ? "padding" : "height"}
+      style={styles.container}
+    >
+    <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
+     
     <View style={styles.container}>
        {/* <View style={styles.topMenu}>
        
+       
        </View> */}
+
+          <Button title='Add Picture' onPress={pickImage} />
           {image && <Image
               style={styles.animeImg}
               source={{uri: image}} />}
-        <Button title='addPicture' onPress={pickImage} />
           <View style={styles.lowerMenu}>
               <View style={styles.textInput} >
 
@@ -101,14 +115,18 @@ export default function addAnimeScreen()
               </View>
           </View>
           <View style={styles.lowerMenu}>
-              <View style={styles.textInput} >
-          <TextInput style={styles.descrption} multiline numberOfLines={3} placeholder="Description" onChangeText={setDescription} />
+              <View style={styles.textInput}>
+          <TextInput style={styles.description} multiline numberOfLines={3} placeholder="Description" onChangeText={setDescription} />
               </View>
           </View>
           
+
           <Button title='Submit' onPress={submitPage} />
-          <Button title='Delete' onPress={deletePage} />
+          <Button title='Delete' onPress={deletePage} color = "red"/>
+          
   </View>
+  </TouchableWithoutFeedback>
+  </KeyboardAvoidingView>
   );
 
 }
@@ -122,22 +140,29 @@ const styles = StyleSheet.create({
 
   },
   animeImg:{      
-      height:200,
-      width:300,
+      height: "35%",
+      width: 200,
   },
-    title: {
+  
+  title: {
       flex:1,
-      fontFamily:'',
+      //fontFamily:'',
       fontSize: 32,
       color:'#000000',
-      textAlign:'center',
-    },
-    descrption: {
-        flex:1,
-      fontFamily:'',
+      textAlign:'left',
+      borderBottomWidth: 1,
+
+  },
+    
+  description: {
+      flex:1,
+      //fontFamily:'',
       fontSize: 20,
       color:'#000000',
-    },
+      borderBottomWidth: 1,
+      maxHeight: 60,
+  },
+
   content : {
       marginLeft:30,
       marginRight:30,
@@ -152,24 +177,27 @@ const styles = StyleSheet.create({
       flexDirection:'row',
       padding:10,
   },
-    lowerMenu: {
-    flexDirection:'row',
+
+  lowerMenu: {
+      flexDirection:'row',
     //backgroundColor:'#072083',
       alignContent: 'center',
       //borderWidth : 1,
       justifyContent: "space-around",
-
   },
+
   rating:{
       color:'black',
       fontSize:18,
   },
+
   header:{
       color:'white'
-    },
-    textInput: {
-        flex: .7,
-        flexDirection: "row",
-  }
+  },
+
+  textInput: {
+      flex: .7,
+      flexDirection: "row",
+  },
   
 });

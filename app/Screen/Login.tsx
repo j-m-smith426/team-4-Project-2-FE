@@ -1,5 +1,5 @@
 import React, { ChangeEvent, useState,useEffect } from "react";
-import { Text, View, StyleSheet, Image, TextInput, TouchableOpacity, Pressable, GestureResponderEvent } from "react-native";
+import { Text, View, StyleSheet, Image, TextInput, TouchableOpacity, Pressable, GestureResponderEvent, KeyboardAvoidingView, Platform } from "react-native";
 import colors from "../config/colors";
 import { useNavigation } from "@react-navigation/core";
 import { useDispatch, useSelector } from "react-redux";
@@ -7,16 +7,21 @@ import { LoginActions, SwitchPageAction } from "../redux/Actions";
 import { Auth } from "aws-amplify";
 import { CognitoUser } from "@aws-amplify/auth";
 import { IRootState } from "../redux/State";
+import IUser from "../model/User";
+import axiosConfig from "../../axiosConfig";
 
 
 const Login = () =>
-{
+{ 
     let navigation = useNavigation();
     //component states
     const [img, setImg] = useState<any>(<View style = {styles.profImg}>
         <Image
-            style={styles.image}
-            source={require('../assets/icon.png')} />
+          
+            source={require('../assets/scouter.png')} 
+           
+            />
+       
             
     </View>);
     const [emailComp, setEmailComp] = useState<any>(<View/>);
@@ -36,8 +41,10 @@ const Login = () =>
     })
     useEffect(() =>
     {
-        checkLogin();
-    }, []);
+        let isMounted = true;
+        isMounted && checkLogin();
+        return() => {isMounted = false}
+    }, [navigation]);
     const onUserChange = (name:string) => {
         console.log("Username is: " + username);
         setUsername(name);
@@ -48,6 +55,25 @@ const Login = () =>
     }
     const onEmailChange = (email:string) => {
         setEmail(email);
+    }
+
+    const addToDb = () =>
+    {
+        let newUser: IUser = {
+            REFERENCE: '0',
+            userId: 'U#' + username,
+            name: username,
+            bio: {
+                greeting: '',
+                description:''
+            },
+            image: 'key',
+            watchlist: [],
+            followed: [],
+            favorites: []
+
+        }
+        axiosConfig.post('User', newUser);
     }
     //-------------
     const submit = async () => {
@@ -63,17 +89,17 @@ const Login = () =>
                type:LoginActions.LOGIN,
                payload:{
                    name: cogUser.getUsername(),
-                  type:  cogUser.getUsername() === 'newUser' ? 'Admin': 'user'
+                   type: cogUser.getUsername() === 'newUser' ? 'Admin': 'user'
                }
            })
                dispatch({
                    type: SwitchPageAction.UPDATE,
                    payload: {
-                    PageName: 'Post',
+                    PageName: 'Home',
                     parentID: `U#${cogUser.getUsername()}`
                 }
             })
-               navigation.navigate('Post');
+               navigation.navigate('Home');
            }
             
        
@@ -90,7 +116,8 @@ const Login = () =>
                     email: email,          
                 }
             });
-            if(user){
+            if (user) {
+                addToDb();
                 toLogin();
             }
             console.log(user);
@@ -110,16 +137,20 @@ const Login = () =>
             dispatch({
                 type: SwitchPageAction.UPDATE,
                 payload: {
-                 PageName: 'Post',
+                 PageName: 'Home',
                  parentID: `U#${currentUser}`
              }
          })
-            navigation.navigate('Post');
+            navigation.navigate('Home');
         }
     }
 
 
     return (
+        <KeyboardAvoidingView
+        behavior={Platform.OS === "ios" ? "padding" : "height"}
+        style={styles.container}
+        >
         <View style = {styles.container}>
             {img}
             <View style= {styles.main}>
@@ -147,7 +178,7 @@ const Login = () =>
             </View>
             <View style = {styles.filler}/>
         </View>
-
+        </KeyboardAvoidingView>
 
     );
     async function toSignup(){
@@ -159,7 +190,8 @@ const Login = () =>
                 autoCompleteType = "email"
                 placeholder="Email"/>
         </View>);
-        setSignup(<TouchableOpacity>
+        setSignup(
+        <TouchableOpacity>
             <Text style={styles.linkText} onPress={toLogin}>Log in</Text>
         </TouchableOpacity>);
         setLoginTrue(false);
@@ -171,7 +203,8 @@ const Login = () =>
                 source={require('../assets/icon.png')} />
         </View>);
         setEmailComp(<View/>);
-        setSignup(                <TouchableOpacity >
+        setSignup(                
+        <TouchableOpacity >
             <Text style={styles.linkText} onPress={toSignup}>Sign Up</Text>
         </TouchableOpacity>);
         setLoginTrue(true);
@@ -221,6 +254,7 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
         alignItems: "center",
     },
+
     inputView: {
         backgroundColor: colors.background,
         borderRadius: 1000,
@@ -229,8 +263,7 @@ const styles = StyleSheet.create({
         height:"20%",
         marginBottom: "2%",
         alignItems: "center",
-        
-      },
+    },
       
     TextInput: {
         height: '90%',
@@ -264,6 +297,11 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
         position: 'relative',
         color: 'white',
+    },
+    logo:{
+        alignSelf:'auto',
+      
+        
     }
 
 
