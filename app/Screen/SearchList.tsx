@@ -5,11 +5,14 @@ import axios from '../../axiosConfig'
 import { getTokenSourceMapRange } from 'typescript';
 import { useCallback } from 'react';
 import { useNavigation } from '@react-navigation/core';
+import { useRoute } from '@react-navigation/native';
+import { useDispatch } from 'react-redux';
+import { SwitchPageAction } from '../redux/Actions';
 
 
 interface IProps
 {
-    page: string,
+    page: string 
 }
 
 const dummyAnime=[
@@ -19,71 +22,77 @@ const dummyAnime=[
   name:'IamAFake',
   bio:'bad day for me',
   image:'',
-},{
-  REFERENCE:'0',
-  TYPEID:'A#FakeAnime',
-  name:'IamAFake',
-  bio:'bad day for me',
-  image:'',
-},
-{
-  REFERENCE:'0',
-  TYPEID:'A#FakeAnime',
-  name:'IamAFake',
-  bio:'bad day for me',
-  image:'',
-},
-{
-  REFERENCE:'0',
-  TYPEID:'A#FakeAnime',
-  name:'IamAFake',
-  bio:'bad day for me',
-  image:'',
 }
 ];
 
+interface IAnimeList
+{
+  TYPEID:string,
+  name:string,
+}
 
-const SearchList=(props:IProps)=> {
 
-  const [animeArr, setAnime] = useState<IAnime[]>(dummyAnime);     
-  const [refreshing, setRefreshing] = useState(false); 
+const SearchList=()=> {
+
+  const [animeArr, setAnime] = useState<IAnimeList[]>([]);     
+
+  const dispatch = useDispatch();
   const navigation = useNavigation(); 
+  const route = useRoute();
+  const params:any = route.params;
+  const { val } = params;
+  
 
   useEffect(() =>
-  {getAnimeBySearch()
-  },[navigation])
+  {
+    let isMounted = true;
+    if (isMounted) {
+      console.log('val',val);
+      getAnimeBySearch();
+    }
+    return()=>{isMounted = false}
+  },[navigation,params])
 
   const getAnimeBySearch = useCallback( async () =>
   {
-    axios.get<any[]>('/Anime/search/'.replace('#','_'))
-    .then(response =>
-      {
-      response.data && response.data.forEach((data) =>
-         { let anime =
-          {
-            REFERENCE:'0',
-            TYPEID:'',
-            name:'',
-            bio:'',
-            image:''
-          };
-          anime.REFERENCE=data.REFERENCE;
-          anime.TYPEID=data.TYPEID;
-          anime.name=data.name;
-          anime.bio=data.bio;
-          anime.image=data.image;
+    console.log("Sending request iwth " + val);
+    if(val){
+      axios.get<any[]>('Anime/search/' + val)
+      .then(response =>
+        {
+        console.log(response.data);
+        const newArr:IAnimeList[] = [];
+        response.data && response.data.forEach(data =>
+        { 
+          console.log(data.TYPEID);
+          let anime =
+            {
+              // REFERENCE:'0',
+              TYPEID:'',
+              name:'',
+              // bio:'',
+              // image:''
+            };
+            anime.TYPEID=data.TYPEID;
+            anime.name=data.TYPEID.substring(2);
+            newArr.push(anime);
+          }
+          )    
+          setAnime(newArr);
+          console.log(animeArr);
+      })
+    }
 
-          animeArr.push(anime);
-          
-
-        }
-        )    
-        setAnime(animeArr)
-  }
-  )
-  }, [refreshing]);
-function getThere(){
-  console.log('hello');
+  }, [val]);
+function getThere(name: string){
+  dispatch({
+    type: SwitchPageAction.UPDATE,
+    payload: {
+      name: 'Anime',
+      parentID: name
+    }
+  });
+  navigation.navigate('Anime')
 }
 
   return (
@@ -96,7 +105,7 @@ function getThere(){
         keyExtractor={(item)=>item.TYPEID}
             data={animeArr}
             renderItem={({item})=>(
-              <TouchableOpacity onPress={getThere}>
+              <TouchableOpacity onPress={() =>getThere(item.TYPEID)}>
                 <Text style={styles.item}>{item.name}</Text>
                 </TouchableOpacity>
 
@@ -138,3 +147,7 @@ const styles = StyleSheet.create({
   
 });
 export default SearchList;
+function useRouter() {
+  throw new Error('Function not implemented.');
+}
+

@@ -17,9 +17,11 @@ import addAnimeScreen from '../Screen/addAnimeScreen';
 import editProfile from '../Components/Profile/editProfile';
 import { useSelector } from 'react-redux';
 import { IRootState } from '../redux/State';
+import Sidebar from './Sidebar';
 import CommentScreen from '../Screen/CommentScreen';
 import CommentNav from '../Screen/CommentNav';
 import mainScreen from '../Screen/mainScreen';
+import SearchList from '../Screen/SearchList';
 interface RouterProps
 {
     children?: any
@@ -36,7 +38,7 @@ const MainRoutes: React.FC<RouterProps> = (props:RouterProps) =>
 
     return (
         <NavigationContainer >
-            <Drawer.Navigator initialRouteName='Login' drawerType = 'slide' screenOptions = {({navigation})=>({
+            <Drawer.Navigator initialRouteName='Login' drawerType = 'slide' drawerContent = {props => <Sidebar {...props} />} screenOptions = {({navigation})=>({
                         headerLeft: () => (<Pressable onPress={() => {navigation.openDrawer()}} style = {styles.menuImg}><Icon
                         name='menu' /></Pressable>),
                         headerShown:user !== 'Guest'
@@ -49,8 +51,9 @@ const MainRoutes: React.FC<RouterProps> = (props:RouterProps) =>
                 <Drawer.Screen name="Edit Profile" component={editProfile} />
                 <Drawer.Screen name="User" component={ProfilePage} />
                 <Drawer.Screen name="Comment" component={CommentNav} />
+                <Drawer.Screen name="Search" component = {SearchList} options={{drawerLabel: () => null}}/>
             </Drawer.Navigator>
-                </NavigationContainer>
+        </NavigationContainer>
         
     );
 }
