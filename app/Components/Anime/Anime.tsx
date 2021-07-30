@@ -13,6 +13,7 @@ const newAnime:IAnime = {
     name:'IamAFake',
     bio:'bad day for me',
     image:'',
+    genre:'',
     rating:1,
   }
 const Anime = () => {
