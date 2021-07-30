@@ -1,6 +1,7 @@
 import React, {useEffect, useState} from "react";
 import { View, Text, ScrollView, Image, StyleSheet, Touchable, TouchableOpacity } from "react-native";
 import { AntDesign } from "@expo/vector-icons";
+import Rating from '../../Screen/Rating'
 import { useSelector } from "react-redux";
 import { IRootState } from "../../redux/State";
 import axiosConfig from "../../../axiosConfig";
@@ -12,6 +13,7 @@ const newAnime:IAnime = {
     name:'IamAFake',
     bio:'bad day for me',
     image:'',
+    genre:'',
     rating:1,
   }
 const Anime = () => {
@@ -81,9 +83,12 @@ const Anime = () => {
                     </TouchableOpacity>
 
                 </View>
-                <Text style={styles.genre}>{/*anime.genra*/}</Text>
-                <Text style={styles.rating}>{anime.rating}</Text>
-                <Text style={styles.description}>{anime.bio}</Text>
+                <Text style = {styles.genre}>Adventure, Action</Text> 
+              
+                <Rating/>
+               
+                <Text style={styles.description}>The epic episodic adventure of Goku and the Z Warriors as they defend the Earth 
+                and the Universe from super-powered fighters and monsters.</Text>
             </View>
         
             {/* <View style = {styles.bottom}></View> */}
@@ -104,7 +109,7 @@ const styles = StyleSheet.create({
     },
 
     information: {
-        paddingTop: "60%",
+        padding:"50%",
         alignItems: "center",
     },
 
@@ -120,16 +125,16 @@ const styles = StyleSheet.create({
         fontSize: 32,
         fontWeight: "bold",
         textAlign:'center',
-        paddingBottom: "4%",
-        paddingHorizontal: "4%",
+        padding:10,
+        
     },
 
     genre: {
         backgroundColor: "#E9E9E9",
-        width: "100%",
+        width: "50%",
         textAlign: 'center',
-        paddingVertical: "2%",
-        fontSize: 16,
+        padding: 5,
+        fontSize: 14,
     },
 
     rating:{
@@ -144,8 +149,8 @@ const styles = StyleSheet.create({
     },
     
     animePicture: {
-        width: 300,
-        height: 400,
+        width: 250,
+        height: 300,
         resizeMode: 'stretch',
         alignSelf: "center",
         borderWidth: 5,

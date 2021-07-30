@@ -5,6 +5,7 @@ interface IAnime {
     name: string,
     bio:string, 
     image:string,
+    genre:string,
     rating?:number
 }
 export default IAnime;

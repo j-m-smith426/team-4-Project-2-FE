@@ -13,6 +13,7 @@ const newAnime:IAnime = {
     name:'IamAFake',
     bio:'bad day for me',
     image:'',
+    genre:'',
     rating:1,
   }
 
@@ -100,15 +101,15 @@ const Rating = () =>{
 }
 const styles=StyleSheet.create ({
     container:{
-        flex:.1,
+        flex:1,
         padding:10,
         justifyContent:'center',
         margin:25
     },
 
     star:{
-        width:40,
-        height:40,
+        width:20,
+        height:20,
         resizeMode:'cover',
         
     },
