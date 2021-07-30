@@ -44,7 +44,7 @@ const MainRoutes: React.FC<RouterProps> = (props:RouterProps) =>
                 {user === 'Guest' && <Drawer.Screen name="Login" component={Login} />}
                 <Drawer.Screen name="Home" component={mainScreen} />
                 <Drawer.Screen name="Post" component={PostScreen} />
-                <Drawer.Screen name="Anime" component={Anime} />
+                <Drawer.Screen name="Anime" component={AnimeScreen} />
                 {userType === 'Admin' && <Drawer.Screen name="AnimeAdd" component={addAnimeScreen} />}
                 <Drawer.Screen name="editProfile" component={editProfile} />
                 <Drawer.Screen name="User" component={ProfilePage} />

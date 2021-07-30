@@ -30,7 +30,9 @@ const Anime = () => {
 
                 </View>
                 <Text style = {styles.genre}>Adventure, Action</Text> 
+              
                 <Rating/>
+               
                 <Text style={styles.description}>The epic episodic adventure of Goku and the Z Warriors as they defend the Earth 
                 and the Universe from super-powered fighters and monsters.</Text>
             </View>
@@ -53,7 +55,7 @@ const styles = StyleSheet.create({
     },
 
     information: {
-        paddingTop: "60%",
+        padding:"50%",
         alignItems: "center",
     },
 
@@ -69,16 +71,16 @@ const styles = StyleSheet.create({
         fontSize: 32,
         fontWeight: "bold",
         textAlign:'center',
-        paddingBottom: "4%",
-        paddingHorizontal: "4%",
+        padding:10,
+        
     },
 
     genre: {
         backgroundColor: "#E9E9E9",
-        width: "100%",
+        width: "50%",
         textAlign: 'center',
-        paddingVertical: "2%",
-        fontSize: 16,
+        padding: 5,
+        fontSize: 14,
     },
 
     rating:{
@@ -93,8 +95,8 @@ const styles = StyleSheet.create({
     },
     
     animePicture: {
-        width: 300,
-        height: 400,
+        width: 250,
+        height: 300,
         resizeMode: 'stretch',
         alignSelf: "center",
         borderWidth: 5,
