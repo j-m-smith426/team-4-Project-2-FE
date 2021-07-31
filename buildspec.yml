@@ -1,5 +1,9 @@
 version: 0.2
 
+env:
+  variables:
+    - EXPO_NAME = joab.smith
+
 phases:
   install:
     runtime-versions:
@@ -12,7 +16,6 @@ phases:
     commands:
       - echo Testing...
       - export EXPO_CLI_PASSWORD=$(aws ssm get-parameter --name "EXPO_PASSWORD" --region "us-east-2" --query 'Parameter.Value' --with-decryption --output text)
-      - export EXPO_NAME=${aws ssm get-parameter --name "EXPO_USERNAME" --region "us-east-2" --query 'Parameter.Value' --with-decryption --output text}
       - npx expo login --non-interactive -u ${EXPO_NAME}
   build:
     commands:

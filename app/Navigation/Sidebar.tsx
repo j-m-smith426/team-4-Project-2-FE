@@ -20,7 +20,7 @@ const Sidebar = (props: any) => {
         <View>
             <View style = {styles.profImg}>
                 <Image style={styles.image}
-                source={require('../assets/icon.png')} />
+                source={require('../assets/scouter.png')} />
                 
             </View>
             <View style={styles.inputView}>
