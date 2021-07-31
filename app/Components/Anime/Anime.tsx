@@ -23,7 +23,7 @@ const newAnime:IAnime = {
 const Anime = () => {
     let isMounted = true;
     const [clicked, setClicked] = useState(false);
-    const [anime, setAnime] = useState(newAnime);
+    const [anime, setAnime] = isMounted && useState(newAnime);
     //const [isLoading, setIsLoading] = useState(true);
     const [currentPage, currentUser] = isMounted && useSelector((state: IRootState) =>
     {
@@ -36,8 +36,11 @@ const Anime = () => {
         console.log('page: ',currentPage)
         //setIsLoading(anime.name === 'IamAFake');
         if (isMounted) {
-            getAnime()
-            setStar(); //set star at load needs work
+            navigation.addListener('focus', () => [
+
+                getAnime()
+            ])
+             //set star at load needs work
         }
       return() => {isMounted = false}
     }, [navigation,currentPage])
@@ -90,11 +93,12 @@ const Anime = () => {
         setClicked(!clicked);
     };
 
-    // if (isLoading) {
-    //     return( <View style={styles.container}>
-    //         <Loading />
-    //         </View>)
-    // }
+    if (anime.name === 'IamAFake') {
+        setStar();
+        return( <View style={styles.container}>
+            <Loading />
+            </View>)
+    }
 
     return  (
         

@@ -1,95 +1,55 @@
+import { useNavigation } from "@react-navigation/native";
 import React from "react";
-import { View, Image, Text, ScrollView, StyleSheet, FlatList } from "react-native";
-
-const Following = () => {
+import { View, Image, Text, ScrollView, StyleSheet, FlatList, Pressable } from "react-native";
+import { useDispatch } from "react-redux";
+import { SwitchPageAction } from "../../redux/Actions";
+interface IProps
+{
+    following: string[];
+}
+const Following = (props: IProps) =>
+{
+    let navigation = useNavigation();
+    let dispatch = useDispatch();
+    console.log(props);
+    const goToUser = (name:string) =>
+    {
+        console.log('going to user');
+        navigation.navigate("User");
+        dispatch({
+            type: SwitchPageAction.UPDATE,
+            payload: {
+                PageName: 'User',
+                parentID: `U#${name}`
+            }
+        })
+    }
     return(
-        <ScrollView>
+       
+            <FlatList
+            data={props.following}
+            renderItem={
+                ({ item }) =>
+                    
+                (
+                    <Pressable onPress={()=>goToUser(item.split('#')[0])}>
 
             <View style={styles.container}>
                 <Image
                     style={styles.follower}
                     source={{
-                        uri: `https://images.theconversation.com/files/284721/original/file-20190718-116547-1kbpq3t.jpg?ixlib=rb-1.1.0&q=45&auto=format&w=1200&h=1200.0&fit=crop`
+                        uri: `https://scouter-revature-project1.s3.amazonaws.com/public/${item.split('#')[1]}`
                     }}
-                />
+                    />
                 <View style={styles.infoContainer}>
-                    <Text style={styles.followerName} numberOfLines={1}>@literally anything</Text>
+                    <Text style={styles.followerName} numberOfLines={1}>{item.split('#')[0]}</Text>
                 </View>
-            </View>
-
-            <View style={styles.container}>
-                <Image
-                    style={styles.follower}
-                    source={{
-                        uri: `https://images.theconversation.com/files/284721/original/file-20190718-116547-1kbpq3t.jpg?ixlib=rb-1.1.0&q=45&auto=format&w=1200&h=1200.0&fit=crop`
-                    }}
-                />
-                <View style={styles.infoContainer}>
-                    <Text style={styles.followerName} numberOfLines={1}>@clifford</Text>
-                </View>
-            </View>
-
-            <View style={styles.container}>
-                <Image
-                    style={styles.follower}
-                    source={{
-                        uri: `https://images.theconversation.com/files/284721/original/file-20190718-116547-1kbpq3t.jpg?ixlib=rb-1.1.0&q=45&auto=format&w=1200&h=1200.0&fit=crop`
-                    }}
-                />
-                <View style={styles.infoContainer}>
-                    <Text style={styles.followerName} numberOfLines={1}>@follower name</Text>
-                </View>
-            </View>
-
-            <View style={styles.container}>
-                <Image
-                    style={styles.follower}
-                    source={{
-                        uri: `https://images.theconversation.com/files/284721/original/file-20190718-116547-1kbpq3t.jpg?ixlib=rb-1.1.0&q=45&auto=format&w=1200&h=1200.0&fit=crop`
-                    }}
-                />
-                <View style={styles.infoContainer}>
-                    <Text style={styles.followerName} numberOfLines={1}>@follower name</Text>
-                </View>
-            </View>
-
-            <View style={styles.container}>
-                <Image
-                    style={styles.follower}
-                    source={{
-                        uri: `https://images.theconversation.com/files/284721/original/file-20190718-116547-1kbpq3t.jpg?ixlib=rb-1.1.0&q=45&auto=format&w=1200&h=1200.0&fit=crop`
-                    }}
-                />
-                <View style={styles.infoContainer}>
-                    <Text style={styles.followerName} numberOfLines={1}>@follower name</Text>
-                </View>
-            </View>
-
-            <View style={styles.container}>
-                <Image
-                    style={styles.follower}
-                    source={{
-                        uri: `https://images.theconversation.com/files/284721/original/file-20190718-116547-1kbpq3t.jpg?ixlib=rb-1.1.0&q=45&auto=format&w=1200&h=1200.0&fit=crop`
-                    }}
-                />
-                <View style={styles.infoContainer}>
-                    <Text style={styles.followerName} numberOfLines={1}>@follower name</Text>
-                </View>
-            </View>
-
-            <View style={styles.container}>
-                <Image
-                    style={styles.follower}
-                    source={{
-                        uri: `https://images.theconversation.com/files/284721/original/file-20190718-116547-1kbpq3t.jpg?ixlib=rb-1.1.0&q=45&auto=format&w=1200&h=1200.0&fit=crop`
-                    }}
-                />
-                <View style={styles.infoContainer}>
-                    <Text style={styles.followerName} numberOfLines={1}>@follower name</Text>
-                </View>
-            </View>
-            
-        </ScrollView>
+                        </View>
+                    </Pressable>
+                        )
+                    }
+                keyExtractor={item => item.split('#')[0]}
+            />
         
     )
 }
