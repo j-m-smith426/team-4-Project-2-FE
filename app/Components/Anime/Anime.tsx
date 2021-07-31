@@ -36,10 +36,7 @@ const Anime = () => {
         console.log('page: ',currentPage)
         //setIsLoading(anime.name === 'IamAFake');
         if (isMounted) {
-            navigation.addListener('focus', () => [
-
                 getAnime()
-            ])
              //set star at load needs work
         }
       return() => {isMounted = false}
