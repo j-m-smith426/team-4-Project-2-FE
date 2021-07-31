@@ -10,6 +10,7 @@ import IUser from "../../model/User";
 import Loading from "../../Screen/loading";
 import { useNavigation } from "@react-navigation/native";
 import color from '../../config/colors'
+import { updateUser } from "../Profile/updateUser";
 const newAnime:IAnime = {
     REFERENCE:'0',
     TYPEID:'A#FakeAnime',
@@ -23,7 +24,7 @@ const Anime = () => {
     let isMounted = true;
     const [clicked, setClicked] = useState(false);
     const [anime, setAnime] = useState(newAnime);
-    const [isLoading, setIsLoading] = useState(false);
+    //const [isLoading, setIsLoading] = useState(true);
     const [currentPage, currentUser] = isMounted && useSelector((state: IRootState) =>
     {
         return [state.sites.IPageState.parentID, state.sites.ILogin.username];
@@ -34,7 +35,10 @@ const Anime = () => {
         isMounted = true;
         console.log('page: ',currentPage)
         //setIsLoading(anime.name === 'IamAFake');
-      isMounted && getAnime()
+        if (isMounted) {
+            getAnime()
+            setStar(); //set star at load needs work
+        }
       return() => {isMounted = false}
     }, [navigation,currentPage])
     const getAnime = async () =>
@@ -46,7 +50,19 @@ const Anime = () => {
                 console.log('page: ',currentPage, 'response',response.data);
                 setAnime(response.data);
             });
-        setIsLoading(false);
+        //setIsLoading(false);
+    }
+    const setStar = () =>
+    {
+        axiosConfig.get('User/U_' + currentUser).then((response) =>
+        {
+            let userData: IUser = response.data;
+            let newFavArr: string[] = userData.favorites;
+            console.log(newFavArr);
+            if (newFavArr && newFavArr.includes(anime.TYPEID + '#' + anime.image)) {
+                setClicked(true);
+            }
+        })
     }
     
     const handleStarClick = () =>
@@ -69,24 +85,16 @@ const Anime = () => {
             }
             userData.favorites = emptyArr;
             console.log(userData);
-            axiosConfig.put('User', {
-                userID: userData.TYPEID,
-                REFERENCE: userData.REFERENCE,
-                image: userData.image,
-                bio: userData.bio,
-                watchlist: userData.watchlist,
-                followed: userData.followed,
-                favorites: userData.favorites
-            });
+            updateUser(userData);
         })
         setClicked(!clicked);
     };
 
-    if (isLoading) {
-        return( <View>
-            <Loading />
-            </View>)
-    }
+    // if (isLoading) {
+    //     return( <View style={styles.container}>
+    //         <Loading />
+    //         </View>)
+    // }
 
     return  (
         
@@ -105,18 +113,23 @@ const Anime = () => {
             </View>
             <View style = {styles.information}>
                 <View style = {styles.headInfo}>
+                    <View style= {styles.titleRow}>
+
                     <Text style={styles.title}> {anime.TYPEID.split('#')[1]}</Text>
                     
                     <TouchableOpacity onPress = {() => handleStarClick()}>
                         <AntDesign name = "star" size = {34} color = {clicked? "gold":"grey"}/>
                     </TouchableOpacity>
+                    </View>
 
-                </View>
-                <Text style={styles.genre}>{anime.genre}</Text>
-              
-                <Rating/>
-               
+                <Text style={styles.genre}>{anime.genre|| 'none'}</Text>
                 <Text style={styles.description}>{anime.bio}</Text>
+                </View>
+                <View >
+                    
+                <Rating/>
+                </View>
+               
             </View>
         
             {/* <View style = {styles.bottom}></View> */}
@@ -132,20 +145,21 @@ const styles = StyleSheet.create({
 
     top: {
         backgroundColor: "#0078FF",
-        paddingVertical: "15%",       
+        paddingVertical: "5%",       
         height: "30%",
     },
 
     information: {
-        flex:1,
-        padding:"50%",
+        flex: 1,
+        flexDirection: 'column',
         alignItems: "center",
     },
 
     headInfo: {
-        flex:1,
-        flexDirection: "row",
-        backgroundColor: color.primary
+        flex: 1,
+        paddingTop: '35%',
+        flexDirection: "column",
+        alignItems: 'center'
     },
 
     star: {
@@ -156,7 +170,7 @@ const styles = StyleSheet.create({
         fontSize: 32,
         fontWeight: "bold",
         textAlign:'center',
-        padding:10,
+        //padding:10,
         
     },
 
@@ -169,7 +183,7 @@ const styles = StyleSheet.create({
     },
 
     rating: {
-        flex: 1,
+       // flex: 1,
         flexDirection: 'row',
         fontSize:18,
         paddingVertical: "5%",
@@ -180,6 +194,11 @@ const styles = StyleSheet.create({
         textAlign:'left',
         fontSize: 16,
     },
+    titleRow: {
+        flex: 1,
+        flexDirection: 'row',
+      
+    },
     
     animePicture: {
         width: 250,
@@ -188,6 +207,7 @@ const styles = StyleSheet.create({
         alignSelf: "center",
         borderWidth: 5,
         borderColor: "white",
+        backgroundColor: color.background
     },
 });
 

@@ -31,7 +31,8 @@ export default function AnimePage() {
 
   
 const FirstRoute = () => (
-  <Anime/>
+  
+  <Anime />
 );
 
 const SecondRoute = () => (

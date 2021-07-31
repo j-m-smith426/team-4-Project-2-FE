@@ -23,6 +23,7 @@ import CommentNav from '../Screen/CommentNav';
 import mainScreen from '../Screen/mainScreen';
 import SearchList from '../Screen/SearchList';
 import AnimePage from '../Components/Anime/AnimeNavigation'
+import AllAnime from '../Screen/AllAnime';
 
 interface RouterProps
 {
@@ -47,15 +48,15 @@ const MainRoutes: React.FC<RouterProps> = (props:RouterProps) =>
                       })}>
                 {user === 'Guest' && <Drawer.Screen name="Login" component={Login} />}
                 <Drawer.Screen name="Home" component={mainScreen} />
-                <Drawer.Screen name="Post" component={PostScreen} />
-
-                <Drawer.Screen name="Anime" component={AnimePage} />
-                {userType === 'Admin' && <Drawer.Screen name="AnimeAdd" component={addAnimeScreen} />}
+                 <Drawer.Screen name="All Anime" component={AllAnime} options={{drawerLabel:'Anime'}} />   
                 <Drawer.Screen name="editProfile" component={editProfile} />
-
                 <Drawer.Screen name="User" component={ProfilePage} />
-                <Drawer.Screen name="Comment" component={CommentNav} />
+                {userType === 'Admin' && <Drawer.Screen name="AnimeAdd" component={addAnimeScreen} />}
+                <Drawer.Screen name="Post" component={PostScreen} options={{drawerLabel: () => null}}/>
+                <Drawer.Screen name="Anime" component={AnimePage} options={{drawerLabel: () => null}}/>
                 <Drawer.Screen name="Search" component = {SearchList} options={{drawerLabel: () => null}}/>
+                <Drawer.Screen name="Comment" component={CommentNav} options={{drawerLabel: () => null}}/>
+
             </Drawer.Navigator>
         </NavigationContainer>
         
