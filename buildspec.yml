@@ -1,0 +1,26 @@
+version: 0.2
+
+phases:
+  install:
+    runtime-versions:
+      nodejs: 12
+    commands:
+      - echo Installing dependencies...
+      - npm install --global --unsafe-perm sharp-cli expo-cli
+      - npm install --force
+  pre_build:
+    commands:
+      - echo Testing...
+      - export EXPO_CLI_PASSWORD=$(aws ssm get-parameter --name "EXPO_PASSWORD" --region "us-east-2" --query 'Parameter.Value' --with-decryption --output text)
+      - export EXPO_NAME=${aws ssm get-parameter --name "EXPO_USERNAME" --region "us-east-2" --query 'Parameter.Value' --with-decryption --output text}
+      - npx expo login --non-interactive -u ${EXPO_NAME}
+  build:
+    commands:
+      - echo Build started on `date`
+      - echo Compiling the actual code
+      - expo publish
+      - expo build:android -t apk --no-wait
+  post_build:
+    commands:
+      - echo Build completed on `date`
+      - echo Android build status can be checked at https://expo.dev/

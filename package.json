@@ -7,7 +7,7 @@
     "web": "expo start --web",
     "eject": "expo eject",
     "test": "jest",
-    "coverage": "jest --watchAll=false --coverage"
+    "coverage": "jest --watchAll --coverage"
   },
   "dependencies": {
     "@aws-amplify/auth": "^4.1.3",

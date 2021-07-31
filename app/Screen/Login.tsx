@@ -7,6 +7,9 @@ import { LoginActions, SwitchPageAction } from "../redux/Actions";
 import { Auth } from "aws-amplify";
 import { CognitoUser } from "@aws-amplify/auth";
 import { IRootState } from "../redux/State";
+import IUser from "../model/User";
+import axiosConfig from "../../axiosConfig";
+import { AuthError } from "@aws-amplify/auth/lib-esm/Errors";
 
 
 const Login = () =>
@@ -26,11 +29,13 @@ const Login = () =>
 
     const [signup,setSignup] = useState<any>(                <TouchableOpacity>
         <Text style={styles.linkText} onPress={toSignup}>Sign Up</Text>
-    </TouchableOpacity>);
+    </TouchableOpacity>
+    );
     //Functionality states
     const [username, setUsername]= useState<string>("");
     const [password, setPassword]= useState<string>("");
-    const [email, setEmail]= useState<string>("");
+    const [email, setEmail] = useState<string>("");
+    const [error, setError] = useState('');
 
     const dispatch = useDispatch();
     const currentUser = useSelector((state: IRootState) =>
@@ -53,6 +58,25 @@ const Login = () =>
     }
     const onEmailChange = (email:string) => {
         setEmail(email);
+    }
+
+    const addToDb = () =>
+    {
+        let newUser: IUser = {
+            REFERENCE: '0',
+            TYPEID: 'U#' + username,
+            name: username,
+            bio: {
+                greeting: '',
+                description:''
+            },
+            image: 'key',
+            watchlist: [],
+            followed: [],
+            favorites: []
+
+        }
+        axiosConfig.post('User', newUser);
     }
     //-------------
     const submit = async () => {
@@ -82,8 +106,11 @@ const Login = () =>
            }
             
        
-       } catch (error) {
-           console.log('error signing in', error);
+       } catch (err) {
+            console.log('error signing in', err);
+            let authErr:AuthError = err
+            setError(authErr.message);
+            
        }  
     }
     async function signUpSubmit() {
@@ -95,12 +122,15 @@ const Login = () =>
                     email: email,          
                 }
             });
-            if(user){
+            if (user) {
+                addToDb();
                 toLogin();
             }
             console.log(user);
-        } catch (error) {
-            console.log('error signing up:', error);
+        } catch (err) {
+            console.log('error signing up:', err);
+            let authErr:AuthError = err
+            setError(authErr.message);
         }
     }
     //login button state
@@ -150,9 +180,13 @@ const Login = () =>
                         placeholder="Password"/>
                 </View>
                 <TouchableOpacity style={styles.loginBtn} onPress={loginTrue ? submit : signUpSubmit}>
-                    <Text style={styles.text}>LOGIN</Text>
-                </TouchableOpacity>
-                {signup}
+                        <Text style={styles.text}>{loginTrue ? 'LOGIN' : 'SignUp'}</Text>
+                    </TouchableOpacity>
+                    <View>
+        <Text>{error||'please sign in'}</Text>
+                </View>
+                    {signup}
+                    
             </View>
             <View style = {styles.filler}/>
         </View>

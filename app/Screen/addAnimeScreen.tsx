@@ -14,7 +14,8 @@ export default function addAnimeScreen()
 {
     const [title, setTitle] = useState('title');
     const [description, setDescription] = useState('description');
-    const [image, setImage] = useState('key');
+  const [image, setImage] = useState('key');
+  const [genre, setGenra] = useState('')
     const [currRes, setRes] = useState('result');
   
   // const page = useSelector((state:IRootState) =>
@@ -55,23 +56,28 @@ export default function addAnimeScreen()
     };
     
     const submitPage = () =>
-    {const Stamp = new Date().getTime();
-      fetch(image).then((response) =>
-      {
+    {
+      const Stamp = new Date().getTime();
+      if (image !== 'key') {
         
+        fetch(image).then((response) =>
+        {
+          
           console.log('Res',response);
           const access = { level: "public" };
           response.blob().then(blob =>
-              {
-                  Storage.put(`A ${title}/${Stamp}.jpg`, blob, access);
-                  
-              })
+            {
+              Storage.put(`A ${title}/${Stamp}.jpg`, blob, access);
+              
+            })
           })
+        }
         axiosConfig.post('Anime', {
           
           parentID:'A#'+title,
           bio:description,
-          image:`A ${title}/${Stamp}.jpg`,
+          image: image !== 'key' ? `A ${title}/${Stamp}.jpg` : 'key',
+          genre,
         })
         .then(function (response) {
           console.log(response);
@@ -114,6 +120,11 @@ export default function addAnimeScreen()
           <View style={styles.lowerMenu}>
               <View style={styles.textInput}>
           <TextInput style={styles.description} multiline numberOfLines={3} placeholder="Description" onChangeText={setDescription} />
+              </View>
+          </View>
+          <View style={styles.lowerMenu}>
+              <View style={styles.textInput}>
+          <TextInput style={styles.description} multiline numberOfLines={1} placeholder="Genra" onChangeText={setGenra} />
               </View>
           </View>
           

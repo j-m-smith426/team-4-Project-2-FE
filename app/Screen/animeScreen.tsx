@@ -1,12 +1,13 @@
 import { StatusBar } from 'expo-status-bar';
 import React,{useState} from 'react';
-import { StyleSheet, Text, View, Image, Button } from 'react-native';
+import { StyleSheet, Text, View, Image, Button, TouchableOpacity } from 'react-native';
 import Rating from './Rating'
 import {Storage} from 'aws-amplify'
 import { useEffect } from 'react';
 import axios from '../../axiosConfig';
 import IAnime from '../model/Anime'
 import SearchList from './SearchList'
+import { AntDesign } from '@expo/vector-icons';
 
 const newAnime:IAnime = {
   REFERENCE:'0',
@@ -14,13 +15,19 @@ const newAnime:IAnime = {
   name:'IamAFake',
   bio:'bad day for me',
   image:'',
+  genre:'',
   rating:1,
 }
 
 export default function AnimeScreen() {
   const [anime,setAnime] = useState<IAnime>(newAnime);
   const currentPage = "A#DragonBallZ";
-  
+  const [clicked, setClicked] = useState(false);
+    const handleStarClick = () => {
+        console.log("Clicked");
+        setClicked(!clicked);
+    };
+
    
     useEffect(() =>
     {
@@ -38,25 +45,23 @@ export default function AnimeScreen() {
   return (
     <View style={styles.container}>
        <View style={styles.topMenu}>
-       <Text style={styles.header}>{anime.TYPEID.split('#')[1]}</Text>
+       <Text style={styles.topMenu}>{anime.TYPEID.split('#')[1]}</Text>
+          <Text>   </Text>
+       <TouchableOpacity onPress = {() => handleStarClick()}>
+                        <AntDesign name = "heart" size = {20} color = {clicked? "gold":"grey"}/>
+                    </TouchableOpacity>
        </View>
-      <Image
-     
+      <Image     
         style={styles.animeImg}
         // source={require('../assets/dbz.jpg')}/>
         source={{uri: `https://scouter-revature-project1.s3.amazonaws.com/public/${anime.image}`}}/> 
-        
+        <Text style={styles.genre}>{anime.genre}</Text>
 
     
-        <Text style={styles.title}>{anime.TYPEID.split('#')[1]}</Text>
         {/* <Text style={styles.rating}></Text> */}
         <Rating/>
         <Text style={styles.content}>{anime.bio}</Text>
-    
-    <View style={styles.lowerMenu}>
    
-
-    </View>
   </View>
   );
 
@@ -69,10 +74,11 @@ const styles = StyleSheet.create({
     backgroundColor: '#fff',
     alignItems: 'center',
     justifyContent: 'space-evenly',
+    marginBottom:25,
 
   },
   animeImg:{      
-      height:200,
+      height:300,
       width:300,
   },
   title:{
@@ -89,11 +95,13 @@ const styles = StyleSheet.create({
   },
   
   topMenu:{
-      color:'white',
-      fontSize:18,
-      backgroundColor:'#072083',
+      color:'black',
+      fontSize:26,
+      backgroundColor:'#fff',
       flexDirection:'row',
-      padding:10,
+      padding:5,
+      margin:5,
+      alignItems:"center",
   },
   lowerMenu:{
     flexDirection:'row',
@@ -108,5 +116,12 @@ const styles = StyleSheet.create({
   },
   header:{
       color:'white'
-  }
+  },
+  genre: {
+    backgroundColor: "#E9E9E9",
+    width: "50%",
+    textAlign: 'center',
+    padding: 5,
+    fontSize: 14,
+}
 });

@@ -1,9 +1,9 @@
 import { useNavigation } from "@react-navigation/native";
 import React, { useCallback, useEffect, useState } from "react";
 import { Text, View, StyleSheet, Image, Pressable } from "react-native";
-import { Provider, useDispatch } from "react-redux";
+import { useDispatch } from "react-redux";
 import axiosConfig from "../../../axiosConfig";
-import { store } from "../../../App";
+
 import colors from "../../config/colors";
 import IPost from "../../model/Post";
 import { SwitchPageAction } from "../../redux/Actions";
@@ -45,7 +45,7 @@ const Post = (props: IPost) =>
     {
         let isMounted = true;
         if (isMounted) {
-            console.log(props);
+            
             setHasImage(props.image !== 'key');
             getProfPic();
         }
@@ -76,20 +76,34 @@ const Post = (props: IPost) =>
         });
         navigation.navigate('Comment');
     }
+    const goToUser = () =>
+    {
+        console.log('going to user');
+        navigation.navigate("User");
+        dispatch({
+            type: SwitchPageAction.UPDATE,
+            payload: {
+                PageName: 'User',
+                parentID: `U#${props.username}`
+            }
+        })
+    }
     
     return (
+        
         <View style={styles.post}>
 
-                {console.log(props.image)}
+            <Pressable onPress={() => goToUser()}>
+                
                 <View style={styles.profImg}>
                     <ProfileImg username={props.username} profileImg={profilepic} />
                 </View>
-            
+            </Pressable>
                 <View style={styles.text}>
                     <Text>{props.Contents}</Text>
             </View>
             
-            { //console.log(`https://scouter-revature-project1.s3.amazonaws.com/public/${props.image}`)}{
+            { 
                 hasImage && <Image testID='CommentImg' style={styles.postImg} source={{
                     uri: `https://scouter-revature-project1.s3.amazonaws.com/public/${props.image}`,
                     method: 'GET',
@@ -144,7 +158,8 @@ const styles = StyleSheet.create({
         maxWidth: 200,
         height: 50,
         marginTop: '2%',
-        marginLeft:'1%'
+        marginLeft: '1%',
+        backgroundColor: colors.background
         
     },
     text: {

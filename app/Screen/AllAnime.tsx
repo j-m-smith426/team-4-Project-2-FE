@@ -32,32 +32,27 @@ interface IAnimeList
 }
 
 
-const SearchList=()=> {
+const AllAnime=()=> {
 
   const [animeArr, setAnime] = useState<IAnimeList[]>([]);     
 
   const dispatch = useDispatch();
   const navigation = useNavigation(); 
-  const route = useRoute();
-  const params:any = route.params;
-  const { val } = params;
   
 
   useEffect(() =>
   {
     let isMounted = true;
     if (isMounted) {
-      console.log('val',val);
-      getAnimeBySearch();
+      
+      getAllAnime();
     }
     return()=>{isMounted = false}
-  },[navigation,params])
+  },[navigation])
 
-  const getAnimeBySearch = useCallback( async () =>
+  const getAllAnime = async () =>
   {
-    console.log("Sending request iwth " + val);
-    if(val){
-      axios.get<any[]>('Anime/search/' + val)
+      axios.get<any[]>('Anime/all')
       .then(response =>
         {
         console.log(response.data);
@@ -82,8 +77,6 @@ const SearchList=()=> {
           console.log(animeArr);
       })
     }
-
-  }, [val]);
   function getThere(name: string)
   {
     console.log(name);
@@ -113,17 +106,6 @@ const SearchList=()=> {
 
             )}
         />
-      
-
-        {/* //loads all items before showing on screen */}
-        {/* <ScrollView>
-        {people.map(item=>(
-                <View key={item.key}>
-                    <Text style={styles.item}>{item.name}</Text>
-                    </View>
-        ))}
-    </ScrollView> */}
-
     </View>
   );
 
@@ -148,8 +130,6 @@ const styles = StyleSheet.create({
   }
   
 });
-export default SearchList;
-function useRouter() {
-  throw new Error('Function not implemented.');
-}
+export default AllAnime;
+
 

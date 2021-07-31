@@ -28,7 +28,7 @@ let newUser: IUser = {
   favorites: []
 
 }
-export default function ProfilePage() {
+export default function Profile() {
   
   let isMounted = true;
   //key value pairs for the header so that the route knows what to look for
@@ -42,14 +42,14 @@ export default function ProfilePage() {
   
   const [userInfo, setUserInfo] = useState<IUser>(newUser);
   let navigation = isMounted && useNavigation();
-  let page = isMounted && useSelector((state: IRootState) =>
+  let user = isMounted && useSelector((state: IRootState) =>
   {
-    return state.sites.IPageState.parentID;
+    return state.sites.ILogin.username
   });
-  let userPage = page.replace('#','_');
+  //let userPage = page.replace('#','_');
   const loadUserInfo = () =>
   {
-    axiosConfig.get(`User/${userPage}`).then((response) =>
+    axiosConfig.get(`User/U_${user}`).then((response) =>
     {
       setUserInfo(response.data);
     })
@@ -72,7 +72,7 @@ export default function ProfilePage() {
   }, [navigation]);
   //Route to each component
 const FirstRoute = () => (
-  <Bio  bio={userInfo.bio} image={userInfo.image}  name={page.split('#')[1]}/>
+  <Bio  bio={userInfo.bio} image={userInfo.image}  name={user}/>
 );
 
 const SecondRoute = () => (
@@ -86,7 +86,7 @@ const ThirdRoute = () => (
 );
 
 const FourthRoute = () => (
-  <Following following={userInfo.followed}/>
+    <Following following={userInfo.followed}/>
 );
 
 const renderScene = SceneMap({
