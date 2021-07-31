@@ -1,8 +1,8 @@
 version: 0.2
 
 env:
-  variables: 
-    EXPO_NAME = joab.smith
+  variables:
+    EXPO_NAME: joab.smith
 
 phases:
   install:
