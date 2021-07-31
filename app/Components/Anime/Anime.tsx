@@ -24,7 +24,7 @@ const Anime = () => {
     let isMounted = true;
     const [clicked, setClicked] = useState(false);
     const [anime, setAnime] = isMounted && useState(newAnime);
-    //const [isLoading, setIsLoading] = useState(true);
+    
     const [currentPage, currentUser] = isMounted && useSelector((state: IRootState) =>
     {
         return [state.sites.IPageState.parentID, state.sites.ILogin.username];
@@ -34,7 +34,7 @@ const Anime = () => {
     {
         isMounted = true;
         console.log('page: ',currentPage)
-        //setIsLoading(anime.name === 'IamAFake');
+        
         if (isMounted) {
                 getAnime()
              //set star at load needs work
@@ -50,7 +50,6 @@ const Anime = () => {
                 console.log('page: ',currentPage, 'response',response.data);
                 setAnime(response.data);
             });
-        //setIsLoading(false);
     }
     const setStar = () =>
     {
