@@ -1,10 +1,9 @@
 import { useNavigation } from "@react-navigation/native";
 import React, { useCallback, useEffect, useState } from "react";
 import { Text, View, StyleSheet, Image, Pressable } from "react-native";
-import { useDispatch } from "react-redux";
+import { Provider, useDispatch } from "react-redux";
 import axiosConfig from "../../../axiosConfig";
-import axios from 'axios'
-
+import { store } from "../../../App";
 import colors from "../../config/colors";
 import IPost from "../../model/Post";
 import { SwitchPageAction } from "../../redux/Actions";
@@ -79,7 +78,6 @@ const Post = (props: IPost) =>
     }
     
     return (
-        
         <View style={styles.post}>
 
                 {console.log(props.image)}

@@ -10,10 +10,10 @@ describe('Post', () =>
     test('Should have correct information', () =>
     {
         const postInfo = {
-            username:'user2', userProfilePic:'yes', Contents:'There once was a little bunny that ran around', timestamp: 5, postID:'001'
+           parentID: 'U#user2',  username:'user2', userProfilePic:'yes', Contents:'There once was a little bunny that ran around', timestamp: 5, postID:'001'
         }
 
-        const wrapper = mount(<Post username='user2' userProfilePic='yes' Contents='There once was a little bunny that ran around' timestamp={5} postID='001' />);
+        const wrapper = mount(<Post parentID='U#user2' username='user2' userProfilePic='yes' Contents='There once was a little bunny that ran around' timestamp={5} postID='001' />);
 
         console.log(wrapper);
         const prop = wrapper.findWhere((node) => node.prop('testID') === 'Name');
