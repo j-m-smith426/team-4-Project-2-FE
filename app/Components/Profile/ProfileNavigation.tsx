@@ -86,7 +86,7 @@ const ThirdRoute = () => (
 );
 
 const FourthRoute = () => (
-  <Following />
+  <Following following={userInfo.followed}/>
 );
 
 const renderScene = SceneMap({
