@@ -11,6 +11,7 @@ import Loading from "../../Screen/loading";
 import { useNavigation } from "@react-navigation/native";
 import color from '../../config/colors'
 import { updateUser } from "../Profile/updateUser";
+
 const newAnime:IAnime = {
     REFERENCE:'0',
     TYPEID:'A#FakeAnime',
@@ -19,7 +20,8 @@ const newAnime:IAnime = {
     image:'',
     genre:'',
     rating:1,
-  }
+}
+
 const Anime = () => {
     let isMounted = true;
     const [clicked, setClicked] = useState(false);
@@ -126,7 +128,7 @@ const Anime = () => {
                     </TouchableOpacity>
                     </View>
 
-                <Text style={styles.genre}>{anime.genre|| 'none'}</Text>
+                <Text testID='genre' style={styles.genre}>{anime.genre|| 'none'}</Text>
                 <Text style={styles.description}>{anime.bio}</Text>
                 </View>
                 <View >

@@ -113,18 +113,18 @@ export default function addAnimeScreen()
               <View style={styles.textInput} >
 
             
-            <TextInput style={styles.title} placeholder="Title" onChangeText={setTitle}/>
+            <TextInput testID = "title" style={styles.title} placeholder="Title" onChangeText={setTitle}/>
               
               </View>
           </View>
           <View style={styles.lowerMenu}>
               <View style={styles.textInput}>
-          <TextInput style={styles.description} multiline numberOfLines={3} placeholder="Description" onChangeText={setDescription} />
+          <TextInput testID = "description" style={styles.description} multiline numberOfLines={3} placeholder="Description" onChangeText={setDescription} />
               </View>
           </View>
           <View style={styles.lowerMenu}>
               <View style={styles.textInput}>
-          <TextInput style={styles.description} multiline numberOfLines={1} placeholder="Genra" onChangeText={setGenra} />
+          <TextInput testID = "genre" style={styles.description} multiline numberOfLines={1} placeholder="Genra" onChangeText={setGenra} />
               </View>
           </View>
           
