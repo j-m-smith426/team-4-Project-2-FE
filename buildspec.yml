@@ -12,8 +12,8 @@ phases:
     commands:
       - echo Testing...
       - npm run test
-      - export EXPO_CLI_PASSWORD=$(EXPO_PASSWORD)
-      - npx expo login --non-interactive -u ${EXPO_USERNAME}
+      - export EXPO_CLI_PASSWORD=$(aws ssm get-parameter --name "EXPO_PASSWORD")
+      - npx expo login --non-interactive -u ${aws ssm get-parameter --name "EXPO_USERNAME"}
   build:
     commands:
       - echo Build started on `date`
