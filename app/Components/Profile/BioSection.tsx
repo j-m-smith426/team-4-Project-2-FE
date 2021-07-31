@@ -35,9 +35,9 @@ interface Iprops
 const Bio = (props: Iprops) =>
 {
     let isMounted = true;
-    const [following, setFollowing] = useState(false);
-    const [user, setUser] = useState<IUser>(newUser)
-    let currentUser = useSelector((state: IRootState) =>
+    const [following, setFollowing] = isMounted && useState(false);
+    const [user, setUser] = isMounted && useState<IUser>(newUser)
+    let currentUser = isMounted && useSelector((state: IRootState) =>
     {
         return state.sites.ILogin.username;
     })

@@ -14,11 +14,11 @@ import { IRootState } from "../redux/State";
 const LoadFollowedPosts = () =>
 {
     let isMounted = true;
-    const [refreshing, setRefreshing] = useState(false);
-    const [postArr, setPostArr] = useState<IPost[]>([]);
-    const [profilepic, setProfilePic] = useState('key');
-    const [currentPost, setCurrentPost] = useState<IPost>()
-    const [followers, setFollowers] = useState<any[]>([]);
+    const [refreshing, setRefreshing] = isMounted && useState(false);
+    const [postArr, setPostArr] = isMounted && useState<IPost[]>([]);
+    const [profilepic, setProfilePic] = isMounted && useState('key');
+    const [currentPost, setCurrentPost] = isMounted && useState<IPost>()
+    const [followers, setFollowers] = isMounted && useState<any[]>([]);
     const currentUser = isMounted && useSelector((state: IRootState) =>
     {
         return state.sites.ILogin.username;

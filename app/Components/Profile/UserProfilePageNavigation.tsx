@@ -40,7 +40,7 @@ export default function Profile() {
     { key: 'fourth', title: 'Follow'}
   ]);
   
-  const [userInfo, setUserInfo] = useState<IUser>(newUser);
+  const [userInfo, setUserInfo] = isMounted && useState<IUser>(newUser);
   let navigation = isMounted && useNavigation();
   let user = isMounted && useSelector((state: IRootState) =>
   {

@@ -15,9 +15,9 @@ interface IProps
 
 const LoadPosts = (props:IProps) =>
 {   let isMounted = true;
-    const [refreshing, setRefreshing] = useState(false);
-    const [postArr, setPostArr] = useState<IPost[]>();
-    const [profilepic, setProfilePic] = useState('key');
+    const [refreshing, setRefreshing] = isMounted && useState(false);
+    const [postArr, setPostArr] = isMounted && useState<IPost[]>();
+    const [profilepic, setProfilePic] = isMounted && useState('key');
     const navigation = isMounted && useNavigation();
     useEffect(() =>
     {

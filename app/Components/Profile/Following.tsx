@@ -1,5 +1,5 @@
 import { useNavigation } from "@react-navigation/native";
-import React from "react";
+import React, { useEffect } from "react";
 import { View, Image, Text, ScrollView, StyleSheet, FlatList, Pressable } from "react-native";
 import { useDispatch } from "react-redux";
 import { SwitchPageAction } from "../../redux/Actions";
@@ -9,9 +9,19 @@ interface IProps
 }
 const Following = (props: IProps) =>
 {
-    let navigation = useNavigation();
-    let dispatch = useDispatch();
-    console.log(props);
+    let isMounted = true;
+    let navigation = isMounted && useNavigation();
+    let dispatch = isMounted && useDispatch();
+    
+    useEffect(() =>
+    {
+        isMounted = true;
+        return () =>
+        {
+            isMounted = false;
+        }
+})
+    
     const goToUser = (name:string) =>
     {
         console.log('going to user');
