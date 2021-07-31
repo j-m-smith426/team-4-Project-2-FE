@@ -1,29 +1,25 @@
 import React, {useState, useEffect} from "react";
 import { ScrollView, Text, Image, View, StyleSheet, Pressable } from "react-native";
 import axiosConfig from "../../../axiosConfig";
-import axios, {AxiosResponse} from "axios";
 import { Icon } from "react-native-elements";
 import { useSelector } from "react-redux";
 import { IRootState } from "../../redux/State";
-
-export interface IAnime {
-    TYPEID: string;
-    REFERENCE: string;
-    name: string;
-    description:string;
-    genres: string[];
-    image:string;
-    
-}
-
-let newAnime:IAnime = {
+import IUser from "../../model/User";
+let newUser: IUser = {
+    REFERENCE: '0',
     TYPEID: '',
-    REFERENCE: '',
     name: '',
-    description:'',
-    genres: [],
-    image:''
+    bio: {
+        greeting: '',
+        description:''
+    },
+    image: 'key',
+    watchlist: [],
+    followed: [],
+    favorites: []
+
 }
+
 interface Iprops
 {
     image: string,
@@ -31,51 +27,46 @@ interface Iprops
         greeting: string,
         description:string
     },
-    following: boolean,
-    user: any,
+   
     name:string
 }
 
 const Bio = (props: Iprops) =>
 {
+    let isMounted = true;
     const [following, setFollowing] = useState(false);
-    const currentUser = useSelector((state: IRootState) =>
+    const [user, setUser] = useState<IUser>(newUser)
+    let currentUser = useSelector((state: IRootState) =>
     {
         return state.sites.ILogin.username;
     })
-    console.log(props);
-   /*
-    const [anime, setAnime] = useState<any>(newAnime);
-    useEffect((), => {
-        getAnime();
-    }, []);
-
-    
-    const getAnime = async () => {
-        let animeResponse: any = 'null';
-        axiosConfig.get('Anime/all').then(response => {
-            animeResponse = response.data;
-            setAnime = animeResponse;
-            //alert(JSON.stringify(response.data));
-
-        })
-    } 
-    
-    const getAnime = async () => {
-        let animeResponse: any = 'null'
-        return axiosConfig.get<typeof newAnime>('Anime/A#Naruto').then(response => {
-            animeResponse = response.data;
-            console.log(animeResponse);
-
-        });
+    useEffect(() =>
+    {
+        isMounted = true;
+        if (isMounted) {
+            
+           setVeiwingUser();
+            setFollow();
+        }
+        return () => { isMounted = false;}
+    },[])
+    const setVeiwingUser = () =>
+    {
+        axiosConfig.get('User/U_'+currentUser).then((resp) => {setUser(resp.data)})
     }
-    getAnime();
-    */
+
+    const setFollow = () =>
+    {
+        if (user.followed.includes(props.name)) {
+            setFollowing(true);
+        }
+    }
+   
     const addFollow = async () =>
     {
-        props.user.followed.push(props.name);
+        user.followed.push(props.name);
         axiosConfig.put('User', {
-            ...props.user
+            ...user
         })
         setFollowing(true);
     }
@@ -83,10 +74,10 @@ const Bio = (props: Iprops) =>
     const unFollow = async() =>
     {
         let temp:any[] = []
-        props.user.followed.forEach((name:any) => {if(name !== props.name){temp.push(name)}})
-        props.user.followed = temp;
+        user.followed.forEach((name:any) => {if(name !== props.name){temp.push(name)}})
+        user.followed = temp;
         axiosConfig.put('User', {
-            ...props.user
+            ...user
         })
         setFollowing(false);
     }
@@ -102,7 +93,6 @@ const Bio = (props: Iprops) =>
     }
     return(
         <View style = {styles.background}>
-        {console.log('compare', currentUser, props.name)}
         <Image
             style = {styles.profilePicture}
             source = {{uri: `https://scouter-revature-project1.s3.amazonaws.com/public/${props.image}`}}

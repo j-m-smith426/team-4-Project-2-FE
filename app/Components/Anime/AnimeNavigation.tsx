@@ -9,6 +9,7 @@ import axiosConfig from '../../../axiosConfig';
 import { IRootState } from '../../redux/State';
 import AnimeScreen from '../../Screen/animeScreen'
 import PostScreen from '../../Screen/PostScreen';
+import Anime from './Anime';
 
 export default function AnimePage() {
   //const layout = useWindowDimensions();
@@ -30,7 +31,7 @@ export default function AnimePage() {
 
   
 const FirstRoute = () => (
-  <AnimeScreen/>
+  <Anime/>
 );
 
 const SecondRoute = () => (

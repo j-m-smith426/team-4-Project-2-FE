@@ -7,11 +7,27 @@ import { useSelector } from "react-redux";
 import { IRootState } from "../../redux/State";
 import { Storage } from 'aws-amplify'
 import axiosConfig from "../../../axiosConfig";
+import IUser from "../../model/User";
+import { updateUser } from "./updateUser";
 
+let newUser: IUser = {
+    REFERENCE: '0',
+    TYPEID: '',
+    name: '',
+    bio: {
+        greeting: '',
+        description:''
+    },
+    image: 'key',
+    watchlist: [],
+    followed: [],
+    favorites: []
+
+}
 const editBio = () =>
 {
     const [image, setImage] = useState('key');
-    const [user, setUser] = useState<any>({})
+    const [user, setUser] = useState<IUser>(newUser)
     const [greeting, setGreeting] = useState('');
     const [descrip, setDescrip] = useState('');
     const navigation = useNavigation();
@@ -75,18 +91,17 @@ const editBio = () =>
                     
             })
         });
-        axiosConfig.put('User', {
-            userID: "U#"+currentUser,
-            REFERENCE: "0",
-            image: `${currentUser}/${Stamp}.jpg`,
-            bio: {
+       
+        user.TYPEID = "U#" + currentUser;
+        user.REFERENCE = "0";
+        user.image = `${currentUser}/${Stamp}.jpg`;
+        user.bio= {
                 greeting,
                 description: descrip
-            },
-            watchlist: user.watchlist || [],
-            followed: user.followed || [],
-            favorites: user.favorites || [],
-        })
+            }
+           
+        updateUser(user);
+        
         navigation.navigate('User', {
             
         });

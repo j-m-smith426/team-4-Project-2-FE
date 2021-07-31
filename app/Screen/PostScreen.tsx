@@ -21,14 +21,17 @@ import LoadPosts from './LoadPosts';
 
 const PostScreen = () =>
 {
-    
-    const [user,currentPage] = useSelector((state: IRootState) =>
+    let isMounted = true;
+    const [user,currentPage] = isMounted && useSelector((state: IRootState) =>
     {
         return [state.sites.ILogin.username, state.sites.IPageState.parentID];
     });
-    let navigation = useNavigation();
+    useEffect(() =>
+    {
+        isMounted = true;
+        return() => {isMounted = false}
+    },[])
     
-    //console.log('Page',currentPage);
     return (
         <ScreenWrapper>
             <View style={styles.item}>

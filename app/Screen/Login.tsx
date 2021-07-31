@@ -64,7 +64,7 @@ const Login = () =>
     {
         let newUser: IUser = {
             REFERENCE: '0',
-            userId: 'U#' + username,
+            TYPEID: 'U#' + username,
             name: username,
             bio: {
                 greeting: '',

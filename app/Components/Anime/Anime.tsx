@@ -7,6 +7,9 @@ import { IRootState } from "../../redux/State";
 import axiosConfig from "../../../axiosConfig";
 import IAnime from "../../model/Anime";
 import IUser from "../../model/User";
+import Loading from "../../Screen/loading";
+import { useNavigation } from "@react-navigation/native";
+import color from '../../config/colors'
 const newAnime:IAnime = {
     REFERENCE:'0',
     TYPEID:'A#FakeAnime',
@@ -17,23 +20,33 @@ const newAnime:IAnime = {
     rating:1,
   }
 const Anime = () => {
-
+    let isMounted = true;
     const [clicked, setClicked] = useState(false);
     const [anime, setAnime] = useState(newAnime);
-    const [currentPage, currentUser] = useSelector((state: IRootState) =>
+    const [isLoading, setIsLoading] = useState(false);
+    const [currentPage, currentUser] = isMounted && useSelector((state: IRootState) =>
     {
         return [state.sites.IPageState.parentID, state.sites.ILogin.username];
-    })
+    });
+    let navigation = isMounted && useNavigation();
     useEffect(() =>
     {
-      let isMounted = true;
+        isMounted = true;
+        console.log('page: ',currentPage)
+        //setIsLoading(anime.name === 'IamAFake');
       isMounted && getAnime()
       return() => {isMounted = false}
-    }, [])
+    }, [navigation,currentPage])
     const getAnime = async () =>
-    {axiosConfig.get('/Anime/'+currentPage.replace('#','_'))
-      .then(response =>{setAnime(response.data)});
-     
+    {
+        
+        axiosConfig.get('/Anime/' + currentPage.replace('#', '_'))
+            .then(response =>
+            {
+                console.log('page: ',currentPage, 'response',response.data);
+                setAnime(response.data);
+            });
+        setIsLoading(false);
     }
     
     const handleStarClick = () =>
@@ -69,7 +82,14 @@ const Anime = () => {
         setClicked(!clicked);
     };
 
-    return(
+    if (isLoading) {
+        return( <View>
+            <Loading />
+            </View>)
+    }
+
+    return  (
+        
         <ScrollView contentContainerStyle = {styles.container}>
             <View style = {styles.top}>
                 <Image
@@ -92,12 +112,11 @@ const Anime = () => {
                     </TouchableOpacity>
 
                 </View>
-                <Text style = {styles.genre}>Adventure, Action</Text> 
+                <Text style={styles.genre}>{anime.genre}</Text>
               
                 <Rating/>
                
-                <Text style={styles.description}>The epic episodic adventure of Goku and the Z Warriors as they defend the Earth 
-                and the Universe from super-powered fighters and monsters.</Text>
+                <Text style={styles.description}>{anime.bio}</Text>
             </View>
         
             {/* <View style = {styles.bottom}></View> */}
@@ -118,12 +137,15 @@ const styles = StyleSheet.create({
     },
 
     information: {
+        flex:1,
         padding:"50%",
         alignItems: "center",
     },
 
     headInfo: {
+        flex:1,
         flexDirection: "row",
+        backgroundColor: color.primary
     },
 
     star: {
@@ -146,7 +168,9 @@ const styles = StyleSheet.create({
         fontSize: 14,
     },
 
-    rating:{
+    rating: {
+        flex: 1,
+        flexDirection: 'row',
         fontSize:18,
         paddingVertical: "5%",
     },

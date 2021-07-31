@@ -37,7 +37,7 @@ const LoadPosts = () =>
     {
         
         setRefreshing(true);
-        console.log('user', currentUser)
+        
         await axiosConfig.get('User/U_' + currentUser).then(async (response) =>
         {
             let user: IUser = response.data
@@ -45,18 +45,15 @@ const LoadPosts = () =>
             let obj = {
                 followArray: [currentUser, ...user.followed]
             }
-            console.log(obj);
+          
             
-            //if (followers.length > 0) {
-                
-                //console.log('followers', followers)
+          
                 await axiosConfig.post<any[]>(`Post/follow`, {
                     followArray: [currentUser]
                 }).then(postResponse =>
                     {
                     let newArray: IPost[] = [];
-            
-                    //console.log('Response:', postResponse.data);
+        
                     //construct each post
                         
                     postResponse.data && postResponse.data.forEach((data) =>
@@ -88,14 +85,13 @@ const LoadPosts = () =>
                         post.timestamp = data.Stamp;
                         post.image = data.image;
                         post.parentID = data.TYPEID;
-                        //setCurrentPost(post);
+                        
                         newArray.push(post);
-                        console.log('Arr',newArray);
                     });
                     setPostArr(newArray);
                     setRefreshing(false);
                 });
-           // }
+          
         })
     
         
@@ -107,7 +103,7 @@ const LoadPosts = () =>
                 renderItem={
                     ({ item, index }) =>
                     {
-                        console.log('item '+index, item.image);
+                        
                       return  (
                             <View style={styles.item}>
                               <Post_additional username={item.username}
