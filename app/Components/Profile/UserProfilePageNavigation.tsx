@@ -13,6 +13,7 @@ import Watchlist from './Watchlist';
 import Following from './Following';
 import Favorites from './Favorites';
 import IUser from '../../model/User';
+import Loading from '../../Screen/loading';
 
 let newUser: IUser = {
   REFERENCE: '0',
@@ -39,7 +40,7 @@ export default function Profile() {
     { key: 'third', title: 'Favorite'},
     { key: 'fourth', title: 'Follow'}
   ]);
-  
+  const [loaded,setLoaded] = useState<Boolean>(false);
   const [userInfo, setUserInfo] = isMounted && useState<IUser>(newUser);
   let navigation = isMounted && useNavigation();
   let user = isMounted && useSelector((state: IRootState) =>
@@ -49,9 +50,14 @@ export default function Profile() {
   //let userPage = page.replace('#','_');
   const loadUserInfo = () =>
   {
+    console.log(`HI`);
     axiosConfig.get(`User/U_${user}`).then((response) =>
     {
+      console.log(`${user} is User, bio=${response.data}`);
       setUserInfo(response.data);
+      
+
+      setLoaded(true);
     })
   }
 
@@ -60,8 +66,6 @@ export default function Profile() {
     isMounted = true;
     console.log(isMounted)
     if (isMounted) {
-      
-      
       loadUserInfo();
     }
     return () =>
@@ -95,17 +99,24 @@ const renderScene = SceneMap({
   third: ThirdRoute,
   fourth: FourthRoute,
 });
+  if(!loaded){
+    return (
+      <Loading></Loading>
+    );
+  } else {
+    return (
+    
+      <TabView
+        style = {styles.TabView}
+        navigationState={{ index, routes }}
+        renderScene={renderScene}
+        onIndexChange={setIndex}
+        renderTabBar={props => <TabBar {...props} style = {styles.TabBar}/>}
+        //initialLayout={{ width: layout.width }}
+      />
+    );
+  }
 
-  return (
-    <TabView
-      style = {styles.TabView}
-      navigationState={{ index, routes }}
-      renderScene={renderScene}
-      onIndexChange={setIndex}
-      renderTabBar={props => <TabBar {...props} style = {styles.TabBar}/>}
-      //initialLayout={{ width: layout.width }}
-    />
-  );
 }
 
 const styles = StyleSheet.create({

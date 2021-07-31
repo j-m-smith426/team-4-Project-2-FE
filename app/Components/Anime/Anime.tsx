@@ -128,7 +128,7 @@ const Anime = () => {
                 </View>
                 <View >
                     
-                <Rating/>
+                <Rating page= {anime.TYPEID}/>
                 </View>
                
             </View>
