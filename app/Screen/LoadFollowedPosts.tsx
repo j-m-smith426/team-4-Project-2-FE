@@ -11,21 +11,22 @@ import { IRootState } from "../redux/State";
 
 
 
-const LoadPosts = () =>
+const LoadFollowedPosts = () =>
 {
+    let isMounted = true;
     const [refreshing, setRefreshing] = useState(false);
     const [postArr, setPostArr] = useState<IPost[]>([]);
     const [profilepic, setProfilePic] = useState('key');
     const [currentPost, setCurrentPost] = useState<IPost>()
     const [followers, setFollowers] = useState<any[]>([]);
-    const currentUser = useSelector((state: IRootState) =>
+    const currentUser = isMounted && useSelector((state: IRootState) =>
     {
         return state.sites.ILogin.username;
     })
-    const navigation = useNavigation();
+    const navigation = isMounted && useNavigation();
     useEffect(() =>
     {
-        let isMounted = true;
+        isMounted = true;
         if (isMounted) {
             getFollowers();
         }
@@ -42,9 +43,9 @@ const LoadPosts = () =>
         {
             let user: IUser = response.data
             
-            let obj = {
-                followArray: [currentUser, ...user.followed]
-            }
+            // let obj = {
+            //     followArray: [currentUser, ...user.followed]
+            // }
           
             
           
@@ -137,4 +138,4 @@ const styles = StyleSheet.create({
     }
 });
   
-export default LoadPosts;
+export default LoadFollowedPosts;

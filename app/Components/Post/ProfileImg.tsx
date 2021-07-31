@@ -14,20 +14,10 @@ const ProfileImg = (props: Iprops) =>
 {
     let navigation = useNavigation();
     const dispatch = useDispatch();
-    const goToUser = () =>
-    {
-        dispatch({
-            type: SwitchPageAction.UPDATE,
-            payload: {
-                PageName: 'User',
-                parentID: `U#${props.username}`
-            }
-        })
-        navigation.navigate("User");
-    }
+    
     
     return (
-            <Pressable onPress={() => goToUser}>
+            
         <View style={styles.container}>
                 <View style={styles.imageCover}>
                     <Image
@@ -45,8 +35,7 @@ const ProfileImg = (props: Iprops) =>
                 </View>
 
         </View>
-            </Pressable>
-
+           
     );
 }
 

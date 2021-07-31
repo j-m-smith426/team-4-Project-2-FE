@@ -5,6 +5,7 @@ import { Icon } from "react-native-elements";
 import { useSelector } from "react-redux";
 import { IRootState } from "../../redux/State";
 import IUser from "../../model/User";
+import { updateUser } from "./updateUser";
 let newUser: IUser = {
     REFERENCE: '0',
     TYPEID: '',
@@ -52,33 +53,35 @@ const Bio = (props: Iprops) =>
     },[])
     const setVeiwingUser = () =>
     {
-        axiosConfig.get('User/U_'+currentUser).then((resp) => {setUser(resp.data)})
+        axiosConfig.get('User/U_' + currentUser).then((resp) =>
+        {
+            console.log(resp.data);
+            setUser(resp.data)
+        })
     }
 
     const setFollow = () =>
     {
-        if (user.followed.includes(props.name)) {
+        if (user.followed.includes(props.name + '#' + props.image)) {
             setFollowing(true);
+            console.log(following);
         }
     }
    
     const addFollow = async () =>
     {
-        user.followed.push(props.name);
-        axiosConfig.put('User', {
-            ...user
-        })
+        user.followed.push(props.name+ '#' + props.image);
+        console.log(user);
+        updateUser(user);
         setFollowing(true);
     }
 
     const unFollow = async() =>
     {
         let temp:any[] = []
-        user.followed.forEach((name:any) => {if(name !== props.name){temp.push(name)}})
+        user.followed.forEach((name:any) => {if(name !== props.name+ '#' + props.image){temp.push(name)}})
         user.followed = temp;
-        axiosConfig.put('User', {
-            ...user
-        })
+        updateUser(user);
         setFollowing(false);
     }
     const followButton = () =>
@@ -92,7 +95,10 @@ const Bio = (props: Iprops) =>
             </Pressable> )
     }
     return(
-        <View style = {styles.background}>
+        <View style={styles.background}>
+            <Text>
+                {props.name}
+            </Text>
         <Image
             style = {styles.profilePicture}
             source = {{uri: `https://scouter-revature-project1.s3.amazonaws.com/public/${props.image}`}}

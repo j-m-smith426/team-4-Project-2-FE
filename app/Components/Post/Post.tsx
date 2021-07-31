@@ -45,7 +45,7 @@ const Post = (props: IPost) =>
     {
         let isMounted = true;
         if (isMounted) {
-            console.log(props);
+            
             setHasImage(props.image !== 'key');
             getProfPic();
         }
@@ -76,16 +76,29 @@ const Post = (props: IPost) =>
         });
         navigation.navigate('Comment');
     }
+    const goToUser = () =>
+    {
+        console.log('going to user');
+        navigation.navigate("User");
+        dispatch({
+            type: SwitchPageAction.UPDATE,
+            payload: {
+                PageName: 'User',
+                parentID: `U#${props.username}`
+            }
+        })
+    }
     
     return (
         
         <View style={styles.post}>
 
-               
+            <Pressable onPress={() => goToUser()}>
+                
                 <View style={styles.profImg}>
                     <ProfileImg username={props.username} profileImg={profilepic} />
                 </View>
-            
+            </Pressable>
                 <View style={styles.text}>
                     <Text>{props.Contents}</Text>
             </View>
@@ -145,7 +158,8 @@ const styles = StyleSheet.create({
         maxWidth: 200,
         height: 50,
         marginTop: '2%',
-        marginLeft:'1%'
+        marginLeft: '1%',
+        backgroundColor: colors.background
         
     },
     text: {

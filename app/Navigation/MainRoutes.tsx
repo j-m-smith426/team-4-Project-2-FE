@@ -24,6 +24,7 @@ import mainScreen from '../Screen/mainScreen';
 import SearchList from '../Screen/SearchList';
 import AnimePage from '../Components/Anime/AnimeNavigation'
 import AllAnime from '../Screen/AllAnime';
+import Profile from '../Components/Profile/UserProfilePageNavigation';
 
 interface RouterProps
 {
@@ -50,7 +51,8 @@ const MainRoutes: React.FC<RouterProps> = (props:RouterProps) =>
                 <Drawer.Screen name="Home" component={mainScreen} />
                  <Drawer.Screen name="All Anime" component={AllAnime} options={{drawerLabel:'Anime'}} />   
                 <Drawer.Screen name="editProfile" component={editProfile} />
-                <Drawer.Screen name="User" component={ProfilePage} />
+                <Drawer.Screen name="Profile" component={Profile} />
+                <Drawer.Screen name="User" component={ProfilePage} options={{drawerLabel: () => null}}/>
                 {userType === 'Admin' && <Drawer.Screen name="AnimeAdd" component={addAnimeScreen} />}
                 <Drawer.Screen name="Post" component={PostScreen} options={{drawerLabel: () => null}}/>
                 <Drawer.Screen name="Anime" component={AnimePage} options={{drawerLabel: () => null}}/>
