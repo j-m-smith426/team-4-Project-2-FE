@@ -11,7 +11,7 @@ interface Iprops{
 const Favorites = (props: Iprops) =>
 {
     let isMounted = true;
-    const [favArr, setFavArr] = useState<any[]>(props.list || []);
+    const [favArr, setFavArr] = isMounted && useState<any[]>(props.list || []);
     const navigation = isMounted && useNavigation();
     const dispatch = isMounted && useDispatch();
     useEffect(() =>
