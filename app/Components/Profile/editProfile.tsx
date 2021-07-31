@@ -25,20 +25,20 @@ let newUser: IUser = {
 
 }
 const editBio = () =>
-{
-    const [image, setImage] = useState('key');
-    const [user, setUser] = useState<IUser>(newUser)
-    const [greeting, setGreeting] = useState('');
-    const [descrip, setDescrip] = useState('');
-    const navigation = useNavigation();
-    const currentUser = useSelector((state: IRootState) =>
+{   let isMounted = true;
+    const [image, setImage] = isMounted && useState('key');
+    const [user, setUser] = isMounted && useState<IUser>(newUser)
+    const [greeting, setGreeting] = isMounted && useState('');
+    const [descrip, setDescrip] = isMounted && useState(user.bio.description);
+    const navigation = isMounted && useNavigation();
+    const currentUser = isMounted && useSelector((state: IRootState) =>
     {
         return state.sites.ILogin.username;
     })
 
     useEffect(() =>
     {
-        let isMounted = true;
+        isMounted = true;
         if (isMounted) {
             
             (async () => {
@@ -50,16 +50,24 @@ const editBio = () =>
                 }
             })();
             loadUser();
+            console.log(user);
         }
         return() => {isMounted = false}
-    }, []);
+    }, [navigation]);
     
     const loadUser = () =>
     {
         axiosConfig.get('User/U_' + currentUser).then((response) =>
         {
             setUser(response.data);
+            setGreeting(user.bio.greeting);
+        setDescrip(user.bio.description);
+        setImage(`https://scouter-revature-project1.s3.amazonaws.com/public/${user.image}`);
         })
+        
+    }
+    if (user.name === '') {
+        loadUser();
     }
 
       const pickImage = async () => {
