@@ -7,7 +7,7 @@ phases:
     commands:
       - echo Installing dependencies...
       - npm install --global --unsafe-perm sharp-cli expo-cli
-      - npm install --legacy-peer-deps
+      - npm install --force
   pre_build:
     commands:
       - echo Testing...
