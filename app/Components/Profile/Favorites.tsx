@@ -1,60 +1,99 @@
+import { useNavigation } from "@react-navigation/native";
+import { googleSignInButton } from "aws-amplify";
 import React, { useEffect, useState } from "react";
-import { Text, StyleSheet, FlatList, View, Image } from "react-native";
+import { Text, StyleSheet, FlatList, View, Image, Pressable } from "react-native";
+import { useDispatch } from "react-redux";
+import color from "../../config/colors";
+import { SwitchPageAction } from "../../redux/Actions";
 interface Iprops{
     list:string[]
 }
-const Favorites = (props:Iprops) => {
-    const [favArr, setFavArr] = useState<any[]>([]);
+const Favorites = (props: Iprops) =>
+{
+    let isMounted = true;
+    const [favArr, setFavArr] = useState<any[]>(props.list || []);
+    const navigation = isMounted && useNavigation();
+    const dispatch = isMounted && useDispatch();
     useEffect(() =>
     {
-        let isMounted = true;
+        isMounted = true;
+        console.log(props.list);
         isMounted && setFavArr(props.list)
         return() => {isMounted = false}
-},[])
-    return(
+    }, [])
+    
+    const goTo = (name:string) => {
+        
+            console.log(name);
+          dispatch({
+            type: SwitchPageAction.UPDATE,
+            payload: {
+              name: 'Anime',
+              parentID: 'A#'+name
+            }
+          });
+          navigation.navigate('Anime')
+    }
+    return (
+        <View style={styles.watchlist}>
+
         <FlatList
             data={favArr}
             renderItem={
-                ({ item }) => (
-                    <View style={styles.anime}>
-                        <Image
-                            style={styles.photo}
-                            source={{
-                                uri: `https://scouter-revature-project1.s3.amazonaws.com/public/${item.image}`
-                            }}
-                        />
-                        <View style={styles.infoContainer}>
-                            <Text style={styles.animeTitle} numberOfLines={1}>{item.name}</Text>
+                ({ item }) =>
+                    
+                (
+                    <Pressable onPress={() => goTo(item.split('#')[1])}>
+
+                        <View style={styles.anime}>
+                            {item.split('#')[2] !== 'key' && <Image
+                                style={styles.photo}
+                                source={{
+                                    uri: `https://scouter-revature-project1.s3.amazonaws.com/public/${item.split('#')[2]}`
+                                }}
+                                />}
+                            <View style={styles.infoContainer}>
+                                <Text style={styles.animeTitle} numberOfLines={1}>{item.split('#')[1]}</Text>
+                            </View>
                         </View>
-                    </View>
-                )}
-            keyExtractor={item => item.name}
-        >
+                    </Pressable>
+                    )
+                }
+                keyExtractor={item => item.split('#')[1]}
+                >
              </FlatList>
+            </View>
     )
 }
 
 
 const styles = StyleSheet.create({
-    watchlist: {},
+    watchlist: {
+        flex: 1,
+        
+    },
     anime: {
+        flex:1,
         flexDirection: "row",
         //paddingHorizontal: "5%",
         //paddingVertical: "2%",
         //justifyContent: "space-between"
         borderBottomWidth: 1,
         borderBottomColor: "grey",
+        
     },
     photo: {
         width: 100,
         height: 150,
         resizeMode: 'stretch',
+        
         //paddingHorizontal: "5%",
     },
     infoContainer: {
         paddingHorizontal: "5%",
         paddingVertical: "5%",
         flex: 1,
+        backgroundColor: color.tertiary
     }, 
 
     animeTitle: {
@@ -62,7 +101,7 @@ const styles = StyleSheet.create({
         fontStyle: "italic",
         fontWeight: "bold",
         paddingBottom: "10%",
-        flex: 0.4,
+        //flex: 0.4,
         //! for font-family may have to install a dependency
         //fontFamily: "sans-serif",
     },

@@ -3,7 +3,6 @@ import React, { useCallback, useEffect, useState } from "react";
 import { Text, View, StyleSheet, Image, Pressable } from "react-native";
 import { useDispatch } from "react-redux";
 import axiosConfig from "../../../axiosConfig";
-import axios from 'axios'
 
 import colors from "../../config/colors";
 import IPost from "../../model/Post";

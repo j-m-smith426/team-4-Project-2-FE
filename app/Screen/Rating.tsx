@@ -101,10 +101,11 @@ const Rating = () =>{
 }
 const styles=StyleSheet.create ({
     container:{
-        flex:1,
+        //flex: 1,
+        //flexDirection:'row',
         padding:10,
         justifyContent:'center',
-        margin:25
+        margin: '3%'
     },
 
     star:{
@@ -116,12 +117,12 @@ const styles=StyleSheet.create ({
     text:{
         textAlign:'center',
         fontSize:14,
-        marginTop:5,
+        //marginTop:5,
     },
     customBar:{
         justifyContent:'center',
         flexDirection:'row',
-        marginTop:10,
+        //marginTop:10,
         backgroundColor:colors.background,
     },
     button:{
