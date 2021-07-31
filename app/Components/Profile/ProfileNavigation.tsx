@@ -11,31 +11,26 @@ import PostScreen from '../../Screen/PostScreen';
 import Bio from './BioSection';
 import Watchlist from './Watchlist';
 import Following from './Following';
+import Favorites from './Favorites';
+import IUser from '../../model/User';
 
-//Route to each component
-// const FirstRoute = () => (
-//   <Bio/>
-// );
+let newUser: IUser = {
+  REFERENCE: '0',
+  TYPEID: '',
+  name: '',
+  bio: {
+      greeting: '',
+      description:''
+  },
+  image: 'key',
+  watchlist: [],
+  followed: [],
+  favorites: []
 
-// const SecondRoute = () => (
-//   // <Favorites/>
-//   <PostScreen />
-// );
-
-// const ThirdRoute = () => (
-//   <Watchlist/>
- 
-// );
-
-// const renderScene = SceneMap({
-//   first: FirstRoute,
-//   second: SecondRoute,
-//   third: ThirdRoute,
-// });
-
+}
 export default function ProfilePage() {
-  //const layout = useWindowDimensions();
-
+  
+  let isMounted = true;
   //key value pairs for the header so that the route knows what to look for
   const [index, setIndex] = React.useState(0);
   const [routes] = React.useState([
@@ -44,32 +39,40 @@ export default function ProfilePage() {
     { key: 'third', title: 'Favorite'},
     { key: 'fourth', title: 'Follow'}
   ]);
-  const [userInfo, setUserInfo] = useState<any>({ bio: { greeting: '', description: '' }, followed: [] });
-  let navigation = useNavigation();
-  const page = useSelector((state: IRootState) =>
+  
+  const [userInfo, setUserInfo] = useState<IUser>(newUser);
+  let navigation = isMounted && useNavigation();
+  let page = isMounted && useSelector((state: IRootState) =>
   {
     return state.sites.IPageState.parentID;
-  })
-  
+  });
   let userPage = page.replace('#','_');
   const loadUserInfo = () =>
   {
     axiosConfig.get(`User/${userPage}`).then((response) =>
     {
-      console.log('Response: ', response.data);
       setUserInfo(response.data);
     })
   }
 
   useEffect(() =>
   {
-    let isMounted = true;
-      isMounted && loadUserInfo();
-    return() => {isMounted = false}
+    isMounted = true;
+    console.log(isMounted)
+    if (isMounted) {
+      
+      
+      loadUserInfo();
+    }
+    return () =>
+    {
+      isMounted = false;
+      console.log(isMounted)
+    }
   }, [navigation]);
   //Route to each component
 const FirstRoute = () => (
-  <Bio  bio={userInfo.bio} image={userInfo.image} following={userInfo.followed.includes(page)} user={userInfo} name={page.split('#')[1]}/>
+  <Bio  bio={userInfo.bio} image={userInfo.image}  name={page.split('#')[1]}/>
 );
 
 const SecondRoute = () => (
@@ -78,7 +81,7 @@ const SecondRoute = () => (
 );
 
 const ThirdRoute = () => (
-  <Watchlist list={userInfo.watchlist}/>
+  <Favorites list={userInfo.favorites}/>
  
 );
 

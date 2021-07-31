@@ -23,13 +23,13 @@ import LoadFollowedPosts from './LoadFollowedPosts';
 const PostScreen = () =>
 {
     
-    const [user,currentPage] = useSelector((state: IRootState) =>
+    const [user] = useSelector((state: IRootState) =>
     {
-        return [state.sites.ILogin.username, state.sites.IPageState.parentID];
+        return [state.sites.ILogin.username];
     });
     let navigation = useNavigation();
     
-    console.log('Page',currentPage);
+    
     return (
         <ScreenWrapper>
             <View style={styles.item}>

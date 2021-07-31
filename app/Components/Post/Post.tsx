@@ -82,7 +82,7 @@ const Post = (props: IPost) =>
         
         <View style={styles.post}>
 
-                {console.log(props.image)}
+               
                 <View style={styles.profImg}>
                     <ProfileImg username={props.username} profileImg={profilepic} />
                 </View>
@@ -91,7 +91,7 @@ const Post = (props: IPost) =>
                     <Text>{props.Contents}</Text>
             </View>
             
-            { //console.log(`https://scouter-revature-project1.s3.amazonaws.com/public/${props.image}`)}{
+            { 
                 hasImage && <Image testID='CommentImg' style={styles.postImg} source={{
                     uri: `https://scouter-revature-project1.s3.amazonaws.com/public/${props.image}`,
                     method: 'GET',

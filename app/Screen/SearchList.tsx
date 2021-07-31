@@ -84,7 +84,9 @@ const SearchList=()=> {
     }
 
   }, [val]);
-function getThere(name: string){
+  function getThere(name: string)
+  {
+    console.log(name);
   dispatch({
     type: SwitchPageAction.UPDATE,
     payload: {

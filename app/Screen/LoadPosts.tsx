@@ -14,14 +14,14 @@ interface IProps
 }
 
 const LoadPosts = (props:IProps) =>
-{
+{   let isMounted = true;
     const [refreshing, setRefreshing] = useState(false);
     const [postArr, setPostArr] = useState<IPost[]>();
     const [profilepic, setProfilePic] = useState('key');
-    const navigation = useNavigation();
+    const navigation = isMounted && useNavigation();
     useEffect(() =>
     {
-        let isMounted = true;
+        isMounted = true;
         isMounted && getPosts();
         return()=> {isMounted = true}
     }, [navigation]);
