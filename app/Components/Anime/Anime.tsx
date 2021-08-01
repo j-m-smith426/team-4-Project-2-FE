@@ -65,7 +65,7 @@ const Anime = () => {
         axiosConfig.get('/Anime/' + currentPage.replace('#', '_'))
             .then(response =>
             {
-                console.log('page: ',currentPage, 'response',response.data);
+                //console.log('page: ',currentPage, 'response',response.data);
                 setAnime(response.data);
             });
     }
@@ -93,20 +93,22 @@ const Anime = () => {
     const handleStarClick = () =>
     {
         //console.log("Clicked");
+        
         axiosConfig.get('User/U_' + currentUser).then((response) =>
         {
             let userData: IUser = response.data;
             let emptyArr: string[] = [];
-            let newFavArr:string[] = userData.favorites;
-            if (newFavArr && newFavArr.includes(anime.TYPEID + '#' + anime.image)) {
-                newFavArr.forEach((item) =>
-                {
-                    if (item !== anime.TYPEID + '#' + anime.image) {
-                        emptyArr.push(item);
-                    }
-                })
-            } else {
-            emptyArr.push(anime.TYPEID + '#' + anime.image);
+            let newFavArr: string[] = userData.favorites;
+            console.log('Base arr',newFavArr)
+            if (clicked) {
+                    newFavArr.forEach((item) =>
+                    {
+                        if (item !== anime.TYPEID + '#' + anime.image) {
+                            emptyArr.push(item);
+                        }
+                    })
+                } else {
+            emptyArr = ([anime.TYPEID + '#' + anime.image, ...newFavArr]);
             }
             userData.favorites = emptyArr;
             console.log(userData);
