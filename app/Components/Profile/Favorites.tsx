@@ -47,13 +47,14 @@ const Favorites = (props: Iprops) =>
 
                         <View style={styles.anime}>
                             {item.split('#')[2] !== 'key' && <Image
+                                testID = 'AnimePicture'
                                 style={styles.photo}
                                 source={{
                                     uri: `https://scouter-revature-project1.s3.amazonaws.com/public/${item.split('#')[2]}`
                                 }}
                                 />}
                             <View style={styles.infoContainer}>
-                                <Text style={styles.animeTitle} numberOfLines={1}>{item.split('#')[1]}</Text>
+                                <Text testID = 'title' style={styles.animeTitle} numberOfLines={1}>{item.split('#')[1]}</Text>
                             </View>
                         </View>
                     </Pressable>

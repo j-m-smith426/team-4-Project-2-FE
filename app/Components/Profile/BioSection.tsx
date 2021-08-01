@@ -104,7 +104,7 @@ const Bio = (props: Iprops) =>
             source = {{uri: `https://scouter-revature-project1.s3.amazonaws.com/public/${props.image}`}}
             />
             {currentUser !== props.name && followButton()}
-            <Text style={styles.intro}>{props.bio.greeting}</Text>
+            <Text testID = 'greeting' style={styles.intro}>{props.bio.greeting}</Text>
         <View style={styles.bio}>
                 <Text>Synopsis:</Text>
                 <Text>{props.bio.description}</Text>
