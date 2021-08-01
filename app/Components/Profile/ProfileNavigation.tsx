@@ -32,15 +32,15 @@ export default function ProfilePage() {
   
   let isMounted = true;
   //key value pairs for the header so that the route knows what to look for
-  const [index, setIndex] = React.useState(0);
-  const [routes] = React.useState([
+  const [index, setIndex] = isMounted && React.useState(0);
+  const [routes] = isMounted && React.useState([
     { key: 'first', title: 'Profile' },
     { key: 'second', title: 'Posts' },
     { key: 'third', title: 'Favorite'},
     { key: 'fourth', title: 'Follow'}
   ]);
   
-  const [userInfo, setUserInfo] = useState<IUser>(newUser);
+  const [userInfo, setUserInfo] = isMounted && useState<IUser>(newUser);
   let navigation = isMounted && useNavigation();
   let page = isMounted && useSelector((state: IRootState) =>
   {
@@ -114,7 +114,7 @@ const styles = StyleSheet.create({
     TabBar: {
       backgroundColor: "green",
       paddingTop: "10%",
-      marginBottom:"10%",
+      
     },
 
     TabView: {

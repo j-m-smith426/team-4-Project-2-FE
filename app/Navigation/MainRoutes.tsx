@@ -52,7 +52,7 @@ const MainRoutes: React.FC<RouterProps> = (props:RouterProps) =>
                  <Drawer.Screen name="All Anime" component={AllAnime} options={{drawerLabel:'Anime'}} />   
                 <Drawer.Screen name="editProfile" component={editProfile} />
                 <Drawer.Screen name="Profile" component={Profile} />
-                <Drawer.Screen name="User" component={ProfilePage} options={{drawerLabel: () => null}}/>
+                <Drawer.Screen name="User" component={ProfilePage} options={{ drawerLabel: () => null}} />
                 {userType === 'Admin' && <Drawer.Screen name="AnimeAdd" component={addAnimeScreen} />}
                 <Drawer.Screen name="Post" component={PostScreen} options={{drawerLabel: () => null}}/>
                 <Drawer.Screen name="Anime" component={AnimePage} options={{drawerLabel: () => null}}/>

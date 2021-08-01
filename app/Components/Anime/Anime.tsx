@@ -11,6 +11,7 @@ import Loading from "../../Screen/loading";
 import { useNavigation } from "@react-navigation/native";
 import color from '../../config/colors'
 import { updateUser } from "../Profile/updateUser";
+import colors from "../../config/colors";
 const newAnime:IAnime = {
     REFERENCE:'0',
     TYPEID:'A#FakeAnime',
@@ -31,7 +32,7 @@ const Anime = () => {
     let isMounted = true;
     const [clicked, setClicked] = useState(false);
     const [anime, setAnime] = isMounted && useState(newAnime);
-    //const [isLoading, setIsLoading] = useState(true);
+    
     const [currentPage, currentUser] = isMounted && useSelector((state: IRootState) =>
     {
         return [state.sites.IPageState.parentID, state.sites.ILogin.username];
@@ -41,12 +42,9 @@ const Anime = () => {
     {
         isMounted = true;
         console.log('page: ',currentPage)
-        //setIsLoading(anime.name === 'IamAFake');
+        
         if (isMounted) {
-          
-
                 getAnime()
-            
              //set star at load needs work
         }
       return() => {isMounted = false}
@@ -60,7 +58,6 @@ const Anime = () => {
                 console.log('page: ',currentPage, 'response',response.data);
                 setAnime(response.data);
             });
-        //setIsLoading(false);
     }
     const setStar = () =>
     {
@@ -108,8 +105,9 @@ const Anime = () => {
     }
 
     return  (
-        <DismissableKeyboard>
-        <ScrollView contentContainerStyle = {styles.container}>
+        <View style={styles.container}>
+
+            <Image style={styles.bgImage} source={{uri: `https://scouter-revature-project1.s3.amazonaws.com/public/${anime.image}`}} />
             <View style = {styles.top}>
                 <Image
                     style = {styles.animePicture}
@@ -118,9 +116,9 @@ const Anime = () => {
                         method: 'GET',
                         cache: 'reload',
                         headers: { Pragma: 'no-cache' },
-                    
+                        
                     }}
-                />
+                    />
             </View>
             <View style = {styles.information}>
                 <View style = {styles.headInfo}>
@@ -128,13 +126,18 @@ const Anime = () => {
 
                     <Text style={styles.title}> {anime.TYPEID.split('#')[1]}</Text>
                     
-                    <TouchableOpacity onPress = {() => handleStarClick()}>
+                    <TouchableOpacity style={styles.star} onPress = {() => handleStarClick()}>
                         <AntDesign name = "star" size = {34} color = {clicked? "gold":"grey"}/>
                     </TouchableOpacity>
                     </View>
 
-                <Text style={styles.genre}>{anime.genre|| 'none'}</Text>
+                    <Text style={styles.genre}>{anime.genre || 'none'}</Text>
+                    <View style={styles.scrollBox}>
+
+        <ScrollView >
                 <Text style={styles.description}>{anime.bio}</Text>
+        </ScrollView>
+                    </View>
                 </View>
                 <View >
                     
@@ -144,19 +147,30 @@ const Anime = () => {
             </View>
         
             {/* <View style = {styles.bottom}></View> */}
-        </ScrollView>
-        </DismissableKeyboard>
+                    </View>
     );
 }
 
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        backgroundColor: "white",
+        backgroundColor: colors.background,
+    },
+    bgImage: {
+        position: 'absolute',
+        top: 0,
+        left: 0,
+        right: 0,
+        bottom: '50%',
+        opacity: 0.3
+    },
+    scrollBox: {
+        height: '50%',
+        width: '100%'
     },
 
     top: {
-        backgroundColor: "#0078FF",
+        //backgroundColor: "#0078FF",
         paddingVertical: "5%",       
         height: "30%",
     },
@@ -165,6 +179,7 @@ const styles = StyleSheet.create({
         flex: 1,
         flexDirection: 'column',
         alignItems: "center",
+        
     },
 
     headInfo: {
@@ -176,13 +191,15 @@ const styles = StyleSheet.create({
 
     star: {
         color: "gold",
+        paddingLeft: 10,
+        paddingBottom: 10 
     },
 
     title:{
         fontSize: 32,
         fontWeight: "bold",
         textAlign:'center',
-        //padding:10,
+        paddingBottom:10,
         
     },
 
@@ -190,6 +207,7 @@ const styles = StyleSheet.create({
         backgroundColor: "#E9E9E9",
         width: "50%",
         textAlign: 'center',
+        paddingBottom: 10,
         padding: 5,
         fontSize: 14,
     },
@@ -202,14 +220,14 @@ const styles = StyleSheet.create({
     },
 
     description: {
-        marginHorizontal: "12%",
+        marginHorizontal: "8%",
         textAlign:'left',
         fontSize: 16,
     },
     titleRow: {
-        flex: 1,
+        //flex: 1,
         flexDirection: 'row',
-      
+        alignItems: 'center'
     },
     
     animePicture: {
@@ -219,7 +237,7 @@ const styles = StyleSheet.create({
         alignSelf: "center",
         borderWidth: 5,
         borderColor: "white",
-        backgroundColor: color.background
+        //backgroundColor: color.background
     },
 });
 

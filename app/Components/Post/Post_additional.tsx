@@ -105,7 +105,7 @@ const Post_additional = (props: IPost) =>
                     <Pressable onPress= {goToComment}>
                 <Button_Comment />
             </Pressable>
-                <Button_Like />
+               
                 </View>
                 
                 <View style={styles.timeContainer}>

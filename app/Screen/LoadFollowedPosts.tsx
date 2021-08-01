@@ -14,11 +14,11 @@ import { IRootState } from "../redux/State";
 const LoadFollowedPosts = () =>
 {
     let isMounted = true;
-    const [refreshing, setRefreshing] = useState(false);
-    const [postArr, setPostArr] = useState<IPost[]>([]);
-    const [profilepic, setProfilePic] = useState('key');
-    const [currentPost, setCurrentPost] = useState<IPost>()
-    const [followers, setFollowers] = useState<any[]>([]);
+    const [refreshing, setRefreshing] = isMounted && useState(false);
+    const [postArr, setPostArr] = isMounted && useState<IPost[]>([]);
+    const [profilepic, setProfilePic] = isMounted && useState('key');
+    const [currentPost, setCurrentPost] = isMounted && useState<IPost>()
+    const [followers, setFollowers] = isMounted && useState<any[]>([]);
     const currentUser = isMounted && useSelector((state: IRootState) =>
     {
         return state.sites.ILogin.username;
@@ -42,15 +42,16 @@ const LoadFollowedPosts = () =>
         await axiosConfig.get('User/U_' + currentUser).then(async (response) =>
         {
             let user: IUser = response.data
-            
-            // let obj = {
-            //     followArray: [currentUser, ...user.followed]
-            // }
-          
+            let followArray = [currentUser];
+            user.followed.forEach((followed) =>
+            {
+                followArray.push(followed.split('#')[0]);
+            })
+           
             
           
                 await axiosConfig.post<any[]>(`Post/follow`, {
-                    followArray: [currentUser]
+                    followArray: followArray
                 }).then(postResponse =>
                     {
                     let newArray: IPost[] = [];

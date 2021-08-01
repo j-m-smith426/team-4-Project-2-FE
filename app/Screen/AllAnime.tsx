@@ -8,6 +8,8 @@ import { useNavigation } from '@react-navigation/core';
 import { useRoute } from '@react-navigation/native';
 import { useDispatch } from 'react-redux';
 import { SwitchPageAction } from '../redux/Actions';
+import colors from '../config/colors';
+
 
 
 interface IProps
@@ -72,7 +74,11 @@ const AllAnime=()=> {
             anime.name=data.TYPEID.substring(2);
             newArr.push(anime);
           }
-          )    
+        )
+        newArr.sort((animeA,animeB) =>
+        {
+          return animeA.TYPEID.split('#')[1].localeCompare(animeB.TYPEID.split('#')[1])
+        })
           setAnime(newArr);
           console.log(animeArr);
       })
@@ -114,17 +120,18 @@ const AllAnime=()=> {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#fff',
-    paddingTop:40,
+    backgroundColor: colors.background,
+    //paddingTop:40,
     paddingHorizontal:20,
     //alignItems: 'center',
    // justifyContent: 'center',
   },
   item:{
-      margin:23,
+      margin:2,
       padding:20,
-      backgroundColor:'pink',
-      fontSize:24,
+      backgroundColor: colors.tertiary,
+    fontSize: 24,
+      borderBottomWidth: 1
 
 
   }
