@@ -155,8 +155,7 @@ const styles = StyleSheet.create({
   image: {
 
     height: 100,
-    width: 100,
-    //maxHeight: '40%',
+    width: 100,    
     resizeMode:"stretch",
     
   },
