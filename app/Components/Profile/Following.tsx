@@ -2,6 +2,7 @@ import { useNavigation } from "@react-navigation/native";
 import React, { useEffect, useState } from "react";
 import { View, Image, Text, ScrollView, StyleSheet, FlatList, Pressable } from "react-native";
 import { useDispatch } from "react-redux";
+import { classicNameResolver } from "typescript";
 import axiosConfig from "../../../axiosConfig";
 import colors from "../../config/colors";
 import IUser from "../../model/User";
@@ -15,15 +16,13 @@ interface IProps
 const Following = (props: IProps) =>
 {
     let isMounted = true;
-    const [followInfo, setfollowinfo] = isMounted && useState<IUser[]>([]);
+    const [loading, setLoading] = useState(false);
     let navigation = isMounted && useNavigation();
     let dispatch = isMounted && useDispatch();
     
     useEffect(() =>
     {
         isMounted = true;
-        
-            getUsers();
             
         return () =>
         {
@@ -31,34 +30,7 @@ const Following = (props: IProps) =>
         }
     }, [navigation])
     
-    const getUsers = () =>
-    {
-        let info:any[] = [];
-        props.following.forEach((name) =>
-        {
-            axiosConfig.get('User/U_' + name).then((response) =>
-            {
-                console.log('info', response.data);
-                if (!followInfo.includes(response.data)) {
-                    
-                    setfollowinfo([...followInfo,response.data]);
-                }
-            })
-            
-        }
-            
-        )
-        
-        
-        
-    }
-    if (followInfo.length !== props.following.length) {
-        //getUsers();
-        return (
-            <Loading/>
-        )
-    }
-    
+
     const goToUser = (name:string) =>
     {
         console.log('going to user');
@@ -77,13 +49,13 @@ const Following = (props: IProps) =>
             
         <FlatList
             
-            data={followInfo}
+            data={props.following}
             renderItem={
                 ({ item }) =>
                 
                 (
                     
-                <Pressable onPress={()=>goToUser(item.TYPEID.split('#')[1])}>
+                <Pressable onPress={()=>goToUser(item)}>
                     <View style={styles.container}>
                 <Image
                     style={styles.follower}
@@ -92,13 +64,13 @@ const Following = (props: IProps) =>
                     }}
                     />
                 <View style={styles.infoContainer}>
-                    <Text style={styles.followerName} numberOfLines={1}>{item.TYPEID.split('#')[1]}</Text>
+                    <Text style={styles.followerName} numberOfLines={1}>{item}</Text>
                 </View>
                         </View>
                     </Pressable>
                         )
                     }
-                    keyExtractor={item => item.TYPEID}
+                    keyExtractor={item => item}
                     />
         
                     </View>

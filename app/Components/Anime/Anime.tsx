@@ -45,18 +45,17 @@ const Anime = () => {
     useSelector((state: IRootState) => {
       return [state.sites.IPageState.parentID, state.sites.ILogin.username];
     });
-  let navigation = isMounted && useNavigation();
-  useEffect(() => {
-    isMounted = true;
-    console.log("page: ", currentPage);
-
-    if (isMounted) {
-      getAnime();
-      //set star at load needs work
-    }
-    return () => {
-      isMounted = false;
-    };
+    let navigation = isMounted && useNavigation();
+    useEffect(() =>
+    {
+        isMounted = true;
+        console.log('page: ',currentPage)
+        
+        if (isMounted) {
+                getAnime()
+             //set star at load needs work
+        }
+      return() => {isMounted = false}
   }, [navigation, currentPage, user]);
   const getAnime = async () => {
     axiosConfig

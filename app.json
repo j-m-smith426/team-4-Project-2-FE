@@ -1,10 +1,11 @@
 {
   "expo": {
-    "name": "scouterAppFE",
+    "name": "scouterApp",
     "slug": "scouterAppFE",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./app/assets/icon.png",
+    "description": "Join others in talking and discussing all things anime",
     "splash": {
       "image": "./app/assets/splash.png",
       "resizeMode": "contain",
