@@ -3,11 +3,9 @@ import {NavigationContainer} from '@react-navigation/native'
 import { createStackNavigator } from '@react-navigation/stack';
 import Login from '../Screen/Login';
 import PostScreen from '../Screen/PostScreen';
-import AnimeScreen from '../Screen/animeScreen';
 import ProfilePage from '../Components/Profile/ProfileNavigation';
 import Anime from '../Components/Anime/Anime';
 import SideMenu from 'react-native-side-menu-updated';
-import animeScreen from '../Screen/animeScreen';
 import { TouchableOpacity, View, Text, Pressable,StyleSheet, } from 'react-native';
 import { useNavigation } from "@react-navigation/core";
 import { DrawerLayoutAndroid } from 'react-native-gesture-handler';
@@ -51,8 +49,8 @@ const MainRoutes: React.FC<RouterProps> = () =>
                  <Drawer.Screen name="All Anime" component={AllAnime} options={{drawerLabel:'Anime'}} />   
                 <Drawer.Screen name="Edit Profile" component={editProfile} />
                 <Drawer.Screen name="Profile" component={Profile} />
-                <Drawer.Screen name="User" component={ProfilePage} options={{ drawerLabel: () => null}} />
                 {userType === 'Admin' && <Drawer.Screen name="Add Anime" component={addAnimeScreen} />}
+                <Drawer.Screen name="User" component={ProfilePage} options={{ drawerLabel: () => null}} />
                 <Drawer.Screen name="Post" component={PostScreen} options={{drawerLabel: () => null}}/>
                 <Drawer.Screen name="Anime" component={AnimePage} options={{drawerLabel: () => null}}/>
                 <Drawer.Screen name="Search" component = {SearchList} options={{drawerLabel: () => null}}/>
