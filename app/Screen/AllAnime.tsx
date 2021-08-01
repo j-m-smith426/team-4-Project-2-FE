@@ -1,5 +1,5 @@
 import React , {useEffect, useState} from 'react';
-import { StyleSheet, Text, View, FlatList, TouchableWithoutFeedback, Pressable, TouchableOpacity} from 'react-native';
+import { StyleSheet, Text, View, FlatList, TouchableWithoutFeedback, Pressable, TouchableOpacity, Image} from 'react-native';
 import IAnime from '../model/Anime'
 import axios from '../../axiosConfig'
 import { getTokenSourceMapRange } from 'typescript';
@@ -8,6 +8,8 @@ import { useNavigation } from '@react-navigation/core';
 import { useRoute } from '@react-navigation/native';
 import { useDispatch } from 'react-redux';
 import { SwitchPageAction } from '../redux/Actions';
+import colors from '../config/colors';
+
 
 
 interface IProps
@@ -27,8 +29,11 @@ const dummyAnime=[
 
 interface IAnimeList
 {
+  
   TYPEID:string,
   name:string,
+  image:string,
+  genre:string,
 }
 
 
@@ -66,13 +71,20 @@ const AllAnime=()=> {
               TYPEID:'',
               name:'',
               // bio:'',
-              // image:''
+              image:'',
+              genre:'',
             };
             anime.TYPEID=data.TYPEID;
             anime.name=data.TYPEID.substring(2);
+            anime.genre=data.genre;
+            anime.image=data.image;
             newArr.push(anime);
           }
-          )    
+        )
+        newArr.sort((animeA,animeB) =>
+        {
+          return animeA.TYPEID.split('#')[1].localeCompare(animeB.TYPEID.split('#')[1])
+        })
           setAnime(newArr);
           console.log(animeArr);
       })
@@ -88,6 +100,8 @@ const AllAnime=()=> {
     }
   });
   navigation.navigate('Anime')
+ 
+  
 }
 
   return (
@@ -100,9 +114,20 @@ const AllAnime=()=> {
         keyExtractor={(item)=>item.TYPEID}
             data={animeArr}
             renderItem={({item})=>(
+              <View style={styles.card}>
               <TouchableOpacity onPress={() =>getThere(item.TYPEID)}>
+               
+              <View style={styles.info}>
+                    <Image style={styles.image} source={{ uri: `https://scouter-revature-project1.s3.amazonaws.com/public/${item.image}` }} />
+                    <View style={styles.col}>
+                <View style={styles.text}>
                 <Text style={styles.item}>{item.name}</Text>
+                <Text style={styles.genre}>{item.genre}</Text>
+                    </View>
+                </View>
+                </View>
                 </TouchableOpacity>
+                </View>
 
             )}
         />
@@ -114,20 +139,54 @@ const AllAnime=()=> {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#fff',
-    paddingTop:40,
-    paddingHorizontal:20,
+    backgroundColor: colors.background,
+    //paddingTop:40,
+    paddingHorizontal:5,
     //alignItems: 'center',
    // justifyContent: 'center',
   },
   item:{
-      margin:23,
-      padding:20,
-      backgroundColor:'pink',
-      fontSize:24,
+      margin:2,
+      padding:10,
+      backgroundColor: colors.tertiary,
+    fontSize: 25,
+    textAlign:"center",
+  },
+  image: {
 
+    height: 100,
+    width: 100,
+    //maxHeight: '40%',
+    resizeMode:"stretch",
+    
+  },
+  card:{
+    
+    
+    padding:5,
+    backgroundColor: colors.tertiary,
+    fontSize: 25,
+    borderBottomWidth: 1,
+   
 
-  }
+  },
+  info:{
+    flexDirection:"row",
+    
+  },
+  genre:{
+    backgroundColor:colors.background,
+    textAlign:"center",
+
+  },
+  col: {
+    flex:1,
+    alignItems:'center'
+  },
+  text: {
+    // : 'center',
+    justifyContent: 'center'
+  },
   
 });
 export default AllAnime;

@@ -3,6 +3,7 @@ import { googleSignInButton } from "aws-amplify";
 import React, { useEffect, useState } from "react";
 import { Text, StyleSheet, FlatList, View, Image, Pressable } from "react-native";
 import { useDispatch } from "react-redux";
+import colors from "../../config/colors";
 import color from "../../config/colors";
 import { SwitchPageAction } from "../../redux/Actions";
 interface Iprops{
@@ -21,6 +22,7 @@ const Favorites = (props: Iprops) =>
         isMounted && setFavArr(props.list)
         return() => {isMounted = false}
     }, [])
+
     
     const goTo = (name:string) => {
         
@@ -51,9 +53,13 @@ const Favorites = (props: Iprops) =>
                                 source={{
                                     uri: `https://scouter-revature-project1.s3.amazonaws.com/public/${item.split('#')[2]}`
                                 }}
-                                />}
+                            />}
+                            
+                            <View style={styles.infoText}>
                             <View style={styles.infoContainer}>
                                 <Text style={styles.animeTitle} numberOfLines={1}>{item.split('#')[1]}</Text>
+                           
+                            </View>
                             </View>
                         </View>
                     </Pressable>
@@ -80,35 +86,39 @@ const styles = StyleSheet.create({
         //justifyContent: "space-between"
         borderBottomWidth: 1,
         borderBottomColor: "grey",
+        justifyContent: 'center',
+        backgroundColor: colors.background
         
     },
     photo: {
-        width: 100,
-        height: 150,
+        width: '30%',
+        height: '100%',
+        //marginLeft:1,
         resizeMode: 'stretch',
         
         //paddingHorizontal: "5%",
     },
     infoContainer: {
-        paddingHorizontal: "5%",
-        paddingVertical: "5%",
+        paddingHorizontal: "3%",
+        paddingVertical: "3%",
         flex: 1,
-        backgroundColor: color.tertiary
+        backgroundColor: color.tertiary,
+        justifyContent: 'center'
     }, 
 
     animeTitle: {
         fontSize: 22,
         fontStyle: "italic",
         fontWeight: "bold",
-        paddingBottom: "10%",
+        paddingVertical: "5%",
+        
         //flex: 0.4,
         //! for font-family may have to install a dependency
         //fontFamily: "sans-serif",
     },
 
     infoText: {
-        fontSize: 16,
-        flex: 0.4
+        flex: 1
     },
 
 });
