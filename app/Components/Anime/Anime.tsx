@@ -1,5 +1,5 @@
 import React, {useEffect, useState} from "react";
-import { View, Text, ScrollView, Image, StyleSheet, Touchable, TouchableOpacity } from "react-native";
+import { View, Text, ScrollView, Image, StyleSheet, Touchable, TouchableOpacity, TouchableWithoutFeedback, Keyboard } from "react-native";
 import { AntDesign } from "@expo/vector-icons";
 import Rating from '../../Screen/Rating'
 import { useSelector } from "react-redux";
@@ -19,7 +19,14 @@ const newAnime:IAnime = {
     image:'',
     genre:'',
     rating:1,
+
   }
+const DismissableKeyboard =({children})=>{
+    <TouchableWithoutFeedback onPress={()=>Keyboard.dismiss()}>
+    {children}
+    </TouchableWithoutFeedback>
+}
+
 const Anime = () => {
     let isMounted = true;
     const [clicked, setClicked] = useState(false);
@@ -101,7 +108,7 @@ const Anime = () => {
     }
 
     return  (
-        
+        <DismissableKeyboard>
         <ScrollView contentContainerStyle = {styles.container}>
             <View style = {styles.top}>
                 <Image
@@ -138,6 +145,7 @@ const Anime = () => {
         
             {/* <View style = {styles.bottom}></View> */}
         </ScrollView>
+        </DismissableKeyboard>
     );
 }
 
