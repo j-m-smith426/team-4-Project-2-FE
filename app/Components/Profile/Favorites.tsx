@@ -1,7 +1,7 @@
 import { useNavigation } from "@react-navigation/native";
 import { googleSignInButton } from "aws-amplify";
 import React, { useEffect, useState } from "react";
-import { Text, StyleSheet, FlatList, View, Image, Pressable } from "react-native";
+import { Text, StyleSheet, FlatList, View, Image, Pressable, TouchableOpacity } from "react-native";
 import { useDispatch } from "react-redux";
 import colors from "../../config/colors";
 import color from "../../config/colors";
@@ -45,7 +45,7 @@ const Favorites = (props: Iprops) =>
                 ({ item }) =>
                     
                 (
-                    <Pressable onPress={() => goTo(item.split('#')[1])}>
+                    <TouchableOpacity onPress={() => goTo(item.split('#')[1])}>
 
                         <View style={styles.anime}>
                             {item.split('#')[2] !== 'key' && <Image
@@ -62,7 +62,7 @@ const Favorites = (props: Iprops) =>
                             </View>
                             </View>
                         </View>
-                    </Pressable>
+                    </TouchableOpacity>
                     )
                 }
                 keyExtractor={item => item.split('#')[1]}
@@ -75,27 +75,23 @@ const Favorites = (props: Iprops) =>
 
 const styles = StyleSheet.create({
     watchlist: {
-        flex: 1,
         
     },
     anime: {
-        flex:1,
+        flex: 1,
         flexDirection: "row",
         //paddingHorizontal: "5%",
         //paddingVertical: "2%",
         //justifyContent: "space-between"
         borderBottomWidth: 1,
-        borderBottomColor: "grey",
-        justifyContent: 'center',
-        backgroundColor: colors.background
-        
+        borderBottomColor: "grey",        
     },
     photo: {
-        width: '30%',
-        height: '100%',
+        width: 100,
+        height: 125,
         //marginLeft:1,
-        resizeMode: 'stretch',
-        
+        resizeMode: "stretch",
+        //flex: 1,
         //paddingHorizontal: "5%",
     },
     infoContainer: {
@@ -108,9 +104,9 @@ const styles = StyleSheet.create({
 
     animeTitle: {
         fontSize: 22,
-        fontStyle: "italic",
         fontWeight: "bold",
         paddingVertical: "5%",
+        paddingLeft: "5%", 
         
         //flex: 0.4,
         //! for font-family may have to install a dependency
