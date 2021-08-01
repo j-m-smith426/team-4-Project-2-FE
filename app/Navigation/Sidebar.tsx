@@ -17,7 +17,7 @@ const Sidebar = (props: any) => {
         props.navigation.navigate('Search', {val: search});
     }
     return (
-        <View>
+        <View style={styles.container}>
             <View style = {styles.profImg}>
                 <Image style={styles.image}
                 source={require('../assets/scouter.png')} />
@@ -31,6 +31,7 @@ const Sidebar = (props: any) => {
                     onSubmitEditing={()=>submit()}/>
                 <Pressable onPress = {() => submit()} style={styles.btn}>
                     <Icon
+                        color={colors.buttonPrimary}
                     name='search'/>
                 </Pressable>
             </View>
@@ -44,38 +45,50 @@ const Sidebar = (props: any) => {
 
     );
   }
-  const styles = StyleSheet.create({
+const styles = StyleSheet.create({
+    container: {
+        flex:1,
+        backgroundColor: colors.mistyRose  
+      },
     btn:
     {
         height: '90%',
         flex:1,
         borderRadius:1000,
-        backgroundColor:colors.buttonPrimary,
+          backgroundColor: colors.primary,
+          alignSelf: 'center',
+          alignItems: 'center',
+        justifyContent: 'center'
         
 
     },
     profImg: {
         alignItems: "center",
         justifyContent: "center",
-        width: '80%',
+        width: '100%',
         height: "30%",
         maxWidth:500
         
     },
     image: {
-        width: '80%',
-        height: '80%',
+        width: '100%',
+        height: '100%',
         resizeMode: 'contain',
+        padding: 10,
         borderRadius: 50,
+        
         
     },
     inputView: {
         backgroundColor: colors.background,
         borderRadius: 1000,
-        flex:3,
+        //flex: 1,
+        maxHeight: '13%',
         marginBottom: "2%",
-        alignItems: "center",
-        flexDirection: "row"
+        alignContent: "center",
+        flexDirection: "row",
+        justifyContent: 'center',
+        borderWidth: 1,
         
       },
       
@@ -85,7 +98,6 @@ const Sidebar = (props: any) => {
         marginHorizontal: 10,
         flex: 3,
         borderRadius: 30,
-        borderWidth:1
     },
     scroll: {
         height: '60%'

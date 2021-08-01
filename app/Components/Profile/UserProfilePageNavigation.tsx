@@ -69,7 +69,7 @@ export default function Profile() {
       isMounted = false;
       console.log(isMounted)
     }
-  }, [navigation]);
+  }, [user]);
   //Route to each component
 const FirstRoute = () => (
   <Bio  bio={userInfo.bio} image={userInfo.image}  name={user}/>
@@ -114,7 +114,7 @@ const styles = StyleSheet.create({
     TabBar: {
       backgroundColor: "green",
       paddingTop: "10%",
-      marginBottom:"10%",
+      //marginBottom:"10%",
     },
 
     TabView: {

@@ -42,15 +42,16 @@ const LoadFollowedPosts = () =>
         await axiosConfig.get('User/U_' + currentUser).then(async (response) =>
         {
             let user: IUser = response.data
-            
-            // let obj = {
-            //     followArray: [currentUser, ...user.followed]
-            // }
-          
+            let followArray = [currentUser];
+            user.followed.forEach((followed) =>
+            {
+                followArray.push(followed.split('#')[0]);
+            })
+           
             
           
                 await axiosConfig.post<any[]>(`Post/follow`, {
-                    followArray: [currentUser]
+                    followArray: followArray
                 }).then(postResponse =>
                     {
                     let newArray: IPost[] = [];
