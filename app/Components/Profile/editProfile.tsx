@@ -139,12 +139,12 @@ const editBio = () =>
                                
             }
             <Button title="Choose Photo" onPress={pickImage}/>
-            <TextInput style={styles.intro} placeholder='Greeting' onChangeText={setGreeting} value={greeting}/>
+            <TextInput testID='greeting' style={styles.intro} placeholder='Greeting' onChangeText={setGreeting} value={greeting}/>
         <View style={styles.bio}>
-                <TextInput style = {styles.info} placeholder="Tell us about yourself!" multiline onChangeText={setDescrip} value={descrip}/>
+                <TextInput testID='description' style = {styles.info} placeholder="Tell us about yourself!" multiline onChangeText={setDescrip} value={descrip}/>
                 
         </View>
-        <Button title="Submit" onPress={submit}/>
+        <Button testID='submit' title="Submit" onPress={submit}/>
 
         </View>
     </TouchableWithoutFeedback>
