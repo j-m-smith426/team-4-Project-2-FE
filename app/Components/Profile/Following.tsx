@@ -22,7 +22,9 @@ const Following = (props: IProps) =>
     useEffect(() =>
     {
         isMounted = true;
-        isMounted && getUsers();
+        
+            getUsers();
+            
         return () =>
         {
             isMounted = false;
@@ -34,9 +36,9 @@ const Following = (props: IProps) =>
         let info:any[] = [];
         props.following.forEach((name) =>
         {
-            axiosConfig.get('User/U_' + name.split('#')[0]).then((response) =>
+            axiosConfig.get('User/U_' + name).then((response) =>
             {
-                //console.log('info', response.data);
+                console.log('info', response.data);
                 if (!followInfo.includes(response.data)) {
                     
                     setfollowinfo([...followInfo,response.data]);
@@ -50,12 +52,12 @@ const Following = (props: IProps) =>
         
         
     }
-    // if (followInfo.length !== props.following.length) {
-    //     //getUsers();
-    //     return (
-    //         <Loading/>
-    //     )
-    // }
+    if (followInfo.length !== props.following.length) {
+        //getUsers();
+        return (
+            <Loading/>
+        )
+    }
     
     const goToUser = (name:string) =>
     {

@@ -4,6 +4,7 @@ import { useEffect } from "react";
 import { FlatList, RefreshControl, View, StyleSheet } from "react-native";
 import { useSelector } from "react-redux";
 import axiosConfig from "../../axiosConfig";
+import Post from "../Components/Post/Post";
 import Post_additional from "../Components/Post/Post_additional";
 import { IPost } from "../model/Post";
 import IUser from "../model/User";
@@ -45,7 +46,7 @@ const LoadFollowedPosts = () =>
             let followArray = [currentUser];
             user.followed.forEach((followed) =>
             {
-                followArray.push(followed.split('#')[0]);
+                followArray.push(followed);
             })
            
             
@@ -108,7 +109,7 @@ const LoadFollowedPosts = () =>
                         
                       return  (
                             <View style={styles.item}>
-                              <Post_additional username={item.username}
+                              <Post username={item.username}
                                   userProfilePic={item.userProfilePic}
                                   Contents={item.Contents}
                                   image={item.image}

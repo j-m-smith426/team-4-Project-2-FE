@@ -7,6 +7,7 @@ import { IRootState } from "../../redux/State";
 import IUser from "../../model/User";
 import colors from '../../config/colors'
 import { updateUser } from "./updateUser";
+import Loading from "../../Screen/loading";
 let newUser: IUser = {
     REFERENCE: '0',
     TYPEID: '',
@@ -42,45 +43,61 @@ const Bio = (props: Iprops) =>
     {
         return state.sites.ILogin.username;
     })
+    const setFollow = () =>
+    {
+        console.log(user.followed.includes(props.name))
+        if (user.followed.includes(props.name)) {
+            setFollowing(true);
+            console.log('follow',following);
+        }
+    }
     useEffect(() =>
     {
         isMounted = true;
         if (isMounted) {
             
-           setVeiwingUser();
             setFollow();
         }
         return () => { isMounted = false;}
-    },[])
+    },[following])
     const setVeiwingUser = () =>
     {
         axiosConfig.get('User/U_' + currentUser).then((resp) =>
         {
             console.log(resp.data);
-            setUser(resp.data)
+            if (user !== resp.data) {
+                setUser(resp.data)
+            }
         })
     }
 
-    const setFollow = () =>
-    {
-        if (user.followed.includes(props.name + '#' + props.image)) {
-            setFollowing(true);
-            console.log(following);
+    if (user.TYPEID === '' || following !== user.followed.includes(props.name)) {
+        setVeiwingUser();
+        if (following !== user.followed.includes(props.name)){
+            setFollow();
+            
         }
+        return (
+            <Loading/>
+        )
     }
+
    
     const addFollow = async () =>
     {
-        user.followed.push(props.name+ '#' + props.image);
-        console.log(user);
-        updateUser(user);
-        setFollowing(true);
+        if (!user.followed.includes(props.name)) {
+            user.followed.push(props.name);
+            console.log(user);
+            updateUser(user);
+            setFollowing(true);
+            
+        }
     }
 
     const unFollow = async() =>
     {
         let temp:any[] = []
-        user.followed.forEach((name:any) => {if(name !== props.name+ '#' + props.image){temp.push(name)}})
+        user.followed.forEach((name:any) => {if(name !== props.name){temp.push(name)}})
         user.followed = temp;
         updateUser(user);
         setFollowing(false);
@@ -132,7 +149,7 @@ const styles = StyleSheet.create({
         top: 0,
         left: 0,
         right: 0,
-        bottom: 500,
+        bottom: '75%',
         opacity: 0.3
     },
     UserNameText: {

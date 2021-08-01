@@ -118,10 +118,12 @@ const AllAnime=()=> {
               <TouchableOpacity onPress={() =>getThere(item.TYPEID)}>
                
               <View style={styles.info}>
-                <Image style={styles.image} source={{uri: `https://scouter-revature-project1.s3.amazonaws.com/public/${item.image}`}}/> 
+                    <Image style={styles.image} source={{ uri: `https://scouter-revature-project1.s3.amazonaws.com/public/${item.image}` }} />
+                    <View style={styles.col}>
                 <View style={styles.text}>
                 <Text style={styles.item}>{item.name}</Text>
                 <Text style={styles.genre}>{item.genre}</Text>
+                    </View>
                 </View>
                 </View>
                 </TouchableOpacity>
@@ -147,7 +149,7 @@ const styles = StyleSheet.create({
       margin:2,
       padding:10,
       backgroundColor: colors.tertiary,
-    fontSize: 24,
+    fontSize: 25,
     textAlign:"center",
   },
   image: {
@@ -160,25 +162,30 @@ const styles = StyleSheet.create({
   },
   card:{
     
-    flexDirection:"row",
+    
     padding:5,
     backgroundColor: colors.tertiary,
-    fontSize: 24,
+    fontSize: 25,
     borderBottomWidth: 1,
    
 
   },
   info:{
     flexDirection:"row",
-
+    
   },
   genre:{
     backgroundColor:colors.background,
     textAlign:"center",
 
   },
-  text:{
-    
+  col: {
+    flex:1,
+    alignItems:'center'
+  },
+  text: {
+    // : 'center',
+    justifyContent: 'center'
   },
   
 });

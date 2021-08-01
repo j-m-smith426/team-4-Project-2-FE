@@ -32,7 +32,7 @@ interface RouterProps
 }
 const Drawer = createDrawerNavigator();
 
-const MainRoutes: React.FC<RouterProps> = (props:RouterProps) =>
+const MainRoutes: React.FC<RouterProps> = () =>
 {
     const [user,userType] = useSelector((state: IRootState) =>
     {
@@ -47,17 +47,17 @@ const MainRoutes: React.FC<RouterProps> = (props:RouterProps) =>
                         name='menu' /></Pressable>),
                         headerShown:user !== 'Guest'
                       })}>
-                {user === 'Guest' && <Drawer.Screen name="Login" component={Login} />}
                 <Drawer.Screen name="Home" component={mainScreen} />
                  <Drawer.Screen name="All Anime" component={AllAnime} options={{drawerLabel:'Anime'}} />   
-                <Drawer.Screen name="editProfile" component={editProfile} />
+                <Drawer.Screen name="Edit Profile" component={editProfile} />
                 <Drawer.Screen name="Profile" component={Profile} />
                 <Drawer.Screen name="User" component={ProfilePage} options={{ drawerLabel: () => null}} />
-                {userType === 'Admin' && <Drawer.Screen name="AnimeAdd" component={addAnimeScreen} />}
+                {userType === 'Admin' && <Drawer.Screen name="Add Anime" component={addAnimeScreen} />}
                 <Drawer.Screen name="Post" component={PostScreen} options={{drawerLabel: () => null}}/>
                 <Drawer.Screen name="Anime" component={AnimePage} options={{drawerLabel: () => null}}/>
                 <Drawer.Screen name="Search" component = {SearchList} options={{drawerLabel: () => null}}/>
                 <Drawer.Screen name="Comment" component={CommentNav} options={{drawerLabel: () => null}}/>
+                <Drawer.Screen name="Login" component={Login} options={{drawerLabel:() => null}} />
 
             </Drawer.Navigator>
         </NavigationContainer>

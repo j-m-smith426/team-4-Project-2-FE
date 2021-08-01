@@ -57,19 +57,23 @@ export default function ProfilePage() {
 
   useEffect(() =>
   {
-    isMounted = true;
-    console.log(isMounted)
-    if (isMounted) {
-      
-      
+    
+    const unsubscribe = navigation.addListener('focus', () =>
+    {
+      isMounted = true;
       loadUserInfo();
-    }
+      setIndex(0);
+    
+      
+    })
+      
+      
     return () =>
     {
       isMounted = false;
-      console.log(isMounted)
+      
     }
-  }, [navigation]);
+  }, [navigation, page]);
   //Route to each component
 const FirstRoute = () => (
   <Bio  bio={userInfo.bio} image={userInfo.image}  name={page.split('#')[1]}/>
