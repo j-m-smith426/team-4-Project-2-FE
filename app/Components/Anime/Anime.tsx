@@ -163,7 +163,7 @@ const Anime = () => {
           </View>
         </View>
         <View style={styles.rating}>
-          <Rating />
+          <Rating page={currentPage}/>
         </View>
       </View>
     </View>

@@ -5,51 +5,52 @@ import StarBorderOutlineIcon from '@material-ui/icons/StarBorderOutlined';
 import StarIcon from '@material-ui/icons/Star';
 import axios from '../../axiosConfig'
 import IAnime from '../model/Anime';
+import { useSelector } from 'react-redux';
+import { IRootState } from '../redux/State';
 
 
-const newAnime:IAnime = {
-    REFERENCE:'0',
-    TYPEID:'A#FAKEANIME',
-    name:'IamAFake',
-    bio:'bad day for me',
-    image:'',
-    genre:'',
-    rating:1,
-  }
 
-
-const Rating = () =>{
-    const[defaultRating, setDefaultRating]=useState(2);
+interface RatingProps{
+    page: String
+}
+const Rating = (props: RatingProps) =>{
+    const[rating, setRating]=useState(0);
+    const[userRating,setUserRating] = useState(2);
     const[maxRating, setMaxRating]=useState([1,2,3,4,5]);
-    const [anime,setAnime] = useState<IAnime>(newAnime);
-
+    
     const filledStar='https://raw.githubusercontent.com/tranhonghan/images/main/star_filled.png';
     const emptyStar='https://raw.githubusercontent.com/tranhonghan/images/main/star_corner.png';
-    let currPage="A#Dragonball"
-    /*
-    useEffect(() =>
-    {rateAnime()},[])
-    const rateAnime = async () =>{
-        axios.get('/Anime/'+currentPage.replace('#','_'))
-        .then(response =>{);
-       
-       
-       
-       
-        axios.put('Anime', {
-          
-            parentID:currPage,
-            rating:defaultRating,
-          
-          })
-          .then(function (response) {
-            console.log(response);
-          })
-    }*/const rateAnime =()=>{
-        console.log('rated');
-
-    }
+    const [currPage,setCurrPage]= useState<String>(props.page);
+    const currentUser = useSelector((state: IRootState) =>
+    {
+        return state.sites.ILogin.username;
+    });
+    const user = "U_" + currentUser;
     
+
+    useEffect(() =>
+    {animeAvg()},[])
+    const animeAvg = async () =>{
+        axios.get('/Rating/'+ currPage.replace('#','_'))
+        .then(response =>{
+            console.log(`Average = ${response.data}`)
+            if(response.data){
+                setRating(response.data);
+            } else {
+                setRating(0);
+            }
+        });
+    };
+    const rateAnime = async() => {
+        console.log(`page = ${currPage}, User = R#${currentUser} rating = ${userRating}`)
+        await axios.put('Ratings', {
+            parentID: currPage,
+            postID: `R#${currentUser}`,
+            rating: userRating
+        })
+        animeAvg();
+        
+    }
     
     
     const CustomRatingBar =() =>{
@@ -61,12 +62,12 @@ const Rating = () =>{
                             <TouchableOpacity
                             activeOpacity={0.7}
                             key={item}
-                            onPress={()=> setDefaultRating(item)}
+                            onPress={()=> setUserRating(item)}
                             >
                                 <Image
                                 style={styles.star}
                                 source={
-                                    item <= defaultRating
+                                    item <= userRating
                                     ? {uri:filledStar}
                                     : {uri:emptyStar}
                                 }
@@ -85,12 +86,12 @@ const Rating = () =>{
             <Text style={styles.text}>Rate This Anime</Text>
             <CustomRatingBar/>
             <Text style={styles.text}>
-                {defaultRating + ' / ' + maxRating.length}
+                {rating + ' / ' + maxRating.length}
             </Text>
             <TouchableOpacity
                 activeOpacity={0.7}
                 style={styles.button}
-                onPress={rateAnime}     
+                onPress={rateAnime}
             >
                 <Text>Rate</Text>
             </TouchableOpacity>
