@@ -1,5 +1,5 @@
 import React, {useEffect, useState} from "react";
-import { View, Text, ScrollView, Image, StyleSheet, Touchable, TouchableOpacity } from "react-native";
+import { View, Text, ScrollView, Image, StyleSheet, Touchable, TouchableOpacity, TouchableWithoutFeedback, Keyboard } from "react-native";
 import { AntDesign } from "@expo/vector-icons";
 import Rating from '../../Screen/Rating'
 import { useSelector } from "react-redux";
@@ -20,7 +20,10 @@ const newAnime:IAnime = {
     image:'',
     genre:'',
     rating:1,
+
   }
+
+
 const Anime = () => {
     let isMounted = true;
     const [clicked, setClicked] = useState(false);
@@ -132,7 +135,7 @@ const Anime = () => {
         </ScrollView>
                     </View>
                 </View>
-                <View >
+                <View style={styles.rating} >
                     
                 <Rating/>
                 </View>
@@ -192,7 +195,7 @@ const styles = StyleSheet.create({
         fontSize: 32,
         fontWeight: "bold",
         textAlign:'center',
-        paddingBottom:10,
+        paddingBottom:7,
         
     },
 
@@ -200,22 +203,21 @@ const styles = StyleSheet.create({
         backgroundColor: "#E9E9E9",
         width: "50%",
         textAlign: 'center',
-        paddingBottom: 10,
+        paddingBottom: 5,
         padding: 5,
         fontSize: 14,
     },
 
     rating: {
-       // flex: 1,
-        flexDirection: 'row',
-        fontSize:18,
-        paddingVertical: "5%",
+        flex: .5,        
+        fontSize:16,
+        
     },
 
     description: {
         marginHorizontal: "8%",
         textAlign:'left',
-        fontSize: 16,
+        fontSize: 15,
     },
     titleRow: {
         //flex: 1,
@@ -224,7 +226,7 @@ const styles = StyleSheet.create({
     },
     
     animePicture: {
-        width: 250,
+        width: 300,
         height: 300,
         resizeMode: 'stretch',
         alignSelf: "center",

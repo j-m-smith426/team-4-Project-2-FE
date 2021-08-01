@@ -58,6 +58,7 @@ const Favorites = (props: Iprops) =>
                             <View style={styles.infoText}>
                             <View style={styles.infoContainer}>
                                 <Text style={styles.animeTitle} numberOfLines={1}>{item.split('#')[1]}</Text>
+                           
                             </View>
                             </View>
                         </View>
