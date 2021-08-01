@@ -1,25 +1,40 @@
 import Anime from '../../../app/Components/Anime/Anime';
-import { IRootState } from '../../../app/redux/State';
 
-
-import { mount, ReactWrapper } from 'enzyme';
-import { nestedHell, findAndShallowRender } from "../../testFunctions";
-import {Text, View, StyleSheet} from 'react-native';
+import { mount} from 'enzyme';
 import React from 'react'; 
+import axios from 'axios';
+
 jest.mock('react-redux');
 jest.mock("@react-navigation/native");
 jest.mock('../../../axiosConfig');
 jest.mock('../../../app/redux/State');
-const mockEvent = jest.fn();
 
 describe('Testing Anime Screen', () => {
-    /*beforeEach(() => {
-        jest.fn()
-    });*/
+    let user = {
+        REFERENCE: '0',
+        TYPEID: 'U_hello',
+        name: 'hello',
+        bio: {
+            greeting: 'hi',
+            description:'bye'
+        },
+        image: 'key',
+        watchlist: ['Anime', 'Other Anime'],
+        followed: ['2Chainz', 'MJ'],
+        favorites: ['Naruto', 'Bleach'],      
+      }
+      let newAnime = {
+        REFERENCE:'0',
+        TYPEID:'A_something',
+        name:'something',
+        bio:'cool things',
+        image:'img.jpg',
+        genre:'adventure',
+        rating:1,
+    }
     it('renders Anime component', () => {
         let wrapper = mount(<Anime/>);
-        //let genre = wrapper.findWhere((node:any) => node.prop('testID') === 'genre');
-        //const wrap = wrapper.find('#genre');
-        //expect(wrapper).toExist();
+        axios.get(user.TYPEID);
+        axios.post('Post', {newAnime});
     })
 })

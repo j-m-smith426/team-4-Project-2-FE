@@ -16,26 +16,6 @@ jest.mock('../../../app/redux/State');
 
 describe('AnimeNavigation', () => {
     it('it navigates to post screen', () => {
-        /*const [index, setIndex] = React.useState(0);
-        const [routes] = React.useState([
-        { key: 'first', title: 'OverView' },
-        { key: 'second', title: 'Posts' },
-        
-        ]);
-        let navigation = jest.mock("@react-navigation/native");
-
-        const FirstRoute = () => (
-            <Anime />
-        );
-
-        const SecondRoute = () => (
-            <PostScreen />
-        );
-
-        const renderScene = SceneMap({
-            first: FirstRoute,
-            second: SecondRoute,
-        });*/
         let wrapper = mount(<AnimePage/>);
         let render = wrapper.find("TabView");
         expect(render).toExist();
