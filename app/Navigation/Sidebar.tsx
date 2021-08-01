@@ -3,13 +3,24 @@ import { DrawerNavigationState } from "@react-navigation/routers";
 import React, { useState } from "react";
 import { View, Image,StyleSheet, TextInput, Pressable,} from "react-native";
 import { Icon } from "react-native-elements";
+import { useDispatch } from "react-redux";
 import colors from "../config/colors";
+import { LoginActions } from "../redux/Actions";
 
 
 const Sidebar = (props: any) => {
-    const [search, setSearch]= useState<string>("");
+    const [search, setSearch] = useState<string>("");
+    const dispatch = useDispatch();
     const onUserChange = (name:string) => {
         setSearch(name);
+    }
+    const logOut = () =>
+    {
+        dispatch({
+            type: LoginActions.LOGOUT
+        });
+        props.navigation.navigate('Login');
+        console.log('logout');
     }
     
     const submit = async () => {
@@ -36,9 +47,13 @@ const Sidebar = (props: any) => {
                 </Pressable>
             </View>
             <View style={styles.scroll}>
-                <DrawerContentScrollView {...props} style = {styles.scroll}>
+                {/* <DrawerContentScrollView {...props} style = {styles.scroll}> */}
+                    <DrawerItem
+                        label='Logout'
+                        onPress={logOut}
+                        />
                     <DrawerItemList {...props} />
-                </DrawerContentScrollView>
+                {/* </DrawerContentScrollView> */}
             </View>
 
         </View>

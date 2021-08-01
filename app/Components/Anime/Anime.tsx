@@ -14,21 +14,35 @@ import { updateUser } from "../Profile/updateUser";
 import colors from "../../config/colors";
 const newAnime:IAnime = {
     REFERENCE:'0',
-    TYPEID:'A#FakeAnime',
-    name:'IamAFake',
-    bio:'bad day for me',
+    TYPEID:'',
+    name:'',
+    bio:'',
     image:'',
     genre:'',
     rating:1,
 
-  }
+}
+let newUser: IUser = {
+    REFERENCE: '0',
+    TYPEID: '',
+    name: '',
+    bio: {
+        greeting: '',
+        description:''
+    },
+    image: 'key',
+    watchlist: [],
+    followed: [],
+    favorites: []
+
+}
 
 
 const Anime = () => {
     let isMounted = true;
     const [clicked, setClicked] = useState(false);
     const [anime, setAnime] = isMounted && useState(newAnime);
-    
+    const [user, setUser] = isMounted && useState<IUser>(newUser)
     const [currentPage, currentUser] = isMounted && useSelector((state: IRootState) =>
     {
         return [state.sites.IPageState.parentID, state.sites.ILogin.username];
@@ -44,7 +58,7 @@ const Anime = () => {
              //set star at load needs work
         }
       return() => {isMounted = false}
-    }, [navigation,currentPage])
+    }, [navigation,currentPage, user])
     const getAnime = async () =>
     {
         
@@ -55,17 +69,25 @@ const Anime = () => {
                 setAnime(response.data);
             });
     }
+    const setVeiwingUser = () =>
+    {
+        axiosConfig.get('User/U_' + currentUser).then((resp) =>
+        {
+            console.log(resp.data);
+            if (user !== resp.data) {
+                setUser(resp.data)
+            }
+        })
+    }
     const setStar = () =>
     {
-        axiosConfig.get('User/U_' + currentUser).then((response) =>
-        {
-            let userData: IUser = response.data;
-            let newFavArr: string[] = userData.favorites;
-            console.log(newFavArr);
+        
+            let userData: IUser = user;
+            let newFavArr: string[] = user.favorites;
             if (newFavArr && newFavArr.includes(anime.TYPEID + '#' + anime.image)) {
                 setClicked(true);
             }
-        })
+        
     }
     
     const handleStarClick = () =>
@@ -92,9 +114,15 @@ const Anime = () => {
         })
         setClicked(!clicked);
     };
-
-    if (anime.name === 'IamAFake') {
-        setStar();
+//Ensure page is loaded anime is set, star is set, user is updated
+    if (anime.TYPEID === '' || clicked !== user.favorites.includes(anime.TYPEID + '#' + anime.image) || user.TYPEID === '') {
+        setVeiwingUser()
+        getAnime();
+        if (clicked !== user.favorites.includes(anime.TYPEID + '#' + anime.image)) {
+            setStar();
+            
+        }
+        //if not show loading
         return( <View style={styles.container}>
             <Loading />
             </View>)
@@ -209,7 +237,7 @@ const styles = StyleSheet.create({
     },
 
     rating: {
-        flex: .5,        
+        flex: 1,        
         fontSize:16,
         
     },
@@ -226,12 +254,16 @@ const styles = StyleSheet.create({
     },
     
     animePicture: {
-        width: 300,
-        height: 300,
+        position: 'absolute',
+        top: '10%',
+        left: '10%',
+        right:'10%',
+        bottom: '-70%',
+       
         resizeMode: 'stretch',
-        alignSelf: "center",
-        borderWidth: 5,
-        borderColor: "white",
+        //alignSelf: "center",
+        //borderWidth: 5,
+        //borderColor: "white",
         //backgroundColor: color.background
     },
 });

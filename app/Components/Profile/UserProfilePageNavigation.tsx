@@ -57,17 +57,15 @@ export default function Profile() {
 
   useEffect(() =>
   {
-    isMounted = true;
-    console.log(isMounted)
-    if (isMounted) {
-      
+    const unsubscribe = navigation.addListener('focus', () =>
+    {
+    isMounted = true;     
       
       loadUserInfo();
-    }
+    })
     return () =>
     {
       isMounted = false;
-      console.log(isMounted)
     }
   }, [user]);
   //Route to each component

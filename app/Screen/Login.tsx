@@ -10,6 +10,7 @@ import { IRootState } from "../redux/State";
 import IUser from "../model/User";
 import axiosConfig from "../../axiosConfig";
 import { AuthError } from "@aws-amplify/auth/lib-esm/Errors";
+import { Icon } from "react-native-elements/dist/icons/Icon";
 
 
 const Login = () =>
@@ -49,34 +50,34 @@ const Login = () =>
         return() => {isMounted = false}
     }, [navigation]);
     const onUserChange = (name:string) => {
-        console.log("Username is: " + username);
+        
         setUsername(name);
         
     }
     const onPassChange = (pass:string) => {
         setPassword(pass);
     }
-    const onEmailChange = (email:string) => {
-        setEmail(email);
+    const onEmailChange = (emailvalue:string) => {
+        setEmail(emailvalue);
     }
 
-    const addToDb = () =>
+    const addToDb = async() =>
     {
-        let newUser: IUser = {
+        let newUser = {
             REFERENCE: '0',
-            TYPEID: 'U#' + username,
+            userID: 'U#' + username,
             name: username,
             bio: {
                 greeting: '',
                 description:''
             },
-            image: 'key',
+            image: 'newUser/1627507631221.jpg',
             watchlist: [],
             followed: [],
             favorites: []
 
         }
-        axiosConfig.post('User', newUser);
+        await axiosConfig.post('User', newUser);
     }
     //-------------
     const submit = async () => {
@@ -125,8 +126,9 @@ const Login = () =>
             if (user) {
                 addToDb();
                 toLogin();
+                setError('Please check your e-mail for confirmation');
             }
-            console.log(user);
+            
         } catch (err) {
             console.log('error signing up:', err);
             let authErr:AuthError = err
@@ -152,6 +154,40 @@ const Login = () =>
             navigation.navigate('Home');
         }
     }
+    const SignUpValidation = () =>
+    {
+        let passwordLength = (password.length >= 8);
+        let passwordCapital = password.match('[A-Z]');
+        let passwordLowerCase = password.match('[a-z]');
+        let passwordSpecial = password.match('[^A-Za-z0-9]')
+        
+            return (
+                <View>
+
+                <View style={styles.textinfo}>
+
+                {passwordLength &&<Icon name='check'></Icon>}
+                <Text>Password must be 8 characters long</Text>
+                </View>
+                <View style={styles.textinfo}>
+
+                {passwordCapital &&<Icon name='check'></Icon>}
+                <Text>Password must contain an uppercase letter</Text>
+                </View>
+                <View style={styles.textinfo}>
+
+                {passwordLowerCase && <Icon name='check'></Icon>}
+                <Text>Password must contain a lowercase letter</Text>
+                </View>
+                <View style={styles.textinfo}>
+
+                {passwordSpecial &&<Icon name='check'></Icon>}
+                <Text>Password must contain a special character</Text>
+                </View>
+                </View>
+            )
+        
+    }
 
 
     return (
@@ -161,6 +197,7 @@ const Login = () =>
         >
         <View style = {styles.container}>
             {img}
+                    <Text>{error||''}</Text>
             <View style= {styles.main}>
                 {emailComp}
                 <View style={styles.inputView}>
@@ -179,20 +216,22 @@ const Login = () =>
                         style={styles.TextInput}
                         placeholder="Password"/>
                 </View>
-                <TouchableOpacity style={styles.loginBtn} onPress={loginTrue ? submit : signUpSubmit}>
+                    <TouchableOpacity style={styles.loginBtn} onPress={loginTrue ? submit : signUpSubmit}>
                         <Text style={styles.text}>{loginTrue ? 'LOGIN' : 'SignUp'}</Text>
                     </TouchableOpacity>
-                    <View>
-        <Text>{error||'please sign in'}</Text>
-                </View>
+                    
                     {signup}
                     
             </View>
-            <View style = {styles.filler}/>
+                    <View style={styles.container}>
+                        {!loginTrue &&<SignUpValidation/>}
+                    </View>
+                <View style={styles.filler} />
         </View>
         </KeyboardAvoidingView>
 
     );
+    
     async function toSignup(){
         setImg(<View style={styles.filler}/>);
         setEmailComp(<View style={styles.inputView}>
@@ -233,7 +272,8 @@ const styles = StyleSheet.create({
         
     },
     filler:{
-        flex:1
+        flex: 1,
+        //justifyContent:'flex-start'
     },
     image: {
         width: '80%',
@@ -254,9 +294,10 @@ const styles = StyleSheet.create({
     },
 
     linkText: {
-        height: "20%",
-        marginBottom: "42%",
-        alignItems: "center",
+        height: "30%",
+        //marginBottom: "42%",
+        // alignItems: "center",
+        
       },
 
     container: {
@@ -314,6 +355,10 @@ const styles = StyleSheet.create({
         alignSelf:'auto',
       
         
+    },
+    textinfo: {
+        flexDirection: 'row',
+        alignItems: 'center'
     }
 
 

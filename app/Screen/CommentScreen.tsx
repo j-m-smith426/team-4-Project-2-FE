@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { FlatList, RefreshControl, StyleSheet, View } from 'react-native';
+import { FlatList, KeyboardAvoidingView, Platform, RefreshControl, StyleSheet, View } from 'react-native';
 
 import Post from '../Components/Post/Post';
 import IPost from '../model/Post';
@@ -87,8 +87,9 @@ const CommentScreen = () =>
     //console.log('Result',postArr);
     return (
         <ScreenWrapper>
-            {console.log('Parent: ',parentPost)}
-            <View style={styles.container}>
+                
+            {/* {console.log('Parent: ',parentPost)} */}
+            <View style={styles.item}>
 
             <Post username={parentPost.username}
                 userProfilePic={parentPost.userProfilePic}
@@ -98,18 +99,22 @@ const CommentScreen = () =>
                 postID={parentPost.postID}
                 parentID={parentPost.parentID}/>
             <AddComment username={user} userProfilePic="pic" />
+               
                 </View>
             </ScreenWrapper>
 )}
 
 const styles = StyleSheet.create({
     container: {
-      //flex: 1,
+      flex: 1,
       alignItems: 'center',
       justifyContent: 'space-evenly',
   
     },
     item: {
+        flex: 1,
+        width: '100%',
+        justifyContent: 'space-evenly',
         marginVertical: 8,
     }
   });
