@@ -14,11 +14,7 @@ export default function addAnimeScreen()
   const [image, setImage] = useState('key');
   const [genre, setGenra] = useState('')
     const [currRes, setRes] = useState('result');
-  
-  // const page = useSelector((state:IRootState) =>
-  // {
-  //   return state.sites.IPageState.parentID.split("#")[1];
-  // })
+
 
   useEffect(() =>
   {
@@ -96,10 +92,7 @@ export default function addAnimeScreen()
     <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
      
     <View style={styles.container}>
-       {/* <View style={styles.topMenu}>
-       
-       
-       </View> */}
+      
 
           <Button title='Add Picture' onPress={pickImage} />
           {image && <Image
@@ -149,8 +142,7 @@ const styles = StyleSheet.create({
   },
   
   title: {
-      flex:1,
-      //fontFamily:'',
+      flex:1,    
       fontSize: 32,
       color:'#000000',
       textAlign:'left',
@@ -159,8 +151,7 @@ const styles = StyleSheet.create({
   },
     
   description: {
-      flex:1,
-      //fontFamily:'',
+      flex:1,    
       fontSize: 20,
       color:'#000000',
       borderBottomWidth: 1,
@@ -183,10 +174,8 @@ const styles = StyleSheet.create({
   },
 
   lowerMenu: {
-      flexDirection:'row',
-    //backgroundColor:'#072083',
-      alignContent: 'center',
-      //borderWidth : 1,
+      flexDirection:'row',    
+      alignContent: 'center',     
       justifyContent: "space-around",
   },
 
