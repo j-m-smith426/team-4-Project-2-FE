@@ -118,7 +118,6 @@ const Post = (props: IPost) =>
                     <Pressable onPress= {goToComment}>
                 <Button_Comment />
             </Pressable>
-                <Button_Like />
                 </View>
                 
                 <View style={styles.timeContainer}>
@@ -154,12 +153,12 @@ const styles = StyleSheet.create({
       
         alignSelf: 'flex-start',
         position: 'relative',
-        width: '50%',
-        maxWidth: 200,
+        width: '40%',
+        maxWidth: 180,
         height: 50,
         marginTop: '2%',
         marginLeft: '1%',
-        backgroundColor: colors.background
+        //backgroundColor: colors.background
         
     },
     text: {
@@ -185,19 +184,22 @@ const styles = StyleSheet.create({
     },
     postBot: {
        
-        height: 40,
-        marginTop: 1,
-        marginLeft: '1%',
-        marginBottom: '1%'
+        height: 30,
+        marginTop: 2,
+        marginLeft: '2%',
+        marginBottom: '1%',
+        justifyContent: 'center'
        
         
     },
     timeContainer: {
         alignSelf: 'flex-end',
-        paddingTop: 10,
+        height: 30,
         position: 'absolute',
-        justifyContent: 'flex-end',
+        justifyContent: 'center',
+        marginBottom: '3%',
         marginRight: '10%',
+        
         
     }
 

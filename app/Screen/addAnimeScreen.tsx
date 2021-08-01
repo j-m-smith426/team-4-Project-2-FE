@@ -1,15 +1,9 @@
-import { StatusBar } from 'expo-status-bar';
 import React, { useEffect } from 'react';
 import { useState } from 'react';
-import { StyleSheet, Text, View, Image, Button, TextInput, Keyboard, Platform, KeyboardAvoidingView, TouchableWithoutFeedback } from 'react-native';
+import { StyleSheet, View, Image, Button, TextInput, Keyboard, Platform, KeyboardAvoidingView, TouchableWithoutFeedback } from 'react-native';
 import * as ImagePicker from 'expo-image-picker'
 import axiosConfig from '../../axiosConfig'
 import { Storage } from 'aws-amplify';
-import Button_animeComments from '../Components/Anime/Button_animeComments';
-import Button_animeFavorite from '../Components/Anime/Button_animeFavorite';
-import Button_animeRating from '../Components/Anime/Button_animeRating';
-import { useSelector } from 'react-redux';
-import { IRootState } from '../redux/State';
 
 
 
@@ -47,7 +41,6 @@ export default function addAnimeScreen()
         let result:any = await ImagePicker.launchImageLibraryAsync({
           mediaTypes: ImagePicker.MediaTypeOptions.All,
           allowsEditing: true,
-          aspect: [4, 3],
           quality: 1,
         });
     

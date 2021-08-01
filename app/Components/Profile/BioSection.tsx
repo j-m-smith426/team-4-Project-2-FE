@@ -5,6 +5,7 @@ import { Icon } from "react-native-elements";
 import { useSelector } from "react-redux";
 import { IRootState } from "../../redux/State";
 import IUser from "../../model/User";
+import colors from '../../config/colors'
 import { updateUser } from "./updateUser";
 let newUser: IUser = {
     REFERENCE: '0',
@@ -88,25 +89,32 @@ const Bio = (props: Iprops) =>
     {
         return (following ?
             <Pressable onPress={unFollow} style={styles.following}>
+               
                 <Icon name='check'/><Text>Following</Text>
+               
             </Pressable>:
             <Pressable onPress={addFollow} style={styles.following}>
-                <Text>Follow</Text>
+                
+                <Text style={styles.followButtonText}>Follow</Text>
+                
             </Pressable> )
     }
     return(
         <View style={styles.background}>
-            <Text>
-                {props.name}
-            </Text>
+            <Image style={styles.topBG} source = {{uri: `https://scouter-revature-project1.s3.amazonaws.com/public/${props.image}`}}>
+            </Image>
+
         <Image
             style = {styles.profilePicture}
             source = {{uri: `https://scouter-revature-project1.s3.amazonaws.com/public/${props.image}`}}
             />
+            <Text style={styles.UserNameText}>
+                {props.name}
+            </Text>
             {currentUser !== props.name && followButton()}
-            <Text style={styles.intro}>{props.bio.greeting}</Text>
         <View style={styles.bio}>
-                <Text>Synopsis:</Text>
+            <Text style={styles.intro}>{props.bio.greeting}</Text>
+                <Text>About Me:</Text>
                 <Text>{props.bio.description}</Text>
             </View>
             
@@ -116,7 +124,20 @@ const Bio = (props: Iprops) =>
 const styles = StyleSheet.create({
     background: {
         flex: 1,
+        backgroundColor: colors.background
         //alignContent: 'space-around'
+    },
+    topBG: {
+        position: 'absolute',
+        top: 0,
+        left: 0,
+        right: 0,
+        bottom: 500,
+        opacity: 0.3
+    },
+    UserNameText: {
+        fontSize: 30,
+        alignSelf: 'center'
     },
 
     username: {
@@ -126,6 +147,9 @@ const styles = StyleSheet.create({
         fontSize: 16,
         fontStyle: "italic",
     },
+    followButtonText: {
+        fontSize:16
+    },
 
     profilePicture: {
         alignSelf: "center",
@@ -134,25 +158,33 @@ const styles = StyleSheet.create({
         paddingBottom: "25%",
         borderWidth: 2,
         borderColor: "grey",
-        borderRadius: 100/2,
+        borderRadius: 100 / 2,
+        marginTop: '6%',
+        marginBottom: '10%'
     },
     intro: {
-        flex: 2,
+        
         fontSize: 16,
         textAlign: "center",
-        paddingTop: "5%"   
+        justifyContent: 'flex-end',
+        paddingVertical: "5%"   
     },
 
     bio: {
         flex: 2,
         fontSize: 16,
         textAlign: "center",
+        
         paddingHorizontal: "10%",
         paddingVertical: "5%"
     },
     following: {
         flexDirection: "row",
-        alignSelf: 'center'
+        alignSelf: 'center',
+        alignItems: 'center',
+        backgroundColor: colors.tertiary,
+        borderRadius: 2000,
+        padding:5
     }
 });
 
