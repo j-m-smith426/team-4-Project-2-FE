@@ -1,12 +1,9 @@
-import { StatusBar } from 'expo-status-bar';
 import React, { useEffect } from 'react';
 import { useState } from 'react';
-import { StyleSheet, Text, View, Image, Button, TextInput, Keyboard, Platform, KeyboardAvoidingView, TouchableWithoutFeedback } from 'react-native';
+import { StyleSheet, View, Image, Button, TextInput, Keyboard, Platform, KeyboardAvoidingView, TouchableWithoutFeedback } from 'react-native';
 import * as ImagePicker from 'expo-image-picker'
 import axiosConfig from '../../axiosConfig'
 import { Storage } from 'aws-amplify';
-import { useSelector } from 'react-redux';
-import { IRootState } from '../redux/State';
 
 
 
@@ -44,7 +41,6 @@ export default function addAnimeScreen()
         let result:any = await ImagePicker.launchImageLibraryAsync({
           mediaTypes: ImagePicker.MediaTypeOptions.All,
           allowsEditing: true,
-          aspect: [4, 3],
           quality: 1,
         });
     
@@ -113,18 +109,18 @@ export default function addAnimeScreen()
               <View style={styles.textInput} >
 
             
-            <TextInput testID = "title" style={styles.title} placeholder="Title" onChangeText={setTitle}/>
+            <TextInput style={styles.title} placeholder="Title" onChangeText={setTitle}/>
               
               </View>
           </View>
           <View style={styles.lowerMenu}>
               <View style={styles.textInput}>
-          <TextInput testID = "description" style={styles.description} multiline numberOfLines={3} placeholder="Description" onChangeText={setDescription} />
+          <TextInput style={styles.description} multiline numberOfLines={3} placeholder="Description" onChangeText={setDescription} />
               </View>
           </View>
           <View style={styles.lowerMenu}>
               <View style={styles.textInput}>
-          <TextInput testID = "genre" style={styles.description} multiline numberOfLines={1} placeholder="Genra" onChangeText={setGenra} />
+          <TextInput style={styles.description} multiline numberOfLines={1} placeholder="Genra" onChangeText={setGenra} />
               </View>
           </View>
           

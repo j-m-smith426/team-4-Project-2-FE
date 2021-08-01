@@ -13,21 +13,25 @@ import Anime from './Anime';
 
 export default function AnimePage() {
   //const layout = useWindowDimensions();
-
+  let isMounted = true;
   //key value pairs for the header so that the route knows what to look for
-  const [index, setIndex] = React.useState(0);
-  const [routes] = React.useState([
+  const [index, setIndex] = isMounted &&  React.useState(0);
+  const [routes] =isMounted &&  React.useState([
     { key: 'first', title: 'OverView' },
     { key: 'second', title: 'Posts' },
     
   ]);
-  const [animeInfo, setAnimeInfo] = useState<any>({ name:'',bio:'', genre:''});
-  let navigation = useNavigation();
-  const anime = useSelector((state: IRootState) =>
+  let navigation = isMounted && useNavigation();
+  const anime =isMounted &&  useSelector((state: IRootState) =>
   {
     return state.sites.IPageState.parentID;
   })
-  
+  useEffect(() =>
+  {
+    isMounted = true;
+    isMounted && setIndex(0);
+    return () => { isMounted = false };
+  }, [navigation, anime]);
 
   
 const FirstRoute = () => (

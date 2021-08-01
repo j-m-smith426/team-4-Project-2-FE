@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import * as ImagePicker from 'expo-image-picker'
-import { View, StyleSheet, Image, Platform, Pressable, Button, TextInput } from "react-native";
+import { View, Text, StyleSheet, Image, Platform, Pressable, Button, TextInput, TouchableOpacity } from "react-native";
 
 import colors from "../../config/colors";
 import ProfileImg from "./ProfileImg";
@@ -127,12 +127,16 @@ const AddComment = (props: IaddPost) =>
             <View style={styles.postBot}>
                 <View style={styles.imgAdd}>
                     <Pressable onPress={pickImage}>
-                        <Icon name="image" />
+                        <Icon size={27} name="image" />
                     </Pressable>
+                    <Text>add Picture</Text>
                 </View>
                 
                 <View style={styles.timeContainer}>
-                    <Button title="Post" onPress={submitPost} />
+                <TouchableOpacity onPress={submitPost}>
+                    <Text>Post</Text>
+
+                    </TouchableOpacity>
                 </View>
 
             </View>
@@ -163,7 +167,7 @@ const styles = StyleSheet.create({
       
         alignSelf: 'flex-start',
         position: 'relative',
-        width: '50%',
+        width: '40%',
         maxWidth: 200,
         height: 50,
         marginTop: '2%',
@@ -197,21 +201,24 @@ const styles = StyleSheet.create({
         marginTop: 1,
         marginLeft: '1%',
         marginBottom: '1%',
-        
-       
+        justifyContent: 'space-between',
+        flexDirection: 'row'
         
     },
     imgAdd: {
         alignSelf: 'flex-start',
         paddingLeft: '4%',
-      paddingTop: '4%'
+        paddingTop: 10,
+        flexDirection: 'row',
+        alignItems: 'center',
     },
     timeContainer: {
-        alignSelf: 'flex-end',
-        paddingTop: 10,
-        position: 'absolute',
-        justifyContent: 'flex-end',
-        marginRight: '10%',
+        
+        padding: 10,
+        
+        marginRight: '5%',
+        borderRadius: 5000,
+        backgroundColor: colors.background
         
     }
 

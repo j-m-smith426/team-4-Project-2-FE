@@ -9,6 +9,7 @@ import { Storage } from 'aws-amplify'
 import axiosConfig from "../../../axiosConfig";
 import IUser from "../../model/User";
 import { updateUser } from "./updateUser";
+import Loading from "../../Screen/loading";
 
 let newUser: IUser = {
     REFERENCE: '0',
@@ -28,7 +29,8 @@ const editBio = () =>
 {   let isMounted = true;
     const [image, setImage] = isMounted && useState('key');
     const [user, setUser] = isMounted && useState<IUser>(newUser)
-    const [greeting, setGreeting] = isMounted && useState('');
+    const [isloading, setIsLoading] = isMounted && useState(false)
+    const [greeting, setGreeting] = isMounted && useState(user.bio.greeting);
     const [descrip, setDescrip] = isMounted && useState(user.bio.description);
     const navigation = isMounted && useNavigation();
     const currentUser = isMounted && useSelector((state: IRootState) =>
@@ -53,23 +55,24 @@ const editBio = () =>
             console.log(user);
         }
         return() => {isMounted = false}
-    }, [navigation]);
+    }, [navigation,user.TYPEID]);
     
     const loadUser = () =>
     {
         axiosConfig.get('User/U_' + currentUser).then((response) =>
         {
             setUser(response.data);
+            console.log(response.data);
             setGreeting(user.bio.greeting);
         setDescrip(user.bio.description);
-        setImage(`https://scouter-revature-project1.s3.amazonaws.com/public/${user.image}`);
+            setImage(`https://scouter-revature-project1.s3.amazonaws.com/public/${user.image}`);
+            
         })
         
     }
-    if (user.name === '') {
-        loadUser();
-    }
+    
 
+    console.log('user', user);
       const pickImage = async () => {
         let result:any = await ImagePicker.launchImageLibraryAsync({
           mediaTypes: ImagePicker.MediaTypeOptions.All,
@@ -175,7 +178,7 @@ const styles = StyleSheet.create({
         borderRadius: 600/2,
     },
     intro: {
-        flex: 2,
+        flex: 1,
         fontSize: 24,
         fontStyle: "italic",
         textAlign: "center",
@@ -183,7 +186,7 @@ const styles = StyleSheet.create({
     },
 
     bio: {
-        flex: 2,
+        flex: 1,
         textAlign: "center",
         paddingHorizontal: "10%",
         paddingVertical: "5%"
