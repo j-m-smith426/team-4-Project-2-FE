@@ -53,7 +53,7 @@ export default function Profile() {
     console.log(`HI`);
     axiosConfig.get(`User/U_${user}`).then((response) =>
     {
-      console.log(`${user} is User, bio=${response.data}`);
+      console.log(`${user} , bio=${response.data.TYPEID}`);
       setUserInfo(response.data);
       
 
