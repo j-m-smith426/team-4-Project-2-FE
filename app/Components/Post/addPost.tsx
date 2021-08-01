@@ -135,7 +135,7 @@ const AddPost = (props: IaddPost) =>
                 
                 <View style={styles.timeContainer}>
                     <TouchableOpacity onPress={submitPost}>
-                    <Text>Post</Text>
+                    <Text style={styles.buttonText}>Post</Text>
 
                     </TouchableOpacity>
                 </View>
@@ -222,7 +222,11 @@ const styles = StyleSheet.create({
         alignItems: 'flex-end',
         marginRight: '5%',
         borderRadius: 5000,
-        backgroundColor: colors.background
+        
+        backgroundColor: colors.buttonPrimary
+    },
+    buttonText: {
+        color: colors.buttonSecondary,
     }
 
 

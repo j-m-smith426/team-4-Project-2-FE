@@ -42,7 +42,7 @@ const Sidebar = (props: any) => {
                     onSubmitEditing={()=>submit()}/>
                 <Pressable onPress = {() => submit()} style={styles.btn}>
                     <Icon
-                        color={colors.buttonPrimary}
+                        color={colors.buttonSecondary}
                     name='search'/>
                 </Pressable>
             </View>
@@ -63,14 +63,14 @@ const Sidebar = (props: any) => {
 const styles = StyleSheet.create({
     container: {
         flex:1,
-        backgroundColor: colors.mistyRose  
+        backgroundColor: colors.background2  
       },
     btn:
     {
         height: '90%',
         flex:1,
         borderRadius:1000,
-          backgroundColor: colors.primary,
+          backgroundColor: colors.buttonPrimary,
           alignSelf: 'center',
           alignItems: 'center',
         justifyContent: 'center'

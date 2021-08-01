@@ -61,7 +61,7 @@ const Anime = () => {
     axiosConfig
       .get("/Anime/" + currentPage.replace("#", "_"))
       .then((response) => {
-        console.log("page: ", currentPage, "response", response.data);
+        //console.log("page: ", currentPage, "response", response.data);
         setAnime(response.data);
       });
   };
@@ -86,16 +86,16 @@ const Anime = () => {
       let userData: IUser = response.data;
       let emptyArr: string[] = [];
       let newFavArr: string[] = userData.favorites;
-      if (newFavArr && newFavArr.includes(anime.TYPEID + "#" + anime.image)) {
+      if (clicked) {
         newFavArr.forEach((item) => {
           if (item !== anime.TYPEID + "#" + anime.image) {
             emptyArr.push(item);
           }
         });
       } else {
-        emptyArr.push(anime.TYPEID + "#" + anime.image);
+        emptyArr = [anime.TYPEID + "#" + anime.image, ...newFavArr];
       }
-      userData.favorites = emptyArr;
+      userData.favorites = emptyArr.sort();
       console.log(userData);
       updateUser(userData);
     });

@@ -57,12 +57,7 @@ const Following = (props: IProps) =>
                     
                 <Pressable onPress={()=>goToUser(item)}>
                     <View style={styles.container}>
-                <Image
-                    style={styles.follower}
-                    source={{
-                        uri: `https://scouter-revature-project1.s3.amazonaws.com/public/${item.image}`
-                    }}
-                    />
+                
                 <View style={styles.infoContainer}>
                     <Text style={styles.followerName} numberOfLines={1}>{item}</Text>
                 </View>
