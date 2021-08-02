@@ -65,8 +65,8 @@ const Login = () =>
     {
         let newUser = {
             REFERENCE: '0',
-            userID: 'U#' + username,
-            name: username,
+            userID: 'U#' + username.toLowerCase(),
+            name: username.toLowerCase(),
             bio: {
                 greeting: '',
                 description:''
@@ -93,14 +93,14 @@ const Login = () =>
                type:LoginActions.LOGIN,
                payload:{
                    name: cogUser.getUsername(),
-                   type: cogUser.getUsername() === 'newUser' ? 'Admin': 'user'
+                   type: (cogUser.getUsername().toLowerCase() === ('newuser' || 'animefanatic')) ? 'Admin': 'user'
                }
            })
                dispatch({
                    type: SwitchPageAction.UPDATE,
                    payload: {
                     PageName: 'Home',
-                    parentID: `U#${cogUser.getUsername()}`
+                    parentID: `U#${cogUser.getUsername().toLowerCase()}`
                 }
             })
                navigation.navigate('Home');

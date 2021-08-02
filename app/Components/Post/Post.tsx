@@ -8,7 +8,7 @@ import colors from "../../config/colors";
 import IPost from "../../model/Post";
 import { SwitchPageAction } from "../../redux/Actions";
 import Button_Comment from "./Button_Comment";
-import Button_Like from "./Button_Like";
+
 import ProfileImg from "./ProfileImg";
 
 
