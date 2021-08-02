@@ -3,7 +3,6 @@ import React, { useCallback, useEffect, useState } from "react";
 import { Text, View, StyleSheet, Image, Pressable, TouchableOpacity } from "react-native";
 import { useDispatch } from "react-redux";
 import axiosConfig from "../../../axiosConfig";
-
 import colors from "../../config/colors";
 import IPost from "../../model/Post";
 import { SwitchPageAction } from "../../redux/Actions";

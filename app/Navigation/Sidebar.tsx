@@ -1,5 +1,4 @@
-import { DrawerContentScrollView, DrawerItem, DrawerItemList, DrawerNavigationProp } from "@react-navigation/drawer";
-import { DrawerNavigationState } from "@react-navigation/routers";
+import { DrawerContentScrollView, DrawerItem, DrawerItemList} from "@react-navigation/drawer";
 import React, { useState } from "react";
 import { View, Image,StyleSheet, TextInput, Pressable, TouchableOpacity, Keyboard,} from "react-native";
 import { Icon } from "react-native-elements";
@@ -77,31 +76,25 @@ const styles = StyleSheet.create({
           backgroundColor: colors.buttonPrimary,
           alignSelf: 'center',
           alignItems: 'center',
-        justifyContent: 'center'
-        
-
+        justifyContent: 'center',
     },
     profImg: {
         alignItems: "center",
         justifyContent: "center",
         width: '100%',
         height: "30%",
-        maxWidth:500
-        
+        maxWidth:500,        
     },
     image: {
         width: '100%',
         height: '100%',
         resizeMode: 'contain',
         padding: 10,
-        borderRadius: 50,
-        
-        
+        borderRadius: 50,        
     },
     inputView: {
         backgroundColor: colors.secondary,
-        borderRadius: 1000,
-        //flex: 1,
+        borderRadius: 1000,       
         maxHeight: '13%',
         marginBottom: "2%",
         alignContent: "center",
