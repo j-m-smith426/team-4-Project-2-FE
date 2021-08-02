@@ -116,17 +116,12 @@ const styles = StyleSheet.create({
     //specifically for header navigation
     TabBar: {
       backgroundColor: "green",
-      paddingTop: "10%",
+      paddingTop: "5%",
       
     },
 
     TabView: {
       flex: 1,
       fontSize:15,
-      
-     
     },
-    bio:{
-
-    }
 })
