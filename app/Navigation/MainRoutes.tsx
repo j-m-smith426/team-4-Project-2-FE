@@ -1,14 +1,9 @@
-import React, { useEffect, useState,} from 'react';
+import React from 'react';
 import {NavigationContainer} from '@react-navigation/native'
-import { createStackNavigator } from '@react-navigation/stack';
 import Login from '../Screen/Login';
 import PostScreen from '../Screen/PostScreen';
 import ProfilePage from '../Components/Profile/ProfileNavigation';
-import Anime from '../Components/Anime/Anime';
-import SideMenu from 'react-native-side-menu-updated';
-import { TouchableOpacity, View, Text, Pressable,StyleSheet, } from 'react-native';
-import { useNavigation } from "@react-navigation/core";
-import { DrawerLayoutAndroid } from 'react-native-gesture-handler';
+import { Pressable, StyleSheet, TouchableOpacity, } from 'react-native';
 import { createDrawerNavigator } from '@react-navigation/drawer';
 import { Icon } from 'react-native-elements';
 import addAnimeScreen from '../Screen/addAnimeScreen';
@@ -16,7 +11,6 @@ import editProfile from '../Components/Profile/editProfile';
 import { useSelector } from 'react-redux';
 import { IRootState } from '../redux/State';
 import Sidebar from './Sidebar';
-import CommentScreen from '../Screen/CommentScreen';
 import CommentNav from '../Screen/CommentNav';
 import mainScreen from '../Screen/mainScreen';
 import SearchList from '../Screen/SearchList';
@@ -41,8 +35,8 @@ const MainRoutes: React.FC<RouterProps> = () =>
     return (
         <NavigationContainer >
             <Drawer.Navigator initialRouteName='Login' drawerType = 'slide' drawerContent = {props => <Sidebar {...props} />} screenOptions = {({navigation})=>({
-                        headerLeft: () => (<Pressable onPress={() => {navigation.openDrawer()}} style = {styles.menuImg}><Icon
-                        name='menu' /></Pressable>),
+                        headerLeft: () => (<TouchableOpacity onPress={() => {navigation.openDrawer()}} style = {styles.menuImg}><Icon
+                        name='menu' /></TouchableOpacity>),
                         headerShown:user !== 'Guest'
                       })}>
                 <Drawer.Screen name="Home" component={mainScreen} />
