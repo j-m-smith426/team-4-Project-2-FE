@@ -223,11 +223,12 @@ const styles = StyleSheet.create({
     backgroundColor:colors.background2,
     width: "50%",
     textAlign: "center",
-    paddingBottom: 5,
+    //paddingBottom: ,
     padding: 5,
     fontSize: 14,
   },
   rating: {
+    paddingTop: "5%",
     flex: 1,
     fontSize: 16,
   },
@@ -236,7 +237,8 @@ const styles = StyleSheet.create({
     textAlign: "left",
     fontSize: 15,
   },
-  titleRow: {    
+  titleRow: {
+    paddingVertical: "4%",    
     flexDirection: "row",
     alignItems: "center",
   },

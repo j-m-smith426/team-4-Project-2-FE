@@ -1,7 +1,7 @@
 import { useNavigation } from "@react-navigation/native";
 import { googleSignInButton } from "aws-amplify";
 import React, { useEffect, useState } from "react";
-import { Text, StyleSheet, FlatList, View, Image, Pressable } from "react-native";
+import { Text, StyleSheet, FlatList, View, Image, Pressable, TouchableOpacity } from "react-native";
 import { useDispatch } from "react-redux";
 import colors from "../../config/colors";
 import color from "../../config/colors";
@@ -45,7 +45,7 @@ const Favorites = (props: Iprops) =>
                 ({ item }) =>
                     
                 (
-                    <Pressable onPress={() => goTo(item.split('#')[1])}>
+                    <TouchableOpacity onPress={() => goTo(item.split('#')[1])}>
 
                         <View style={styles.anime}>
                             {item.split('#')[2] !== 'key' && <Image
@@ -62,7 +62,7 @@ const Favorites = (props: Iprops) =>
                             </View>
                             </View>
                         </View>
-                    </Pressable>
+                    </TouchableOpacity>
                     )
                 }
                 keyExtractor={item => item.split('#')[1]}
