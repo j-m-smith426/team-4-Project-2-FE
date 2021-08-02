@@ -1,7 +1,7 @@
 import { DrawerContentScrollView, DrawerItem, DrawerItemList, DrawerNavigationProp } from "@react-navigation/drawer";
 import { DrawerNavigationState } from "@react-navigation/routers";
 import React, { useState } from "react";
-import { View, Image,StyleSheet, TextInput, Pressable,} from "react-native";
+import { View, Image,StyleSheet, TextInput, Pressable, TouchableOpacity, Keyboard,} from "react-native";
 import { Icon } from "react-native-elements";
 import { useDispatch } from "react-redux";
 import colors from "../config/colors";
@@ -43,12 +43,12 @@ newState.routes = newState.routes.filter(item => !['User','Post','Anime', 'Searc
                     onChangeText ={onUserChange}
                     style={styles.TextInput}
                     placeholder="Search"
-                    onSubmitEditing={()=>submit()}/>
-                <Pressable onPress = {() => submit()} style={styles.btn}>
+                    onSubmitEditing={()=>submit().then(Keyboard.dismiss)}/>
+                <TouchableOpacity onPress = {() => submit().then(Keyboard.dismiss)} style={styles.btn}>
                     <Icon
                         color={colors.buttonSecondary}
                     name='search'/>
-                </Pressable>
+                </TouchableOpacity>
             </View>
             <View style={styles.scroll}>
                 <DrawerContentScrollView {...props} style = {styles.scroll}>

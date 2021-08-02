@@ -1,14 +1,10 @@
 import { useNavigation } from "@react-navigation/native";
 import React, { useEffect, useState } from "react";
-import { View, Image, Text, ScrollView, StyleSheet, FlatList, Pressable } from "react-native";
+import { View, Image, Text, ScrollView, StyleSheet, FlatList, Pressable, TouchableOpacity } from "react-native";
 import { useDispatch } from "react-redux";
-import { classicNameResolver } from "typescript";
-import axiosConfig from "../../../axiosConfig";
 import colors from "../../config/colors";
-import IUser from "../../model/User";
 import { SwitchPageAction } from "../../redux/Actions";
-import Loading from "../../Screen/loading";
-import ScreenWrapper from "../../Screen/ScreenWrapper";
+
 interface IProps
 {
     following: string[];
@@ -56,14 +52,14 @@ const Following = (props: IProps) =>
                 
                 (
                     
-                <Pressable onPress={()=>goToUser(item)}>
+                <TouchableOpacity onPress={()=>goToUser(item)}>
                     <View style={styles.container}>
                 
                 <View style={styles.infoContainer}>
                     <Text style={styles.followerName} numberOfLines={1}>{item}</Text>
                 </View>
                         </View>
-                    </Pressable>
+                    </TouchableOpacity>
                         )
                     }
                     keyExtractor={item => item}
@@ -105,15 +101,13 @@ const styles = StyleSheet.create({
         flex: 1,
     },
     flatlist: {
-    flex:1,
-      backgroundColor: colors.background  
+        flex:1,
+        backgroundColor: colors.background,  
     },
 
     followerName: {
         fontSize: 20,
         fontStyle: "italic",
-        
-        //flex: 0.5,
     },
 });
 

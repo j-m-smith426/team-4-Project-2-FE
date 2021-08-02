@@ -1,6 +1,6 @@
 import { useNavigation } from "@react-navigation/native";
 import React, { useCallback, useEffect, useState } from "react";
-import { Text, View, StyleSheet, Image, Pressable } from "react-native";
+import { Text, View, StyleSheet, Image, Pressable, TouchableOpacity } from "react-native";
 import { useDispatch } from "react-redux";
 import axiosConfig from "../../../axiosConfig";
 
@@ -115,9 +115,9 @@ const Post = (props: IPost) =>
             
             <View style={styles.postBot}>
                 <View style={styles.postBot}>
-                    <Pressable onPress= {goToComment}>
-                <Button_Comment />
-            </Pressable>
+                    <TouchableOpacity onPress= {goToComment}>
+                        <Button_Comment />
+                    </TouchableOpacity>
                 </View>
                 
                 <View style={styles.timeContainer}>

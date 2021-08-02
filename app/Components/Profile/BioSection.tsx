@@ -1,5 +1,5 @@
 import React, {useState, useEffect} from "react";
-import { ScrollView, Text, Image, View, StyleSheet, Pressable } from "react-native";
+import { ScrollView, Text, Image, View, StyleSheet, Pressable, TouchableOpacity } from "react-native";
 import axiosConfig from "../../../axiosConfig";
 import { Icon } from "react-native-elements";
 import { useSelector } from "react-redux";
@@ -109,36 +109,36 @@ const Bio = (props: Iprops) =>
     const followButton = () =>
     {
         return (following ?
-            <Pressable onPress={unFollow} style={styles.following}>
+            <TouchableOpacity onPress={unFollow} style={styles.following}>
                
                 <Icon color={colors.buttonSecondary} name='check'/><Text style={styles.buttonText}>Following</Text>
                
-            </Pressable>:
-            <Pressable onPress={addFollow} style={styles.following}>
-                
+            </TouchableOpacity>:
+            <TouchableOpacity onPress={addFollow} style={styles.following}>
                 <Text style={styles.followButtonText}>Follow</Text>
-                
-            </Pressable> )
+            </TouchableOpacity> )
     }
     return(
         <View style={styles.background}>
-            <Image style={styles.topBG} source = {{uri: `https://scouter-revature-project1.s3.amazonaws.com/public/${props.image}`}}>
-            </Image>
+                <Image style={styles.topBG} source = {{uri: `https://scouter-revature-project1.s3.amazonaws.com/public/${props.image}`}}>
+                </Image>
 
-        <Image
-            style = {styles.profilePicture}
-            source = {{uri: `https://scouter-revature-project1.s3.amazonaws.com/public/${props.image}`}}
-            />
-            <Text style={styles.UserNameText}>
-                {props.name}
-            </Text>
-            {currentUser !== props.name && followButton()}
-        <View style={styles.bio}>
-            <Text style={styles.intro}>{props.bio.greeting}</Text>
-                <Text>About Me:</Text>
-                <Text>{props.bio.description}</Text>
-            </View>
-            
+                <Image
+                    style = {styles.profilePicture}
+                    source = {{uri: `https://scouter-revature-project1.s3.amazonaws.com/public/${props.image}`}}
+                />
+            {/* <View style = {styles.info}> */}
+                <Text style={styles.UserNameText}>
+                    @{props.name}
+                </Text>
+                {currentUser !== props.name && followButton()}
+                <View style={styles.bio}>
+                    <Text style={styles.intro}>Welcome!</Text>
+                    <Text style={styles.intro}>{props.bio.greeting}</Text>
+                    <Text style = {styles.description}>About Me:</Text>
+                    <Text style = {styles.description}>{props.bio.description}</Text>
+                </View>
+            {/* </View> */}
     </View>
     );
 }
@@ -153,21 +153,17 @@ const styles = StyleSheet.create({
         top: 0,
         left: 0,
         right: 0,
-        bottom: '75%',
-        opacity: 0.3
-    },
-    UserNameText: {
-        fontSize: 30,
-        alignSelf: 'center'
+        height: '30%',
+        opacity: 0.3,
     },
 
-    username: {
-        paddingVertical: "4%",
-        textAlign: "center",
-        flex: 0.10,
-        fontSize: 16,
+    UserNameText: {
+        paddingTop: "5%",
+        fontSize: 30,
+        alignSelf: 'center',
         fontStyle: "italic",
     },
+
     followButtonText: {
         fontSize: 16,
         color: colors.buttonSecondary
@@ -175,31 +171,36 @@ const styles = StyleSheet.create({
 
     profilePicture: {
         alignSelf: "center",
-        width: 100,
-        height: 100,
+        width: 150,
+        height: 150,
         paddingBottom: "25%",
         borderWidth: 2,
         borderColor: "grey",
-        borderRadius: 100 / 2,
+        borderRadius: 150 / 2,
         marginTop: '6%',
         marginBottom: '10%'
     },
-    intro: {
-        
-        fontSize: 16,
+
+    intro: {    
+        fontSize: 22,
         textAlign: "center",
         justifyContent: 'flex-end',
-        paddingVertical: "5%"   
+        paddingVertical: "2%"   
     },
 
     bio: {
         flex: 2,
-        fontSize: 16,
-        textAlign: "center",
-        
+        fontSize: 18,
+        textAlign: "center",  
         paddingHorizontal: "10%",
         paddingVertical: "5%"
     },
+
+    description: {
+        paddingTop: "4%",
+        fontSize: 20,
+    },
+
     following: {
         flexDirection: "row",
         alignSelf: 'center',
