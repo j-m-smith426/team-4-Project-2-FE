@@ -1,7 +1,7 @@
 const colors = {
   primary: "rgb(201,218,134)",
   secondary: "rgb(210,210,210)", //sidebar input field
-  tertiary: "rgb(70,130,180)", //Background of items
+  tertiary: "rgb(108,157,198)", //Background of items
   background: "rgb(201,218,234)", //Background
   background2: "rgb(210,210,230)", //SideBar
   buttonPrimary: "rgb(62,5,87)", //Background
