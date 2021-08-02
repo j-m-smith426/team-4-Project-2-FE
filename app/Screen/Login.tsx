@@ -1,5 +1,5 @@
-import React, { ChangeEvent, useState,useEffect } from "react";
-import { Text, View, StyleSheet, Image, TextInput, TouchableOpacity, Pressable, GestureResponderEvent, KeyboardAvoidingView, Platform } from "react-native";
+import React, { useState,useEffect } from "react";
+import { Text, View, StyleSheet, Image, TextInput, TouchableOpacity, KeyboardAvoidingView, Platform, TouchableWithoutFeedback, Keyboard } from "react-native";
 import colors from "../config/colors";
 import { useNavigation } from "@react-navigation/core";
 import { useDispatch, useSelector } from "react-redux";
@@ -7,7 +7,6 @@ import { LoginActions, SwitchPageAction } from "../redux/Actions";
 import { Auth } from "aws-amplify";
 import { CognitoUser } from "@aws-amplify/auth";
 import { IRootState } from "../redux/State";
-import IUser from "../model/User";
 import axiosConfig from "../../axiosConfig";
 import { AuthError } from "@aws-amplify/auth/lib-esm/Errors";
 import { Icon } from "react-native-elements/dist/icons/Icon";
@@ -163,27 +162,26 @@ const Login = () =>
         
             return (
                 <View>
+                    <View style={styles.textinfo}>
 
-                <View style={styles.textinfo}>
+                    {passwordLength &&<Icon name='check'></Icon>}
+                    <Text>Password must be 8 characters long</Text>
+                    </View>
+                    <View style={styles.textinfo}>
 
-                {passwordLength &&<Icon name='check'></Icon>}
-                <Text>Password must be 8 characters long</Text>
-                </View>
-                <View style={styles.textinfo}>
+                    {passwordCapital &&<Icon name='check'></Icon>}
+                    <Text>Password must contain an uppercase letter</Text>
+                    </View>
+                    <View style={styles.textinfo}>
 
-                {passwordCapital &&<Icon name='check'></Icon>}
-                <Text>Password must contain an uppercase letter</Text>
-                </View>
-                <View style={styles.textinfo}>
+                    {passwordLowerCase && <Icon name='check'></Icon>}
+                    <Text>Password must contain a lowercase letter</Text>
+                    </View>
+                    <View style={styles.textinfo}>
 
-                {passwordLowerCase && <Icon name='check'></Icon>}
-                <Text>Password must contain a lowercase letter</Text>
-                </View>
-                <View style={styles.textinfo}>
-
-                {passwordSpecial &&<Icon name='check'></Icon>}
-                <Text>Password must contain a special character</Text>
-                </View>
+                    {passwordSpecial &&<Icon name='check'></Icon>}
+                    <Text>Password must contain a special character</Text>
+                    </View>
                 </View>
             )
         
@@ -195,6 +193,7 @@ const Login = () =>
         behavior={Platform.OS === "ios" ? "padding" : "height"}
         style={styles.container}
         >
+        <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
         <View style = {styles.container}>
             {img}
                     <Text>{error||''}</Text>
@@ -217,7 +216,7 @@ const Login = () =>
                         placeholder="Password"/>
                 </View>
                     <TouchableOpacity style={styles.loginBtn} onPress={loginTrue ? submit : signUpSubmit}>
-                        <Text style={styles.text}>{loginTrue ? 'LOGIN' : 'SignUp'}</Text>
+                        <Text style={styles.text}>{loginTrue ? 'LOGIN' : 'SIGNUP'}</Text>
                     </TouchableOpacity>
                     
                     {signup}
@@ -228,6 +227,7 @@ const Login = () =>
                     </View>
                 <View style={styles.filler} />
         </View>
+        </TouchableWithoutFeedback>
         </KeyboardAvoidingView>
 
     );
@@ -243,7 +243,7 @@ const Login = () =>
         </View>);
         setSignup(
         <TouchableOpacity>
-            <Text style={styles.linkText} onPress={toLogin}>Log in</Text>
+            <Text style={styles.linkText} onPress={toLogin}>LOGIN</Text>
         </TouchableOpacity>);
         setLoginTrue(false);
     } 
@@ -256,7 +256,7 @@ const Login = () =>
         setEmailComp(<View/>);
         setSignup(                
         <TouchableOpacity >
-            <Text style={styles.linkText} onPress={toSignup}>Sign Up</Text>
+            <Text style={styles.linkText} onPress={toSignup}>SIGNUP</Text>
         </TouchableOpacity>);
         setLoginTrue(true);
     } 
@@ -306,6 +306,7 @@ const styles = StyleSheet.create({
         width: '100%',
         justifyContent: 'center',
         alignItems: "center",
+        paddingTop: "9%",
     },
 
     inputView: {
