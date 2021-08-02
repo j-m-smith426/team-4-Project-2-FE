@@ -35,7 +35,7 @@ const Rating = (props: RatingProps) =>{
         .then(response =>{
             console.log(`Average = ${response.data}`)
             if(response.data){
-                setRating(response.data);
+                setRating(Math.round(response.data* 100) / 100 );
             } else {
                 setRating(0);
             }
