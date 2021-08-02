@@ -1,7 +1,6 @@
-import { DrawerContentScrollView, DrawerItem, DrawerItemList, DrawerNavigationProp } from "@react-navigation/drawer";
-import { DrawerNavigationState } from "@react-navigation/routers";
+import { DrawerItem, DrawerItemList } from "@react-navigation/drawer";
 import React, { useState } from "react";
-import { View, Image,StyleSheet, TextInput, Pressable,} from "react-native";
+import { View, Image,StyleSheet, TextInput, Pressable, TouchableWithoutFeedback, Keyboard, TouchableOpacity,} from "react-native";
 import { Icon } from "react-native-elements";
 import { useDispatch } from "react-redux";
 import colors from "../config/colors";
@@ -34,18 +33,20 @@ const Sidebar = (props: any) => {
                 source={require('../assets/scouter.png')} />
                 
             </View>
+            <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
             <View style={styles.inputView}>
                 <TextInput 
                     onChangeText ={onUserChange}
                     style={styles.TextInput}
                     placeholder="Search"
                     onSubmitEditing={()=>submit()}/>
-                <Pressable onPress = {() => submit()} style={styles.btn}>
+                <TouchableOpacity onPress = {() => submit().then(Keyboard.dismiss)} style={styles.btn}>
                     <Icon
-                        color={colors.buttonPrimary}
+                        //color={colors.buttonPrimary}
                     name='search'/>
-                </Pressable>
+                </TouchableOpacity>
             </View>
+            </TouchableWithoutFeedback>
             <View style={styles.scroll}>
                 {/* <DrawerContentScrollView {...props} style = {styles.scroll}> */}
                     <DrawerItem
@@ -70,7 +71,7 @@ const styles = StyleSheet.create({
         height: '90%',
         flex:1,
         borderRadius:1000,
-          backgroundColor: colors.primary,
+          //backgroundColor: colors.primary,
           alignSelf: 'center',
           alignItems: 'center',
         justifyContent: 'center'
