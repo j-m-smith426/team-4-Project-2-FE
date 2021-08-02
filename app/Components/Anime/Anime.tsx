@@ -38,7 +38,7 @@ let newUser: IUser = {
 const Anime = () => {
   let isMounted = true;
   const [clicked, setClicked] = useState(false);
-  const [anime, setAnime] = isMounted && useState(newAnime);
+    const [anime, setAnime] = isMounted && useState(newAnime);
   const [user, setUser] = isMounted && useState<IUser>(newUser);
   const [currentPage, currentUser] =
     isMounted &&
@@ -56,7 +56,7 @@ const Anime = () => {
              //set star at load needs work
         }
       return() => {isMounted = false}
-  }, [navigation, currentPage, user]);
+  }, [navigation]);
   const getAnime = async () => {
     axiosConfig
       .get("/Anime/" + currentPage.replace("#", "_"))
@@ -109,7 +109,8 @@ const Anime = () => {
   ) {
     setVeiwingUser();
     getAnime();
-    if (clicked !== user.favorites.includes(anime.TYPEID + "#" + anime.image)) {
+      if (clicked !== user.favorites.includes(anime.TYPEID + "#" + anime.image)) {
+          
       setStar();
     }
     //if not show loading

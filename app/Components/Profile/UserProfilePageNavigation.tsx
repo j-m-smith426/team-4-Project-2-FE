@@ -14,6 +14,7 @@ import Following from './Following';
 import Favorites from './Favorites';
 import IUser from '../../model/User';
 import Loading from '../../Screen/loading';
+import colors from '../../config/colors';
 
 let newUser: IUser = {
   REFERENCE: '0',
@@ -63,17 +64,16 @@ export default function Profile() {
 
   useEffect(() =>
   {
-    const unsubscribe = navigation.addListener('focus', () =>
-    {
-    isMounted = true;     
+      isMounted = true;
       
-      loadUserInfo();
-    })
+    loadUserInfo();
+    setIndex(0);
+   
     return () =>
     {
       isMounted = false;
     }
-  }, [user]);
+  }, [navigation,user]);
   //Route to each component
 const FirstRoute = () => (
   <Bio  bio={userInfo.bio} image={userInfo.image}  name={user}/>
@@ -123,14 +123,14 @@ const styles = StyleSheet.create({
 
     //specifically for header navigation
     TabBar: {
-      backgroundColor: "green",
+      backgroundColor: colors.TabBarHeader,
       paddingTop: "10%",
       //marginBottom:"10%",
     },
-
+    
     TabView: {
       flex: 1,
-      fontSize:15,
+      fontSize:13,
       
      
     },

@@ -76,13 +76,13 @@ const Favorites = (props: Iprops) =>
 const styles = StyleSheet.create({
     watchlist: {
         flex: 1,
-        
+        backgroundColor: colors.background
     },
     anime: {
         flex:1,
         flexDirection: "row",
-        //paddingHorizontal: "5%",
-        //paddingVertical: "2%",
+        paddingHorizontal: "1%",
+        paddingVertical: "1%",
         //justifyContent: "space-between"
         borderBottomWidth: 1,
         borderBottomColor: "grey",
@@ -99,8 +99,8 @@ const styles = StyleSheet.create({
         //paddingHorizontal: "5%",
     },
     infoContainer: {
-        paddingHorizontal: "3%",
-        paddingVertical: "3%",
+        paddingHorizontal: "5%",
+        paddingVertical: "7%",
         flex: 1,
         backgroundColor: color.tertiary,
         justifyContent: 'center'

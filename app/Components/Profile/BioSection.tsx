@@ -38,6 +38,7 @@ const Bio = (props: Iprops) =>
 {
     let isMounted = true;
     const [following, setFollowing] = isMounted && useState(false);
+    const [isloading, setIsloading] = isMounted && useState(false)
     const [user, setUser] = isMounted && useState<IUser>(newUser)
     let currentUser = isMounted && useSelector((state: IRootState) =>
     {
@@ -72,6 +73,7 @@ const Bio = (props: Iprops) =>
     }
 
     if (user.TYPEID === '' || following !== user.followed.includes(props.name)) {
+        isloading || setIsloading(true)
         setVeiwingUser();
         if (following !== user.followed.includes(props.name)){
             setFollow();
@@ -80,8 +82,10 @@ const Bio = (props: Iprops) =>
         return (
             <Loading/>
         )
+    } else {
+        
+        !isloading || setIsloading(false);
     }
-
    
     const addFollow = async () =>
     {
@@ -107,7 +111,7 @@ const Bio = (props: Iprops) =>
         return (following ?
             <Pressable onPress={unFollow} style={styles.following}>
                
-                <Icon name='check'/><Text>Following</Text>
+                <Icon color={colors.buttonSecondary} name='check'/><Text style={styles.buttonText}>Following</Text>
                
             </Pressable>:
             <Pressable onPress={addFollow} style={styles.following}>
@@ -165,7 +169,8 @@ const styles = StyleSheet.create({
         fontStyle: "italic",
     },
     followButtonText: {
-        fontSize:16
+        fontSize: 16,
+        color: colors.buttonSecondary
     },
 
     profilePicture: {
@@ -199,9 +204,12 @@ const styles = StyleSheet.create({
         flexDirection: "row",
         alignSelf: 'center',
         alignItems: 'center',
-        backgroundColor: colors.tertiary,
+        backgroundColor: colors.buttonPrimary,
         borderRadius: 2000,
         padding:5
+    },
+    buttonText: {
+        color: colors.buttonSecondary
     }
 });
 
