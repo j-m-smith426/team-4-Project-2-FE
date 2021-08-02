@@ -127,10 +127,10 @@ const AddPost = (props: IaddPost) =>
             
             <View style={styles.postBot}>
                 <View style={styles.imgAdd}>
-                    <Pressable onPress={pickImage}>
+                    <TouchableOpacity style = {styles.addImage} onPress={pickImage}>
                         <Icon size={27} name="image" />
-                    </Pressable>
-                        <Text>add Picture</Text>
+                        <Text>Add Photo</Text>
+                    </TouchableOpacity>
                 </View>
                 
                 <View style={styles.timeContainer}>
@@ -162,19 +162,20 @@ const styles = StyleSheet.create({
         
         
     },
-    profImg: {
-        
-        flexDirection: 'row',
-      
+    profImg: {      
         alignSelf: 'flex-start',
         position: 'relative',
         width: '40%',
         maxWidth: 200,
         height: 50,
         marginTop: '2%',
-        marginLeft:'1%'
-        
+        marginLeft:'1%'  
     },
+
+    addImage: {
+        flexDirection: 'row',
+    },
+
     text: {
        
         flexDirection: 'row',
