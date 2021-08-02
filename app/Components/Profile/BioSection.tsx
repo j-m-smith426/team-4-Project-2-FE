@@ -134,9 +134,9 @@ const Bio = (props: Iprops) =>
                 {currentUser !== props.name && followButton()}
                 <View style={styles.bio}>
                     <Text style={styles.intro}>Welcome!</Text>
-                    <Text style={styles.intro}>{props.bio.greeting}</Text>
+                <Text numberOfLines={1} style={styles.intro}>{props.bio.greeting}</Text>
                     <Text style = {styles.description}>About Me:</Text>
-                    <Text style = {styles.description}>{props.bio.description}</Text>
+                    <Text numberOfLines={6} style = {styles.description}>{props.bio.description}</Text>
                 </View>
             {/* </View> */}
     </View>
