@@ -17,7 +17,9 @@ export const Reducer = (
       newState.ILogin.userType = action.payload.type;
       return newState;
     case LoginActions.LOGOUT:
-      newState.ILogin.username = "Guest";
+      newState.ILogin.username = initialState.ILogin.username;
+      newState.IPageState.parentID = initialState.IPageState.parentID;
+      newState.IPageState.postID = initialState.IPageState.postID;
       return newState;
     case SwitchPageAction.UPDATE:
       newState.IPageState.PageName = action.payload.name;
