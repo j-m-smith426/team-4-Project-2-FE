@@ -140,6 +140,7 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: colors.background,
+    
     //paddingTop:40,
     //paddingHorizontal:5,
     //alignItems: 'center',
@@ -166,6 +167,7 @@ const styles = StyleSheet.create({
     backgroundColor: colors.tertiary,
     fontSize: 25,
     borderBottomWidth: 1,
+    borderRadius: 10
    
 
   },
@@ -174,9 +176,10 @@ const styles = StyleSheet.create({
     
   },
   genre:{
-    backgroundColor:colors.background,
+    backgroundColor: colors.background,
+    paddingHorizontal: 5,
     textAlign:"center",
-
+    borderRadius: 1000
   },
   col: {
     flex:1,

@@ -95,9 +95,11 @@ const Anime = () => {
       } else {
         emptyArr = [anime.TYPEID + "#" + anime.image, ...newFavArr];
       }
-      userData.favorites = emptyArr.sort();
+      emptyArr.sort();
+      userData.favorites = emptyArr;
       console.log(userData);
       updateUser(userData);
+      setUser(userData);
     });
     setClicked(!clicked);
   };

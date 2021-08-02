@@ -92,7 +92,7 @@ const Login = () =>
                type:LoginActions.LOGIN,
                payload:{
                    name: cogUser.getUsername().toLowerCase(),
-                   type: (cogUser.getUsername().toLowerCase() === ('newuser' || 'animefanatic')) ? 'Admin': 'user'
+                   type: cogUser.getUsername().toLowerCase() === 'animefanatic' ? 'Admin': 'user'
                }
            })
                dispatch({
