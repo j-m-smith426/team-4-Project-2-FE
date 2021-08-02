@@ -15,6 +15,9 @@ describe('Login Screen', () => {
         const wrapper = mount(<AllAnime/>);
         const resp = {TYPEID: 'A#DBZ', name: 'DBZ'};
         axios.get(resp.TYPEID);
-        expect(wrapper.find('FlatList')).toHaveProp('keyExtractor');
+        expect(wrapper.find('FlatList')).toHaveReturnedTimes;
+        
+        //toHaveProp('keyExtractor');
+        
     })
 }) 

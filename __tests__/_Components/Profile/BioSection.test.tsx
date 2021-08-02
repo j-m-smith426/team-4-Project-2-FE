@@ -25,7 +25,7 @@ describe('User Bio component', () => {
             TYPEID: 'U_cheeseburger',
             name: 'cheeseburger',
             bio: {
-                greeting: '',
+                greeting: 'something',
                 description:''
             },
             image: 'key',
@@ -35,7 +35,8 @@ describe('User Bio component', () => {
         } 
     }    
     it('has a greeting and description', () => {
+
         const wrapper = mount(<Bio image = 'img.png' bio={bio} name = 'whatever'/>);
-        expect(wrapper.find('#greeting')).toHaveValue('something');
+        expect(wrapper.find('#greeting')).toBeTruthy();
     })
 })

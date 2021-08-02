@@ -56,8 +56,7 @@ const PopularAnime = () => {
 
 const styles = StyleSheet.create({
     container: {
-        //marginHorizontal: "2%",
-        //width: "100%"
+       
     },
     containAnime: {
         flexWrap: "wrap",
@@ -70,9 +69,7 @@ const styles = StyleSheet.create({
 
     animeCard: {
         flex: 1,
-        //paddingLeft: "1%"
-        //justifyContent: "center",
-
+       
     },
     
     anime: {

@@ -2,7 +2,7 @@ import AddPost from "../../../app/Components/Post/addPost";
 import React from "react";
 import { mount } from "enzyme";
 import axios from 'axios';
-import axiosConfig from "../../../axiosConfig";
+
 jest.mock('react-redux');
 jest.mock("@react-navigation/native");
 jest.mock('react-native-tab-view');

@@ -49,11 +49,7 @@ const styles = StyleSheet.create({
 
         width: '45%',
         height: '100%', 
-        
-
-       // backgroundColor: 'indigo',
-
-    },
+        },
     image: {
         width: 50,
         height: 50,

@@ -224,8 +224,7 @@ const styles = StyleSheet.create({
   genre: {
     backgroundColor:colors.background2,
     width: "50%",
-    textAlign: "center",
-    //paddingBottom: ,
+    textAlign: "center",   
     padding: 5,
     fontSize: 14,
   },
