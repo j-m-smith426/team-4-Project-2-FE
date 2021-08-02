@@ -61,7 +61,7 @@ const styles = StyleSheet.create({
   //specifically for header navigation
   TabBar: {
     backgroundColor: colors.TabBarHeader,
-    paddingTop: "10%",
+    paddingTop: "5%",
   },
 
   TabView: {

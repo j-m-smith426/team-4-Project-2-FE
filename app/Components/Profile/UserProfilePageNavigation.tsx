@@ -9,7 +9,6 @@ import axiosConfig from '../../../axiosConfig';
 import { IRootState } from '../../redux/State';
 import PostScreen from '../../Screen/PostScreen';
 import Bio from './BioSection';
-import Watchlist from './Watchlist';
 import Following from './Following';
 import Favorites from './Favorites';
 import IUser from '../../model/User';
@@ -124,7 +123,7 @@ const styles = StyleSheet.create({
     //specifically for header navigation
     TabBar: {
       backgroundColor: colors.TabBarHeader,
-      paddingTop: "10%",
+      paddingTop: "5%",
       //marginBottom:"10%",
     },
     
