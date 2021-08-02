@@ -13,6 +13,7 @@ import Watchlist from './Watchlist';
 import Following from './Following';
 import Favorites from './Favorites';
 import IUser from '../../model/User';
+import colors from '../../config/colors';
 
 let newUser: IUser = {
   REFERENCE: '0',
@@ -57,15 +58,12 @@ export default function ProfilePage() {
 
   useEffect(() =>
   {
-    
-    const unsubscribe = navigation.addListener('focus', () =>
-    {
       isMounted = true;
       loadUserInfo();
       setIndex(0);
     
       
-    })
+  
       
       
     return () =>
@@ -116,7 +114,7 @@ const styles = StyleSheet.create({
 
     //specifically for header navigation
     TabBar: {
-      backgroundColor: "green",
+      backgroundColor: colors.TabBarHeader,
       paddingTop: "10%",
       
     },

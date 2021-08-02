@@ -27,6 +27,10 @@ const Sidebar = (props: any) => {
         console.log('current Search',search);
         props.navigation.navigate('Search', {val: search});
     }
+    const { state, ...rest } = props;
+const newState = { ...state}  //copy from state before applying any filter. do not change original state
+newState.routes = newState.routes.filter(item => !['User','Post','Anime', 'Search', 'Comment','Login'].includes(item.name)) //replace "Login' with your route name
+
     return (
         <View style={styles.container}>
             <View style = {styles.profImg}>
@@ -42,18 +46,18 @@ const Sidebar = (props: any) => {
                     onSubmitEditing={()=>submit()}/>
                 <Pressable onPress = {() => submit()} style={styles.btn}>
                     <Icon
-                        color={colors.buttonPrimary}
+                        color={colors.buttonSecondary}
                     name='search'/>
                 </Pressable>
             </View>
             <View style={styles.scroll}>
-                {/* <DrawerContentScrollView {...props} style = {styles.scroll}> */}
+                <DrawerContentScrollView {...props} style = {styles.scroll}>
                     <DrawerItem
                         label='Logout'
                         onPress={logOut}
                         />
-                    <DrawerItemList {...props} />
-                {/* </DrawerContentScrollView> */}
+                    <DrawerItemList state={newState} {...rest} />
+                </DrawerContentScrollView>
             </View>
 
         </View>
@@ -63,14 +67,14 @@ const Sidebar = (props: any) => {
 const styles = StyleSheet.create({
     container: {
         flex:1,
-        backgroundColor: colors.mistyRose  
+        backgroundColor: colors.background2  
       },
     btn:
     {
         height: '90%',
         flex:1,
         borderRadius:1000,
-          backgroundColor: colors.primary,
+          backgroundColor: colors.buttonPrimary,
           alignSelf: 'center',
           alignItems: 'center',
         justifyContent: 'center'
