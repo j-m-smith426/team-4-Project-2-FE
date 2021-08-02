@@ -91,7 +91,7 @@ const Login = () =>
            dispatch({
                type:LoginActions.LOGIN,
                payload:{
-                   name: cogUser.getUsername(),
+                   name: cogUser.getUsername().toLowerCase(),
                    type: (cogUser.getUsername().toLowerCase() === ('newuser' || 'animefanatic')) ? 'Admin': 'user'
                }
            })
