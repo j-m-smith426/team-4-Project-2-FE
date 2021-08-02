@@ -36,7 +36,10 @@ To-do list:
 * More comprehensive frontend testing
 
 ## Getting Started
-In order to run Scouter Mobile, please install the Expo Go app on an android phone.
+Quick and Easy Use: 
+
+In order to run Scouter Mobile, please install the Expo Go app on an android phone. Then scan the QR code below:
+![QRCode](app/assets/qrcode.png)
 
 Then click the following link https://bit.ly/3xeEuep to download the app.
 
