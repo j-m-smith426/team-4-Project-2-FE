@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import * as ImagePicker from 'expo-image-picker'
-import { View, StyleSheet, Image, Platform, Pressable, Text, TextInput, TouchableOpacity } from "react-native";
+import { View, StyleSheet, Image, Platform, Pressable, Text, TextInput, TouchableOpacity, Touchable } from "react-native";
 
 import colors from "../../config/colors";
 import ProfileImg from "./ProfileImg";
@@ -127,16 +127,15 @@ const AddPost = (props: IaddPost) =>
             
             <View style={styles.postBot}>
                 <View style={styles.imgAdd}>
-                    <Pressable onPress={pickImage}>
+                    <TouchableOpacity style = {styles.addPic} onPress={pickImage}>
                         <Icon size={27} name="image" />
-                    </Pressable>
-                        <Text>add Picture</Text>
+                        <Text> Add Photo</Text>
+                    </TouchableOpacity>
                 </View>
                 
                 <View style={styles.timeContainer}>
                     <TouchableOpacity onPress={submitPost}>
-                    <Text>Post</Text>
-
+                        <Text>Post</Text>
                     </TouchableOpacity>
                 </View>
 
@@ -159,13 +158,10 @@ const styles = StyleSheet.create({
         
         flexDirection:"row",
         maxHeight: 500,
-        
-        
     },
+
     profImg: {
-        
         flexDirection: 'row',
-      
         alignSelf: 'flex-start',
         position: 'relative',
         width: '40%',
@@ -173,10 +169,9 @@ const styles = StyleSheet.create({
         height: 50,
         marginTop: '2%',
         marginLeft:'1%'
-        
     },
+    
     text: {
-       
         flexDirection: 'row',
         alignSelf: 'center',
         marginTop: 10,
@@ -186,6 +181,7 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
         position: 'relative',
     },
+
     postImg: {
         height: 200,
         width: '80%',
@@ -193,21 +189,19 @@ const styles = StyleSheet.create({
         alignSelf: 'center',
         borderColor: 'black',
         resizeMode: 'center',
-        marginBottom: 5,
-        
+        marginBottom: 5,    
     },
+
     postBot: {
        flexDirection:'row',
         height: 40,
         marginTop: 1,
         marginLeft: '1%',
         marginBottom: '1%',
-        justifyContent: 'space-between'
-       
-        
+        justifyContent: 'space-between',    
     },
+
     imgAdd: {
-    
         flexDirection: 'row',
         alignSelf: 'flex-start',
         alignItems: 'center',
@@ -215,6 +209,11 @@ const styles = StyleSheet.create({
         padding: 10,
     //   backgroundColor: colors.background
     },
+
+    addPic: {
+        flexDirection: 'row',
+    },
+
     timeContainer: {
         //alignSelf: 'flex-end',
         padding: 10,
@@ -222,9 +221,8 @@ const styles = StyleSheet.create({
         alignItems: 'flex-end',
         marginRight: '5%',
         borderRadius: 5000,
-        backgroundColor: colors.background
+        //backgroundColor: colors.background
     }
-
 
 });
 
