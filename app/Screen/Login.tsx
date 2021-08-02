@@ -306,7 +306,7 @@ const styles = StyleSheet.create({
         width: '100%',
         justifyContent: 'center',
         alignItems: "center",
-        paddingTop: "9%",
+        paddingVertical: "9%",
     },
 
     inputView: {

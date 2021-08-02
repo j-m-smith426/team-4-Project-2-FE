@@ -122,6 +122,7 @@ const Anime = () => {
   }
 
   return (
+    // <ScrollView>
     <View style={styles.container}>
       <Image
         style={styles.bgImage}
@@ -167,6 +168,8 @@ const Anime = () => {
         </View>
       </View>
     </View>
+    // {/* </ScrollView> */}
+
   );
 };
 
