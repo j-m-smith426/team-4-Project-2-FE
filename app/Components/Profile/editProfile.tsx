@@ -122,9 +122,11 @@ const editBio = () =>
         <KeyboardAvoidingView
         behavior={Platform.OS === "ios" ? "padding" : "height"}
         style={styles.background}
-      >
-      <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
+        >
                 <View style={styles.background}>
+
+      <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
+            <ScrollView>
                     <View style={styles.nameBar}>
 
             <Text style={styles.username}>{currentUser}</Text>
@@ -132,16 +134,16 @@ const editBio = () =>
             {image !== 'key'? <Image
                 style={styles.profilePicture}
                 source={{ uri: image }}
-            /> :
-            <Image
+                /> :
+                <Image
                 style={styles.profilePicture}
                 source={{
                     //require('https://www.seekpng.com/png/detail/245-2454602_tanni-chand-default-user-image-png.png')}
                     uri: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTypACuX8ygmzipbD197uPBv40pqsvU8Egh-_Oo_xqg2OQqZbL1Cm-5XRxVcF3QjaocHCg&usqp=CAU',    
                 }}
-            />
-                               
-                    }
+                />
+                
+            }
                     
             <Button color={colors.TabBarHeader} title="Choose Photo" onPress={pickImage}/>
 
@@ -153,8 +155,9 @@ const editBio = () =>
         </View>
         <Button color={colors.TabBarHeader} testID='submit' title="Submit" onPress={submit}/>
 
-        </View>
+            </ScrollView>
     </TouchableWithoutFeedback>
+        </View>
     </KeyboardAvoidingView>
     )
 }
