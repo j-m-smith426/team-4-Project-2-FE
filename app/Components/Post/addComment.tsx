@@ -126,15 +126,16 @@ const AddComment = (props: IaddPost) =>
             
             <View style={styles.postBot}>
                 <View style={styles.imgAdd}>
-                    <TouchableOpacity onPress={pickImage}>
+                    <Pressable onPress={pickImage}>
                         <Icon size={27} name="image" />
-                    </TouchableOpacity>
-                    <Text>Add Photo</Text>
+                    </Pressable>
+                    <Text>add Picture</Text>
                 </View>
                 
                 <View style={styles.timeContainer}>
-                    <TouchableOpacity onPress={submitPost}>
-                        <Text>Post</Text>
+                <TouchableOpacity onPress={submitPost}>
+                    <Text style={styles.buttonText}>Post</Text>
+
                     </TouchableOpacity>
                 </View>
 
@@ -212,10 +213,15 @@ const styles = StyleSheet.create({
         alignItems: 'center',
     },
     timeContainer: {
+        
         padding: 10,
+        
         marginRight: '5%',
         borderRadius: 5000,
-        backgroundColor: colors.background
+        backgroundColor: colors.buttonPrimary
+    },
+    buttonText: {
+        color: colors.buttonSecondary,
     }
 
 

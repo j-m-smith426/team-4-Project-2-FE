@@ -11,7 +11,7 @@ const Button_Comment = () =>
         <View style={styles.commentContainer}>
 
             
-            <Text>Comment</Text>
+            <Text style={styles.buttonText}>Comment</Text>
             
 
         </View>
@@ -21,7 +21,7 @@ const Button_Comment = () =>
 const styles = StyleSheet.create({
     commentContainer: {
 
-        //backgroundColor: colors.background,
+        backgroundColor: colors.buttonPrimary,
         justifyContent: 'center',
         //marginHorizontal: '2%',
         width: '25%',
@@ -30,6 +30,9 @@ const styles = StyleSheet.create({
 
 
         height: '100%'
+    },
+    buttonText: {
+        color: colors.buttonSecondary
     }
 });
 

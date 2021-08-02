@@ -1,6 +1,7 @@
-import { DrawerItem, DrawerItemList } from "@react-navigation/drawer";
+import { DrawerContentScrollView, DrawerItem, DrawerItemList, DrawerNavigationProp } from "@react-navigation/drawer";
+import { DrawerNavigationState } from "@react-navigation/routers";
 import React, { useState } from "react";
-import { View, Image,StyleSheet, TextInput, Pressable, TouchableWithoutFeedback, Keyboard, TouchableOpacity,} from "react-native";
+import { View, Image,StyleSheet, TextInput, Pressable,} from "react-native";
 import { Icon } from "react-native-elements";
 import { useDispatch } from "react-redux";
 import colors from "../config/colors";
@@ -26,6 +27,10 @@ const Sidebar = (props: any) => {
         console.log('current Search',search);
         props.navigation.navigate('Search', {val: search});
     }
+    const { state, ...rest } = props;
+const newState = { ...state}  //copy from state before applying any filter. do not change original state
+newState.routes = newState.routes.filter(item => !['User','Post','Anime', 'Search', 'Comment','Login'].includes(item.name)) //replace "Login' with your route name
+
     return (
         <View style={styles.container}>
             <View style = {styles.profImg}>
@@ -33,28 +38,26 @@ const Sidebar = (props: any) => {
                 source={require('../assets/scouter.png')} />
                 
             </View>
-            <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
             <View style={styles.inputView}>
                 <TextInput 
                     onChangeText ={onUserChange}
                     style={styles.TextInput}
                     placeholder="Search"
                     onSubmitEditing={()=>submit()}/>
-                <TouchableOpacity onPress = {() => submit().then(Keyboard.dismiss)} style={styles.btn}>
+                <Pressable onPress = {() => submit()} style={styles.btn}>
                     <Icon
-                        //color={colors.buttonPrimary}
+                        color={colors.buttonSecondary}
                     name='search'/>
-                </TouchableOpacity>
+                </Pressable>
             </View>
-            </TouchableWithoutFeedback>
             <View style={styles.scroll}>
-                {/* <DrawerContentScrollView {...props} style = {styles.scroll}> */}
+                <DrawerContentScrollView {...props} style = {styles.scroll}>
                     <DrawerItem
                         label='Logout'
                         onPress={logOut}
                         />
-                    <DrawerItemList {...props} />
-                {/* </DrawerContentScrollView> */}
+                    <DrawerItemList state={newState} {...rest} />
+                </DrawerContentScrollView>
             </View>
 
         </View>
@@ -64,14 +67,14 @@ const Sidebar = (props: any) => {
 const styles = StyleSheet.create({
     container: {
         flex:1,
-        backgroundColor: colors.mistyRose  
+        backgroundColor: colors.background2  
       },
     btn:
     {
         height: '90%',
         flex:1,
         borderRadius:1000,
-          //backgroundColor: colors.primary,
+          backgroundColor: colors.buttonPrimary,
           alignSelf: 'center',
           alignItems: 'center',
         justifyContent: 'center'

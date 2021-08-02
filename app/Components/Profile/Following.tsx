@@ -13,24 +13,24 @@ const Following = (props: IProps) =>
 {
     let isMounted = true;
     const [loading, setLoading] = useState(false);
+    const [following, setFollow] = useState(props.following);
     let navigation = isMounted && useNavigation();
     let dispatch = isMounted && useDispatch();
     
     useEffect(() =>
     {
         isMounted = true;
-            
+         setFollow(props.following)   
         return () =>
         {
             isMounted = false;
         }
-    }, [navigation])
+    }, [navigation,following])
     
 
     const goToUser = (name:string) =>
     {
         console.log('going to user');
-        navigation.navigate("User");
         dispatch({
             type: SwitchPageAction.UPDATE,
             payload: {
@@ -38,6 +38,7 @@ const Following = (props: IProps) =>
                 parentID: `U#${name}`
             }
         })
+        navigation.navigate("User");
     }
     return(
        
@@ -53,12 +54,7 @@ const Following = (props: IProps) =>
                     
                 <TouchableOpacity onPress={()=>goToUser(item)}>
                     <View style={styles.container}>
-                <Image
-                    style={styles.follower}
-                    source={{
-                        uri: `https://scouter-revature-project1.s3.amazonaws.com/public/${item.image}`
-                    }}
-                    />
+                
                 <View style={styles.infoContainer}>
                     <Text style={styles.followerName} numberOfLines={1}>{item}</Text>
                 </View>
@@ -78,14 +74,14 @@ const styles = StyleSheet.create({
     container: {
         flex:1,
         flexDirection: "row",
-        paddingHorizontal: "5%",
-        paddingVertical: "2%",
+        paddingHorizontal: "2%",
+        paddingVertical: "1%",
         //justifyContent: "space-between"
         borderBottomWidth: 1,
         borderBottomColor: "grey",
         
     },
-
+    
     follower: {
         width: "22%",
         height: "100%",
@@ -95,12 +91,14 @@ const styles = StyleSheet.create({
         borderRadius: 80/2,
         resizeMode: 'stretch',
     },
-
+    
     infoContainer: {
         paddingHorizontal: "5%",
         paddingVertical: "8%",
+        marginVertical: 1,
+        backgroundColor: colors.tertiary,
         
-        //flex: 1,
+        flex: 1,
     },
     flatlist: {
         flex:1,
@@ -108,7 +106,7 @@ const styles = StyleSheet.create({
     },
 
     followerName: {
-        fontSize: 18,
+        fontSize: 20,
         fontStyle: "italic",
     },
 });

@@ -4,6 +4,7 @@ import { useEffect } from "react";
 import { StyleSheet } from "react-native";
 import { TabView, SceneMap, TabBar } from "react-native-tab-view";
 import { useSelector } from "react-redux";
+import colors from "../../config/colors";
 import { IRootState } from "../../redux/State";
 import PostScreen from "../../Screen/PostScreen";
 import Anime from "./Anime";
@@ -59,8 +60,8 @@ export default function AnimePage() {
 const styles = StyleSheet.create({
   //specifically for header navigation
   TabBar: {
-    backgroundColor: "green",
-    paddingTop: "5%",
+    backgroundColor: colors.TabBarHeader,
+    paddingTop: "10%",
   },
 
   TabView: {
