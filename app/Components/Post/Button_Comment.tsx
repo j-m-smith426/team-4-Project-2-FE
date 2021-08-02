@@ -21,7 +21,7 @@ const Button_Comment = () =>
 const styles = StyleSheet.create({
     commentContainer: {
 
-        backgroundColor: colors.background,
+        //backgroundColor: colors.background,
         justifyContent: 'center',
         //marginHorizontal: '2%',
         width: '25%',
