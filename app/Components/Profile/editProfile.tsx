@@ -10,6 +10,7 @@ import axiosConfig from "../../../axiosConfig";
 import IUser from "../../model/User";
 import { updateUser } from "./updateUser";
 import Loading from "../../Screen/loading";
+import colors from "../../config/colors";
 
 let newUser: IUser = {
     REFERENCE: '0',
@@ -123,8 +124,11 @@ const editBio = () =>
         style={styles.background}
       >
       <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
-            <View style = {styles.background}>
+                <View style={styles.background}>
+                    <View style={styles.nameBar}>
+
             <Text style={styles.username}>{currentUser}</Text>
+                    </View>
             {image !== 'key'? <Image
                 style={styles.profilePicture}
                 source={{ uri: image }}
@@ -137,14 +141,17 @@ const editBio = () =>
                 }}
             />
                                
-            }
-            <Button title="Choose Photo" onPress={pickImage}/>
-            <TextInput testID='greeting' style={styles.intro} placeholder='Greeting' onChangeText={setGreeting} value={greeting}/>
+                    }
+                    
+            <Button color={colors.TabBarHeader} title="Choose Photo" onPress={pickImage}/>
+
+                    
+            <TextInput testID='greeting' maxLength={33} numberOfLines={1} style={styles.intro} placeholder='Add a Greeting Here' onChangeText={setGreeting} value={greeting}/>
         <View style={styles.bio}>
-                <TextInput testID='description' style = {styles.info} placeholder="Tell us about yourself!" multiline onChangeText={setDescrip} value={descrip}/>
+                <TextInput testID='description' style = {styles.info} placeholder="Tell us about yourself Here!" multiline onChangeText={setDescrip} value={descrip}/>
                 
         </View>
-        <Button testID='submit' title="Submit" onPress={submit}/>
+        <Button color={colors.TabBarHeader} testID='submit' title="Submit" onPress={submit}/>
 
         </View>
     </TouchableWithoutFeedback>
@@ -158,14 +165,22 @@ const styles = StyleSheet.create({
     background: {
         flex: 1,
         paddingBottom: "5%",
+        backgroundColor: colors.background,
+        justifyContent: 'space-between'
     },
 
     username: {
-        paddingVertical: "4%",
+        paddingVertical: "2%",
         textAlign: "center",
-        flex: 0.10,
+        //flex: 0.10,
         fontSize: 16,
         fontStyle: "italic",
+    },
+    nameBar: {
+        flexDirection: 'row',
+        //backgroundColor: colors.TabBarHeader,
+        justifyContent: 'center',
+        textAlign: 'center'
     },
 
     profilePicture: {
@@ -173,6 +188,7 @@ const styles = StyleSheet.create({
         width: 150,
         height: 150,
         padding: "15%",
+        margin: '5%',
         borderWidth: 2,
         borderColor: "grey",
         borderRadius: 600/2,

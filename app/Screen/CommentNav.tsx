@@ -2,6 +2,7 @@ import React from "react";
 import { View, StyleSheet } from "react-native";
 import { SceneMap, TabBar, TabView } from "react-native-tab-view";
 import { useSelector } from "react-redux";
+import colors from "../config/colors";
 import { IRootState } from "../redux/State";
 import CommentScreen from "./CommentScreen";
 import LoadPosts from "./LoadPosts";
@@ -61,8 +62,8 @@ const styles = StyleSheet.create({
 
     //specifically for header navigation
     TabBar: {
-      backgroundColor: "green",
-      paddingTop: "10%",
+      backgroundColor: colors.TabBarHeader,
+      paddingTop: "5%",
     },
 
     TabView: {
