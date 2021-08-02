@@ -14,6 +14,7 @@ import { IRootState } from '../redux/State';
 import axiosConfig from '../../axiosConfig';
 import { useNavigation } from '@react-navigation/native';
 import AddComment from '../Components/Post/addComment';
+import { ScrollView } from 'react-native-gesture-handler';
 
 
 
@@ -86,10 +87,12 @@ const CommentScreen = () =>
   
     //console.log('Result',postArr);
     return (
+        
+
         <ScreenWrapper>
-                
             {/* {console.log('Parent: ',parentPost)} */}
             <View style={styles.item}>
+           
 
             <Post username={parentPost.username}
                 userProfilePic={parentPost.userProfilePic}
@@ -100,15 +103,18 @@ const CommentScreen = () =>
                 parentID={parentPost.parentID}/>
             <AddComment username={user} userProfilePic="pic" />
                
+                
                 </View>
             </ScreenWrapper>
+                
 )}
 
 const styles = StyleSheet.create({
     container: {
-      flex: 1,
+        flex: 1,
+       // width: '100%',
       alignItems: 'center',
-      justifyContent: 'space-evenly',
+      //justifyContent: 'space-evenly',
   
     },
     item: {

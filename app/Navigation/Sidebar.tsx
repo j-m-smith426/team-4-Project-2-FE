@@ -99,7 +99,7 @@ const styles = StyleSheet.create({
         
     },
     inputView: {
-        backgroundColor: colors.background,
+        backgroundColor: colors.secondary,
         borderRadius: 1000,
         //flex: 1,
         maxHeight: '13%',
