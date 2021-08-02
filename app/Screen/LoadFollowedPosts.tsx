@@ -5,7 +5,6 @@ import { FlatList, RefreshControl, View, StyleSheet } from "react-native";
 import { useSelector } from "react-redux";
 import axiosConfig from "../../axiosConfig";
 import Post from "../Components/Post/Post";
-import Post_additional from "../Components/Post/Post_additional";
 import { IPost } from "../model/Post";
 import IUser from "../model/User";
 import { IRootState } from "../redux/State";

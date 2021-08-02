@@ -36,7 +36,7 @@ const PostScreen = () =>
         <ScreenWrapper>
             <View style={styles.item}>
 
-            {currentPage === 'U#'+user &&<AddPost username={user} userProfilePic="pic"/>}
+            {currentPage === 'U#'+user || currentPage.startsWith('A#') &&<AddPost username={user} userProfilePic="pic"/>}
             </View>
             <LoadPosts page={currentPage}/>
 
