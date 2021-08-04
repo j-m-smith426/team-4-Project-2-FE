@@ -10,12 +10,14 @@
 [![Reliability Rating](https://sonarcloud.io/api/project_badges/measure?project=RevatureRobert_team-4-Project-2-FE&metric=reliability_rating)](https://sonarcloud.io/dashboard?id=RevatureRobert_team-4-Project-2-FE)
 [![Security Rating](https://sonarcloud.io/api/project_badges/measure?project=RevatureRobert_team-4-Project-2-FE&metric=security_rating)](https://sonarcloud.io/dashboard?id=RevatureRobert_team-4-Project-2-FE)
 [![Vulnerabilities](https://sonarcloud.io/api/project_badges/measure?project=RevatureRobert_team-4-Project-2-FE&metric=vulnerabilities)](https://sonarcloud.io/dashboard?id=RevatureRobert_team-4-Project-2-FE)
-[![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=RevatureRobert_team-4-Project-2-FE&metric=alert_status)](https://sonarcloud.io/dashboard?id=RevatureRobert_team-4-Project-2-FE)
 
 ## Project Description
-Scouter is a social mobile application designed to be a community for anime viewers. With Scouter, a user can log in by creating and verifying their account through email. Once logged in, the user now has access to all that Scouter has to offer! This includes editting their profile, viewing anime pages, and seeing the opinions of the rest of the anime community along with sharing their own opinions.
+Scouter is a serverless social mobile application designed to be a community for anime viewers. With Scouter, a user can log in by creating and verifying their account through email. Once logged in, the user now has access to all that Scouter has to offer! This includes editting their profile, viewing anime pages, and seeing the opinions of the rest of the anime community along with sharing their own opinions.
 
 _Scouter Mobile is only available on Android._
+
+Here is our backend repository.\
+[Scouter Backend](https://github.com/RevatureRobert/team-4-Project-2-BE)
 
 ## Technologies and Languages Used
 * TypeScript
