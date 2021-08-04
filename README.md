@@ -15,7 +15,7 @@
 ## Project Description
 Scouter is a social mobile application designed to be a community for anime viewers. With Scouter, a user can log in by creating and verifying their account through email. Once logged in, the user now has access to all that Scouter has to offer! This includes editting their profile, viewing anime pages, and seeing the opinions of the rest of the anime community along with sharing their own opinions.
 
-Scouter Mobile is only available on Android. Currently, iOS is unavailable due to the service fee.
+Scouter Mobile is only available on Android.
 
 ## Technologies and Languages Used
 * TypeScript
@@ -98,6 +98,8 @@ Now, you are ready to run the application. Run in the root directory:
 ```powershell
 npm start
 ```
+Then, a new tab will appear in your browser giving you several methods of running the application. You may use iOS during development; however, we do not have a developer's license for iOS which is why the current iteration of Scouter, the QR Code and APK above, can only be run on an android device.
+
 Anything pushed to our development branch gets automatically built.
 
 ## Usage
