@@ -15,7 +15,7 @@
 ## Project Description
 Scouter is a social mobile application designed to be a community for anime viewers. With Scouter, a user can log in by creating and verifying their account through email. Once logged in, the user now has access to all that Scouter has to offer! This includes editting their profile, viewing anime pages, and seeing the opinions of the rest of the anime community along with sharing their own opinions.
 
-Scouter Mobile is only available on Android.
+_Scouter Mobile is only available on Android._
 
 ## Technologies and Languages Used
 * TypeScript
@@ -53,7 +53,7 @@ Quick and Easy Use:
 In order to run Scouter Mobile, please install the Expo Go app on your android mobile device. Then, using the Expo Go app or if your device can scan with its camera, scan the QR code below:
 
 <p align="center">
- <img src = "https://github.com/RevatureRobert/team-4-Project-2-FE/blob/main/app/assets/qrcode.png" alt="QR Code">
+ <img src = "https://github.com/RevatureRobert/team-4-Project-2-FE/blob/main/app/assets/qrcode.png" alt="QR Code Located in app/assets/qrcode.png">
 </p>
 
 Other Methods:
