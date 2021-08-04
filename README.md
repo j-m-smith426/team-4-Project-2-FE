@@ -53,7 +53,7 @@ Quick and Easy Use:
 In order to run Scouter Mobile, please install the Expo Go app on your android mobile device. Then, using the Expo Go app or if your device can scan with its camera, scan the QR code below:
 
 <p align="center">
- <img src = "https://github.com/RevatureRobert/team-4-Project-2-FE/blob/main/app/assets/qrcode.png" alt="QR Code Located in app/assets/qrcode.png">
+ <img src = "https://github.com/RevatureRobert/team-4-Project-2-FE/blob/main/app/assets/qrcode.png" alt="QR Code Located in app/assets/qrcode.png" />
 </p>
 
 Other Methods:
@@ -105,12 +105,18 @@ Anything pushed to our development branch gets automatically built.
 ## Usage
 
 ### Login Screen
-//put both sign up and login side by side
+<p align="center">
+ <img src = "https://github.com/RevatureRobert/team-4-Project-2-FE/blob/main/app/assets/Login Screen.png" alt="QR Code Located in app/assets/Login Screen.png" height="500" />
+ <img src = "https://github.com/RevatureRobert/team-4-Project-2-FE/blob/main/app/assets/SignUp Screen.png" alt="QR Code Located in app/assets/SignUp Screen.png" height="500"/>
+</p>
 
 When the user starts up Scouter, the first screen that will appear is the Login Screen. Since the user does not have an account with us, the user should click on "Sign Up" where they will provide an email, a username, and a password. The password must abide by the restrictions on the Sign Up screen. Otherwise, the request will not go through. Upon successfully signing up, the user will receive an email to verify their account. Then, the user is all set up to enjoy Scouter.
 
 ### Home Screen / Sidebar (Drawer) Navigation
-//put both pics side by side
+<p align="center">
+ <img src = "https://github.com/RevatureRobert/team-4-Project-2-FE/blob/main/app/assets/Home Screen.png" alt="QR Code Located in app/assets/Home Screen.png" height="500" />
+ <img src = "https://github.com/RevatureRobert/team-4-Project-2-FE/blob/main/app/assets/Sidebar.png" alt="QR Code Located in app/assets/Sidebar.png" height="500" />
+</p>
 
 The **Home Screen** is where all your posts and all the posts of the users you follow are located. Since you may be a new user, the feed will be empty; however, this will populate the screen once you follow someone. You may **post a comment** in your home screen, whether it is a photo from your gallery or just a message you would like people who follow you to see, or comment on other posts by pressing the **Comment** button on the post.
 
@@ -119,12 +125,17 @@ In the top left corner, we have an icon that you can use to open up the **Sideba
 Anywhere you see other users posts (Home Screen and Anime Post Screen), if you press on their name, it will navigate you to their profile.
 
 ### Anime Screen
-//put All Anime Screen
+<p align="center">
+ <img src = "https://github.com/RevatureRobert/team-4-Project-2-FE/blob/main/app/assets/All Anime Screen.png" alt="QR Code Located in app/assets/All Anime Screen.png" height="500" />
+</p>
 
 If the user clicks on **Anime** from the sidebar, it routes to our Anime screen where it displays all the anime in our database. Each Anime clickable and will route you to its respective page. Only an admin account can add anime to the database from the application. Otherwise, it would have to be done from the backend. 
 
 ### Specific Anime Screen
-//put both Specific Anime and posts side by side
+<p align="center">
+ <img src = "https://github.com/RevatureRobert/team-4-Project-2-FE/blob/main/app/assets/Anime Overview Screen.png" alt="QR Code Located in app/assets/Anime Overview Screen.png" height="500" />
+ <img src = "https://github.com/RevatureRobert/team-4-Project-2-FE/blob/main/app/assets/Anime Post Screen.png" alt="QR Code Located in app/assets/Anime Post Screen.png" height="500" />
+</p>
 
 Once you have a chosen an anime and moved to its page, you will see that it has its own form of navigation. You can swipe right to go to the **Posts** page of the anime and swipe left to return to the **Overview** page.
 
@@ -133,12 +144,19 @@ The **Overview** page contains an image of the anime, a **Favorites** button, th
 The **Posts** screen holds all posts specifically directed at this anime. This includes any posts made by all users that visited the anime and left a comment. The user may also leave a post by writing a comment or adding a photo and pressing the post bottom on the bottom right of the comment.
 
 ### Edit Profile Screen 
-//Edit Profile Screen
+<p align="center">
+ <img src = "https://github.com/RevatureRobert/team-4-Project-2-FE/blob/main/app/assets/Edit Profile Screen.png" alt="QR Code Located in app/assets/Edit Profile Screen.png" height="500" />
+</p>
 
 To navigate to this screen, open up the sidebar and press **Edit Profile**. The edit profile screen is simple. It asks for a profile photo, a greeting for other users who visit your profile to see, and a little bit about the user. If you choose to leave it blank, it will reflect on the user's **Profile** screen. Press **submit** to send it to your profile.
 
 ### Profile Screen
-//put bio, posts, favorites. followers screen
+<p align="center">
+ <img src = "https://github.com/RevatureRobert/team-4-Project-2-FE/blob/main/app/assets/Profile Screen.png" alt="QR Code Located in app/assets/Profile Screen.png" height="450" />
+ <img src = "https://github.com/RevatureRobert/team-4-Project-2-FE/blob/main/app/assets/Profile Posts Screen.png" alt="QR Code Located in app/assets/Profile Posts Screen.png" height="450" />
+ <img src = "https://github.com/RevatureRobert/team-4-Project-2-FE/blob/main/app/assets/Favorite Anime.png" alt="QR Code Located in app/assets/Favorite Anime.png" height="450" />
+ <img src = "https://github.com/RevatureRobert/team-4-Project-2-FE/blob/main/app/assets/Follow Screen.png" alt="QR Code Located in app/assets/Follow Screen.png" height="450" />
+</p>
 
 Navigate to the profile screen by pressing on **Profile** in the sidebar. Similar to a specific Anime's page, the Profile Screen also has its own swipeable navigation that consists of Profile, Posts, Favorite, and Follow.
 
