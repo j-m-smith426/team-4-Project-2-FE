@@ -1,4 +1,14 @@
-![Scouter Home Page](app/assets/scouter.png)
+![Scouter Home Page](app/assets/scouter.png) \
+[![Bugs](https://sonarcloud.io/api/project_badges/measure?project=RevatureRobert_team-4-Project-2-FE&metric=bugs)](https://sonarcloud.io/dashboard?id=RevatureRobert_team-4-Project-2-FE)
+[![Code Smells](https://sonarcloud.io/api/project_badges/measure?project=RevatureRobert_team-4-Project-2-FE&metric=code_smells)](https://sonarcloud.io/dashboard?id=RevatureRobert_team-4-Project-2-FE)
+[![Duplicated Lines (%)](https://sonarcloud.io/api/project_badges/measure?project=RevatureRobert_team-4-Project-2-FE&metric=duplicated_lines_density)](https://sonarcloud.io/dashboard?id=RevatureRobert_team-4-Project-2-FE)
+[![Lines of Code](https://sonarcloud.io/api/project_badges/measure?project=RevatureRobert_team-4-Project-2-FE&metric=ncloc)](https://sonarcloud.io/dashboard?id=RevatureRobert_team-4-Project-2-FE)
+[![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=RevatureRobert_team-4-Project-2-FE&metric=alert_status)](https://sonarcloud.io/dashboard?id=RevatureRobert_team-4-Project-2-FE)
+[![Maintainability Rating](https://sonarcloud.io/api/project_badges/measure?project=RevatureRobert_team-4-Project-2-FE&metric=sqale_rating)](https://sonarcloud.io/dashboard?id=RevatureRobert_team-4-Project-2-FE)
+[![Reliability Rating](https://sonarcloud.io/api/project_badges/measure?project=RevatureRobert_team-4-Project-2-FE&metric=reliability_rating)](https://sonarcloud.io/dashboard?id=RevatureRobert_team-4-Project-2-FE)
+[![Security Rating](https://sonarcloud.io/api/project_badges/measure?project=RevatureRobert_team-4-Project-2-FE&metric=security_rating)](https://sonarcloud.io/dashboard?id=RevatureRobert_team-4-Project-2-FE)
+[![Vulnerabilities](https://sonarcloud.io/api/project_badges/measure?project=RevatureRobert_team-4-Project-2-FE&metric=vulnerabilities)](https://sonarcloud.io/dashboard?id=RevatureRobert_team-4-Project-2-FE)
+[![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=RevatureRobert_team-4-Project-2-FE&metric=alert_status)](https://sonarcloud.io/dashboard?id=RevatureRobert_team-4-Project-2-FE)
 
 ## Project Description
 Scouter is a social mobile application designed to be a community for anime viewers. With Scouter, a user can log in by creating and verifying their account through email. Once logged in, the user now has access to all that Scouter has to offer! This includes editting their profile, viewing anime pages, and seeing the opinions of the rest of the anime community along with sharing their own opinions.
