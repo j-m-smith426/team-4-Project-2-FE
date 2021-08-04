@@ -154,10 +154,10 @@ To navigate to this screen, open up the sidebar and press **Edit Profile**. The 
 
 ### Profile Screen
 <p align="center">
- <img src = "https://github.com/RevatureRobert/team-4-Project-2-FE/blob/main/app/assets/Profile Screen.png" alt="QR Code Located in app/assets/Profile Screen.png" height="450" />
- <img src = "https://github.com/RevatureRobert/team-4-Project-2-FE/blob/main/app/assets/Profile Posts Screen.png" alt="QR Code Located in app/assets/Profile Posts Screen.png" height="450" />
- <img src = "https://github.com/RevatureRobert/team-4-Project-2-FE/blob/main/app/assets/Favorite Anime.png" alt="QR Code Located in app/assets/Favorite Anime.png" height="450" />
- <img src = "https://github.com/RevatureRobert/team-4-Project-2-FE/blob/main/app/assets/Follow Screen.png" alt="QR Code Located in app/assets/Follow Screen.png" height="450" />
+ <img src = "https://github.com/RevatureRobert/team-4-Project-2-FE/blob/main/app/assets/Profile Screen.png" alt="QR Code Located in app/assets/Profile Screen.png" height="400" />
+ <img src = "https://github.com/RevatureRobert/team-4-Project-2-FE/blob/main/app/assets/Profile Posts Screen.png" alt="QR Code Located in app/assets/Profile Posts Screen.png" height="400" />
+ <img src = "https://github.com/RevatureRobert/team-4-Project-2-FE/blob/main/app/assets/Favorite Anime.png" alt="QR Code Located in app/assets/Favorite Anime.png" height="400" />
+ <img src = "https://github.com/RevatureRobert/team-4-Project-2-FE/blob/main/app/assets/Follow Screen.png" alt="QR Code Located in app/assets/Follow Screen.png" height="400" />
 </p>
 
 Navigate to the profile screen by pressing on **Profile** in the sidebar. Similar to a specific Anime's page, the Profile Screen also has its own swipeable navigation that consists of Profile, Posts, Favorite, and Follow.
