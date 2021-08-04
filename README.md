@@ -1,4 +1,6 @@
-![Scouter Home Page](app/assets/scouter.png) \
+![Scouter Home Page](app/assets/scouter.png)
+
+
 [![Bugs](https://sonarcloud.io/api/project_badges/measure?project=RevatureRobert_team-4-Project-2-FE&metric=bugs)](https://sonarcloud.io/dashboard?id=RevatureRobert_team-4-Project-2-FE)
 [![Code Smells](https://sonarcloud.io/api/project_badges/measure?project=RevatureRobert_team-4-Project-2-FE&metric=code_smells)](https://sonarcloud.io/dashboard?id=RevatureRobert_team-4-Project-2-FE)
 [![Duplicated Lines (%)](https://sonarcloud.io/api/project_badges/measure?project=RevatureRobert_team-4-Project-2-FE&metric=duplicated_lines_density)](https://sonarcloud.io/dashboard?id=RevatureRobert_team-4-Project-2-FE)
@@ -48,12 +50,27 @@ To-do list:
 ## Getting Started
 Quick and Easy Use: 
 
-In order to run Scouter Mobile, please install the Expo Go app on an android phone. Then scan the QR code below:
-![QRCode](app/assets/qrcode.png)
+In order to run Scouter Mobile, please install the Expo Go app on your android mobile device. Then, using the Expo Go app or if your device can scan with its camera, scan the QR code below:
 
-Then click the following link https://bit.ly/3xeEuep to download the app.
+<p align="center">
+ <img src = "https://github.com/RevatureRobert/team-4-Project-2-FE/blob/main/app/assets/qrcode.png" alt="QR Code">
+</p>
 
-Sign Up for an account, verify your e-mail, and then you can log in and enjoy.
+Other Methods:
+* If the above method is not suitable for you, you have two options to download the APK from. Both use the provided link: https://bit.ly/3xeEuep
+  * Using your mobile device (*preferable choice would be to use Expo or download using the emulator*):
+    1. Enable sideloading
+    2. Allow Permissions for Unknown Apps. The location depends on the version of the device. Refer here: https://www.verizon.com/support/knowledge-base-222186/
+    3. [Download the app](https://bit.ly/3xeEuep)
+    4. Install any dependencies that pop up. You will be prompted.
+  * Using an Emulator:
+    1. [Download the app](https://bit.ly/3xeEuep)
+    2. Download and Install [Android Studio](https://developer.android.com/studio)
+    3. Create a blank project and open the AVD (Android Virtual Device) located in the top right of your screen.
+    4. Create a device if one is not already present and choose one of the newer models. We recommend the Pixel 4a.
+    5. Press the play icon (expect a long start up time) and drag and drop the APK on the emulator screen. Now it will begin installing and you are good to go.
+
+**Sign Up for an account, verify your e-mail, and log in and enjoy!!**
 
 ### For Development:
 
@@ -71,11 +88,11 @@ node --version
 npm --version
 ```
 Both should result in a version display.
-Once installed, open up the root of the repository and install Scouter's dependencies: 
+Once installed, open up the root of the repository and install Scouter's dependencies by force: 
 ```powershell
 npm install --force
 ```
-This will read from the package.json and install all necessary dependencies, including React and TypeScript. At this point, everything should be ready.
+This will read from the package.json and install all necessary dependencies forcefully, including React and TypeScript. This is needed due to version conflicts that have been fixed but will throw errors in the terminal if the libraries are not installed with force. At this point, everything should be ready.
 
 Now, you are ready to run the application. Run in the root directory:
 ```powershell
