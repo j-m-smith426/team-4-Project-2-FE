@@ -4,7 +4,6 @@
 [![Bugs](https://sonarcloud.io/api/project_badges/measure?project=RevatureRobert_team-4-Project-2-FE&metric=bugs)](https://sonarcloud.io/dashboard?id=RevatureRobert_team-4-Project-2-FE)
 [![Code Smells](https://sonarcloud.io/api/project_badges/measure?project=RevatureRobert_team-4-Project-2-FE&metric=code_smells)](https://sonarcloud.io/dashboard?id=RevatureRobert_team-4-Project-2-FE)
 [![Duplicated Lines (%)](https://sonarcloud.io/api/project_badges/measure?project=RevatureRobert_team-4-Project-2-FE&metric=duplicated_lines_density)](https://sonarcloud.io/dashboard?id=RevatureRobert_team-4-Project-2-FE)
-[![Lines of Code](https://sonarcloud.io/api/project_badges/measure?project=RevatureRobert_team-4-Project-2-FE&metric=ncloc)](https://sonarcloud.io/dashboard?id=RevatureRobert_team-4-Project-2-FE)
 [![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=RevatureRobert_team-4-Project-2-FE&metric=alert_status)](https://sonarcloud.io/dashboard?id=RevatureRobert_team-4-Project-2-FE)
 [![Maintainability Rating](https://sonarcloud.io/api/project_badges/measure?project=RevatureRobert_team-4-Project-2-FE&metric=sqale_rating)](https://sonarcloud.io/dashboard?id=RevatureRobert_team-4-Project-2-FE)
 [![Reliability Rating](https://sonarcloud.io/api/project_badges/measure?project=RevatureRobert_team-4-Project-2-FE&metric=reliability_rating)](https://sonarcloud.io/dashboard?id=RevatureRobert_team-4-Project-2-FE)
