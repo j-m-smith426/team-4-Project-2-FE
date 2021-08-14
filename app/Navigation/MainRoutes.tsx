@@ -1,9 +1,10 @@
-import React from 'react';
+import React, { useState } from 'react';
 import {NavigationContainer} from '@react-navigation/native'
 import Login from '../Screen/Login';
 import PostScreen from '../Screen/PostScreen';
 import ProfilePage from '../Components/Profile/ProfileNavigation';
-import { Pressable, StyleSheet, TouchableOpacity, } from 'react-native';
+
+import { TouchableOpacity, StyleSheet, View } from 'react-native';
 import { createDrawerNavigator } from '@react-navigation/drawer';
 import { Icon } from 'react-native-elements';
 import addAnimeScreen from '../Screen/addAnimeScreen';
