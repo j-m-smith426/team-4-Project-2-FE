@@ -4,7 +4,7 @@ import { View, Image,StyleSheet, TextInput, Pressable, TouchableOpacity, Keyboar
 import { Icon } from "react-native-elements";
 import { useDispatch } from "react-redux";
 import colors from "../config/colors";
-import { LoginActions } from "../redux/Actions";
+import { LoginActions } from "../redux/Actions/Actions";
 
 
 const Sidebar = (props: any) => {

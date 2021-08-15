@@ -1,7 +1,7 @@
 import React from 'react';
 import { useNavigation } from '@react-navigation/native';
 import { useDispatch } from 'react-redux';
-import { SwitchPageAction } from '../../redux/Actions';
+import { SwitchPageAction } from '../../redux/Actions/Actions';
 
 import { Image, View, StyleSheet, Text, Pressable } from 'react-native';
 interface Iprops

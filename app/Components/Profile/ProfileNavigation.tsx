@@ -1,18 +1,18 @@
 import { useNavigation } from '@react-navigation/native';
 import * as React from 'react';
 import { useEffect } from 'react';
-import { useState } from 'react';
-import { View, Text, useWindowDimensions, StyleSheet } from 'react-native';
+import { StyleSheet } from 'react-native';
 import { TabView, SceneMap, TabBar } from 'react-native-tab-view';
-import { useSelector } from 'react-redux';
-import axiosConfig from '../../../axiosConfig';
+import { useDispatch, useSelector } from 'react-redux';
 import { IRootState } from '../../redux/State';
-import PostScreen from '../../Screen/PostScreen';
+import PostScreen from '../../Screen/Comment-Post/PostScreen';
 import Bio from './BioSection';
 import Following from './Following';
 import Favorites from './Favorites';
 import IUser from '../../model/User';
 import colors from '../../config/colors';
+import { getAnUser } from '../../redux/Actions/UsersActions';
+import Loading from '../../Screen/loading';
 
 let newUser: IUser = {
   REFERENCE: '0',
@@ -40,40 +40,40 @@ export default function ProfilePage() {
     { key: 'fourth', title: 'Follow'}
   ]);
   
-  const [userInfo, setUserInfo] = isMounted && useState<IUser>(newUser);
-  let navigation = isMounted && useNavigation();
-  let page = isMounted && useSelector((state: IRootState) =>
+  const userInfo = useSelector((state: IRootState) =>
   {
-    return state.sites.IPageState.parentID;
-  });
-  let userPage = page.replace('#','_');
-  const loadUserInfo = () =>
-  {
-    axiosConfig.get(`User/${userPage}`).then((response) =>
-    {
-      setUserInfo(response.data);
-    })
-  }
+    console.log(state.Update);
 
+    return state.Update.User
+  })
+  const navigation = isMounted && useNavigation();
+  const page = isMounted && useSelector((state: IRootState) =>
+  {
+    console.log('State',state.Page.IPageState);
+    return state.Page.IPageState.UserPageName;
+  });
+  const user = page && page.split('#')[1];
+  const dispatch = useDispatch()
+  
   useEffect(() =>
   {
-      isMounted = true;
-      loadUserInfo();
-      setIndex(0);
-    
-      
-  
-      
-      
+    isMounted = true;
+    dispatch(getAnUser(user));
+    setIndex(0); 
     return () =>
     {
       isMounted = false;
       
     }
-  }, [navigation, page]);
+  }, [navigation, userInfo.TYPEID!== page]);
+  if (!page|| !userInfo){
+    return (
+      <Loading/>
+    )
+  }
   //Route to each component
-const FirstRoute = () => (
-  <Bio  bio={userInfo.bio} image={userInfo.image}  name={page.split('#')[1]}/>
+  const FirstRoute = () => (
+  <Bio  bio={userInfo.bio} image={userInfo.image}  name={user}/>
 );
 
 const SecondRoute = () => (
@@ -96,6 +96,7 @@ const renderScene = SceneMap({
   third: ThirdRoute,
   fourth: FourthRoute,
 });
+  
 
   return (
     <TabView

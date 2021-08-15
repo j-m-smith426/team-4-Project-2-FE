@@ -5,7 +5,7 @@ import { Text, StyleSheet, FlatList, View, Image, Pressable, TouchableOpacity } 
 import { useDispatch } from "react-redux";
 import colors from "../../config/colors";
 import color from "../../config/colors";
-import { SwitchPageAction } from "../../redux/Actions";
+import { SwitchPageAction } from "../../redux/Actions/Actions";
 interface Iprops{
     list:string[]
 }
@@ -28,9 +28,9 @@ const Favorites = (props: Iprops) =>
         
             console.log(name);
           dispatch({
-            type: SwitchPageAction.UPDATE,
+            type: SwitchPageAction.UPDATEANIME,
             payload: {
-              name: 'Anime',
+              name: 'A#'+name,
               parentID: 'A#'+name
             }
           });

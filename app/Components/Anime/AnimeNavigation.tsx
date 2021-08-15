@@ -6,7 +6,7 @@ import { TabView, SceneMap, TabBar } from "react-native-tab-view";
 import { useSelector } from "react-redux";
 import colors from "../../config/colors";
 import { IRootState } from "../../redux/State";
-import PostScreen from "../../Screen/PostScreen";
+import PostScreen from "../../Screen/Comment-Post/PostScreen";
 import Anime from "./Anime";
 
 export default function AnimePage() {
@@ -24,7 +24,7 @@ export default function AnimePage() {
   const anime =
     isMounted &&
     useSelector((state: IRootState) => {
-      return state.sites.IPageState.parentID;
+      return state.Page.IPageState.AnimePageName;
     });
   useEffect(() => {
     isMounted = true;
@@ -32,7 +32,7 @@ export default function AnimePage() {
     return () => {
       isMounted = false;
     };
-  }, [navigation, anime]);
+  }, [anime]);
 
   const FirstRoute = () => <Anime />;
 

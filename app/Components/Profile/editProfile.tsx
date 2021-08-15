@@ -36,7 +36,7 @@ const editBio = () =>
     const navigation = isMounted && useNavigation();
     const currentUser = isMounted && useSelector((state: IRootState) =>
     {
-        return state.sites.ILogin.username;
+        return state.Login.ILogin.username;
     })
 
     useEffect(() =>

@@ -2,8 +2,8 @@ import React, { useEffect, useState } from "react";
 import {  View,  Text,  ScrollView,  Image,  StyleSheet,  TouchableOpacity,} from "react-native";
 import { AntDesign } from "@expo/vector-icons";
 import Rating from "../../Screen/Rating";
-import { useSelector } from "react-redux";
-import { IRootState } from "../../redux/State";
+import { useDispatch, useSelector } from "react-redux";
+import { IAppState, IRootState } from "../../redux/State";
 import axiosConfig from "../../../axiosConfig";
 import IAnime from "../../model/Anime";
 import IUser from "../../model/User";
@@ -11,6 +11,8 @@ import Loading from "../../Screen/loading";
 import { useNavigation } from "@react-navigation/native";
 import { updateUser } from "../Profile/updateUser";
 import colors from "../../config/colors";
+import { getAnAnime } from "../../redux/Actions/AnimeActions";
+import { getAnUser, updateLoggedInUser } from "../../redux/Actions/UsersActions";
 
 const newAnime: IAnime = {
   REFERENCE: "0",
@@ -38,12 +40,17 @@ let newUser: IUser = {
 const Anime = () => {
   let isMounted = true;
   const [clicked, setClicked] = useState(false);
-    const [anime, setAnime] = isMounted && useState(newAnime);
-  const [user, setUser] = isMounted && useState<IUser>(newUser);
-  const [currentPage, currentUser] =
+  const anime = isMounted && useSelector((state: IRootState) => state.Update.Anime);
+  const dispatch = useDispatch();
+  const currentPage =
     isMounted &&
     useSelector((state: IRootState) => {
-      return [state.sites.IPageState.parentID, state.sites.ILogin.username];
+      return state.Page.IPageState.AnimePageName;
+    });
+    const  currentUser =
+    isMounted &&
+    useSelector((state: IRootState) => {
+      return  state.Login.ILogin.user
     });
     let navigation = isMounted && useNavigation();
     useEffect(() =>
@@ -52,38 +59,22 @@ const Anime = () => {
         console.log('page: ',currentPage)
         
         if (isMounted) {
-                getAnime()
+          dispatch(getAnAnime(currentPage))
              //set star at load needs work
         }
       return() => {isMounted = false}
-  }, [navigation]);
-  const getAnime = async () => {
-    axiosConfig
-      .get("/Anime/" + currentPage.replace("#", "_"))
-      .then((response) => {
-        //console.log("page: ", currentPage, "response", response.data);
-        setAnime(response.data);
-      });
-  };
-  const setVeiwingUser = () => {
-    axiosConfig.get("User/U_" + currentUser).then((resp) => {
-      console.log(resp.data);
-      if (user !== resp.data) {
-        setUser(resp.data);
-      }
-    });
-  };
+    }, [navigation]);
+  
   const setStar = () => {
-    let userData: IUser = user;
-    let newFavArr: string[] = user.favorites;
+    let newFavArr: string[] = currentUser.favorites;
     if (newFavArr && newFavArr.includes(anime.TYPEID + "#" + anime.image)) {
       setClicked(true);
     }
   };
 
   const handleStarClick = () => {   
-    axiosConfig.get("User/U_" + currentUser).then((response) => {
-      let userData: IUser = response.data;
+    
+      let userData: IUser = currentUser;
       let emptyArr: string[] = [];
       let newFavArr: string[] = userData.favorites;
       if (clicked) {
@@ -98,20 +89,18 @@ const Anime = () => {
       emptyArr.sort();
       userData.favorites = emptyArr;
       console.log(userData);
-      updateUser(userData);
-      setUser(userData);
-    });
+    updateUser(userData);
+    dispatch(updateLoggedInUser(currentUser.TYPEID))
     setClicked(!clicked);
   };
   //Ensure page is loaded anime is set, star is set, user is updated
   if (
     anime.TYPEID === "" ||
-    clicked !== user.favorites.includes(anime.TYPEID + "#" + anime.image) ||
-    user.TYPEID === ""
+    clicked !== currentUser.favorites.includes(anime.TYPEID + "#" + anime.image) ||
+    currentUser.TYPEID === ""
   ) {
-    setVeiwingUser();
-    getAnime();
-      if (clicked !== user.favorites.includes(anime.TYPEID + "#" + anime.image)) {
+    
+      if (clicked !== currentUser.favorites.includes(anime.TYPEID + "#" + anime.image)) {
           
       setStar();
     }

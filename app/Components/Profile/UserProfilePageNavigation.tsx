@@ -2,18 +2,19 @@ import { useNavigation } from '@react-navigation/native';
 import * as React from 'react';
 import { useEffect } from 'react';
 import { useState } from 'react';
-import { View, Text, useWindowDimensions, StyleSheet } from 'react-native';
+import { StyleSheet } from 'react-native';
 import { TabView, SceneMap, TabBar } from 'react-native-tab-view';
-import { useSelector } from 'react-redux';
-import axiosConfig from '../../../axiosConfig';
+import { useDispatch, useSelector } from 'react-redux';
 import { IRootState } from '../../redux/State';
-import PostScreen from '../../Screen/PostScreen';
+
 import Bio from './BioSection';
 import Following from './Following';
 import Favorites from './Favorites';
 import IUser from '../../model/User';
-import Loading from '../../Screen/loading';
 import colors from '../../config/colors';
+import { updateLoggedInUser } from '../../redux/Actions/UsersActions';
+import PostScreen from '../../Screen/Comment-Post/PostScreen';
+import PostScreenUser from '../../Screen/Comment-Post/PostScreenUser';
 
 let newUser: IUser = {
   REFERENCE: '0',
@@ -41,55 +42,42 @@ export default function Profile() {
     { key: 'fourth', title: 'Follow'}
   ]);
   const [loaded,setLoaded] = useState<Boolean>(false);
-  const [userInfo, setUserInfo] = isMounted && useState<IUser>(newUser);
   let navigation = isMounted && useNavigation();
   let user = isMounted && useSelector((state: IRootState) =>
   {
-    return state.sites.ILogin.username
+    return state.Login.ILogin.user
   });
-  //let userPage = page.replace('#','_');
-  const loadUserInfo = () =>
-  {
-    console.log(`HI`);
-    axiosConfig.get(`User/U_${user}`).then((response) =>
-    {
-      console.log(`${user} , bio=${response.data.TYPEID}`);
-      setUserInfo(response.data);
-      
-
-      setLoaded(true);
-    })
-  }
+  const dispatch = useDispatch();
 
   useEffect(() =>
   {
       isMounted = true;
-      
-    loadUserInfo();
+    dispatch(updateLoggedInUser(user.TYPEID));
+    
     setIndex(0);
    
     return () =>
     {
       isMounted = false;
     }
-  }, [navigation,user]);
+  }, [navigation]);
   //Route to each component
 const FirstRoute = () => (
-  <Bio  bio={userInfo.bio} image={userInfo.image}  name={user}/>
+  <Bio  bio={user.bio} image={user.image}  name={user.TYPEID.split('#')[1]}/>
 );
 
 const SecondRoute = () => (
   // <Favorites/>
-  <PostScreen />
+  <PostScreenUser />
 );
 
 const ThirdRoute = () => (
-  <Favorites list={userInfo.favorites}/>
+  <Favorites list={user.favorites}/>
  
 );
 
 const FourthRoute = () => (
-    <Following following={userInfo.followed}/>
+    <Following following={user.followed}/>
 );
 
 const renderScene = SceneMap({
@@ -98,11 +86,6 @@ const renderScene = SceneMap({
   third: ThirdRoute,
   fourth: FourthRoute,
 });
-  if(!loaded){
-    return (
-      <Loading></Loading>
-    );
-  } else {
     return (
     
       <TabView
@@ -114,7 +97,6 @@ const renderScene = SceneMap({
         //initialLayout={{ width: layout.width }}
       />
     );
-  }
 
 }
 

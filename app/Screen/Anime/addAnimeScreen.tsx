@@ -2,7 +2,7 @@ import React, { useEffect } from 'react';
 import { useState } from 'react';
 import { StyleSheet, View, Image, Button, TextInput, Keyboard, Platform, KeyboardAvoidingView, TouchableWithoutFeedback } from 'react-native';
 import * as ImagePicker from 'expo-image-picker'
-import axiosConfig from '../../axiosConfig'
+import axiosConfig from '../../../axiosConfig'
 import { Storage } from 'aws-amplify';
 
 

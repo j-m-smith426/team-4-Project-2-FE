@@ -1,4 +1,4 @@
-import addAnimeScreen from "../../app/Screen/addAnimeScreen";
+import addAnimeScreen from "../../app/Screen/Anime/addAnimeScreen";
 import {mount, shallow} from 'enzyme';
 import axios from "axios";
 

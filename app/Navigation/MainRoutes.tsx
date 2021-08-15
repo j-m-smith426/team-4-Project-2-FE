@@ -1,23 +1,26 @@
 import React, { useState } from 'react';
 import {NavigationContainer} from '@react-navigation/native'
 import Login from '../Screen/Login';
-import PostScreen from '../Screen/PostScreen';
+
 import ProfilePage from '../Components/Profile/ProfileNavigation';
 
 import { TouchableOpacity, StyleSheet, View } from 'react-native';
 import { createDrawerNavigator } from '@react-navigation/drawer';
 import { Icon } from 'react-native-elements';
-import addAnimeScreen from '../Screen/addAnimeScreen';
+import addAnimeScreen from '../Screen/Anime/addAnimeScreen';
 import editProfile from '../Components/Profile/editProfile';
 import { useSelector } from 'react-redux';
 import { IRootState } from '../redux/State';
 import Sidebar from './Sidebar';
-import CommentNav from '../Screen/CommentNav';
+
 import mainScreen from '../Screen/mainScreen';
 import SearchList from '../Screen/SearchList';
 import AnimePage from '../Components/Anime/AnimeNavigation'
-import AllAnime from '../Screen/AllAnime';
+
 import Profile from '../Components/Profile/UserProfilePageNavigation';
+import AllAnime from '../Screen/Anime/AllAnime';
+import CommentNav from '../Screen/Comment-Post/CommentNav';
+import PostScreen from '../Screen/Comment-Post/PostScreen';
 
 interface RouterProps
 {
@@ -27,10 +30,14 @@ const Drawer = createDrawerNavigator();
 
 const MainRoutes: React.FC<RouterProps> = () =>
 {
-    const [user,userType] = useSelector((state: IRootState) =>
+    const user = useSelector((state: IRootState) =>
     {
-        return [state.sites.ILogin.username,state.sites.ILogin.userType];
-})
+        return state.Login.ILogin.username;
+    });
+    const userType = useSelector((state: IRootState) =>
+    {
+        return state.Login.ILogin.userType;
+    });
 
 
     return (

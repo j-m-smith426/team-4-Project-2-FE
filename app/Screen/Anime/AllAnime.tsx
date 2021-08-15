@@ -1,14 +1,10 @@
 import React , {useEffect, useState} from 'react';
-import { StyleSheet, Text, View, FlatList, TouchableWithoutFeedback, Pressable, TouchableOpacity, Image} from 'react-native';
-import IAnime from '../model/Anime'
-import axios from '../../axiosConfig'
-import { getTokenSourceMapRange } from 'typescript';
-import { useCallback } from 'react';
+import { StyleSheet, Text, View, FlatList, TouchableOpacity, Image} from 'react-native';
+import axios from '../../../axiosConfig'
 import { useNavigation } from '@react-navigation/core';
-import { useRoute } from '@react-navigation/native';
 import { useDispatch } from 'react-redux';
-import { SwitchPageAction } from '../redux/Actions';
-import colors from '../config/colors';
+import { SwitchPageAction } from '../../redux/Actions/Actions';
+import colors from '../../config/colors';
 
 
 
@@ -93,9 +89,9 @@ const AllAnime=()=> {
   {
     console.log(name);
   dispatch({
-    type: SwitchPageAction.UPDATE,
+    type: SwitchPageAction.UPDATEANIME,
     payload: {
-      name: 'Anime',
+      name: name,
       parentID: name
     }
   });

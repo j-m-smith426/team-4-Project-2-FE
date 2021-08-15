@@ -1,36 +1,31 @@
 import React from 'react';
 
-import { StyleSheet, Text, View } from 'react-native';
+import { StyleSheet } from 'react-native';
 
-import Post from './app/Components/Post/Post';
-import Login from './app/Screen/Login';
 import MainRoutes from './app/Navigation/MainRoutes';
 
-import Following from './app/Components/Profile/Following';
-import Anime from './app/Components/Anime/Anime';
-import PopularAnime from './app/Components/Anime/PopularAnime';
-import addAnimeScreen from './app/Screen/addAnimeScreen';
 
-import AnimeScreen from './app/Screen/animeScreen';
-import PostScreen from './app/Screen/PostScreen';
 import { Provider } from 'react-redux';
-import { combineReducers, createStore, Store } from 'redux';
-import { IAppState } from './app/redux/State';
-import { IAppActions } from './app/redux/Actions';
-import { Reducer } from './app/redux/Reducers';
+import { applyMiddleware, combineReducers, createStore } from 'redux';
+import {LoginReducer, PageReducer, UpdateInfoReducer  } from './app/redux/Reducers';
 import Amplify from 'aws-amplify';
 import { currentConfig } from './amplifyConfig';
+import thunk from 'redux-thunk';
 
 
 
 
 Amplify.configure(currentConfig);
 export const rootReducer = combineReducers({
-  sites:  Reducer
+  Login: LoginReducer,
+  Page: PageReducer,
+  Update:  UpdateInfoReducer
+    
+
   });
 const w:any = window;
-export const store= createStore(rootReducer, w.__REDUX_DEVTOOLS_EXTENSION__ && w.__REDUX_DEVTOOLS_EXTENSION__() );
-//export type RootState = ReturnType<typeof store.getState>;
+export const store = createStore(rootReducer, applyMiddleware(thunk));
+
 export default function App() {
   return (
     //<Following />

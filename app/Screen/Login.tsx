@@ -3,13 +3,14 @@ import { Text, View, StyleSheet, Image, TextInput, TouchableOpacity, KeyboardAvo
 import colors from "../config/colors";
 import { useNavigation } from "@react-navigation/core";
 import { useDispatch, useSelector } from "react-redux";
-import { LoginActions, SwitchPageAction } from "../redux/Actions";
+import { LoginActions, SwitchPageAction } from "../redux/Actions/Actions";
 import { Auth } from "aws-amplify";
 import { CognitoUser } from "@aws-amplify/auth";
 import { IRootState } from "../redux/State";
 import axiosConfig from "../../axiosConfig";
 import { AuthError } from "@aws-amplify/auth/lib-esm/Errors";
 import { Icon } from "react-native-elements/dist/icons/Icon";
+import { logInUser } from "../redux/Actions/UsersActions";
 
 
 const Login = () =>
@@ -40,7 +41,7 @@ const Login = () =>
     const dispatch = useDispatch();
     const currentUser = useSelector((state: IRootState) =>
     {
-        return state.sites.ILogin.username
+        return state.Login.ILogin.username
     })
     useEffect(() =>
     {
@@ -80,31 +81,11 @@ const Login = () =>
     }
     //-------------
     const submit = async () => {
-        console.log("Username is" + username);
         
         try {
             let cogUser: CognitoUser= await Auth.signIn(username, password);
-            
-           
-           
-           if(cogUser){
-           dispatch({
-               type:LoginActions.LOGIN,
-               payload:{
-                   name: cogUser.getUsername().toLowerCase(),
-                   type: cogUser.getUsername().toLowerCase() === 'animefanatic' ? 'Admin': 'user'
-               }
-           })
-               dispatch({
-                   type: SwitchPageAction.UPDATE,
-                   payload: {
-                    PageName: 'Home',
-                    parentID: `U#${cogUser.getUsername().toLowerCase()}`
-                }
-            })
-               navigation.navigate('Home');
-           }
-            
+            dispatch(logInUser(cogUser));
+            navigation.navigate('Home');
        
        } catch (err) {
             console.log('error signing in', err);
@@ -144,9 +125,9 @@ const Login = () =>
         if (currentUser !== 'Guest') {
             //Switch page info
             dispatch({
-                type: SwitchPageAction.UPDATE,
+                type: SwitchPageAction.UPDATEUSER,
                 payload: {
-                 PageName: 'Home',
+                 name: `U#${currentUser}`,
                  parentID: `U#${currentUser}`
              }
          })

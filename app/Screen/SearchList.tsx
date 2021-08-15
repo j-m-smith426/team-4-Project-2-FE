@@ -7,9 +7,10 @@ import { useCallback } from 'react';
 import { useNavigation } from '@react-navigation/core';
 import { useRoute } from '@react-navigation/native';
 import { useDispatch } from 'react-redux';
-import { SwitchPageAction } from '../redux/Actions';
+import { SwitchPageAction } from '../redux/Actions/Actions';
 import colors from '../config/colors';
 import IUser from '../model/User';
+import { getAnAnime } from '../redux/Actions/AnimeActions';
 
 
 interface IProps
@@ -101,9 +102,9 @@ const SearchList=()=> {
   {
     console.log(name);
   dispatch({
-    type: SwitchPageAction.UPDATE,
+    type: SwitchPageAction.UPDATEUSER,
     payload: {
-      name: 'User',
+      name: name,
       parentID: name
     }
   });
@@ -115,12 +116,13 @@ const SearchList=()=> {
   {
     console.log(name);
   dispatch({
-    type: SwitchPageAction.UPDATE,
+    type: SwitchPageAction.UPDATEANIME,
     payload: {
-      name: 'Anime',
+      name: name,
       parentID: name
     }
   });
+    dispatch(getAnAnime(name));
   navigation.navigate('Anime')
 }
 
