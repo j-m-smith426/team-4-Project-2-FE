@@ -102,7 +102,7 @@ const AddPost = (props: IaddPost) =>
 
             
                 <View style={styles.profImg}>
-                    <ProfileImg username={props.username} profileImg={currentUser.image} />
+                    <ProfileImg username={currentUser.TYPEID.split('#')[1]} profileImg={currentUser.image} />
                 </View>
             
                 <View style={styles.text}>
