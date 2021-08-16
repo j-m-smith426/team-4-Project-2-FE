@@ -4,6 +4,7 @@ import { StyleSheet, View, Image, Button, TextInput, Keyboard, Platform, Keyboar
 import * as ImagePicker from 'expo-image-picker'
 import axiosConfig from '../../../axiosConfig'
 import { Storage } from 'aws-amplify';
+import { useDispatch } from 'react-redux';
 
 
 
@@ -13,7 +14,7 @@ export default function addAnimeScreen()
     const [description, setDescription] = useState('description');
   const [image, setImage] = useState('key');
   const [genre, setGenra] = useState('')
-    const [currRes, setRes] = useState('result');
+  const [currRes, setRes] = useState('result');
 
 
   useEffect(() =>
