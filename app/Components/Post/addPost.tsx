@@ -25,14 +25,13 @@ const AddPost = (props: IaddPost) =>
 {
     const [image, setImage] = useState('key');
     const [content, setContent] = useState('');
-    const [profilepic, setProfilePic] = useState('key');
     const currentUser = useSelector((state: IRootState) =>
     {
-        return state.sites.ILogin.username;
+        return state.Login.ILogin.user;
     })
     let page: string = useSelector((state: IRootState) =>
     {
-        return state.sites.IPageState.parentID;
+        return state.Page.IPageState.parentID;
     });
     useEffect(() =>
     {
@@ -47,7 +46,6 @@ const AddPost = (props: IaddPost) =>
                     }
                 }
             })();
-            getProfPic();
         }
         return() => {isMounted = false}
       }, []);
@@ -68,17 +66,6 @@ const AddPost = (props: IaddPost) =>
             setImage('key');
         }
     };
-    const getProfPic = () =>
-    {
-        
-        axiosConfig.get<any>(`User/U_${props.username}`, {
-        }).then(userResponse =>
-            {
-            let userData = userResponse.data;
-            console.log('ProfileIMG: ', userData.image);
-                setProfilePic(userData.image);
-            })
-        }
 
     const submitPost = () =>
     {
@@ -115,7 +102,7 @@ const AddPost = (props: IaddPost) =>
 
             
                 <View style={styles.profImg}>
-                    <ProfileImg username={props.username} profileImg={profilepic} />
+                    <ProfileImg username={currentUser.TYPEID.split('#')[1]} profileImg={currentUser.image} />
                 </View>
             
                 <View style={styles.text}>

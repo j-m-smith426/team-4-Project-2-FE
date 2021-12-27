@@ -2,12 +2,13 @@ import React, {useState, useEffect} from "react";
 import { ScrollView, Text, Image, View, StyleSheet, Pressable, TouchableOpacity } from "react-native";
 import axiosConfig from "../../../axiosConfig";
 import { Icon } from "react-native-elements";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { IRootState } from "../../redux/State";
 import IUser from "../../model/User";
 import colors from '../../config/colors'
 import { updateUser } from "./updateUser";
 import Loading from "../../Screen/loading";
+import { updateLoggedInUser } from "../../redux/Actions/UsersActions";
 let newUser: IUser = {
     REFERENCE: '0',
     TYPEID: '',
@@ -27,9 +28,9 @@ interface Iprops
 {
     image: string,
     bio: {
-        greeting: string,
-        description:string
-    },
+        greeting: string;
+        description: string;
+      };
    
     name:string
 }
@@ -39,17 +40,17 @@ const Bio = (props: Iprops) =>
     let isMounted = true;
     const [following, setFollowing] = isMounted && useState(false);
     const [isloading, setIsloading] = isMounted && useState(false)
-    const [user, setUser] = isMounted && useState<IUser>(newUser)
     let currentUser = isMounted && useSelector((state: IRootState) =>
     {
-        return state.sites.ILogin.username;
+        return state.Login.ILogin.user;
     })
+    const dispatch = useDispatch();
     const setFollow = () =>
     {
-        console.log(user.followed.includes(props.name))
-        if (user.followed.includes(props.name)) {
+        console.log(currentUser.followed.includes(props.name))
+        if (currentUser.followed.includes(props.name)) {
             setFollowing(true);
-            console.log('follow',following);
+            
         }
     }
     useEffect(() =>
@@ -61,21 +62,10 @@ const Bio = (props: Iprops) =>
         }
         return () => { isMounted = false;}
     },[following])
-    const setVeiwingUser = () =>
-    {
-        axiosConfig.get('User/U_' + currentUser).then((resp) =>
-        {
-            console.log(resp.data);
-            if (user !== resp.data) {
-                setUser(resp.data)
-            }
-        })
-    }
 
-    if (user.TYPEID === '' || following !== user.followed.includes(props.name)) {
+    if (currentUser.TYPEID === '' || following !== currentUser.followed.includes(props.name)) {
         isloading || setIsloading(true)
-        setVeiwingUser();
-        if (following !== user.followed.includes(props.name)){
+        if (following !== currentUser.followed.includes(props.name)){
             setFollow();
             
         }
@@ -89,10 +79,12 @@ const Bio = (props: Iprops) =>
    
     const addFollow = async () =>
     {
-        if (!user.followed.includes(props.name)) {
+        if (!currentUser.followed.includes(props.name)) {
+            let user = currentUser;
             user.followed.push(props.name);
             console.log(user);
             updateUser(user);
+            dispatch(updateLoggedInUser(user.TYPEID))
             setFollowing(true);
             
         }
@@ -100,10 +92,12 @@ const Bio = (props: Iprops) =>
 
     const unFollow = async() =>
     {
-        let temp:any[] = []
+        let temp: any[] = []
+        let user = currentUser;
         user.followed.forEach((name:any) => {if(name !== props.name){temp.push(name)}})
         user.followed = temp;
         updateUser(user);
+        dispatch(updateLoggedInUser(user.TYPEID))
         setFollowing(false);
     }
     const followButton = () =>
@@ -131,7 +125,7 @@ const Bio = (props: Iprops) =>
                 <Text style={styles.UserNameText}>
                     @{props.name}
                 </Text>
-                {currentUser !== props.name && followButton()}
+                {currentUser.TYPEID.split('#')[1] !== props.name && followButton()}
                 <View style={styles.bio}>
                     <Text style={styles.intro}>Welcome!</Text>
                 <Text numberOfLines={1} style={styles.intro}>{props.bio.greeting}</Text>

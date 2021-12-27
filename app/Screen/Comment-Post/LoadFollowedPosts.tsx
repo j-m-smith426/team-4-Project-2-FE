@@ -3,11 +3,11 @@ import React, { useState, useCallback } from "react";
 import { useEffect } from "react";
 import { FlatList, RefreshControl, View, StyleSheet } from "react-native";
 import { useSelector } from "react-redux";
-import axiosConfig from "../../axiosConfig";
-import Post from "../Components/Post/Post";
-import { IPost } from "../model/Post";
-import IUser from "../model/User";
-import { IRootState } from "../redux/State";
+import axiosConfig from "../../../axiosConfig";
+import Post from "../../Components/Post/Post";
+import { IPost } from "../../model/Post";
+import IUser from "../../model/User";
+import { IRootState } from "../../redux/State";
 
 
 
@@ -18,10 +18,9 @@ const LoadFollowedPosts = () =>
     const [postArr, setPostArr] = isMounted && useState<IPost[]>([]);
     const [profilepic, setProfilePic] = isMounted && useState('key');
     const [currentPost, setCurrentPost] = isMounted && useState<IPost>()
-    const [followers, setFollowers] = isMounted && useState<any[]>([]);
     const currentUser = isMounted && useSelector((state: IRootState) =>
     {
-        return state.sites.ILogin.username;
+        return state.Login.ILogin.user;
     })
     const navigation = isMounted && useNavigation();
     useEffect(() =>
@@ -31,27 +30,18 @@ const LoadFollowedPosts = () =>
             getFollowers();
         }
         return () => { isMounted = false };
-    }, [navigation]);
+    }, [navigation, currentUser]);
 
 
     const getFollowers = useCallback(async () =>
     {
         
         setRefreshing(true);
-        
-        await axiosConfig.get('User/U_' + currentUser).then(async (response) =>
-        {
-            let user: IUser = response.data
-            let followArray = [currentUser];
-            user.followed.forEach((followed) =>
-            {
-                followArray.push(followed);
-            })
            
             
           
                 await axiosConfig.post<any[]>(`Post/follow`, {
-                    followArray: followArray
+                    followArray: [...currentUser.followed, currentUser.TYPEID.split('#')[1]]
                 }).then(postResponse =>
                     {
                     let newArray: IPost[] = [];
@@ -92,12 +82,11 @@ const LoadFollowedPosts = () =>
                     });
                     setPostArr(newArray);
                     setRefreshing(false);
-                });
           
         })
     
         
-    }, [refreshing]);
+    }, [refreshing, currentUser.TYPEID===""]);
     return(
             <FlatList
                 //viewabilityConfig={{viewAreaCoveragePercentThreshold: 100}}

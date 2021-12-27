@@ -5,7 +5,7 @@ import { useDispatch } from "react-redux";
 import axiosConfig from "../../../axiosConfig";
 import colors from "../../config/colors";
 import IPost from "../../model/Post";
-import { SwitchPageAction } from "../../redux/Actions";
+import { SwitchPageAction } from "../../redux/Actions/Actions";
 import Button_Comment from "./Button_Comment";
 
 import ProfileImg from "./ProfileImg";
@@ -80,9 +80,9 @@ const Post = (props: IPost) =>
         console.log('going to user');
         navigation.navigate("User");
         dispatch({
-            type: SwitchPageAction.UPDATE,
+            type: SwitchPageAction.UPDATEUSER,
             payload: {
-                PageName: 'User',
+                name: `U#${props.username}`,
                 parentID: `U#${props.username}`
             }
         })

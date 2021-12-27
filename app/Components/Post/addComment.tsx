@@ -30,10 +30,10 @@ const AddComment = (props: IaddPost) => {
   const [content, setContent] = useState("");
   const [profilepic, setProfilePic] = useState("key");
   const currentUser = useSelector((state: IRootState) => {
-    return state.sites.ILogin.username;
+    return state.Login.ILogin.username;
   });
   let page: string = useSelector((state: IRootState) => {
-    return state.sites.IPageState.postID;
+    return state.Page.IPageState.postID;
   });
   useEffect(() => {
     let isMounted = true;

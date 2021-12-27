@@ -3,10 +3,10 @@ import React, { useState, useCallback } from "react";
 import { useEffect } from "react";
 import { FlatList, RefreshControl, View, StyleSheet } from "react-native";
 import { useSelector } from "react-redux";
-import axiosConfig from "../../axiosConfig";
-import Post from "../Components/Post/Post";
-import { IPost } from "../model/Post";
-import { IRootState } from "../redux/State";
+import axiosConfig from "../../../axiosConfig";
+import Post from "../../Components/Post/Post";
+import { IPost } from "../../model/Post";
+import { IRootState } from "../../redux/State";
 
 interface IProps
 {

@@ -1,30 +1,35 @@
 import React, { useState } from 'react';
 import { FlatList, RefreshControl, StyleSheet, View } from 'react-native';
 
-import Post from '../Components/Post/Post';
-import IPost from '../model/Post';
-import AddPost from '../Components/Post/addPost';
-import ScreenWrapper from './ScreenWrapper';
 
 
-import axios from '../../axiosConfig'
+import AddPost from '../../Components/Post/addPost';
+
+
+
+
 import { useEffect } from 'react';
 import { useCallback } from 'react';
 import { Auth } from 'aws-amplify';
 import { useSelector } from 'react-redux';
-import { IRootState } from '../redux/State';
-import axiosConfig from '../../axiosConfig';
+
 import { useNavigation } from '@react-navigation/native';
 import LoadPosts from './LoadPosts';
+import { IRootState } from '../../redux/State';
+import ScreenWrapper from '../ScreenWrapper';
 
 
 
 const PostScreen = () =>
 {
     let isMounted = true;
-    const [user,currentPage] = isMounted && useSelector((state: IRootState) =>
+    const user = isMounted && useSelector((state: IRootState) =>
     {
-        return [state.sites.ILogin.username, state.sites.IPageState.parentID];
+        return state.Login.ILogin.username;
+    });
+    const currentPage = isMounted && useSelector((state: IRootState) =>
+    {
+        return state.Login.IPageState.parentID;
     });
     useEffect(() =>
     {

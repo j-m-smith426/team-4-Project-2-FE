@@ -2,11 +2,11 @@ import React from "react";
 import { View, StyleSheet } from "react-native";
 import { SceneMap, TabBar, TabView } from "react-native-tab-view";
 import { useSelector } from "react-redux";
-import colors from "../config/colors";
-import { IRootState } from "../redux/State";
+import colors from "../../config/colors";
+import { IRootState } from "../../redux/State";
 import CommentScreen from "./CommentScreen";
 import LoadPosts from "./LoadPosts";
-import ScreenWrapper from "./ScreenWrapper";
+import ScreenWrapper from "../ScreenWrapper";
 
 const CommentNav = () =>
 {
@@ -28,7 +28,7 @@ const CommentNav = () =>
     {
         const [currentPost] = useSelector((state: IRootState) =>
         {
-            return [state.sites.IPageState.postID];
+            return [state.Page.IPageState.postID];
         });
         return (
             <View>

@@ -3,7 +3,7 @@ import React, { useEffect, useState } from "react";
 import { View, Image, Text, ScrollView, StyleSheet, FlatList, Pressable, TouchableOpacity } from "react-native";
 import { useDispatch } from "react-redux";
 import colors from "../../config/colors";
-import { SwitchPageAction } from "../../redux/Actions";
+import { SwitchPageAction } from "../../redux/Actions/Actions";
 
 interface IProps
 {
@@ -32,9 +32,9 @@ const Following = (props: IProps) =>
     {
         console.log('going to user');
         dispatch({
-            type: SwitchPageAction.UPDATE,
+            type: SwitchPageAction.UPDATEUSER,
             payload: {
-                PageName: 'User',
+                name: `U#${name}`,
                 parentID: `U#${name}`
             }
         })

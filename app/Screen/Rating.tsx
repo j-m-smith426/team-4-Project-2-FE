@@ -23,7 +23,7 @@ const Rating = (props: RatingProps) =>{
     const [currPage,setCurrPage]= useState<String>(props.page);
     const currentUser = useSelector((state: IRootState) =>
     {
-        return state.sites.ILogin.username;
+        return state.Login.ILogin.username;
     });
     const user = "U_" + currentUser;
     

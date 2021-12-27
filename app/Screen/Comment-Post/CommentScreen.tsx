@@ -1,35 +1,26 @@
 import React, { useState } from 'react';
 import { FlatList, KeyboardAvoidingView, Platform, RefreshControl, StyleSheet, View } from 'react-native';
 
-import Post from '../Components/Post/Post';
-import IPost from '../model/Post';
-import AddPost from '../Components/Post/addPost';
-import ScreenWrapper from './ScreenWrapper';
-import axios from '../../axiosConfig'
+import axios from '../../../axiosConfig'
 import { useEffect } from 'react';
 import { useCallback } from 'react';
 import { Auth } from 'aws-amplify';
 import { useSelector } from 'react-redux';
-import { IRootState } from '../redux/State';
-import axiosConfig from '../../axiosConfig';
+
 import { useNavigation } from '@react-navigation/native';
-import AddComment from '../Components/Post/addComment';
+
 import { ScrollView } from 'react-native-gesture-handler';
+import IPost from '../../model/Post';
+import AddComment from '../../Components/Post/addComment';
+import { IRootState } from '../../redux/State';
+import ScreenWrapper from '../ScreenWrapper';
+import Post from '../../Components/Post/Post';
 
 
 
 
-// const postArr: IPost[] = [
-//     {
-//         username:'user1', userProfilePic:'yes', Contents:'There once was a little bunny that ran around', timestamp: 5, postID:'001'
-//     },
-//     {
-//        username:'user2', userProfilePic:'yes', Contents:'He was very cute', image:'yes', timestamp:5, postID:'002',
-//     },
-//     {
-//        username:'user3', userProfilePic:'yes', Contents:'He was very cute', image:'yes', timestamp:5, postID:'003',
-//     }
-// ]
+
+
 let post: IPost = {
     username: '',
     userProfilePic: '',
@@ -44,9 +35,17 @@ const CommentScreen = () =>
 {
    
     const [parentPost, setParentPost] = useState<IPost>(post);
-    const [user, currentPage, currentPost] = useSelector((state: IRootState) =>
+    const user = useSelector((state: IRootState) =>
     {
-        return [state.sites.ILogin.username, state.sites.IPageState.parentID, state.sites.IPageState.postID];
+        return state.Login.ILogin.username;
+    });
+    const currentPage = useSelector((state: IRootState) =>
+    {
+        return  state.Page.IPageState.parentID;
+    });
+    const currentPost = useSelector((state: IRootState) =>
+    {
+        return state.Page.IPageState.postID;
     });
 
     let navigation = useNavigation();

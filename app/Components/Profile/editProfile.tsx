@@ -3,7 +3,7 @@ import React,{ useEffect, useState } from "react";
 import { ScrollView, TextInput, View, Text, Image, StyleSheet, Platform, Button, KeyboardAvoidingView, TouchableWithoutFeedback, Keyboard } from "react-native"
 //import { Button } from "react-native-elements/dist/buttons/Button";
 import * as ImagePicker from 'expo-image-picker'
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { IRootState } from "../../redux/State";
 import { Storage } from 'aws-amplify'
 import axiosConfig from "../../../axiosConfig";
@@ -11,6 +11,7 @@ import IUser from "../../model/User";
 import { updateUser } from "./updateUser";
 import Loading from "../../Screen/loading";
 import colors from "../../config/colors";
+import { updateLoggedInUser } from "../../redux/Actions/UsersActions";
 
 let newUser: IUser = {
     REFERENCE: '0',
@@ -36,8 +37,9 @@ const editBio = () =>
     const navigation = isMounted && useNavigation();
     const currentUser = isMounted && useSelector((state: IRootState) =>
     {
-        return state.sites.ILogin.username;
-    })
+        return state.Login.ILogin.username;
+    });
+    const dispatch = useDispatch()
 
     useEffect(() =>
     {
@@ -113,7 +115,7 @@ const editBio = () =>
             }
            
         updateUser(user);
-        
+        dispatch(updateLoggedInUser(user.TYPEID));
         navigation.navigate('User', {
             
         });
